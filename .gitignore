@@ -1,0 +1,59 @@
+
+# ============================================
+# R-MOVE - Git ignore rules
+# ============================================
+
+# Datos originales y procesados
+/data/raw/**
+!/data/raw/**/
+!/data/raw/**/.gitkeep
+/data/processed/**
+!/data/processed/**/
+!/data/processed/**/.gitkeep
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Credenciales y configuración privada
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs y archivos temporales
+*.log
+*.tmp
+*.temp
+
+# Resultados generados
+/outputs/figures/**
+!/outputs/figures/**/
+!/outputs/figures/**/.gitkeep
+/outputs/tables/**
+!/outputs/tables/**/
+!/outputs/tables/**/.gitkeep
