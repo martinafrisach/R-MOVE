@@ -3,3 +3,5 @@ numpy
 matplotlib
 jupyterlab
 ipykernel
+pyarrow
+duckdb
