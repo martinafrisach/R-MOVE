@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="ca">
+<html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>R-MOVE · Incidències a Rodalies</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -43,111 +44,42 @@ main{padding:20px 24px 28px}
 .neg{color:var(--or-d)}
 [hidden]{display:none!important}
 </style>
+<link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 <header>
   <div class="logo" aria-hidden="true">R</div>
-  <div><h1>Incidències a Rodalies de Catalunya</h1><small>R-MOVE · Mockup amb dades simulades i recorreguts aproximats</small></div>
+  <div><h1>Movilidad e incidencias de Rodalies</h1><small>R-MOVE · Explora los resultados reales del corredor sur</small></div>
 </header>
 <div class="bar">
-  <div><label for="q">Línia</label><input id="q" list="lines" placeholder="Cerca o tria una línia (R1, R2 Nord, RG1…)" autocomplete="off"></div>
-  <datalist id="lines"></datalist>
-  <div><label for="day">Dia</label><input type="date" id="day" min="2026-09-01" max="2026-11-01"></div>
-  <button id="clr" type="button">Tots els dies</button>
-  <button id="back" hidden type="button">Veure totes les línies</button>
+<div><label for="event">Incidencia</label><select id="event"><option value="2025-06-05">5 junio 2025 · Resultados analizados</option><option value="2025-03-07">7 marzo 2025 · Pendiente de explicación</option></select></div>
+<div><label for="q">Explorar líneas (contexto aproximado)</label><input id="q" list="lines" placeholder="R1, R2 Sud…" autocomplete="off"><datalist id="lines"></datalist></div>
+<button id="back" type="button">Ver todas las líneas</button><button id="results" type="button">Resultados OD</button>
 </div>
 <main>
-  <p class="sum" id="sum"></p>
-  <section id="list" class="grid" aria-label="Línies de Rodalies"></section>
-  <section id="view" class="detail" hidden>
-    <div id="map" role="application" aria-label="Mapa interactiu de Catalunya"></div>
-    <div class="side">
-      <div class="card"><h2 id="ttl" style="margin:0 0 8px;font-size:18px"></h2><div class="kpis" id="kpi"></div></div>
-      <div class="card"><b>Incidències</b><div id="incs"></div></div>
-    </div>
-  </section>
+<p class="notice">Asociaciones temporales: estos resultados no demuestran un efecto causal de Rodalies. Las conexiones OD representan movilidad entre municipios, no recorridos ferroviarios.</p>
+<p id="status" role="status" aria-live="polite">Cargando resultados…</p>
+<p class="sum" id="sum"></p>
+<section id="list" class="grid" aria-label="Líneas de Rodalies" hidden></section>
+<section id="analysis">
+<div class="kpis card" id="summary" hidden></div>
+<div class="explore-heading"><h2>¿Cómo cambió la movilidad?</h2><p>1. Elige un municipio · 2. Filtra el sentido · 3. Selecciona una conexión</p></div>
+<div class="bar explorer-controls">
+<div><label for="municipality">Municipio</label><select id="municipality"><option value="">Vista general</option><option value="08019">Barcelona</option><option value="08056">Castelldefels</option><option value="08089">Gavà</option><option value="08301">Viladecans</option><option value="08169">El Prat de Llobregat</option></select></div>
+<div><label for="direction">Sentido del desplazamiento</label><select id="direction"><option value="both">Salidas y llegadas</option><option value="out">Salidas del municipio</option><option value="in">Llegadas al municipio</option></select></div>
+<button id="overview" type="button">Volver a la vista general</button></div>
+<div class="detail">
+<div><div class="bar mapbar"><label for="basemap"><input type="checkbox" id="basemap"> Activar fondo OpenStreetMap</label></div><div id="map" aria-label="Mapa interactivo de relaciones OD"></div><p id="mapstatus" role="status">Sin teselas: nodos en posiciones municipales aproximadas.</p><div class="legend"><span class="negative">● Menor desviación que en días comparables</span><span class="positive">● Mayor desviación que en días comparables</span><small>Gris: sin diferencia · Flecha: destino · Conexión gruesa: selección. El color no indica por sí solo si aumentaron o disminuyeron los viajes.</small></div><section class="card"><h2 id="explore-title">Empieza por un municipio</h2><p>Relaciones ordenadas por magnitud de la diferencia, en puntos porcentuales.</p><div id="filtered" aria-live="polite"></div></section></div>
+<aside class="side"><div class="card"><h2 id="ttl">Explora la movilidad</h2><div id="relation" aria-live="polite"></div></div><details class="card"><summary>Ayuda para leer los resultados</summary><dl><dt>Desviación (%)</dt><dd>Diferencia porcentual entre viajes observados y esperados por la regresión: 100 × (observados / esperados − 1).</dd><dt>Puntos porcentuales (pp)</dt><dd>Resta entre dos porcentajes. Aquí: desviación del día − mediana de las desviaciones de los días comparables.</dd><dt>Días de referencia</dt><dd>Días comparables utilizados como controles en el análisis. Su mediana permite contextualizar la desviación del día.</dd></dl><p>El intervalo P25–P75 es descriptivo; no es una prueba de significación ni causalidad.</p></details></aside>
+</div>
+<div class="charts" id="selection-charts" hidden><section class="card"><h2>Observados y esperados</h2><p>Viajes de la relación seleccionada</p><div id="volumes"></div></section><section class="card"><h2>Comparación con referencias</h2><div id="reference"></div></section></div>
+<details class="card"><summary>Mayores diferencias del corredor completo</summary><div id="ranking" class="charts"></div></details>
+<details class="card"><summary>Consultar las 20 relaciones del corredor sur</summary><p>Selecciona una fila para explorar el detalle. Ordenadas por diferencia respecto a controles.</p><div class="tablewrap"><table><thead><tr><th>Relación OD</th><th>Observados</th><th>Esperados</th><th>Desviación %</th><th>Mediana controles %</th><th>Diferencia pp</th><th>Fuera P25–P75</th></tr></thead><tbody id="rows"></tbody></table></div></details>
+<details class="card"><summary>Datos pendientes y alcance</summary><p>No hay series temporales ni comparación directa de viajes frente a otros jueves en este JSON. La comparación disponible es entre desviaciones respecto a la regresión.</p><p>Para una evolución diaria, exportar del Notebook 04: fecha, códigos OD, viajes observados y esperados, desviación, indicador de día de incidencia/control, criterio de selección de controles e identificador de incidencia. Para comparar viajes con otros jueves, incluir esa referencia y su método de cálculo.</p><a href="../../data/processed/rmove/incidencia_2025_06_05.json">Consultar JSON original</a></details>
+</section>
 </main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-// Estaciones (coordenadas aproximadas)
-const S={
- pc:['Barcelona Plaça Catalunya',41.387,2.170],sants:['Barcelona Sants',41.379,2.140],fr:['Barcelona Estació de França',41.384,2.184],
- sa:['Sant Andreu Arenal',41.435,2.190],clot:['Barcelona Clot',41.410,2.187],aer:['Aeroport',41.305,2.073],cast:['Castelldefels',41.284,1.976],
- gran:['Granollers Centre',41.608,2.289],mat:['Mataró',41.538,2.445],aren:['Arenys de Mar',41.581,2.551],cel:['Sant Celoni',41.690,2.490],
- blan:['Blanes',41.675,2.790],mac:['Maçanet-Massanes',41.690,2.722],gir:['Girona',41.979,2.806],fig:['Figueres',42.264,2.960],port:['Portbou',42.428,3.157],
- vil:['Vilanova i la Geltrú',41.220,1.726],vfr:['Vilafranca del Penedès',41.347,1.699],svc:['Sant Vicenç de Calders',41.266,1.537],
- tar:['Tarragona',41.111,1.254],reus:['Reus',41.156,1.109],mart:['Martorell',41.474,1.932],ter:['Terrassa',41.564,2.013],
- sab:['Sabadell',41.545,2.106],cerd:['Cerdanyola Universitat',41.497,2.133],man:['Manresa',41.729,1.823],vic:['Vic',41.930,2.254],
- rip:['Ripoll',42.201,2.191],puig:['Puigcerdà',42.433,1.928],lle:['Lleida Pirineus',41.618,0.633],cerv:['Cervera',41.667,1.274],
- mora:['Móra la Nova',41.111,0.653],tort:['Tortosa',40.813,0.516],ald:['L’Aldea-Amposta',40.746,0.573],pob:['La Pobla de Segur',42.249,0.969],
- flix:['Flix',41.227,0.554],mol:['Molins de Rei',41.414,2.017]};
-// Líneas: id, nombre, color, estaciones en orden
-const LN=[
- ['R1','R1','#75b0e5','mol pc fr sa mat aren blan'.split(' ')],
- ['R2','R2','#00a14b','aer sants pc clot gran'.split(' ')],
- ['R2N','R2 Nord','#c3d600','mac cel gran clot pc'.split(' ')],
- ['R2S','R2 Sud','#00a14b','aer cast vil svc'.split(' ')],
- ['R3','R3','#e8541e','sants pc sa gran vic rip puig'.split(' ')],
- ['R4','R4','#f2a900','svc vfr mart sants pc ter man'.split(' ')],
- ['R7','R7','#b17bb8','cerd sab ter'.split(' ')],
- ['R8','R8','#8a1e66','mart cerd gran'.split(' ')],
- ['R11','R11','#3a7fc3','sants fr mac gir fig port'.split(' ')],
- ['R12','R12','#e0a100','lle cerv man'.split(' ')],
- ['R13','R13','#d6006e','lle cerv reus tar'.split(' ')],
- ['R14','R14','#6a9a2a','sants vfr svc tar'.split(' ')],
- ['R15','R15','#9b6b3a','reus mora flix'.split(' ')],
- ['R16','R16','#0e7c86','sants svc tar tort'.split(' ')],
- ['R17','R17','#7a4fa3','sants svc reus tort ald'.split(' ')],
- ['RG1','RG1','#2a6f4f','mac blan gir'.split(' ')],
- ['RL3','RL3','#b33a3a','sants vic rip puig'.split(' ')],
- ['RL4','RL4','#455a8c','sants man cerv lle pob'.split(' ')]
-].map(([id,n,c,st])=>({id,n,c,st}));
-// Incidencias simuladas (determinista)
-let sd=11;const r=()=>{sd=(sd*1664525+1013904223)>>>0;return sd/4294967296};
-const TY=['Avaria de catenària','Tall per obres','Manca de subministrament','Temporal','Incidència de senyalització','Objecte a la via'];
-LN.forEach(l=>{const k=Math.floor(r()*4);l.inc=Array.from({length:k},()=>{const s=l.st[Math.floor(r()*l.st.length)],d=1+Math.floor(r()*60);
- return{s,t:TY[Math.floor(r()*TY.length)],date:new Date(Date.UTC(2026,8,1+d)),dur:1+Math.floor(r()*4),imp:-Math.round((4+r()*22)*10)/10}}).sort((a,b)=>a.date-b.date)});
-const $=id=>document.getElementById(id),DAY=864e5;
-const dt=d=>d.toLocaleDateString('ca-ES',{day:'numeric',month:'short',timeZone:'UTC'});
-const fg=c=>{const n=parseInt(c.slice(1),16),y=.299*(n>>16)+.587*(n>>8&255)+.114*(n&255);return y>150?'#111':'#fff'};
-const pc=v=>'−'+Math.abs(v).toFixed(1).replace('.',',')+' %';
-const plural=n=>n===1?'1 incidència':n+' incidències';
-let cur=null,map,layer;
-// Incidències filtrades pel dia seleccionat (actives aquell dia)
-function incs(l){const v=$('day').value;if(!v)return l.inc;const t=Date.parse(v);return l.inc.filter(i=>t>=+i.date&&t<=+i.date+(i.dur-1)*DAY)}
-$('lines').innerHTML=LN.map(l=>`<option value="${l.n}">`).join('');
-function renderList(){
- const v=$('day').value;let tot=0;
- $('list').innerHTML=LN.map(l=>{const k=incs(l).length;tot+=k;
-  return `<button class="tile ${k?'has':''}" data-l="${l.id}"><span class="badge" style="background:${l.c};color:${fg(l.c)}">${l.n}</span><span>${S[l.st[0]][0]} – ${S[l.st.at(-1)][0]}<small>${k?'<b>'+plural(k)+'</b>':'Sense incidències'}</small></span></button>`}).join('');
- $('sum').textContent=(v?'Dia '+dt(new Date(Date.parse(v)))+': ':'Tots els dies: ')+plural(tot)+' a '+LN.length+' línies.';
-}
-function show(id){
- const l=LN.find(x=>x.id===id);if(!l)return;cur=l;
- const I=incs(l);
- $('list').hidden=true;$('view').hidden=false;$('back').hidden=false;$('q').value=l.n;
- $('ttl').innerHTML=`<span class="badge" style="background:${l.c};color:${fg(l.c)};display:inline-block">${l.n}</span>`;
- const avg=I.length?I.reduce((a,i)=>a+i.imp,0)/I.length:0,worst=I.length?Math.min(...I.map(i=>i.imp)):0;
- $('kpi').innerHTML=`<div><b>${I.length}</b><span>Incidències</span></div><div><b class="neg">${I.length?pc(avg):'—'}</b><span>Impacte mitjà en mobilitat</span></div><div><b class="neg">${I.length?pc(worst):'—'}</b><span>Pitjor incidència</span></div><div><b>${l.st.length}</b><span>Estacions</span></div>`;
- if(!map){map=L_.map('map');L_.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'}).addTo(map)}
- if(layer)layer.remove();layer=L_.layerGroup().addTo(map);
- const pts=l.st.map(k=>[S[k][1],S[k][2]]);
- L_.polyline(pts,{color:l.c,weight:6,opacity:.9}).addTo(layer);
- l.st.forEach(k=>L_.circleMarker([S[k][1],S[k][2]],{radius:5,color:'#333',weight:1.5,fillColor:'#fff',fillOpacity:1}).bindTooltip(S[k][0]).addTo(layer));
- const mk=I.map(i=>L_.circleMarker([S[i.s][1],S[i.s][2]],{radius:9+Math.abs(i.imp)/2.5,color:'#b85500',weight:2,fillColor:'#e8700a',fillOpacity:.45})
-  .bindPopup(`<b>${i.t}</b><br>${S[i.s][0]}<br>${dt(i.date)} · ${i.dur} ${i.dur>1?'dies':'dia'}<br>Mobilitat: ${pc(i.imp)}`).addTo(layer));
- $('incs').innerHTML=I.length?I.map((i,n)=>`<div class="inc" tabindex="0" data-n="${n}"><b>${i.t}</b> <span class="neg">${pc(i.imp)}</span><small>${S[i.s][0]} · ${dt(i.date)}</small></div>`).join(''):'<p style="color:var(--mut)">Cap incidència en aquest filtre.</p>';
- $('incs').onclick=e=>{const d=e.target.closest('[data-n]');if(d){const m=mk[+d.dataset.n];map.setView(m.getLatLng(),11);m.openPopup()}};
- map.invalidateSize();map.fitBounds(pts,{padding:[40,40]});
-}
-function home(){cur=null;$('list').hidden=false;$('view').hidden=true;$('back').hidden=true;$('q').value='';renderList()}
-$('list').onclick=e=>{const t=e.target.closest('[data-l]');if(t)show(t.dataset.l)};
-$('q').onchange=e=>{const v=e.target.value.trim().toLowerCase(),l=LN.find(x=>x.n.toLowerCase()===v||x.id.toLowerCase()===v);l?show(l.id):v||home()};
-$('day').onchange=()=>{renderList();if(cur)show(cur.id)};
-$('clr').onclick=()=>{$('day').value='';renderList();if(cur)show(cur.id)};
-$('back').onclick=home;
-renderList();
-</script>
-<script>const L_=window.L;</script>
+<script src="network.js"></script>
+<script src="dashboard.js"></script>
 </body>
 </html>
