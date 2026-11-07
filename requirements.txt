@@ -16,3 +16,4 @@ geopandas
 streamlit
 plotly
 holidays
+openpyxl
