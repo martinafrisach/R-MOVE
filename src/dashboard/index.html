@@ -1,93 +1,237 @@
+
 <!doctype html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>R-MOVE · Incidències a Rodalies</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<style>
-:root{--or:#e8700a;--or-d:#b85500;--or-l:#fff1e3;--bg:#fbf7f2;--ink:#2b2b2b;--mut:#6b6560;--line:#eadfd3}
-*{box-sizing:border-box}
-body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-header{background:var(--or);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.logo{width:42px;height:42px;border-radius:8px;background:#fff;color:var(--or);font-weight:800;font-size:24px;display:grid;place-items:center}
-h1{font-size:20px;margin:0;line-height:1.2}
-header small{display:block;opacity:.9;font-size:12.5px}
-.bar{background:#fff;border-bottom:3px solid var(--or);padding:12px 24px;display:flex;gap:14px 20px;align-items:flex-end;flex-wrap:wrap}
-.bar label{display:block;font-size:12.5px;font-weight:600;color:var(--or-d);margin-bottom:3px}
-input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
-#q{min-width:min(320px,100%)}
-button{font:inherit;padding:8px 14px;border:1px solid var(--or);border-radius:6px;background:#fff;color:var(--or-d);cursor:pointer}
-button:hover{background:var(--or-l)}
-:focus-visible{outline:3px solid var(--or);outline-offset:2px}
-main{padding:20px 24px 28px}
-.sum{color:var(--mut);margin:0 0 12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.tile{display:flex;gap:12px;align-items:center;text-align:left;padding:12px;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--or);border-radius:8px;width:100%}
-.tile:hover{background:var(--or-l)}
-.badge{flex:none;min-width:52px;text-align:center;font-weight:700;padding:8px 6px;border-radius:6px}
-.tile small{display:block;color:var(--mut)}
-.has small b{color:var(--or-d)}
-.detail{display:grid;grid-template-columns:1fr 320px;gap:16px}
-@media(max-width:900px){.detail{grid-template-columns:1fr}}
-#map{height:560px;border-radius:8px;border:2px solid var(--or)}
-@media(max-width:900px){#map{height:380px}}
-.side{display:flex;flex-direction:column;gap:12px}
-.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--or);border-radius:8px;padding:12px 14px}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.kpis b{display:block;font-size:22px}
-.kpis span{font-size:12.5px;color:var(--mut)}
-.inc{padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.inc:last-child{border:0}
-.inc small{color:var(--mut);display:block}
-.neg{color:var(--or-d)}
-[hidden]{display:none!important}
-</style>
-<link rel="stylesheet" href="dashboard.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>R-MOVE · Movilidad e incidencias</title>
+
+    <!-- Icono del dashboard -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Estilos del mapa Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Estilos propios: versión actualizada para evitar caché -->
+    <link rel="stylesheet" href="dashboard.css?v=minimal2">
 </head>
+
 <body>
-<header>
-  <div class="logo" aria-hidden="true">R</div>
-  <div><h1>Movilidad e incidencias de Rodalies</h1><small>R-MOVE · Maresme y corredor sur · Resultados reales de movilidad</small></div>
+
+    <!-- CABECERA -->
+    <header class="topbar">
+    <div class="brand">
+        <div class="brandicon">R</div>
+
+        <div>
+            <strong>Movilidad e incidencias de Rodalies</strong>
+            <span>R-MOVE · Maresme y corredor sur · Resultados reales de movilidad</span>
+        </div>
+    </div>
+
+    <div class="event-picker">
+        <label for="event">Incidencia analizada</label>
+        <select id="event">
+            <option value="2025-06-05">5 junio 2025 · Corredor sur</option>
+            <option value="2025-02-07">7 febrero 2025 · Maresme</option>
+        </select>
+    </div>
 </header>
-<div class="bar">
-<div><label for="event">Incidencia</label><select id="event"><option value="2025-06-05">5 junio 2025 · Corredor sur</option><option value="2025-02-07">7 febrero 2025 · R1 / Maresme · Y25-002</option></select></div>
-<div><label for="q">Explorar líneas (contexto aproximado)</label><input id="q" list="lines" placeholder="R1, R2 Sud…" autocomplete="off"><datalist id="lines"></datalist></div>
-<button id="back" type="button">Ver todas las líneas</button><button id="results" type="button">Resultados OD</button>
-</div>
-<main>
-<p class="notice">Asociaciones temporales: estos resultados no demuestran un efecto causal de Rodalies. Las conexiones OD representan movilidad entre municipios, no recorridos ferroviarios.</p>
-<p id="status" role="status" aria-live="polite">Cargando resultados…</p>
-<p class="sum" id="sum"></p>
-<section id="list" class="grid" aria-label="Líneas de Rodalies" hidden></section>
-<section id="analysis">
-<section id="case-info" class="card" aria-label="Incidencia documentada"></section>
-<p id="coverage-note" class="notice"></p>
-<div class="kpis card" id="summary" hidden></div>
-<div class="explore-heading"><h2>¿Cómo cambió la movilidad?</h2><p>1. Elige un municipio · 2. Filtra el sentido · 3. Selecciona una conexión</p></div>
-<div class="bar explorer-controls">
-<div><label for="municipality">Municipio</label><select id="municipality"><option value="">Vista general</option></select></div>
-<div><label for="direction">Sentido del desplazamiento</label><select id="direction"><option value="both">Salidas y llegadas</option><option value="out">Salidas del municipio</option><option value="in">Llegadas al municipio</option></select></div>
-<div hidden><label for="metric">Indicador del mapa y las barras</label><select id="metric"><option value="variacion_observada_pct">Variación observada frente a días comparables (%)</option></select></div>
-<button id="overview" type="button">Volver a la vista general</button></div>
-<div class="detail">
-<div><div class="bar mapbar"><label for="basemap"><input type="checkbox" id="basemap"> Activar fondo OpenStreetMap</label></div><div id="map" aria-label="Mapa interactivo de relaciones OD"></div><p id="mapstatus" role="status">Sin teselas: nodos en posiciones municipales aproximadas.</p><div class="legend"><span class="negative" id="legend-negative">● Menos viajes que la mediana comparable</span><span class="positive" id="legend-positive">● Más viajes que la mediana comparable</span><small id="legend-help">Variación observada (%) · Flecha: destino · Conexión gruesa: selección.</small></div><section class="card"><h2 id="explore-title">Empieza por un municipio</h2><p id="metric-description">Relaciones ordenadas por magnitud de la variación observada (%).</p><div id="filtered" aria-live="polite"></div></section></div>
-<aside class="side"><div class="card"><h2 id="ttl">Explora la movilidad</h2><div id="relation" aria-live="polite"></div></div><details class="card"><summary>Ayuda para leer los resultados</summary><dl><dt>Mediana comparable</dt><dd>Valor central de los viajes observados en días del mismo día semanal.</dd><dt>Variación observada (%)</dt><dd>100 × (viajes observados / mediana − 1). Un valor negativo indica menos viajes que esa referencia.</dd><dt>Días de referencia</dt><dd>Mismo día semanal dentro de ±42 días, sin la fecha analizada, festivos ni fechas del Excel. Se excluyen julio y agosto de objetivos y controles; solo se analizan laborables. El análisis retrospectivo puede incluir días posteriores.</dd><dt>P25–P75 de viajes</dt><dd>Banda que describe la dispersión de los viajes en controles. No es un intervalo de confianza ni una prueba de significación.</dd></dl><p>Las diferencias son asociaciones temporales y no demuestran causalidad de Rodalies.</p></details></aside>
-</div>
-<div class="charts" id="selection-charts" hidden><section class="card"><h2>Observados y mediana comparable</h2><p>Viajes de la relación seleccionada</p><div id="volumes"></div></section><section class="card"><h2>Distribución de los días de referencia</h2><div id="reference"></div></section></div>
-<section id="relation-more" hidden><section class="card"><h2 id="temporal-title">Evolución temporal</h2><p>Observaciones diarias reales. Las ausencias se muestran como huecos. La mediana retrospectiva por fecha puede utilizar controles posteriores; no es una predicción sin futuro.</p><div id="temporal"></div></section><details class="card"><summary>Sensibilidad de la relación seleccionada</summary><div id="sensitivity"></div></details></section>
-<details class="card"><summary>Contexto provincial y calidad de datos</summary><p>Comparación provincial de viajes y cobertura con los mismos criterios de calendario. No permite atribuir una causa a sus variaciones.</p><div id="coverage"></div><div id="province-series"></div></details>
-<section class="card"><h2>Conclusiones descriptivas del caso</h2><div id="case-conclusions"></div></section>
-<details class="card"><summary id="availability-title">Disponibilidad de datos y relaciones excluidas</summary><div id="availability"></div></details>
-<details class="card"><summary>Mayores diferencias del corredor completo</summary><div id="ranking" class="charts"></div></details>
-<details class="card"><summary id="relations-title">Consultar las relaciones del caso</summary><p>Selecciona una fila para explorar el detalle. Ordenadas por variación de viajes respecto a la mediana.</p><div class="tablewrap"><table><thead><tr><th>Relación OD</th><th>Observados</th><th>Mediana comparable</th><th>Variación %</th><th>P25 viajes</th><th>P75 viajes</th><th>N controles</th></tr></thead><tbody id="rows"></tbody></table></div></details>
-<details class="card"><summary>Datos y alcance del análisis</summary><p>El JSON conserva viajes observados, mediana, variación, percentiles, controles, disponibilidad, contexto provincial y series temporales. Ámbito: lunes a viernes, sin festivos oficiales de Cataluña y excluyendo julio y agosto. No es un calendario completo de vacaciones escolares.</p><p>La comparación principal es retrospectiva (±42 días). La evaluación predictiva utiliza únicamente controles anteriores y se documenta en el Notebook 02. Se excluyen todas las fechas con incidencias en el Excel.</p><p>Las conexiones son relaciones OD entre municipios, no itinerarios de tren. Los nodos tienen posiciones municipales aproximadas.</p><a id="download-json" href="#">Consultar JSON original del caso</a> · <a id="download-controls" href="#">Consultar controles utilizados</a></details>
-</section>
-</main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="network.js"></script>
-<script src="case-views.js"></script>
-<script src="dashboard.js"></script>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+
+        <!-- Estado de carga -->
+        <p id="status" role="status" aria-live="polite">
+            Cargando…
+        </p>
+
+        <div id="app" hidden>
+
+            <!-- INFORMACIÓN DE LA INCIDENCIA -->
+            <div class="intro">
+
+                <div>
+                    <span class="eyebrow" id="incident-code"></span>
+
+                    <h1 id="incident-title"></h1>
+
+                    <p id="incident-description"></p>
+                </div>
+
+                <!-- Información metodológica -->
+                <details class="info">
+                    <summary>Fuente y método</summary>
+                    <div id="information"></div>
+                </details>
+
+            </div>
+
+            <!-- INDICADORES PRINCIPALES -->
+            <div class="kpis">
+
+                <div class="kpi">
+                    <small>Relaciones analizadas</small>
+                    <strong id="kpi-relations">—</strong>
+                </div>
+
+                <div class="kpi">
+                    <small>Con menos viajes</small>
+                    <strong id="kpi-decrease">—</strong>
+                </div>
+
+                <div class="kpi">
+                    <small>Con más viajes</small>
+                    <strong id="kpi-increase">—</strong>
+                </div>
+
+            </div>
+
+            <!-- ZONA DE EXPLORACIÓN -->
+            <div class="workspace">
+
+                <!-- MAPA INTERACTIVO -->
+                <section class="map-card">
+
+                    <div class="panel-head">
+
+                        <div>
+                            <h2>Mapa de movilidad</h2>
+                            <p>
+                                Selecciona un municipio o una conexión.
+                            </p>
+                        </div>
+
+                        <!-- FILTROS -->
+                        <div class="filters">
+
+                            <label for="municipality">
+                                Municipio
+                                <select id="municipality"></select>
+                            </label>
+
+                            <label for="direction">
+                                Sentido
+                                <select id="direction">
+                                    <option value="both">Ambos</option>
+                                    <option value="out">Salidas</option>
+                                    <option value="in">Llegadas</option>
+                                </select>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Mapa Leaflet -->
+                    <div
+                        id="map"
+                        aria-label="Mapa interactivo de relaciones entre municipios"
+                    ></div>
+
+                    <!-- Leyenda -->
+                    <div class="map-footer">
+
+                        <div class="legend">
+
+                            <span>
+                                <i class="dot down"></i>
+                                Menos viajes
+                            </span>
+
+                            <span>
+                                <i class="dot up"></i>
+                                Más viajes
+                            </span>
+
+                        </div>
+
+                        <small>
+                            Conexiones entre municipios, no recorridos ferroviarios.
+                        </small>
+
+                    </div>
+
+                </section>
+
+                <!-- PANEL DERECHO -->
+                <div class="right">
+
+                    <!-- DETALLE DE LA RELACIÓN SELECCIONADA -->
+                    <section
+                        class="detail-card"
+                        id="relation-detail"
+                        aria-live="polite"
+                    >
+                        <h2>Selecciona una relación</h2>
+                    </section>
+
+                    <!-- RANKING -->
+                    <section class="top-card">
+
+                        <div class="panel-head">
+
+                            <div>
+                                <h2>Mayores variaciones</h2>
+
+                                <p id="ranking-subtitle">
+                                    Respecto a días comparables
+                                </p>
+                            </div>
+
+                            <!-- Ordenación del ranking -->
+                            <label class="sort-label" for="sort">
+                                Ordenar
+
+                                <select id="sort">
+                                    <option value="absolute">
+                                        Por viajes
+                                    </option>
+
+                                    <option value="percent">
+                                        Por %
+                                    </option>
+                                </select>
+
+                            </label>
+
+                        </div>
+
+                        <div
+                            id="top-relations"
+                            class="top-relations"
+                        ></div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+            <!-- LIMITACIONES -->
+            <p class="footer-note">
+                Comparaciones descriptivas con la mediana de días
+                comparables (±42 días). Los datos agregan todos los
+                medios de transporte; las variaciones no demuestran
+                un efecto causado por Rodalies.
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- LIBRERÍA LEAFLET -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- FUNCIONES AUXILIARES -->
+    <script src="case-views.js?v=minimal2"></script>
+
+    <!-- LÓGICA PRINCIPAL DEL DASHBOARD -->
+    <script src="dashboard.js?v=minimal2"></script>
+
 </body>
 </html>
