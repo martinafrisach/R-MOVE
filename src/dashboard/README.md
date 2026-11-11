@@ -1,27 +1,16 @@
-# R-MOVE · dashboard minimalista
+﻿# Dashboard R-MOVE
 
-Para empaquetado, validaciones y despliegue en GitHub Pages,
-consulta el [README principal](../../README.md). Los fuentes permanecen aquí.
+Dos vistas sobre resultados del motor Python y el notebook 04:
 
-Vista compacta sobre los resultados reales del Notebook 04. Incluye solo: selector de caso, tres indicadores, mapa y detalle de una relación OD, y un ranking de cinco conexiones. Fuente y método en un desplegable.
+- **Análisis general:** preguntas y conclusiones, cobertura documental, magnitud entre grupos, intervalos exploratorios, recorte de fechas extremas y recurrencia descriptiva. Filtros de entradas/salidas y exposición.
+- **Estudio de casos:** cinco casos seleccionados, mapa y relaciones OD, detalle de viajes y mediana, filtros municipales y ranking.
 
-## Instalación en el repositorio existente
+`overview.js` lee `data/processed/rmove/general/dashboard_general.json`. `dashboard.js` carga cada caso bajo demanda. `case-views.js` presenta el detalle. Las rutas relativas funcionan bajo `/R-MOVE/`.
 
-Copia los archivos `src/dashboard/index.html`, `dashboard.css`, `dashboard.js` y `case-views.js` a `R-MOVE/src/dashboard/`. No necesitas copiar `data` si tu repositorio ya dispone de los dos JSON generados por Notebook 04 dentro de `data/processed/rmove/`.
+Desde la raíz, servir con `python -m http.server 8000` y abrir `http://localhost:8000/src/dashboard/`. Enlace directo a casos: `?view=cases&date=2025-03-17`.
 
-Desde la raíz del repositorio ejecuta `python -m http.server 8000` y visita http://localhost:8000/src/dashboard/ . Refresca con Ctrl+F5.
+Los resultados generales y de casos deben corresponder al mismo Excel. `python -m src.analysis.rmove_review` verifica las 425 relaciones contra M2, analiza influencia de fechas y genera la exportación general. Al regenerar resultados, actualizar sus hashes en `publication.json` tras revisarlos.
 
-## Datos
+Las conclusiones se limitan a incidencias documentadas. Los municipios desconocidos no son controles de baja exposición. La recurrencia no es un ranking de significación y los intervalos no establecen causalidad.
 
-Los dos JSON de `data/processed/rmove/` ya están versionados en la rama del PR.
-El equipo confirma disponer de autorización para publicar estos resultados derivados.
-`publication.json` contiene sus rutas y hashes SHA-256. El build verifica hashes,
-esquema, rutas y lista cerrada de archivos; no requiere campos de autorización.
-Las referencias se calculan en
-Notebook 04, no en JavaScript. La aplicación necesita Internet para cargar
-Leaflet y teselas de OpenStreetMap; si el proveedor bloquea las teselas se mantiene
-la geometría de las conexiones.
-
-## Interpretación
-
-La diferencia de viajes es frente a la mediana de días comparables, no el número de viajeros afectados por Rodalies. Los puntos geográficos son posiciones municipales aproximadas y las conexiones no son itinerarios ferroviarios.
+Consulta el [README principal](../../README.md) para pruebas y empaquetado.

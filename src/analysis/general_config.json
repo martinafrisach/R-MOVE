@@ -1,0 +1,23 @@
+{
+  "incidencias": "data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx",
+  "hoja": "Incidencias Barcelona",
+  "movilidad": "data/processed/telefonica/M2.parquet",
+  "inicio_catalogo": "2023-01-01",
+  "fin_catalogo": "2025-08-31",
+  "estaciones_referencia": "data/raw/rodalies/estaciones_renfe_actual.csv",
+  "gtfs_referencia": "data/raw/rodalies/renfe_cercanias_actual.zip",
+  "ventana_dias": 42,
+  "salida": "data/processed/rmove/general",
+  "contraste": {
+    "minimo_placebos": 5,
+    "ventana_placebos_dias": 42,
+    "max_variacion_cobertura_od_pct": 20,
+    "cuantil_descriptivo": 0.9,
+    "minimo_municipios_grupo_fecha": 3,
+    "minimo_fechas_recurrencia": 10,
+    "bloque_dias": 84,
+    "replicas_bootstrap": 2000,
+    "semilla": 20261111
+  },
+  "revision_territorial": "data/processed/rmove/general/asignaciones_validadas_usuario.json"
+}

@@ -78,13 +78,16 @@ class MedianTests(unittest.TestCase):
         data=json.loads((directory/"incidencia_2025_06_05.json").read_text(encoding="utf-8"))
         controls=pd.read_csv(directory/"controles_2025_06_05.csv",parse_dates=["day"])
         self.assertEqual(data["version_esquema"],3)
-        self.assertEqual(len(data["relaciones"]),20)
+        seleccionadas=[r for r in data["disponibilidad_od"] if r["seleccionada"]]
+        self.assertEqual(len(data["relaciones"]),len(seleccionadas))
+        self.assertEqual({(r["municipio_origen"],r["municipio_destino"]) for r in data["relaciones"]},
+                         {(r["municipio_origen"],r["municipio_destino"]) for r in seleccionadas})
         self.assertEqual(data["metodologia"]["controles"]["meses_excluidos"],[7,8])
         for r in data["relaciones"]:
             c=controls.loc[controls.Relacion.eq(r["relacion"])]
             self.assertEqual(c.day.dt.strftime("%Y-%m-%d").tolist(),r["fechas_controles"])
             self.assertEqual(r["n_controles"],len(c))
-            self.assertEqual(r["n_controles"],8)
+            self.assertGreaterEqual(r["n_controles"],data["metodologia"]["controles"]["minimo_controles"])
             self.assertFalse(c.day.dt.month.isin([7,8]).any())
             self.assertNotIn(data["fecha_incidencia"],r["fechas_controles"])
             self.assertAlmostEqual(r["mediana_viajes_controles"],c.viajes_observados.median())

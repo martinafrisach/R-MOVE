@@ -1,5 +1,12 @@
 # Revisión de publicación del PR #1
 
+> Documento histórico del PR inicial. El dashboard vigente tiene cinco casos
+> y una exportación general, con un artefacto de trece archivos. Las cifras y
+> hashes de abajo describen la revisión original, no el catálogo actual. Para
+> el estado vigente, consultar `src/dashboard/publication.json`, el README y
+> las auditorías locales del análisis. Esta actualización se ha preparado y
+> validado localmente; no se ha ejecutado un despliegue remoto.
+
 ## Evidencia remota
 
 Revisados el [PR #1](https://github.com/martinafrisach/R-MOVE/pull/1) y la rama

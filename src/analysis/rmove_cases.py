@@ -5,22 +5,26 @@ import json
 import numpy as np
 import pandas as pd
 
+from .rmove_general import normalizar_catalogo
+
 from .rmove_indicators import (
     calcular_indicadores, comparar_relaciones, seleccionar_controles, MESES_EXCLUIDOS,
 )
 
 
 def ficha_incidencia(incidencias, identificador):
-    filas = incidencias.loc[incidencias["ID"].eq(identificador)]
+    incidencias = normalizar_catalogo(incidencias)
+    identificador = str(identificador).strip()
+    filas = incidencias.loc[incidencias["incident_id"].eq(identificador)]
     if len(filas) != 1:
         raise ValueError(f"Se esperaba una incidencia única: {identificador}")
     fila = filas.iloc[0]
-    campos = {"lineas_afectadas": "Líneas afectadas", "tramo": "Lugar / tramo",
-        "causa": "Causa documentada", "afectacion": "Afectación documentada",
-        "horario": "Horario / duración", "fuente": "Fuente",
-        "url": "URL verificable", "cautelas": "Notas y cautelas"}
-    return {"id": identificador, "fecha": pd.Timestamp(fila["Fecha"]).strftime("%Y-%m-%d"),
-        **{destino: str(fila[origen]) if pd.notna(fila[origen]) else "No consta"
+    campos = {"lineas_afectadas": "line", "tramo": "place",
+        "causa": "incident_type", "afectacion": "description",
+        "horario": "schedule / duration", "fuente": "source",
+        "url": "URL", "cautelas": "notes"}
+    return {"id": identificador, "fecha": fila["date"].strftime("%Y-%m-%d"),
+        **{destino: str(fila[origen]) if pd.notna(fila.get(origen)) else "No consta"
            for destino, origen in campos.items()}}
 
 
@@ -164,6 +168,6 @@ def exportar_caso(*, output_dir, fecha, ficha, ambito, municipios, resultados, m
         "sensibilidad": registros_json(sensibilidad.drop(columns="fechas_controles").rename(columns={"Relacion": "relacion"})),
         "evolucion_temporal": evolucion, "conclusiones": conclusiones_caso(resultados, cobertura),
         "archivos": {"controles": controles_csv}}
-    with (output_dir/f"incidencia_{sufijo}.json").open("w", encoding="utf-8") as f:
+    with (output_dir/f"incidencia_{sufijo}.json").open("w", encoding="utf-8", newline="\n") as f:
         json.dump(salida, f, ensure_ascii=False, indent=2, allow_nan=False)
     return salida

@@ -9,21 +9,38 @@ import pandas as pd
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"src"))
 from analysis.rmove_cases import ficha_incidencia
+from analysis.rmove_general import cargar_catalogo
+from analysis.rmove_review import casos_notebook
 
 
 class CasesTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.cases={date:json.loads((ROOT/f"data/processed/rmove/incidencia_{date.replace('-','_')}.json").read_text(encoding="utf-8"))
-                   for date in ["2025-02-07","2025-06-05"]}
+        catalogo=cargar_catalogo(ROOT/"data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx")
+        fechas=[ficha_incidencia(catalogo,c["id"])["fecha"] for c in casos_notebook(ROOT/"notebooks/04_comparacion_movilidad_incidencias.ipynb")]
+        cls.cases={date:json.loads((ROOT/f"data/processed/rmove/incidencia_{date.replace('-','_')}.json").read_text(encoding="utf-8")) for date in fechas}
 
     def test_documented_incident_from_original_excel(self):
         incidencias=pd.read_excel(ROOT/"data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx",sheet_name="Incidencias Barcelona")
-        expected=ficha_incidencia(incidencias,"Y25-002")
-        self.assertEqual(self.cases["2025-02-07"]["incidencia_documentada"],expected)
-        self.assertEqual(expected["fecha"],"2025-02-07")
-        self.assertIn("R1",expected["lineas_afectadas"])
-        self.assertIn("Sants",expected["tramo"])
+        for identificador in [172, "203", "248", "16", "67"]:
+            expected=ficha_incidencia(incidencias,identificador)
+            fila=incidencias.loc[incidencias.incident_id.astype(str).eq(str(identificador))].iloc[0]
+            self.assertEqual(expected["id"],str(identificador))
+            self.assertEqual(expected["fecha"],pd.Timestamp(fila["date"]).strftime("%Y-%m-%d"))
+            for destino,origen in {"lineas_afectadas":"line", "tramo":"place", "causa":"incident_type",
+                                   "afectacion":"description", "horario":"schedule / duration",
+                                   "fuente":"source", "url":"URL", "cautelas":"notes"}.items():
+                self.assertEqual(expected[destino],str(fila[origen]) if pd.notna(fila[origen]) else "No consta")
+
+    def test_numeric_excel_date_and_missing_documentary_fields(self):
+        tabla=pd.DataFrame({"incident_id":[1],"date":[44955],"line":["R1"],
+                            "place":["Barcelona"],"source":["fixture"],"URL":[None]})
+        ficha=ficha_incidencia(tabla,"1")
+        self.assertEqual(ficha["fecha"],"2023-01-29")
+        self.assertEqual(ficha["cautelas"],"No consta")
+        self.assertEqual(ficha["url"],"No consta")
+        with self.assertRaises(ValueError):
+            ficha_incidencia(tabla,"inexistente")
 
     def test_february_sufficiency_and_observations(self):
         case=self.cases["2025-02-07"]
@@ -47,7 +64,8 @@ class CasesTests(unittest.TestCase):
                 controls=audit.loc[audit.Relacion.eq(row["relacion"])]
                 dates=controls.day.dt.strftime("%Y-%m-%d").tolist()
                 self.assertEqual(dates,row["fechas_controles"])
-                self.assertEqual(len(dates),9 if date=="2025-02-07" else 8)
+                self.assertEqual(len(dates),row["n_controles"])
+                self.assertGreaterEqual(len(dates),case["metodologia"]["controles"]["minimo_controles"])
                 self.assertNotIn(date,dates);self.assertFalse(set(dates)&excluded)
                 self.assertTrue(controls.day.dt.day_of_week.eq(pd.Timestamp(date).day_of_week).all())
                 self.assertFalse(controls.day.dt.month.isin([7,8]).any())

@@ -2,19 +2,19 @@
   "proyecto": "R-MOVE",
   "version_esquema": 3,
   "fecha_incidencia": "2025-02-07",
-  "descripcion": "Fallo en la infraestructura / señalización del túnel · Barcelona Sants–Plaça de Catalunya",
+  "descripcion": "Avería de señalización · Barcelona-Sants–Plaça de Catalunya",
   "ambito": "R1 / Maresme",
   "incidencia_documentada": {
-    "id": "Y25-002",
+    "id": "172",
     "fecha": "2025-02-07",
     "lineas_afectadas": "R1; R3; R4; R7",
-    "tramo": "Barcelona Sants–Plaça de Catalunya",
-    "causa": "Fallo en la infraestructura / señalización del túnel",
-    "afectacion": "Circulación por vía única y frecuencias reducidas; afectación de múltiples líneas",
-    "horario": "Desde antes de 07:00; resuelta ~10:15",
-    "fuente": "betevé y 3CatInfo",
-    "url": "https://beteve.cat/mobilitat/divendres-negre-rodalies-retards-r1-r3-r4-7-febrer/",
-    "cautelas": "El registro parlamentario atribuye a esta afectación 179 trenes y 25.955 viajeros. Coincide con otra avería del R2 aeropuerto."
+    "tramo": "Barcelona-Sants–Plaça de Catalunya",
+    "causa": "Avería de señalización",
+    "afectacion": "Circulación por vía única durante casi cinco horas por avería de señalización; servicio reducido.",
+    "horario": "Desde primera hora hasta pasadas 10:00",
+    "fuente": "3CatInfo",
+    "url": "https://www.3cat.cat/3catinfo/retards-a-les-linies-r1-r3-i-r4-de-rodalies-que-circulen-per-via-unica-entre-sants-i-catalunya/noticia/3334596/",
+    "cautelas": "Informe parlamentario de incidencia destacada: 179 trenes; 25.955 viajeros afectados."
   },
   "municipios": [
     {
@@ -70,6 +70,98 @@
       "excluye_festivos_CT": true,
       "excluye_fechas_excel": true,
       "fechas_incidencias_excluidas": [
+        "2023-01-18",
+        "2023-01-26",
+        "2023-01-29",
+        "2023-01-30",
+        "2023-01-31",
+        "2023-02-01",
+        "2023-02-15",
+        "2023-02-20",
+        "2023-03-09",
+        "2023-03-13",
+        "2023-03-14",
+        "2023-03-29",
+        "2023-03-31",
+        "2023-04-10",
+        "2023-04-17",
+        "2023-04-21",
+        "2023-04-25",
+        "2023-05-01",
+        "2023-05-02",
+        "2023-05-03",
+        "2023-05-07",
+        "2023-05-09",
+        "2023-05-25",
+        "2023-06-06",
+        "2023-06-07",
+        "2023-06-13",
+        "2023-06-14",
+        "2023-06-26",
+        "2023-06-27",
+        "2023-07-05",
+        "2023-07-20",
+        "2023-07-28",
+        "2023-08-10",
+        "2023-08-14",
+        "2023-08-15",
+        "2023-08-18",
+        "2023-08-22",
+        "2023-08-24",
+        "2023-09-01",
+        "2023-09-10",
+        "2023-09-15",
+        "2023-09-27",
+        "2023-10-02",
+        "2023-10-03",
+        "2023-10-09",
+        "2023-10-16",
+        "2023-10-30",
+        "2023-10-31",
+        "2023-11-03",
+        "2023-11-05",
+        "2023-11-06",
+        "2023-11-23",
+        "2023-11-24",
+        "2023-11-27",
+        "2023-12-12",
+        "2023-12-13",
+        "2023-12-17",
+        "2024-01-05",
+        "2024-01-10",
+        "2024-01-12",
+        "2024-01-20",
+        "2024-02-01",
+        "2024-02-06",
+        "2024-02-07",
+        "2024-02-08",
+        "2024-02-12",
+        "2024-02-15",
+        "2024-02-16",
+        "2024-02-19",
+        "2024-02-21",
+        "2024-02-23",
+        "2024-03-03",
+        "2024-03-07",
+        "2024-03-08",
+        "2024-03-18",
+        "2024-04-01",
+        "2024-04-03",
+        "2024-04-04",
+        "2024-04-21",
+        "2024-04-22",
+        "2024-04-29",
+        "2024-05-03",
+        "2024-05-04",
+        "2024-05-08",
+        "2024-05-12",
+        "2024-05-18",
+        "2024-05-21",
+        "2024-06-04",
+        "2024-06-05",
+        "2024-06-12",
+        "2024-06-15",
+        "2024-06-29",
         "2024-07-07",
         "2024-07-15",
         "2024-07-23",
@@ -112,23 +204,70 @@
         "2024-12-19",
         "2024-12-28",
         "2025-01-10",
+        "2025-01-14",
+        "2025-01-25",
+        "2025-02-05",
+        "2025-02-06",
         "2025-02-07",
+        "2025-02-09",
+        "2025-02-11",
+        "2025-02-24",
+        "2025-02-26",
+        "2025-03-01",
+        "2025-03-03",
+        "2025-03-04",
+        "2025-03-05",
+        "2025-03-06",
         "2025-03-07",
+        "2025-03-11",
+        "2025-03-17",
         "2025-03-21",
         "2025-03-31",
-        "2025-04-09",
+        "2025-04-01",
+        "2025-04-02",
+        "2025-04-05",
+        "2025-04-07",
+        "2025-04-10",
+        "2025-04-11",
         "2025-04-28",
+        "2025-04-29",
+        "2025-04-30",
         "2025-05-05",
+        "2025-05-08",
         "2025-05-12",
-        "2025-05-19",
+        "2025-05-30",
+        "2025-06-02",
         "2025-06-05",
         "2025-06-06",
+        "2025-06-07",
+        "2025-06-12",
         "2025-06-17",
+        "2025-06-20",
         "2025-06-21",
+        "2025-06-25",
+        "2025-06-26",
+        "2025-07-01",
+        "2025-07-03",
+        "2025-07-04",
+        "2025-07-05",
+        "2025-07-06",
+        "2025-07-10",
         "2025-07-12",
+        "2025-07-14",
+        "2025-07-15",
+        "2025-07-17",
+        "2025-07-23",
+        "2025-07-25",
         "2025-07-28",
+        "2025-08-07",
+        "2025-08-08",
+        "2025-08-15",
+        "2025-08-20",
+        "2025-08-22",
+        "2025-08-23",
         "2025-08-24",
-        "2025-08-25"
+        "2025-08-25",
+        "2025-08-28"
       ],
       "fuente": "data\\raw\\rodalies\\RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx"
     },
@@ -3719,21 +3858,21 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-01-21",
       "viajes_observados": 1802.0,
-      "mediana_viajes_controles": 1713.0,
+      "mediana_viajes_controles": 1694.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-01-22",
       "viajes_observados": 1736.0,
-      "mediana_viajes_controles": 1744.0,
+      "mediana_viajes_controles": 1738.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-01-23",
       "viajes_observados": 1838.0,
-      "mediana_viajes_controles": 1739.0,
+      "mediana_viajes_controles": 1727.0,
       "estado": "ok"
     },
     {
@@ -3768,21 +3907,21 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-01-28",
       "viajes_observados": 1766.0,
-      "mediana_viajes_controles": 1729.0,
+      "mediana_viajes_controles": 1713.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-01-29",
       "viajes_observados": 1799.0,
-      "mediana_viajes_controles": 1744.0,
+      "mediana_viajes_controles": 1740.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-01-30",
       "viajes_observados": 1794.0,
-      "mediana_viajes_controles": 1786.5,
+      "mediana_viajes_controles": 1739.0,
       "estado": "ok"
     },
     {
@@ -3810,7 +3949,7 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-03",
       "viajes_observados": 1757.0,
-      "mediana_viajes_controles": 1794.0,
+      "mediana_viajes_controles": 1786.0,
       "estado": "ok"
     },
     {
@@ -3831,7 +3970,7 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-06",
       "viajes_observados": 1857.0,
-      "mediana_viajes_controles": 1794.0,
+      "mediana_viajes_controles": 1771.0,
       "estado": "ok"
     },
     {
@@ -3859,28 +3998,28 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-10",
       "viajes_observados": 1591.0,
-      "mediana_viajes_controles": 1794.0,
+      "mediana_viajes_controles": 1786.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-11",
       "viajes_observados": 1805.0,
-      "mediana_viajes_controles": 1752.5,
+      "mediana_viajes_controles": 1766.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-12",
       "viajes_observados": 1598.0,
-      "mediana_viajes_controles": 1773.0,
+      "mediana_viajes_controles": 1771.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-13",
       "viajes_observados": 1701.0,
-      "mediana_viajes_controles": 1831.5,
+      "mediana_viajes_controles": 1816.0,
       "estado": "ok"
     },
     {
@@ -3908,28 +4047,28 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-17",
       "viajes_observados": 1987.0,
-      "mediana_viajes_controles": 1785.0,
+      "mediana_viajes_controles": 1757.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-18",
       "viajes_observados": 1830.0,
-      "mediana_viajes_controles": 1752.5,
+      "mediana_viajes_controles": 1766.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-19",
       "viajes_observados": 1889.0,
-      "mediana_viajes_controles": 1758.5,
+      "mediana_viajes_controles": 1740.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-20",
       "viajes_observados": 1748.0,
-      "mediana_viajes_controles": 1831.5,
+      "mediana_viajes_controles": 1823.0,
       "estado": "ok"
     },
     {
@@ -3957,35 +4096,35 @@
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-24",
       "viajes_observados": 1792.0,
-      "mediana_viajes_controles": 1819.0,
+      "mediana_viajes_controles": 1767.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-25",
       "viajes_observados": 1739.0,
-      "mediana_viajes_controles": 1776.0,
+      "mediana_viajes_controles": 1786.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-26",
       "viajes_observados": 1711.0,
-      "mediana_viajes_controles": 1791.0,
+      "mediana_viajes_controles": 1799.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-27",
       "viajes_observados": 1869.0,
-      "mediana_viajes_controles": 1831.5,
+      "mediana_viajes_controles": 1808.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Barcelona",
       "fecha": "2025-02-28",
       "viajes_observados": 1770.0,
-      "mediana_viajes_controles": 1757.0,
+      "mediana_viajes_controles": 1736.5,
       "estado": "ok"
     },
     {
@@ -4013,28 +4152,28 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-20",
       "viajes_observados": 3032.0,
-      "mediana_viajes_controles": 3059.0,
+      "mediana_viajes_controles": 3142.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-21",
       "viajes_observados": 2969.0,
-      "mediana_viajes_controles": 3070.5,
+      "mediana_viajes_controles": 3073.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-22",
       "viajes_observados": 3147.0,
-      "mediana_viajes_controles": 3154.0,
+      "mediana_viajes_controles": 3169.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-23",
       "viajes_observados": 2977.0,
-      "mediana_viajes_controles": 3116.0,
+      "mediana_viajes_controles": 3101.0,
       "estado": "ok"
     },
     {
@@ -4062,28 +4201,28 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-27",
       "viajes_observados": 2936.0,
-      "mediana_viajes_controles": 3142.0,
+      "mediana_viajes_controles": 3155.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-28",
       "viajes_observados": 3073.0,
-      "mediana_viajes_controles": 3050.0,
+      "mediana_viajes_controles": 3018.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-29",
       "viajes_observados": 3185.0,
-      "mediana_viajes_controles": 3147.0,
+      "mediana_viajes_controles": 3150.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-01-30",
       "viajes_observados": 3118.0,
-      "mediana_viajes_controles": 3122.0,
+      "mediana_viajes_controles": 3101.0,
       "estado": "ok"
     },
     {
@@ -4111,14 +4250,14 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-03",
       "viajes_observados": 3059.0,
-      "mediana_viajes_controles": 3142.0,
+      "mediana_viajes_controles": 3148.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-04",
       "viajes_observados": 3091.0,
-      "mediana_viajes_controles": 3017.0,
+      "mediana_viajes_controles": 2985.5,
       "estado": "ok"
     },
     {
@@ -4132,7 +4271,7 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-06",
       "viajes_observados": 3133.0,
-      "mediana_viajes_controles": 3114.0,
+      "mediana_viajes_controles": 3101.0,
       "estado": "ok"
     },
     {
@@ -4160,28 +4299,28 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-10",
       "viajes_observados": 3303.0,
-      "mediana_viajes_controles": 3059.0,
+      "mediana_viajes_controles": 3070.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-11",
       "viajes_observados": 2968.0,
-      "mediana_viajes_controles": 3050.0,
+      "mediana_viajes_controles": 3002.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-12",
       "viajes_observados": 2870.0,
-      "mediana_viajes_controles": 3147.0,
+      "mediana_viajes_controles": 3150.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-13",
       "viajes_observados": 3088.0,
-      "mediana_viajes_controles": 3116.0,
+      "mediana_viajes_controles": 3105.5,
       "estado": "ok"
     },
     {
@@ -4209,28 +4348,28 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-17",
       "viajes_observados": 3176.0,
-      "mediana_viajes_controles": 3070.0,
+      "mediana_viajes_controles": 3081.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-18",
       "viajes_observados": 3089.0,
-      "mediana_viajes_controles": 3017.0,
+      "mediana_viajes_controles": 3002.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-19",
       "viajes_observados": 2867.0,
-      "mediana_viajes_controles": 3084.5,
+      "mediana_viajes_controles": 3150.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-20",
       "viajes_observados": 3130.0,
-      "mediana_viajes_controles": 3105.5,
+      "mediana_viajes_controles": 3094.5,
       "estado": "ok"
     },
     {
@@ -4258,35 +4397,35 @@
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-24",
       "viajes_observados": 3039.0,
-      "mediana_viajes_controles": 3081.0,
+      "mediana_viajes_controles": 3111.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-25",
       "viajes_observados": 2814.0,
-      "mediana_viajes_controles": 3052.5,
+      "mediana_viajes_controles": 3073.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-26",
       "viajes_observados": 3155.0,
-      "mediana_viajes_controles": 3008.0,
+      "mediana_viajes_controles": 3060.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-27",
       "viajes_observados": 3114.0,
-      "mediana_viajes_controles": 3094.5,
+      "mediana_viajes_controles": 3092.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Mataró",
       "fecha": "2025-02-28",
       "viajes_observados": 3260.0,
-      "mediana_viajes_controles": 3112.0,
+      "mediana_viajes_controles": 3175.0,
       "estado": "ok"
     },
     {
@@ -4314,28 +4453,28 @@
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-20",
       "viajes_observados": 104.0,
-      "mediana_viajes_controles": 107.0,
+      "mediana_viajes_controles": 104.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 87.0,
-      "mediana_viajes_controles": 123.0,
+      "mediana_viajes_controles": 119.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 169.0,
-      "mediana_viajes_controles": 152.0,
+      "mediana_viajes_controles": 146.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-23",
       "viajes_observados": 113.0,
-      "mediana_viajes_controles": 148.0,
+      "mediana_viajes_controles": 146.0,
       "estado": "ok"
     },
     {
@@ -4363,28 +4502,28 @@
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-27",
       "viajes_observados": 82.0,
-      "mediana_viajes_controles": 117.0,
+      "mediana_viajes_controles": 125.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-28",
       "viajes_observados": 125.0,
-      "mediana_viajes_controles": 120.0,
+      "mediana_viajes_controles": 107.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 127.0,
-      "mediana_viajes_controles": 152.0,
+      "mediana_viajes_controles": 146.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-01-30",
       "viajes_observados": 153.0,
-      "mediana_viajes_controles": 145.0,
+      "mediana_viajes_controles": 131.5,
       "estado": "ok"
     },
     {
@@ -4412,28 +4551,28 @@
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 104.0,
-      "mediana_viajes_controles": 117.0,
+      "mediana_viajes_controles": 114.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-04",
       "viajes_observados": 135.0,
-      "mediana_viajes_controles": 123.0,
+      "mediana_viajes_controles": 110.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-05",
       "viajes_observados": 172.0,
-      "mediana_viajes_controles": 151.5,
+      "mediana_viajes_controles": 146.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 171.0,
-      "mediana_viajes_controles": 143.0,
+      "mediana_viajes_controles": 137.0,
       "estado": "ok"
     },
     {
@@ -4461,28 +4600,28 @@
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 129.0,
-      "mediana_viajes_controles": 107.0,
+      "mediana_viajes_controles": 104.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 141.0,
-      "mediana_viajes_controles": 130.0,
+      "mediana_viajes_controles": 135.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 161.0,
-      "mediana_viajes_controles": 151.0,
+      "mediana_viajes_controles": 142.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-13",
       "viajes_observados": 166.0,
-      "mediana_viajes_controles": 144.0,
+      "mediana_viajes_controles": 137.0,
       "estado": "ok"
     },
     {
@@ -4510,28 +4649,28 @@
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 103.0,
-      "mediana_viajes_controles": 121.0,
+      "mediana_viajes_controles": 125.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 144.0,
-      "mediana_viajes_controles": 130.0,
+      "mediana_viajes_controles": 135.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-19",
       "viajes_observados": 141.0,
-      "mediana_viajes_controles": 156.5,
+      "mediana_viajes_controles": 147.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-20",
       "viajes_observados": 143.0,
-      "mediana_viajes_controles": 148.0,
+      "mediana_viajes_controles": 147.0,
       "estado": "ok"
     },
     {
@@ -4559,35 +4698,35 @@
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 107.0,
-      "mediana_viajes_controles": 117.0,
+      "mediana_viajes_controles": 114.5,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 148.0,
-      "mediana_viajes_controles": 138.0,
+      "mediana_viajes_controles": 144.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-26",
       "viajes_observados": 225.0,
-      "mediana_viajes_controles": 151.0,
+      "mediana_viajes_controles": 143.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 149.0,
-      "mediana_viajes_controles": 148.0,
+      "mediana_viajes_controles": 145.0,
       "estado": "ok"
     },
     {
       "relacion": "Arenys de Mar → Premià de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 198.0,
-      "mediana_viajes_controles": 146.0,
+      "mediana_viajes_controles": 148.0,
       "estado": "ok"
     },
     {
@@ -4615,28 +4754,28 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-20",
       "viajes_observados": 1655.0,
-      "mediana_viajes_controles": 1754.0,
+      "mediana_viajes_controles": 1721.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 1737.0,
-      "mediana_viajes_controles": 1878.0,
+      "mediana_viajes_controles": 1822.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 1821.0,
-      "mediana_viajes_controles": 1882.0,
+      "mediana_viajes_controles": 1800.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-23",
       "viajes_observados": 1936.0,
-      "mediana_viajes_controles": 1981.0,
+      "mediana_viajes_controles": 1916.0,
       "estado": "ok"
     },
     {
@@ -4671,21 +4810,21 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-28",
       "viajes_observados": 1822.0,
-      "mediana_viajes_controles": 1878.0,
+      "mediana_viajes_controles": 1756.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 1835.0,
-      "mediana_viajes_controles": 1905.0,
+      "mediana_viajes_controles": 1871.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-01-30",
       "viajes_observados": 1988.0,
-      "mediana_viajes_controles": 1998.0,
+      "mediana_viajes_controles": 1955.0,
       "estado": "ok"
     },
     {
@@ -4713,28 +4852,28 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 1607.0,
-      "mediana_viajes_controles": 1754.0,
+      "mediana_viajes_controles": 1739.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-04",
       "viajes_observados": 1923.0,
-      "mediana_viajes_controles": 1844.5,
+      "mediana_viajes_controles": 1756.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-05",
       "viajes_observados": 1905.0,
-      "mediana_viajes_controles": 1859.0,
+      "mediana_viajes_controles": 1835.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 2047.0,
-      "mediana_viajes_controles": 1988.0,
+      "mediana_viajes_controles": 1981.0,
       "estado": "ok"
     },
     {
@@ -4762,28 +4901,28 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 1770.0,
-      "mediana_viajes_controles": 1721.0,
+      "mediana_viajes_controles": 1709.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 1926.0,
-      "mediana_viajes_controles": 1844.5,
+      "mediana_viajes_controles": 1775.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 1697.0,
-      "mediana_viajes_controles": 1905.0,
+      "mediana_viajes_controles": 1878.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-13",
       "viajes_observados": 1974.0,
-      "mediana_viajes_controles": 2022.5,
+      "mediana_viajes_controles": 2005.5,
       "estado": "ok"
     },
     {
@@ -4811,28 +4950,28 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 1721.0,
-      "mediana_viajes_controles": 1748.5,
+      "mediana_viajes_controles": 1714.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 1889.0,
-      "mediana_viajes_controles": 1873.0,
+      "mediana_viajes_controles": 1775.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-19",
       "viajes_observados": 1972.0,
-      "mediana_viajes_controles": 1893.5,
+      "mediana_viajes_controles": 1835.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-20",
       "viajes_observados": 2101.0,
-      "mediana_viajes_controles": 2022.5,
+      "mediana_viajes_controles": 2005.5,
       "estado": "ok"
     },
     {
@@ -4860,14 +4999,14 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 1754.0,
-      "mediana_viajes_controles": 1743.0,
+      "mediana_viajes_controles": 1717.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 1775.0,
-      "mediana_viajes_controles": 1889.5,
+      "mediana_viajes_controles": 1889.0,
       "estado": "ok"
     },
     {
@@ -4881,14 +5020,14 @@
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 2037.0,
-      "mediana_viajes_controles": 2035.0,
+      "mediana_viajes_controles": 2023.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Arenys de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 2338.0,
-      "mediana_viajes_controles": 2402.0,
+      "mediana_viajes_controles": 2389.5,
       "estado": "ok"
     },
     {
@@ -4923,21 +5062,21 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-01-21",
       "viajes_observados": 4649.0,
-      "mediana_viajes_controles": 4882.0,
+      "mediana_viajes_controles": 4894.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-01-22",
       "viajes_observados": 4848.0,
-      "mediana_viajes_controles": 4777.0,
+      "mediana_viajes_controles": 4738.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-01-23",
       "viajes_observados": 4612.0,
-      "mediana_viajes_controles": 4993.0,
+      "mediana_viajes_controles": 5035.5,
       "estado": "ok"
     },
     {
@@ -4972,21 +5111,21 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-01-28",
       "viajes_observados": 4792.0,
-      "mediana_viajes_controles": 4882.0,
+      "mediana_viajes_controles": 4798.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-01-29",
       "viajes_observados": 4627.0,
-      "mediana_viajes_controles": 5077.0,
+      "mediana_viajes_controles": 4812.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-01-30",
       "viajes_observados": 4704.0,
-      "mediana_viajes_controles": 4993.0,
+      "mediana_viajes_controles": 5034.0,
       "estado": "ok"
     },
     {
@@ -5014,28 +5153,28 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-03",
       "viajes_observados": 4525.0,
-      "mediana_viajes_controles": 4494.0,
+      "mediana_viajes_controles": 4458.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-04",
       "viajes_observados": 4913.0,
-      "mediana_viajes_controles": 4831.0,
+      "mediana_viajes_controles": 4747.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-05",
       "viajes_observados": 5077.0,
-      "mediana_viajes_controles": 4812.5,
+      "mediana_viajes_controles": 4773.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-06",
       "viajes_observados": 5058.0,
-      "mediana_viajes_controles": 4928.0,
+      "mediana_viajes_controles": 4980.0,
       "estado": "ok"
     },
     {
@@ -5063,21 +5202,21 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-10",
       "viajes_observados": 4509.0,
-      "mediana_viajes_controles": 4494.0,
+      "mediana_viajes_controles": 4458.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-11",
       "viajes_observados": 4870.0,
-      "mediana_viajes_controles": 4903.5,
+      "mediana_viajes_controles": 4894.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-12",
       "viajes_observados": 5080.0,
-      "mediana_viajes_controles": 4848.0,
+      "mediana_viajes_controles": 4773.0,
       "estado": "ok"
     },
     {
@@ -5112,28 +5251,28 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-17",
       "viajes_observados": 4643.0,
-      "mediana_viajes_controles": 4501.5,
+      "mediana_viajes_controles": 4494.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-18",
       "viajes_observados": 5050.0,
-      "mediana_viajes_controles": 4882.0,
+      "mediana_viajes_controles": 4894.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-19",
       "viajes_observados": 4769.0,
-      "mediana_viajes_controles": 4924.5,
+      "mediana_viajes_controles": 4812.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-20",
       "viajes_observados": 5320.0,
-      "mediana_viajes_controles": 5045.0,
+      "mediana_viajes_controles": 5086.0,
       "estado": "ok"
     },
     {
@@ -5161,14 +5300,14 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-24",
       "viajes_observados": 4472.0,
-      "mediana_viajes_controles": 4525.0,
+      "mediana_viajes_controles": 4501.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-25",
       "viajes_observados": 4894.0,
-      "mediana_viajes_controles": 4936.0,
+      "mediana_viajes_controles": 4959.0,
       "estado": "ok"
     },
     {
@@ -5182,14 +5321,14 @@
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-27",
       "viajes_observados": 5143.0,
-      "mediana_viajes_controles": 5049.0,
+      "mediana_viajes_controles": 5140.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → El Masnou",
       "fecha": "2025-02-28",
       "viajes_observados": 4746.0,
-      "mediana_viajes_controles": 4882.0,
+      "mediana_viajes_controles": 4892.0,
       "estado": "ok"
     },
     {
@@ -5217,28 +5356,28 @@
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-20",
       "viajes_observados": 11710.0,
-      "mediana_viajes_controles": 11681.0,
+      "mediana_viajes_controles": 11646.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-21",
       "viajes_observados": 12405.0,
-      "mediana_viajes_controles": 12431.5,
+      "mediana_viajes_controles": 12292.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-22",
       "viajes_observados": 12318.0,
-      "mediana_viajes_controles": 12502.0,
+      "mediana_viajes_controles": 12376.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-23",
       "viajes_observados": 12533.0,
-      "mediana_viajes_controles": 12680.0,
+      "mediana_viajes_controles": 12559.0,
       "estado": "ok"
     },
     {
@@ -5266,28 +5405,28 @@
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-27",
       "viajes_observados": 11681.0,
-      "mediana_viajes_controles": 11710.0,
+      "mediana_viajes_controles": 11646.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-28",
       "viajes_observados": 12148.0,
-      "mediana_viajes_controles": 12488.0,
+      "mediana_viajes_controles": 12348.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-29",
       "viajes_observados": 12100.0,
-      "mediana_viajes_controles": 12502.0,
+      "mediana_viajes_controles": 12376.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-01-30",
       "viajes_observados": 12515.0,
-      "mediana_viajes_controles": 12680.0,
+      "mediana_viajes_controles": 12568.0,
       "estado": "ok"
     },
     {
@@ -5315,28 +5454,28 @@
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-03",
       "viajes_observados": 11069.0,
-      "mediana_viajes_controles": 11710.0,
+      "mediana_viajes_controles": 11663.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-04",
       "viajes_observados": 12590.0,
-      "mediana_viajes_controles": 12348.5,
+      "mediana_viajes_controles": 12220.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-05",
       "viajes_observados": 12683.0,
-      "mediana_viajes_controles": 12454.5,
+      "mediana_viajes_controles": 12376.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-06",
       "viajes_observados": 12996.0,
-      "mediana_viajes_controles": 12603.0,
+      "mediana_viajes_controles": 12568.0,
       "estado": "ok"
     },
     {
@@ -5364,28 +5503,28 @@
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-10",
       "viajes_observados": 11579.0,
-      "mediana_viajes_controles": 11895.0,
+      "mediana_viajes_controles": 11695.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-11",
       "viajes_observados": 12571.0,
-      "mediana_viajes_controles": 12497.5,
+      "mediana_viajes_controles": 12405.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-12",
       "viajes_observados": 12502.0,
-      "mediana_viajes_controles": 12683.0,
+      "mediana_viajes_controles": 12376.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-13",
       "viajes_observados": 12603.0,
-      "mediana_viajes_controles": 12876.5,
+      "mediana_viajes_controles": 12645.0,
       "estado": "ok"
     },
     {
@@ -5413,28 +5552,28 @@
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-17",
       "viajes_observados": 11895.0,
-      "mediana_viajes_controles": 11925.0,
+      "mediana_viajes_controles": 11681.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-18",
       "viajes_observados": 12783.0,
-      "mediana_viajes_controles": 12488.0,
+      "mediana_viajes_controles": 12405.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-19",
       "viajes_observados": 12407.0,
-      "mediana_viajes_controles": 12749.0,
+      "mediana_viajes_controles": 12423.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-20",
       "viajes_observados": 12757.0,
-      "mediana_viajes_controles": 13042.0,
+      "mediana_viajes_controles": 12852.0,
       "estado": "ok"
     },
     {
@@ -5462,35 +5601,35 @@
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-24",
       "viajes_observados": 12140.0,
-      "mediana_viajes_controles": 11895.0,
+      "mediana_viajes_controles": 11695.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-25",
       "viajes_observados": 12292.0,
-      "mediana_viajes_controles": 12686.5,
+      "mediana_viajes_controles": 12783.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-26",
       "viajes_observados": 13334.0,
-      "mediana_viajes_controles": 12683.0,
+      "mediana_viajes_controles": 12502.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-27",
       "viajes_observados": 13101.0,
-      "mediana_viajes_controles": 13042.0,
+      "mediana_viajes_controles": 12757.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Mataró",
       "fecha": "2025-02-28",
       "viajes_observados": 13511.0,
-      "mediana_viajes_controles": 13026.0,
+      "mediana_viajes_controles": 12855.5,
       "estado": "ok"
     },
     {
@@ -5518,28 +5657,28 @@
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-20",
       "viajes_observados": 3606.0,
-      "mediana_viajes_controles": 4037.0,
+      "mediana_viajes_controles": 3991.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 3909.0,
-      "mediana_viajes_controles": 4246.0,
+      "mediana_viajes_controles": 3998.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 3933.0,
-      "mediana_viajes_controles": 4589.0,
+      "mediana_viajes_controles": 4084.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-23",
       "viajes_observados": 4039.0,
-      "mediana_viajes_controles": 4365.5,
+      "mediana_viajes_controles": 4223.0,
       "estado": "ok"
     },
     {
@@ -5567,28 +5706,28 @@
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-27",
       "viajes_observados": 3783.0,
-      "mediana_viajes_controles": 4187.0,
+      "mediana_viajes_controles": 4037.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-28",
       "viajes_observados": 3998.0,
-      "mediana_viajes_controles": 4453.5,
+      "mediana_viajes_controles": 4201.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 4050.0,
-      "mediana_viajes_controles": 4735.0,
+      "mediana_viajes_controles": 4334.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-01-30",
       "viajes_observados": 4166.0,
-      "mediana_viajes_controles": 4693.0,
+      "mediana_viajes_controles": 4607.5,
       "estado": "ok"
     },
     {
@@ -5616,28 +5755,28 @@
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 4892.0,
-      "mediana_viajes_controles": 4187.0,
+      "mediana_viajes_controles": 3910.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-04",
       "viajes_observados": 5143.0,
-      "mediana_viajes_controles": 4205.5,
+      "mediana_viajes_controles": 3953.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-05",
       "viajes_observados": 5223.0,
-      "mediana_viajes_controles": 4507.0,
+      "mediana_viajes_controles": 4237.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 4973.0,
-      "mediana_viajes_controles": 4451.0,
+      "mediana_viajes_controles": 4553.0,
       "estado": "ok"
     },
     {
@@ -5665,28 +5804,28 @@
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 4959.0,
-      "mediana_viajes_controles": 4239.0,
+      "mediana_viajes_controles": 4011.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 5082.0,
-      "mediana_viajes_controles": 4388.0,
+      "mediana_viajes_controles": 4363.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 5248.0,
-      "mediana_viajes_controles": 4449.0,
+      "mediana_viajes_controles": 4237.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-13",
       "viajes_observados": 5512.0,
-      "mediana_viajes_controles": 4638.5,
+      "mediana_viajes_controles": 4553.0,
       "estado": "ok"
     },
     {
@@ -5714,21 +5853,21 @@
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 5098.0,
-      "mediana_viajes_controles": 4258.5,
+      "mediana_viajes_controles": 4239.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 5090.0,
-      "mediana_viajes_controles": 4518.0,
+      "mediana_viajes_controles": 4363.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-19",
       "viajes_observados": 5177.0,
-      "mediana_viajes_controles": 4519.0,
+      "mediana_viajes_controles": 4237.5,
       "estado": "ok"
     },
     {
@@ -5763,35 +5902,35 @@
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 4705.0,
-      "mediana_viajes_controles": 4278.0,
+      "mediana_viajes_controles": 4258.5,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 5108.0,
-      "mediana_viajes_controles": 4643.0,
+      "mediana_viajes_controles": 4663.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-26",
       "viajes_observados": 5484.0,
-      "mediana_viajes_controles": 4589.0,
+      "mediana_viajes_controles": 4449.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 5423.0,
-      "mediana_viajes_controles": 4954.0,
+      "mediana_viajes_controles": 4935.0,
       "estado": "ok"
     },
     {
       "relacion": "Barcelona → Premià de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 5165.0,
-      "mediana_viajes_controles": 4809.0,
+      "mediana_viajes_controles": 4586.0,
       "estado": "ok"
     },
     {
@@ -5819,21 +5958,21 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-20",
       "viajes_observados": 4388.0,
-      "mediana_viajes_controles": 4520.0,
+      "mediana_viajes_controles": 4533.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-21",
       "viajes_observados": 4497.0,
-      "mediana_viajes_controles": 4787.5,
+      "mediana_viajes_controles": 4828.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-22",
       "viajes_observados": 4576.0,
-      "mediana_viajes_controles": 4753.0,
+      "mediana_viajes_controles": 4669.0,
       "estado": "ok"
     },
     {
@@ -5868,28 +6007,28 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-27",
       "viajes_observados": 4314.0,
-      "mediana_viajes_controles": 4520.0,
+      "mediana_viajes_controles": 4533.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-28",
       "viajes_observados": 4579.0,
-      "mediana_viajes_controles": 4787.5,
+      "mediana_viajes_controles": 4662.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-29",
       "viajes_observados": 4610.0,
-      "mediana_viajes_controles": 4958.0,
+      "mediana_viajes_controles": 4740.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-01-30",
       "viajes_observados": 4694.0,
-      "mediana_viajes_controles": 4760.5,
+      "mediana_viajes_controles": 4785.0,
       "estado": "ok"
     },
     {
@@ -5917,28 +6056,28 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-03",
       "viajes_observados": 4520.0,
-      "mediana_viajes_controles": 4459.0,
+      "mediana_viajes_controles": 4477.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-04",
       "viajes_observados": 4828.0,
-      "mediana_viajes_controles": 4724.0,
+      "mediana_viajes_controles": 4538.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-05",
       "viajes_observados": 4958.0,
-      "mediana_viajes_controles": 4740.5,
+      "mediana_viajes_controles": 4669.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-06",
       "viajes_observados": 4853.0,
-      "mediana_viajes_controles": 4668.0,
+      "mediana_viajes_controles": 4681.0,
       "estado": "ok"
     },
     {
@@ -5966,21 +6105,21 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-10",
       "viajes_observados": 4597.0,
-      "mediana_viajes_controles": 4459.0,
+      "mediana_viajes_controles": 4471.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-11",
       "viajes_observados": 4747.0,
-      "mediana_viajes_controles": 4839.5,
+      "mediana_viajes_controles": 4828.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-12",
       "viajes_observados": 4753.0,
-      "mediana_viajes_controles": 4958.0,
+      "mediana_viajes_controles": 4669.0,
       "estado": "ok"
     },
     {
@@ -6015,28 +6154,28 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-17",
       "viajes_observados": 4533.0,
-      "mediana_viajes_controles": 4489.5,
+      "mediana_viajes_controles": 4520.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-18",
       "viajes_observados": 5065.0,
-      "mediana_viajes_controles": 4787.5,
+      "mediana_viajes_controles": 4828.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-19",
       "viajes_observados": 4728.0,
-      "mediana_viajes_controles": 4855.5,
+      "mediana_viajes_controles": 4681.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-20",
       "viajes_observados": 5159.0,
-      "mediana_viajes_controles": 4773.5,
+      "mediana_viajes_controles": 4798.0,
       "estado": "ok"
     },
     {
@@ -6064,14 +6203,14 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-24",
       "viajes_observados": 4459.0,
-      "mediana_viajes_controles": 4533.0,
+      "mediana_viajes_controles": 4526.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-25",
       "viajes_observados": 4851.0,
-      "mediana_viajes_controles": 4808.0,
+      "mediana_viajes_controles": 4828.0,
       "estado": "ok"
     },
     {
@@ -6085,14 +6224,14 @@
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-27",
       "viajes_observados": 4902.0,
-      "mediana_viajes_controles": 4887.5,
+      "mediana_viajes_controles": 4922.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Barcelona",
       "fecha": "2025-02-28",
       "viajes_observados": 4566.0,
-      "mediana_viajes_controles": 4799.0,
+      "mediana_viajes_controles": 4731.0,
       "estado": "ok"
     },
     {
@@ -6120,21 +6259,21 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-01-20",
       "viajes_observados": 1102.0,
-      "mediana_viajes_controles": 1140.0,
+      "mediana_viajes_controles": 1157.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-01-21",
       "viajes_observados": 1186.0,
-      "mediana_viajes_controles": 1132.5,
+      "mediana_viajes_controles": 1126.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-01-22",
       "viajes_observados": 1147.0,
-      "mediana_viajes_controles": 1193.0,
+      "mediana_viajes_controles": 1192.5,
       "estado": "ok"
     },
     {
@@ -6169,21 +6308,21 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-01-27",
       "viajes_observados": 1102.0,
-      "mediana_viajes_controles": 1135.0,
+      "mediana_viajes_controles": 1140.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-01-28",
       "viajes_observados": 1227.0,
-      "mediana_viajes_controles": 1132.5,
+      "mediana_viajes_controles": 1116.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-01-29",
       "viajes_observados": 1022.0,
-      "mediana_viajes_controles": 1193.0,
+      "mediana_viajes_controles": 1192.5,
       "estado": "ok"
     },
     {
@@ -6218,28 +6357,28 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-03",
       "viajes_observados": 1209.0,
-      "mediana_viajes_controles": 1131.0,
+      "mediana_viajes_controles": 1121.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-04",
       "viajes_observados": 1139.0,
-      "mediana_viajes_controles": 1137.5,
+      "mediana_viajes_controles": 1129.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-05",
       "viajes_observados": 1200.0,
-      "mediana_viajes_controles": 1165.5,
+      "mediana_viajes_controles": 1154.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-06",
       "viajes_observados": 1159.0,
-      "mediana_viajes_controles": 1176.0,
+      "mediana_viajes_controles": 1153.0,
       "estado": "ok"
     },
     {
@@ -6267,28 +6406,28 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-10",
       "viajes_observados": 1165.0,
-      "mediana_viajes_controles": 1131.0,
+      "mediana_viajes_controles": 1121.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-11",
       "viajes_observados": 1142.0,
-      "mediana_viajes_controles": 1142.0,
+      "mediana_viajes_controles": 1139.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-12",
       "viajes_observados": 1161.0,
-      "mediana_viajes_controles": 1170.0,
+      "mediana_viajes_controles": 1144.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-13",
       "viajes_observados": 1292.0,
-      "mediana_viajes_controles": 1167.5,
+      "mediana_viajes_controles": 1153.0,
       "estado": "ok"
     },
     {
@@ -6316,21 +6455,21 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-17",
       "viajes_observados": 1140.0,
-      "mediana_viajes_controles": 1133.0,
+      "mediana_viajes_controles": 1135.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-18",
       "viajes_observados": 1126.0,
-      "mediana_viajes_controles": 1143.5,
+      "mediana_viajes_controles": 1173.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-19",
       "viajes_observados": 1075.0,
-      "mediana_viajes_controles": 1165.5,
+      "mediana_viajes_controles": 1154.0,
       "estado": "ok"
     },
     {
@@ -6365,14 +6504,14 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-24",
       "viajes_observados": 999.0,
-      "mediana_viajes_controles": 1135.0,
+      "mediana_viajes_controles": 1137.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-25",
       "viajes_observados": 1173.0,
-      "mediana_viajes_controles": 1143.5,
+      "mediana_viajes_controles": 1186.0,
       "estado": "ok"
     },
     {
@@ -6386,14 +6525,14 @@
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-27",
       "viajes_observados": 1333.0,
-      "mediana_viajes_controles": 1190.0,
+      "mediana_viajes_controles": 1176.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Mataró",
       "fecha": "2025-02-28",
       "viajes_observados": 1254.0,
-      "mediana_viajes_controles": 1217.0,
+      "mediana_viajes_controles": 1225.0,
       "estado": "ok"
     },
     {
@@ -6421,28 +6560,28 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-20",
       "viajes_observados": 626.0,
-      "mediana_viajes_controles": 608.0,
+      "mediana_viajes_controles": 640.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 643.0,
-      "mediana_viajes_controles": 683.5,
+      "mediana_viajes_controles": 677.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 651.0,
-      "mediana_viajes_controles": 616.0,
+      "mediana_viajes_controles": 591.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-23",
       "viajes_observados": 668.0,
-      "mediana_viajes_controles": 650.0,
+      "mediana_viajes_controles": 652.0,
       "estado": "ok"
     },
     {
@@ -6470,7 +6609,7 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-27",
       "viajes_observados": 608.0,
-      "mediana_viajes_controles": 626.0,
+      "mediana_viajes_controles": 640.0,
       "estado": "ok"
     },
     {
@@ -6484,14 +6623,14 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 622.0,
-      "mediana_viajes_controles": 651.0,
+      "mediana_viajes_controles": 623.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-01-30",
       "viajes_observados": 747.0,
-      "mediana_viajes_controles": 650.0,
+      "mediana_viajes_controles": 652.0,
       "estado": "ok"
     },
     {
@@ -6519,7 +6658,7 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 574.0,
-      "mediana_viajes_controles": 640.0,
+      "mediana_viajes_controles": 652.0,
       "estado": "ok"
     },
     {
@@ -6533,14 +6672,14 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-05",
       "viajes_observados": 653.0,
-      "mediana_viajes_controles": 619.0,
+      "mediana_viajes_controles": 608.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 617.0,
-      "mediana_viajes_controles": 652.0,
+      "mediana_viajes_controles": 655.0,
       "estado": "ok"
     },
     {
@@ -6568,28 +6707,28 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 702.0,
-      "mediana_viajes_controles": 625.0,
+      "mediana_viajes_controles": 625.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 589.0,
-      "mediana_viajes_controles": 700.5,
+      "mediana_viajes_controles": 690.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 558.0,
-      "mediana_viajes_controles": 631.0,
+      "mediana_viajes_controles": 626.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-13",
       "viajes_observados": 702.0,
-      "mediana_viajes_controles": 652.0,
+      "mediana_viajes_controles": 655.0,
       "estado": "ok"
     },
     {
@@ -6617,14 +6756,14 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 664.0,
-      "mediana_viajes_controles": 623.5,
+      "mediana_viajes_controles": 625.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 716.0,
-      "mediana_viajes_controles": 690.5,
+      "mediana_viajes_controles": 690.0,
       "estado": "ok"
     },
     {
@@ -6638,7 +6777,7 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-20",
       "viajes_observados": 652.0,
-      "mediana_viajes_controles": 663.0,
+      "mediana_viajes_controles": 670.5,
       "estado": "ok"
     },
     {
@@ -6666,14 +6805,14 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 608.0,
-      "mediana_viajes_controles": 625.0,
+      "mediana_viajes_controles": 625.5,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 753.0,
-      "mediana_viajes_controles": 697.5,
+      "mediana_viajes_controles": 704.0,
       "estado": "ok"
     },
     {
@@ -6687,14 +6826,14 @@
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 673.0,
-      "mediana_viajes_controles": 663.0,
+      "mediana_viajes_controles": 668.0,
       "estado": "ok"
     },
     {
       "relacion": "El Masnou → Premià de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 716.0,
-      "mediana_viajes_controles": 704.0,
+      "mediana_viajes_controles": 738.5,
       "estado": "ok"
     },
     {
@@ -6722,28 +6861,28 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-20",
       "viajes_observados": 3053.0,
-      "mediana_viajes_controles": 3183.0,
+      "mediana_viajes_controles": 3155.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 3088.0,
-      "mediana_viajes_controles": 3150.0,
+      "mediana_viajes_controles": 3118.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 3328.0,
-      "mediana_viajes_controles": 3296.0,
+      "mediana_viajes_controles": 3302.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-23",
       "viajes_observados": 3251.0,
-      "mediana_viajes_controles": 3257.5,
+      "mediana_viajes_controles": 3229.5,
       "estado": "ok"
     },
     {
@@ -6771,28 +6910,28 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-27",
       "viajes_observados": 3023.0,
-      "mediana_viajes_controles": 3209.0,
+      "mediana_viajes_controles": 3229.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-28",
       "viajes_observados": 3047.0,
-      "mediana_viajes_controles": 3158.0,
+      "mediana_viajes_controles": 3103.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 3296.0,
-      "mediana_viajes_controles": 3263.0,
+      "mediana_viajes_controles": 3295.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-01-30",
       "viajes_observados": 3362.0,
-      "mediana_viajes_controles": 3256.5,
+      "mediana_viajes_controles": 3228.5,
       "estado": "ok"
     },
     {
@@ -6820,14 +6959,14 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 3119.0,
-      "mediana_viajes_controles": 3209.0,
+      "mediana_viajes_controles": 3192.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-04",
       "viajes_observados": 3276.0,
-      "mediana_viajes_controles": 3107.0,
+      "mediana_viajes_controles": 3067.5,
       "estado": "ok"
     },
     {
@@ -6841,7 +6980,7 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 3293.0,
-      "mediana_viajes_controles": 3251.0,
+      "mediana_viajes_controles": 3228.5,
       "estado": "ok"
     },
     {
@@ -6869,28 +7008,28 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 3155.0,
-      "mediana_viajes_controles": 3183.0,
+      "mediana_viajes_controles": 3150.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 3200.0,
-      "mediana_viajes_controles": 3117.5,
+      "mediana_viajes_controles": 3096.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 2983.0,
-      "mediana_viajes_controles": 3263.0,
+      "mediana_viajes_controles": 3279.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-13",
       "viajes_observados": 3262.0,
-      "mediana_viajes_controles": 3269.0,
+      "mediana_viajes_controles": 3228.5,
       "estado": "ok"
     },
     {
@@ -6918,28 +7057,28 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 3242.0,
-      "mediana_viajes_controles": 3182.0,
+      "mediana_viajes_controles": 3155.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 3118.0,
-      "mediana_viajes_controles": 3144.0,
+      "mediana_viajes_controles": 3096.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-19",
       "viajes_observados": 3051.0,
-      "mediana_viajes_controles": 3238.0,
+      "mediana_viajes_controles": 3279.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-20",
       "viajes_observados": 3206.0,
-      "mediana_viajes_controles": 3290.0,
+      "mediana_viajes_controles": 3292.5,
       "estado": "ok"
     },
     {
@@ -6967,35 +7106,35 @@
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 3209.0,
-      "mediana_viajes_controles": 3181.0,
+      "mediana_viajes_controles": 3168.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 2984.0,
-      "mediana_viajes_controles": 3144.5,
+      "mediana_viajes_controles": 3117.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-26",
       "viajes_observados": 3213.0,
-      "mediana_viajes_controles": 3173.0,
+      "mediana_viajes_controles": 3263.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 3199.0,
-      "mediana_viajes_controles": 3290.0,
+      "mediana_viajes_controles": 3262.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Arenys de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 3699.0,
-      "mediana_viajes_controles": 3424.0,
+      "mediana_viajes_controles": 3434.0,
       "estado": "ok"
     },
     {
@@ -7023,28 +7162,28 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-20",
       "viajes_observados": 11065.0,
-      "mediana_viajes_controles": 11266.0,
+      "mediana_viajes_controles": 11201.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-21",
       "viajes_observados": 11808.0,
-      "mediana_viajes_controles": 11685.0,
+      "mediana_viajes_controles": 11923.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-22",
       "viajes_observados": 12034.0,
-      "mediana_viajes_controles": 11893.0,
+      "mediana_viajes_controles": 11832.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-23",
       "viajes_observados": 12706.0,
-      "mediana_viajes_controles": 12331.0,
+      "mediana_viajes_controles": 12272.0,
       "estado": "ok"
     },
     {
@@ -7072,7 +7211,7 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-27",
       "viajes_observados": 10702.0,
-      "mediana_viajes_controles": 11266.0,
+      "mediana_viajes_controles": 11201.0,
       "estado": "ok"
     },
     {
@@ -7086,14 +7225,14 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-29",
       "viajes_observados": 11541.0,
-      "mediana_viajes_controles": 11910.0,
+      "mediana_viajes_controles": 11901.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-01-30",
       "viajes_observados": 12355.0,
-      "mediana_viajes_controles": 12335.5,
+      "mediana_viajes_controles": 12395.5,
       "estado": "ok"
     },
     {
@@ -7121,7 +7260,7 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-03",
       "viajes_observados": 11201.0,
-      "mediana_viajes_controles": 11266.0,
+      "mediana_viajes_controles": 10883.5,
       "estado": "ok"
     },
     {
@@ -7142,7 +7281,7 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-06",
       "viajes_observados": 12364.0,
-      "mediana_viajes_controles": 12355.0,
+      "mediana_viajes_controles": 12478.5,
       "estado": "ok"
     },
     {
@@ -7170,28 +7309,28 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-10",
       "viajes_observados": 12044.0,
-      "mediana_viajes_controles": 11266.0,
+      "mediana_viajes_controles": 11133.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-11",
       "viajes_observados": 11288.0,
-      "mediana_viajes_controles": 11949.5,
+      "mediana_viajes_controles": 11941.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-12",
       "viajes_observados": 11648.0,
-      "mediana_viajes_controles": 11910.0,
+      "mediana_viajes_controles": 11901.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-13",
       "viajes_observados": 12189.0,
-      "mediana_viajes_controles": 12483.0,
+      "mediana_viajes_controles": 12610.5,
       "estado": "ok"
     },
     {
@@ -7219,14 +7358,14 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-17",
       "viajes_observados": 11266.0,
-      "mediana_viajes_controles": 11574.5,
+      "mediana_viajes_controles": 11201.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-18",
       "viajes_observados": 12425.0,
-      "mediana_viajes_controles": 11874.5,
+      "mediana_viajes_controles": 11941.0,
       "estado": "ok"
     },
     {
@@ -7240,7 +7379,7 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-20",
       "viajes_observados": 12602.0,
-      "mediana_viajes_controles": 12491.5,
+      "mediana_viajes_controles": 12662.5,
       "estado": "ok"
     },
     {
@@ -7268,14 +7407,14 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-24",
       "viajes_observados": 11808.0,
-      "mediana_viajes_controles": 11266.0,
+      "mediana_viajes_controles": 11233.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-25",
       "viajes_observados": 11941.0,
-      "mediana_viajes_controles": 11963.0,
+      "mediana_viajes_controles": 11968.0,
       "estado": "ok"
     },
     {
@@ -7289,14 +7428,14 @@
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-27",
       "viajes_observados": 12619.0,
-      "mediana_viajes_controles": 12654.0,
+      "mediana_viajes_controles": 12706.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Barcelona",
       "fecha": "2025-02-28",
       "viajes_observados": 11310.0,
-      "mediana_viajes_controles": 11363.0,
+      "mediana_viajes_controles": 11370.0,
       "estado": "ok"
     },
     {
@@ -7324,21 +7463,21 @@
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-01-20",
       "viajes_observados": 1123.0,
-      "mediana_viajes_controles": 1179.0,
+      "mediana_viajes_controles": 1191.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-01-21",
       "viajes_observados": 1202.0,
-      "mediana_viajes_controles": 1116.0,
+      "mediana_viajes_controles": 1114.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-01-22",
       "viajes_observados": 1089.0,
-      "mediana_viajes_controles": 1245.0,
+      "mediana_viajes_controles": 1178.5,
       "estado": "ok"
     },
     {
@@ -7373,21 +7512,21 @@
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-01-27",
       "viajes_observados": 1191.0,
-      "mediana_viajes_controles": 1151.0,
+      "mediana_viajes_controles": 1165.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-01-28",
       "viajes_observados": 1286.0,
-      "mediana_viajes_controles": 1116.0,
+      "mediana_viajes_controles": 1113.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-01-29",
       "viajes_observados": 1123.0,
-      "mediana_viajes_controles": 1245.0,
+      "mediana_viajes_controles": 1178.5,
       "estado": "ok"
     },
     {
@@ -7422,28 +7561,28 @@
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-03",
       "viajes_observados": 1083.0,
-      "mediana_viajes_controles": 1165.0,
+      "mediana_viajes_controles": 1172.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-04",
       "viajes_observados": 1113.0,
-      "mediana_viajes_controles": 1144.0,
+      "mediana_viajes_controles": 1116.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-05",
       "viajes_observados": 1281.0,
-      "mediana_viajes_controles": 1194.5,
+      "mediana_viajes_controles": 1160.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-06",
       "viajes_observados": 1098.0,
-      "mediana_viajes_controles": 1192.0,
+      "mediana_viajes_controles": 1182.5,
       "estado": "ok"
     },
     {
@@ -7471,21 +7610,21 @@
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-10",
       "viajes_observados": 1165.0,
-      "mediana_viajes_controles": 1149.0,
+      "mediana_viajes_controles": 1150.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-11",
       "viajes_observados": 1213.0,
-      "mediana_viajes_controles": 1141.0,
+      "mediana_viajes_controles": 1118.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-12",
       "viajes_observados": 1144.0,
-      "mediana_viajes_controles": 1213.0,
+      "mediana_viajes_controles": 1154.5,
       "estado": "ok"
     },
     {
@@ -7520,21 +7659,21 @@
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-17",
       "viajes_observados": 1179.0,
-      "mediana_viajes_controles": 1150.0,
+      "mediana_viajes_controles": 1151.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-18",
       "viajes_observados": 1114.0,
-      "mediana_viajes_controles": 1167.0,
+      "mediana_viajes_controles": 1164.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-19",
       "viajes_observados": 1129.0,
-      "mediana_viajes_controles": 1194.5,
+      "mediana_viajes_controles": 1160.0,
       "estado": "ok"
     },
     {
@@ -7569,35 +7708,35 @@
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-24",
       "viajes_observados": 1090.0,
-      "mediana_viajes_controles": 1165.0,
+      "mediana_viajes_controles": 1158.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-25",
       "viajes_observados": 1110.0,
-      "mediana_viajes_controles": 1174.5,
+      "mediana_viajes_controles": 1179.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-26",
       "viajes_observados": 1267.0,
-      "mediana_viajes_controles": 1145.0,
+      "mediana_viajes_controles": 1144.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-27",
       "viajes_observados": 1235.0,
-      "mediana_viajes_controles": 1228.0,
+      "mediana_viajes_controles": 1192.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → El Masnou",
       "fecha": "2025-02-28",
       "viajes_observados": 1286.0,
-      "mediana_viajes_controles": 1177.0,
+      "mediana_viajes_controles": 1195.0,
       "estado": "ok"
     },
     {
@@ -7632,21 +7771,21 @@
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 2926.0,
-      "mediana_viajes_controles": 3320.0,
+      "mediana_viajes_controles": 3261.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 2882.0,
-      "mediana_viajes_controles": 3399.0,
+      "mediana_viajes_controles": 3306.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-01-23",
       "viajes_observados": 3072.0,
-      "mediana_viajes_controles": 3400.0,
+      "mediana_viajes_controles": 3263.0,
       "estado": "ok"
     },
     {
@@ -7681,21 +7820,21 @@
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-01-28",
       "viajes_observados": 3261.0,
-      "mediana_viajes_controles": 3322.5,
+      "mediana_viajes_controles": 3204.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 3275.0,
-      "mediana_viajes_controles": 3399.0,
+      "mediana_viajes_controles": 3243.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-01-30",
       "viajes_observados": 3270.0,
-      "mediana_viajes_controles": 3550.0,
+      "mediana_viajes_controles": 3413.0,
       "estado": "ok"
     },
     {
@@ -7723,28 +7862,28 @@
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 3786.0,
-      "mediana_viajes_controles": 3209.0,
+      "mediana_viajes_controles": 3167.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-04",
       "viajes_observados": 3846.0,
-      "mediana_viajes_controles": 3263.5,
+      "mediana_viajes_controles": 3145.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-05",
       "viajes_observados": 3912.0,
-      "mediana_viajes_controles": 3297.0,
+      "mediana_viajes_controles": 3221.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 4026.0,
-      "mediana_viajes_controles": 3270.0,
+      "mediana_viajes_controles": 3263.0,
       "estado": "ok"
     },
     {
@@ -7772,28 +7911,28 @@
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 3728.0,
-      "mediana_viajes_controles": 3292.0,
+      "mediana_viajes_controles": 3250.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 3670.0,
-      "mediana_viajes_controles": 3263.5,
+      "mediana_viajes_controles": 3261.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 3848.0,
-      "mediana_viajes_controles": 3275.0,
+      "mediana_viajes_controles": 3128.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-13",
       "viajes_observados": 3822.0,
-      "mediana_viajes_controles": 3263.0,
+      "mediana_viajes_controles": 3242.0,
       "estado": "ok"
     },
     {
@@ -7821,28 +7960,28 @@
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 3718.0,
-      "mediana_viajes_controles": 3343.5,
+      "mediana_viajes_controles": 3292.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 3666.0,
-      "mediana_viajes_controles": 3263.5,
+      "mediana_viajes_controles": 3261.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-19",
       "viajes_observados": 3588.0,
-      "mediana_viajes_controles": 3297.0,
+      "mediana_viajes_controles": 3128.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-20",
       "viajes_observados": 3667.0,
-      "mediana_viajes_controles": 3400.0,
+      "mediana_viajes_controles": 3263.0,
       "estado": "ok"
     },
     {
@@ -7870,35 +8009,35 @@
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 3830.0,
-      "mediana_viajes_controles": 3395.0,
+      "mediana_viajes_controles": 3343.5,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 3793.0,
-      "mediana_viajes_controles": 3332.0,
+      "mediana_viajes_controles": 3398.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-26",
       "viajes_observados": 4213.0,
-      "mediana_viajes_controles": 3319.0,
+      "mediana_viajes_controles": 3275.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 3807.0,
-      "mediana_viajes_controles": 3550.0,
+      "mediana_viajes_controles": 3270.0,
       "estado": "ok"
     },
     {
       "relacion": "Mataró → Premià de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 3887.0,
-      "mediana_viajes_controles": 3362.0,
+      "mediana_viajes_controles": 3419.0,
       "estado": "ok"
     },
     {
@@ -7933,14 +8072,14 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-01-21",
       "viajes_observados": 92.0,
-      "mediana_viajes_controles": 128.5,
+      "mediana_viajes_controles": 127.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-01-22",
       "viajes_observados": 117.0,
-      "mediana_viajes_controles": 139.0,
+      "mediana_viajes_controles": 140.5,
       "estado": "ok"
     },
     {
@@ -7982,14 +8121,14 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-01-28",
       "viajes_observados": 130.0,
-      "mediana_viajes_controles": 133.5,
+      "mediana_viajes_controles": 126.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-01-29",
       "viajes_observados": 117.0,
-      "mediana_viajes_controles": 139.0,
+      "mediana_viajes_controles": 142.5,
       "estado": "ok"
     },
     {
@@ -8024,14 +8163,14 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-03",
       "viajes_observados": 103.0,
-      "mediana_viajes_controles": 118.0,
+      "mediana_viajes_controles": 115.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-04",
       "viajes_observados": 141.0,
-      "mediana_viajes_controles": 135.0,
+      "mediana_viajes_controles": 128.5,
       "estado": "ok"
     },
     {
@@ -8045,7 +8184,7 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-06",
       "viajes_observados": 187.0,
-      "mediana_viajes_controles": 161.0,
+      "mediana_viajes_controles": 166.0,
       "estado": "ok"
     },
     {
@@ -8073,21 +8212,21 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-10",
       "viajes_observados": 153.0,
-      "mediana_viajes_controles": 113.0,
+      "mediana_viajes_controles": 108.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-11",
       "viajes_observados": 192.0,
-      "mediana_viajes_controles": 140.5,
+      "mediana_viajes_controles": 140.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-12",
       "viajes_observados": 163.0,
-      "mediana_viajes_controles": 132.0,
+      "mediana_viajes_controles": 135.0,
       "estado": "ok"
     },
     {
@@ -8122,21 +8261,21 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-17",
       "viajes_observados": 118.0,
-      "mediana_viajes_controles": 116.5,
+      "mediana_viajes_controles": 113.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-18",
       "viajes_observados": 179.0,
-      "mediana_viajes_controles": 141.0,
+      "mediana_viajes_controles": 140.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-19",
       "viajes_observados": 146.0,
-      "mediana_viajes_controles": 131.5,
+      "mediana_viajes_controles": 135.0,
       "estado": "ok"
     },
     {
@@ -8171,35 +8310,35 @@
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-24",
       "viajes_observados": 130.0,
-      "mediana_viajes_controles": 118.0,
+      "mediana_viajes_controles": 115.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-25",
       "viajes_observados": 140.0,
-      "mediana_viajes_controles": 146.0,
+      "mediana_viajes_controles": 145.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-26",
       "viajes_observados": 171.0,
-      "mediana_viajes_controles": 131.0,
+      "mediana_viajes_controles": 138.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-27",
       "viajes_observados": 179.0,
-      "mediana_viajes_controles": 163.0,
+      "mediana_viajes_controles": 161.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Arenys de Mar",
       "fecha": "2025-02-28",
       "viajes_observados": 211.0,
-      "mediana_viajes_controles": 176.0,
+      "mediana_viajes_controles": 180.0,
       "estado": "ok"
     },
     {
@@ -8227,28 +8366,28 @@
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-20",
       "viajes_observados": 3438.0,
-      "mediana_viajes_controles": 3610.0,
+      "mediana_viajes_controles": 3594.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-21",
       "viajes_observados": 3648.0,
-      "mediana_viajes_controles": 3905.5,
+      "mediana_viajes_controles": 3765.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-22",
       "viajes_observados": 3708.0,
-      "mediana_viajes_controles": 4347.0,
+      "mediana_viajes_controles": 3892.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-23",
       "viajes_observados": 3966.0,
-      "mediana_viajes_controles": 4109.5,
+      "mediana_viajes_controles": 3897.5,
       "estado": "ok"
     },
     {
@@ -8276,28 +8415,28 @@
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-27",
       "viajes_observados": 3323.0,
-      "mediana_viajes_controles": 3877.0,
+      "mediana_viajes_controles": 3610.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-28",
       "viajes_observados": 3765.0,
-      "mediana_viajes_controles": 4103.5,
+      "mediana_viajes_controles": 3847.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-29",
       "viajes_observados": 3806.0,
-      "mediana_viajes_controles": 4399.0,
+      "mediana_viajes_controles": 4188.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-01-30",
       "viajes_observados": 3945.0,
-      "mediana_viajes_controles": 4284.0,
+      "mediana_viajes_controles": 4130.0,
       "estado": "ok"
     },
     {
@@ -8325,28 +8464,28 @@
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-03",
       "viajes_observados": 4792.0,
-      "mediana_viajes_controles": 3877.0,
+      "mediana_viajes_controles": 3548.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-04",
       "viajes_observados": 5148.0,
-      "mediana_viajes_controles": 3963.0,
+      "mediana_viajes_controles": 3706.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-05",
       "viajes_observados": 4969.0,
-      "mediana_viajes_controles": 4162.5,
+      "mediana_viajes_controles": 3951.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-06",
       "viajes_observados": 5003.0,
-      "mediana_viajes_controles": 4274.0,
+      "mediana_viajes_controles": 4130.0,
       "estado": "ok"
     },
     {
@@ -8374,28 +8513,28 @@
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-10",
       "viajes_observados": 4763.0,
-      "mediana_viajes_controles": 3959.0,
+      "mediana_viajes_controles": 3731.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-11",
       "viajes_observados": 4924.0,
-      "mediana_viajes_controles": 4053.0,
+      "mediana_viajes_controles": 3945.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-12",
       "viajes_observados": 5194.0,
-      "mediana_viajes_controles": 4167.0,
+      "mediana_viajes_controles": 3951.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-13",
       "viajes_observados": 5244.0,
-      "mediana_viajes_controles": 4284.0,
+      "mediana_viajes_controles": 4130.0,
       "estado": "ok"
     },
     {
@@ -8423,21 +8562,21 @@
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-17",
       "viajes_observados": 5077.0,
-      "mediana_viajes_controles": 4015.5,
+      "mediana_viajes_controles": 3959.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-18",
       "viajes_observados": 4928.0,
-      "mediana_viajes_controles": 4220.0,
+      "mediana_viajes_controles": 3945.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-19",
       "viajes_observados": 5183.0,
-      "mediana_viajes_controles": 4223.5,
+      "mediana_viajes_controles": 3951.0,
       "estado": "ok"
     },
     {
@@ -8472,35 +8611,35 @@
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-24",
       "viajes_observados": 4363.0,
-      "mediana_viajes_controles": 4072.0,
+      "mediana_viajes_controles": 4020.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-25",
       "viajes_observados": 5062.0,
-      "mediana_viajes_controles": 4335.0,
+      "mediana_viajes_controles": 4391.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-26",
       "viajes_observados": 5436.0,
-      "mediana_viajes_controles": 4280.0,
+      "mediana_viajes_controles": 4167.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-27",
       "viajes_observados": 5429.0,
-      "mediana_viajes_controles": 4500.0,
+      "mediana_viajes_controles": 4343.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Barcelona",
       "fecha": "2025-02-28",
       "viajes_observados": 4915.0,
-      "mediana_viajes_controles": 4375.0,
+      "mediana_viajes_controles": 4204.0,
       "estado": "ok"
     },
     {
@@ -8535,21 +8674,21 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-01-21",
       "viajes_observados": 714.0,
-      "mediana_viajes_controles": 696.5,
+      "mediana_viajes_controles": 684.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-01-22",
       "viajes_observados": 733.0,
-      "mediana_viajes_controles": 735.0,
+      "mediana_viajes_controles": 653.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-01-23",
       "viajes_observados": 698.0,
-      "mediana_viajes_controles": 724.5,
+      "mediana_viajes_controles": 707.5,
       "estado": "ok"
     },
     {
@@ -8584,21 +8723,21 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-01-28",
       "viajes_observados": 691.0,
-      "mediana_viajes_controles": 708.0,
+      "mediana_viajes_controles": 699.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-01-29",
       "viajes_observados": 663.0,
-      "mediana_viajes_controles": 735.0,
+      "mediana_viajes_controles": 728.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-01-30",
       "viajes_observados": 795.0,
-      "mediana_viajes_controles": 722.5,
+      "mediana_viajes_controles": 707.5,
       "estado": "ok"
     },
     {
@@ -8626,28 +8765,28 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-03",
       "viajes_observados": 680.0,
-      "mediana_viajes_controles": 670.0,
+      "mediana_viajes_controles": 655.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-04",
       "viajes_observados": 719.0,
-      "mediana_viajes_controles": 708.0,
+      "mediana_viajes_controles": 702.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-05",
       "viajes_observados": 744.0,
-      "mediana_viajes_controles": 728.0,
+      "mediana_viajes_controles": 693.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-06",
       "viajes_observados": 734.0,
-      "mediana_viajes_controles": 715.0,
+      "mediana_viajes_controles": 707.5,
       "estado": "ok"
     },
     {
@@ -8675,28 +8814,28 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-10",
       "viajes_observados": 641.0,
-      "mediana_viajes_controles": 680.0,
+      "mediana_viajes_controles": 675.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-11",
       "viajes_observados": 702.0,
-      "mediana_viajes_controles": 716.5,
+      "mediana_viajes_controles": 714.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-12",
       "viajes_observados": 643.0,
-      "mediana_viajes_controles": 733.0,
+      "mediana_viajes_controles": 699.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-13",
       "viajes_observados": 751.0,
-      "mediana_viajes_controles": 722.5,
+      "mediana_viajes_controles": 707.5,
       "estado": "ok"
     },
     {
@@ -8724,28 +8863,28 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-17",
       "viajes_observados": 670.0,
-      "mediana_viajes_controles": 660.5,
+      "mediana_viajes_controles": 641.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-18",
       "viajes_observados": 763.0,
-      "mediana_viajes_controles": 716.5,
+      "mediana_viajes_controles": 714.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-19",
       "viajes_observados": 735.0,
-      "mediana_viajes_controles": 701.5,
+      "mediana_viajes_controles": 669.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-20",
       "viajes_observados": 700.0,
-      "mediana_viajes_controles": 742.5,
+      "mediana_viajes_controles": 740.5,
       "estado": "ok"
     },
     {
@@ -8773,14 +8912,14 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-24",
       "viajes_observados": 754.0,
-      "mediana_viajes_controles": 670.0,
+      "mediana_viajes_controles": 655.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-25",
       "viajes_observados": 744.0,
-      "mediana_viajes_controles": 741.0,
+      "mediana_viajes_controles": 719.0,
       "estado": "ok"
     },
     {
@@ -8794,14 +8933,14 @@
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-27",
       "viajes_observados": 798.0,
-      "mediana_viajes_controles": 742.5,
+      "mediana_viajes_controles": 730.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → El Masnou",
       "fecha": "2025-02-28",
       "viajes_observados": 787.0,
-      "mediana_viajes_controles": 770.0,
+      "mediana_viajes_controles": 775.0,
       "estado": "ok"
     },
     {
@@ -8836,14 +8975,14 @@
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-01-21",
       "viajes_observados": 2920.0,
-      "mediana_viajes_controles": 3362.5,
+      "mediana_viajes_controles": 3295.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-01-22",
       "viajes_observados": 2809.0,
-      "mediana_viajes_controles": 3433.0,
+      "mediana_viajes_controles": 3277.0,
       "estado": "ok"
     },
     {
@@ -8885,14 +9024,14 @@
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-01-28",
       "viajes_observados": 3295.0,
-      "mediana_viajes_controles": 3382.5,
+      "mediana_viajes_controles": 3178.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-01-29",
       "viajes_observados": 3331.0,
-      "mediana_viajes_controles": 3456.0,
+      "mediana_viajes_controles": 3339.5,
       "estado": "ok"
     },
     {
@@ -8927,28 +9066,28 @@
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-03",
       "viajes_observados": 3951.0,
-      "mediana_viajes_controles": 3195.0,
+      "mediana_viajes_controles": 3152.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-04",
       "viajes_observados": 3826.0,
-      "mediana_viajes_controles": 3315.0,
+      "mediana_viajes_controles": 3110.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-05",
       "viajes_observados": 4016.0,
-      "mediana_viajes_controles": 3382.0,
+      "mediana_viajes_controles": 3277.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-06",
       "viajes_observados": 4070.0,
-      "mediana_viajes_controles": 3352.0,
+      "mediana_viajes_controles": 3381.0,
       "estado": "ok"
     },
     {
@@ -8976,28 +9115,28 @@
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-10",
       "viajes_observados": 3785.0,
-      "mediana_viajes_controles": 3242.0,
+      "mediana_viajes_controles": 3175.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-11",
       "viajes_observados": 3880.0,
-      "mediana_viajes_controles": 3315.0,
+      "mediana_viajes_controles": 3295.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-12",
       "viajes_observados": 3751.0,
-      "mediana_viajes_controles": 3331.0,
+      "mediana_viajes_controles": 3128.5,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-13",
       "viajes_observados": 3873.0,
-      "mediana_viajes_controles": 3328.5,
+      "mediana_viajes_controles": 3265.0,
       "estado": "ok"
     },
     {
@@ -9025,21 +9164,21 @@
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-17",
       "viajes_observados": 3809.0,
-      "mediana_viajes_controles": 3294.0,
+      "mediana_viajes_controles": 3242.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-18",
       "viajes_observados": 3745.0,
-      "mediana_viajes_controles": 3315.0,
+      "mediana_viajes_controles": 3295.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-19",
       "viajes_observados": 3600.0,
-      "mediana_viajes_controles": 3366.5,
+      "mediana_viajes_controles": 3128.5,
       "estado": "ok"
     },
     {
@@ -9074,35 +9213,35 @@
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-24",
       "viajes_observados": 3831.0,
-      "mediana_viajes_controles": 3346.0,
+      "mediana_viajes_controles": 3294.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-25",
       "viajes_observados": 3902.0,
-      "mediana_viajes_controles": 3365.0,
+      "mediana_viajes_controles": 3395.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-26",
       "viajes_observados": 3972.0,
-      "mediana_viajes_controles": 3402.0,
+      "mediana_viajes_controles": 3331.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-27",
       "viajes_observados": 3828.0,
-      "mediana_viajes_controles": 3416.5,
+      "mediana_viajes_controles": 3410.0,
       "estado": "ok"
     },
     {
       "relacion": "Premià de Mar → Mataró",
       "fecha": "2025-02-28",
       "viajes_observados": 4062.0,
-      "mediana_viajes_controles": 3525.0,
+      "mediana_viajes_controles": 3516.0,
       "estado": "ok"
     }
   ],

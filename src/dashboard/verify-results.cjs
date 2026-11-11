@@ -68,5 +68,5 @@ async function verify(date) {
 }
 
 (async () => {
-  for (const date of ['2025-06-05', '2025-02-07']) await verify(date);
+  for (const date of ['2025-06-05', '2025-02-07','2025-03-17','2023-05-02','2024-04-29']) await verify(date);
 })().catch(error => { console.error(error); process.exitCode = 1; });

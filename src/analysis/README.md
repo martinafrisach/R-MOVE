@@ -5,7 +5,7 @@ La referencia principal es la mediana de viajes del mismo día semanal. El Noteb
 ## Regla compartida
 
 - Objetivos: lunes a viernes, sin festivos oficiales de Cataluña, excluyendo julio y agosto por decisión del usuario.
-- Controles: mismo día semanal dentro de 42 días; mismas exclusiones de calendario y todas las fechas de inicio de incidencias de la columna `Fecha` del Excel. Nunca incluye el objetivo.
+- Controles: mismo día semanal dentro de 42 días; mismas exclusiones de calendario y todas las fechas de inicio de incidencias de la columna `date` del Excel. Nunca incluye el objetivo.
 - Predictivo: solo controles anteriores. Retrospectivo: anteriores y posteriores, ±42 días. No se confunden sus resultados.
 - Mínimo de tres controles válidos; se muestra sensibilidad a cinco controles y ventanas de 28/42/56 días. Ausencias no imputadas y viajes negativos no válidos.
 - La exclusión de julio/agosto no es un calendario completo de vacaciones escolares. Festivos municipales, puentes, episodios sin registrar y duraciones de incidencias no detalladas siguen siendo limitaciones.

@@ -16,6 +16,10 @@
 # Excepciones: resultados del dashboard R-MOVE
 !/data/processed/rmove/incidencia_2025_06_05.json
 !/data/processed/rmove/incidencia_2025_02_07.json
+!/data/processed/rmove/incidencia_2025_03_17.json
+!/data/processed/rmove/incidencia_2023_05_02.json
+!/data/processed/rmove/incidencia_2024_04_29.json
+!/data/processed/rmove/general/dashboard_general.json
 
 # Entornos virtuales
 .venv/

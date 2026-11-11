@@ -18,7 +18,7 @@
     >
 
     <!-- Estilos propios: versión actualizada para evitar caché -->
-    <link rel="stylesheet" href="dashboard.css?v=minimal2">
+    <link rel="stylesheet" href="dashboard.css?v=general1">
 </head>
 
 <body>
@@ -30,21 +30,82 @@
 
         <div>
             <strong>Movilidad e incidencias de Rodalies</strong>
-            <span>R-MOVE · Maresme y corredor sur · Resultados reales de movilidad</span>
+            <span>R-MOVE · Incidencias documentadas y movilidad intermunicipal</span>
         </div>
     </div>
 
-    <div class="event-picker">
+    <div class="event-picker" id="case-picker" hidden>
         <label for="event">Incidencia analizada</label>
         <select id="event">
-            <option value="2025-06-05">5 junio 2025 · Corredor sur</option>
+            <option value="2025-06-05">5 junio 2025 · Barcelona y corredores</option>
             <option value="2025-02-07">7 febrero 2025 · Maresme</option>
+            <option value="2025-03-17">17 marzo 2025 · Vallès</option>
+            <option value="2023-05-02">2 mayo 2023 · Corredor sur</option>
+            <option value="2024-04-29">29 abril 2024 · Corredor nord</option>
         </select>
     </div>
 </header>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main>
+
+        <nav class="view-nav" aria-label="Vistas del análisis">
+            <button id="nav-general" type="button" aria-pressed="true" aria-controls="general-view">Análisis general</button>
+            <button id="nav-cases" type="button" aria-pressed="false" aria-controls="case-view">Estudio de casos</button>
+        </nav>
+
+        <section id="general-view" aria-labelledby="general-title">
+            <div class="general-intro">
+                <div><span class="eyebrow">LA MIRADA CONJUNTA</span>
+                    <h1 id="general-title">Qué cambia cuando hay una incidencia documentada</h1>
+                    <p>Comparar cada municipio con sus propios días habituales para distinguir patrones de fluctuaciones.</p>
+                </div>
+                <span class="scope-tag" id="general-period">2023–2025</span>
+            </div>
+            <p id="general-status" role="status" aria-live="polite">Cargando el análisis general…</p>
+            <div id="general-content" hidden>
+                <div class="general-kpis" id="general-kpis"></div>
+                <div class="research-grid" id="research-questions"></div>
+                <div class="overview-columns">
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">01 · COMPARACIÓN</span><h2>La magnitud del cambio</h2></div>
+                            <label class="sort-label" for="general-direction">Movilidad<select id="general-direction"><option value="entradas">Entradas</option><option value="salidas">Salidas</option></select></label>
+                        </div>
+                        <p class="chart-caption">Exceso de magnitud frente a los placebos propios, en puntos porcentuales. Los valores positivos indican cambios mayores, sean subidas o bajadas.</p>
+                        <div id="magnitude-chart" class="interval-chart"></div>
+                        <p class="chart-caption">Punto: estimación entre fechas. Línea: intervalo exploratorio del 95 %. Si cruza cero, la diferencia no es clara.</p>
+                    </section>
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">02 · ROBUSTEZ</span><h2>¿Lo explican unos pocos días?</h2></div></div>
+                        <p class="chart-caption">Repetimos el contraste retirando conjuntamente las fechas de mayor magnitud. La selección se usa solo como sensibilidad.</p>
+                        <div id="robustness-table" class="table-scroll"></div>
+                        <p class="chart-caption">Se conserva la referencia original. Los días excluidos aparecen debajo; el recorte no demuestra causalidad.</p>
+                    </section>
+                </div>
+                <div class="overview-columns lower-columns">
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">03 · FECHAS</span><h2>Fechas que conviene examinar</h2></div></div>
+                        <div id="influence-dates" class="date-list"></div>
+                        <p class="chart-caption">Máximo de la mediana municipal del exceso de magnitud entre grupos y sentidos. No es el impacto causal de un episodio.</p>
+                    </section>
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">04 · RECURRENCIA</span><h2>Patrones para profundizar</h2></div>
+                            <label class="sort-label" for="recurrence-exposure">Exposición<select id="recurrence-exposure"><option value="directa">Directa</option><option value="indirecta">Indirecta</option></select></label>
+                        </div>
+                        <p class="chart-caption">Municipios con al menos diez fechas y tres meses analizados. Frecuencia de superación de su umbral local descriptivo; no es un ranking de significación.</p>
+                        <div id="recurrence-table" class="table-scroll"></div>
+                    </section>
+                </div>
+                <section class="overview-card cases-overview">
+                    <div class="panel-head"><div><span class="eyebrow">DEL CONJUNTO AL DETALLE</span><h2>Explora los casos documentados</h2></div></div>
+                    <div id="case-links" class="case-links"></div>
+                </section>
+                <details class="method-card"><summary>Cómo leer los resultados · Método y límites</summary><div id="general-method"></div></details>
+                <p class="footer-note">Muestra de incidencias documentadas, no un registro exhaustivo. Los placebos son fechas sin incidencia documentada. Movilidad de todos los modos; asociaciones exploratorias sin atribución causal.</p>
+            </div>
+        </section>
+
+        <section id="case-view" hidden aria-label="Estudio de casos">
 
         <!-- Estado de carga -->
         <p id="status" role="status" aria-live="polite">
@@ -222,6 +283,8 @@
 
         </div>
 
+        </section>
+
     </main>
 
     <!-- LIBRERÍA LEAFLET -->
@@ -231,7 +294,8 @@
     <script src="case-views.js?v=minimal2"></script>
 
     <!-- LÓGICA PRINCIPAL DEL DASHBOARD -->
-    <script src="dashboard.js?v=minimal2"></script>
+    <script src="dashboard.js?v=general1"></script>
+    <script src="overview.js?v=general1"></script>
 
 </body>
 </html>

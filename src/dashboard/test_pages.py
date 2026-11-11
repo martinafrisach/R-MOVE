@@ -16,6 +16,7 @@ class PublicationTests(unittest.TestCase):
         files = {"src/dashboard/" + name: (pages.SOURCE / name).read_bytes() for name in pages.ASSETS}
         files["index.html"] = (pages.SOURCE / "pages-entry.html").read_bytes()
         files.update(dict.fromkeys(pages.RESULTS.values(), b""))
+        files[pages.GENERAL_RESULT] = b""
         return files
 
     def test_relative_routes_under_project_prefix(self):
@@ -63,6 +64,24 @@ class PublicationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "fuera de la lista"):
                 pages.prepare()
 
+    def test_general_summary_must_reference_exact_case_bytes(self):
+        import hashlib
+        original = pages.read_regular
+        general = json.loads(original(pages.GENERAL_RESULT))
+        general["casos"][0]["sha256"] = "0" * 64
+        changed = json.dumps(general).encode()
+        manifest = json.loads(original("src/dashboard/publication.json"))
+        manifest["results"][pages.GENERAL_RESULT]["sha256"] = hashlib.sha256(changed).hexdigest()
+        def read(relative):
+            if relative == pages.GENERAL_RESULT:
+                return changed
+            if relative == "src/dashboard/publication.json":
+                return json.dumps(manifest).encode()
+            return original(relative)
+        with patch.object(pages, "read_regular", side_effect=read):
+            with self.assertRaisesRegex(ValueError, "misma revisión"):
+                pages.prepare()
+
     def test_changed_result_hash_is_blocked(self):
         original = pages.read_regular
         manifest = {"schema_version": 1, "results": {
@@ -106,7 +125,7 @@ class PublicationTests(unittest.TestCase):
                 pages.main()
                 actual = {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()}
                 self.assertEqual(actual, set(files))
-                self.assertEqual(len(actual), 8)
+                self.assertEqual(len(actual), 13)
                 for name, content in files.items():
                     self.assertEqual((output / name).read_bytes(), content)
                 with self.assertRaisesRegex(ValueError, "ya existe"):

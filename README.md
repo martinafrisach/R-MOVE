@@ -1,120 +1,58 @@
-# R-MOVE
+﻿# R-MOVE
 
-Dashboard estático de movilidad e incidencias. Los fuentes permanecen en
-`src/dashboard/`; los notebooks y cálculos están en `notebooks/` y `src/analysis/`.
+Motor Python de movilidad e incidencias documentadas y dashboard estático.
+El análisis vive en `src/analysis/`, los notebooks en `notebooks/` y la web en `src/dashboard/`.
 
-## Estado del despliegue
+## Dashboard
 
-El dashboard necesita estos dos resultados del Notebook 04:
+- **Análisis general:** cuatro preguntas de investigación, cobertura, magnitud frente a placebos, intervalos exploratorios, sensibilidad a fechas extremas, recurrencia municipal y acceso a casos.
+- **Estudio de casos:** cinco exportaciones del notebook 04, mapa municipal, filtros de dirección, detalle OD y ranking de variaciones.
 
-- `data/processed/rmove/incidencia_2025_06_05.json`
-- `data/processed/rmove/incidencia_2025_02_07.json`
+Casos vigentes: 7 de febrero, 17 de marzo y 5 de junio de 2025, 2 de mayo de 2023 y 29 de abril de 2024. Junio incluye 23 municipios. Los cinco casos suman 425 relaciones verificadas contra el Excel actual y M2.
 
-Ambos están **versionados en el remoto** de `deploy/dashboard-pages`, incorporados
-por el commit `c7c6a4bcfbb6d9f743475b74add6bd005318b677`. El equipo confirma que
-tiene autorización para publicar los resultados derivados incluidos en ambos JSON.
-Consulta las [evidencias de revisión](docs/dashboard-publication-review.md).
+La mayor magnitud del análisis principal es sensible a retirar las cinco fechas extremas; no se atribuye causalidad ni se confirma efecto dominó. Informe local: `data/processed/rmove/general/conclusiones_generales.md`.
 
-`src/dashboard/publication.json` contiene exclusivamente la versión del manifiesto
-y las rutas con sus hashes SHA-256. El build no exige los campos `authorization`,
-`approved_by` ni `approved_on`. La confirmación del equipo se documenta aquí;
-la autorización no es una comprobación técnica del empaquetador.
-No hay regeneración automática ni sustitución de ausencias por datos inventados.
+## Actualizar resultados
 
-`.gitignore` permite únicamente esos dos resultados dentro de los datos procesados;
-el resto de resultados y los datasets originales siguen ignorados. `.gitattributes`
-fija LF para ambos JSON, evitando diferencias de hash entre Windows y Linux sin
-cambiar su contenido analítico. Los hashes corresponden a bytes exactos, no a una
-reserialización del JSON.
+1. Guardar el Excel vigente en la ruta de `src/analysis/general_config.json`.
+2. Para reemplazar el análisis general sin copias anteriores:
 
-## Mantener los resultados de publicación
+   ```powershell
+   .venv/Scripts/python.exe -B -m src.analysis.rmove_rebuild --reemplazar --reglas-territoriales-aceptadas
+   ```
 
-1. El equipo confirma la autorización para los dos JSON incluidos. Revisar cualquier
-   cambio futuro de contenido y su alcance de redistribución antes de incorporarlo.
-2. No ampliar las excepciones de
-   `.gitignore`, ni añadir datasets originales, Excel, Parquet, CSV, credenciales
-   u otros resultados.
-3. Añadir una entrada por ruta exacta en `publication.json.results` con estos
-   campo `sha256` (hash hexadecimal SHA-256 del archivo completo).
-   Cada cambio de contenido requiere revisión y nuevo hash.
-   En PowerShell: `Get-FileHash -Algorithm SHA256 <ruta>`; guardar el hash en minúsculas.
-4. Revisar el PR antes de fusionarlo. Un JSON ausente, un hash incorrecto o un
-   esquema incompatible detienen el build; no se regeneran datos durante el despliegue.
+3. Ejecutar el notebook 04 para regenerar sus casos con ese Excel.
+4. Verificar casos, recalcular influencia y exportar el resumen web:
 
-## Artefacto y rutas
+   ```powershell
+   .venv/Scripts/python.exe -B -m src.analysis.rmove_review
+   ```
 
-`python -B src/dashboard/build-pages.py` construye `dist/dashboard-pages/`
-desde una lista cerrada, sin copiar el repositorio ni directorios completos:
+5. Revisar resultados y actualizar los SHA-256 exactos de los seis JSON incluidos en `src/dashboard/publication.json`. Si cambia la selección de casos, actualizar `RESULTS` en el empaquetador, `CASES` en JavaScript, selector HTML y excepciones exactas de `.gitignore`.
 
-```text
-index.html                         # entrada relativa a src/dashboard/
-src/dashboard/index.html
-src/dashboard/dashboard.css
-src/dashboard/dashboard.js
-src/dashboard/case-views.js
-src/dashboard/favicon.svg
-data/processed/rmove/incidencia_2025_06_05.json  # hash y esquema verificados
-data/processed/rmove/incidencia_2025_02_07.json  # hash y esquema verificados
-```
+El cálculo completo requiere el entorno Python y los datos locales originales. La web consume resultados calculados; no ejecuta análisis en el navegador. La [documentación del motor](docs/analisis-general.md) describe reglas y límites.
 
-La entrada se conserva como fuente en `src/dashboard/pages-entry.html` y se
-copia como `index.html` en la raíz del artefacto. Así `/R-MOVE/` abre
-`/R-MOVE/src/dashboard/`. Las rutas `../../data/processed/rmove/...` de
-`dashboard.js` resuelven dentro de `/R-MOVE/data/processed/rmove/`. CSS, scripts
-y favicon son relativos al dashboard; no requieren dominio raíz ni un `base`
-específico. El constructor comprueba estas referencias y rechaza enlaces locales
-absolutos o destinos ausentes. No incluye README, scripts de empaquetado,
-manifiesto, notebooks, análisis, `.git`, datasets ni otros resultados.
-
-## Desplegar con GitHub Actions
-
-En **Settings → Pages → Build and deployment → Source**, seleccionar **GitHub
-Actions**. Configurar el entorno `github-pages` para permitir despliegues de
-`main` y las protecciones/revisiones que requiera el repositorio. Véase la
-[documentación oficial de GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
-
-`.github/workflows/deploy-dashboard.yml` valida los pull requests sin publicar
-artefactos. Tras fusionar en `main`, construye y sube únicamente
-`dist/dashboard-pages/`; el job de despliegue recibe `pages: write` e
-`id-token: write`. También permite ejecución manual desde `main`; desde otras
-ramas solo valida y construye. No utiliza secretos ni ejecuta notebooks. Los
-errores de integridad, esquema, rutas o lista de archivos detienen la subida y el despliegue.
-
-La URL esperada es `https://martinafrisach.github.io/R-MOVE/` salvo configuración
-de dominio distinta; usar como referencia la URL del entorno que devuelve Actions.
-Este PR prepara la configuración y los resultados versionados; no activa Pages,
-no hace merge ni ejecuta ningún despliegue. Subir cambios a la rama del PR solo
-ejecuta las validaciones de `pull_request`, nunca el job de publicación.
-
-## Validación
-
-Desde la raíz, con Python 3.12+ y Node 22+:
+## Validar y construir
 
 ```powershell
+.venv/Scripts/python.exe -B -m unittest discover -s src/analysis -v
+.venv/Scripts/python.exe -B -m unittest discover -s src/dashboard -p test_pages.py -v
 node --check src/dashboard/dashboard.js
+node --check src/dashboard/overview.js
 node --check src/dashboard/case-views.js
-python -B -m unittest discover -s src/dashboard -p test_pages.py -v
 node src/dashboard/verify-results.cjs
-python -B src/dashboard/build-pages.py --check
-python -B src/dashboard/build-pages.py
-python -m http.server 8000 --directory dist/dashboard-pages
+node src/dashboard/verify-overview.cjs
+.venv/Scripts/python.exe -B src/dashboard/build-pages.py --check
+.venv/Scripts/python.exe -B src/dashboard/build-pages.py
+.venv/Scripts/python.exe -m http.server 8000 --directory dist/dashboard-pages
 ```
 
-Los dos comandos de compilación deben completarse con los resultados versionados.
-La prueba del build usa los ocho archivos reales en un directorio temporal,
-ejecutando todas las validaciones y verificando bytes y lista exacta de archivos,
-sin publicar nada. La comprobación
-Node ejecuta el JavaScript real con ambos JSON y un DOM mínimo, revisando hashes,
-carga, indicadores, detalle, ranking, filtros y coordenadas. Usa el modo sin
-Leaflet; no sustituye una prueba visual de mapa en navegador.
-`--check` valida sin escribir. El constructor rechaza una salida existente para
-no reutilizar archivos de una compilación anterior: revisar y retirar manualmente
-`dist/dashboard-pages/` antes de reconstruir. `dist/` ya está ignorado por Git.
+El build rechaza una salida existente: comprobar su ubicación y retirar el artefacto generado antes de reconstruir. `--check` solo valida. La entrada de raíz redirige a `src/dashboard/`; las referencias son relativas y se validan bajo `/R-MOVE/`.
 
-Tras construir, inspeccionar los ocho archivos del artefacto,
-abrir `http://localhost:8000/` y comprobar la redirección, ambos casos, indicadores,
-filtros, ranking y detalle. En las herramientas de red del navegador, confirmar
-que ambos JSON, CSS, JS y favicon devuelven 200 sin salir del prefijo del sitio.
-Repetir sobre la URL de Pages tras el despliegue. Leaflet se carga desde unpkg y
-el mapa usa teselas de OpenStreetMap: requieren Internet y comprobar su atribución.
-La validación automática de rutas y sintaxis no sustituye esta revisión visual.
+El artefacto contiene exactamente **13 archivos**: la entrada de raíz, seis assets del dashboard y seis JSON derivados (cinco casos y resumen general). Se verifican esquema, hashes, coherencia entre resumen y casos y rutas. No se copian notebooks, CSV, Parquet, Excel, credenciales, código de análisis ni directorios completos. Las únicas excepciones de datos en Git son esos seis JSON. Leaflet y OpenStreetMap requieren Internet.
+
+## GitHub Pages
+
+El workflow `.github/workflows/deploy-dashboard.yml` construye el mismo artefacto. Los pull requests validan; el despliegue se ejecuta desde `main` conforme al workflow. Cambiar el dashboard local no hace merge, push ni despliega por sí solo. No se ejecutan notebooks en el despliegue.
+
+Revisión visual local con Edge sin interfaz en escritorio, viewport móvil real de 390 px y vista de casos con mapa. Las pruebas Node verifican carga, filtros, navegación, intervalos y errores sin llamadas de red para el mapa.

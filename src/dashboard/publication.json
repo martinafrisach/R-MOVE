@@ -2,10 +2,22 @@
   "schema_version": 1,
   "results": {
     "data/processed/rmove/incidencia_2025_06_05.json": {
-      "sha256": "85052899df465ee9535361497f1bee06ee7890beceb317e4414625023e3a966d"
+      "sha256": "a456df455fcf2371e8e838702958961ef7c89b6f08b428734993eae342dc7dec"
     },
     "data/processed/rmove/incidencia_2025_02_07.json": {
-      "sha256": "4f5ba94ec2d7817e89caf40007cf028a27b19873038b14c8395cd705e139167e"
+      "sha256": "4f247455668a05220186e367daaff6af9eab216df68cdd6baa0f080ab9699836"
+    },
+    "data/processed/rmove/incidencia_2025_03_17.json": {
+      "sha256": "27ff7a47907d2acc1240d9786bc628fb725bea8c5b08a2977f640bcd173300ee"
+    },
+    "data/processed/rmove/incidencia_2023_05_02.json": {
+      "sha256": "52e5528a2c9925ff2dd7cf2c1e241468e5525c25c3a16aed7fc932603884420a"
+    },
+    "data/processed/rmove/incidencia_2024_04_29.json": {
+      "sha256": "829b863d43b39e0a5239a6b9fa4f5dd70757e8011396d8dbb0295a1d2d129424"
+    },
+    "data/processed/rmove/general/dashboard_general.json": {
+      "sha256": "de2774a2f635765741ad7d56148455d98400dfece0b72e3bdd36f640b388adba"
     }
   }
 }

@@ -11,11 +11,15 @@ from html.parser import HTMLParser
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "src/dashboard"
 OUTPUT = ROOT / "dist/dashboard-pages"
-ASSETS = ("index.html", "dashboard.css", "dashboard.js", "case-views.js", "favicon.svg")
+ASSETS = ("index.html", "dashboard.css", "dashboard.js", "case-views.js", "overview.js", "favicon.svg")
 RESULTS = {
     "2025-06-05": "data/processed/rmove/incidencia_2025_06_05.json",
     "2025-02-07": "data/processed/rmove/incidencia_2025_02_07.json",
+    "2025-03-17": "data/processed/rmove/incidencia_2025_03_17.json",
+    "2023-05-02": "data/processed/rmove/incidencia_2023_05_02.json",
+    "2024-04-29": "data/processed/rmove/incidencia_2024_04_29.json",
 }
+GENERAL_RESULT = "data/processed/rmove/general/dashboard_general.json"
 
 
 def read_regular(relative):
@@ -59,6 +63,9 @@ def validate_routes(files):
     expected = {date: "../../" + path for date, path in RESULTS.items()}
     if not cases or json.loads(cases[1].replace("'", '"')) != expected:
         raise ValueError("Las rutas CASES de dashboard.js no coinciden con el artefacto")
+    overview = files["src/dashboard/overview.js"].decode("utf-8")
+    if f"const GENERAL_DATA='../../{GENERAL_RESULT}';" not in overview:
+        raise ValueError("La ruta general no coincide con el artefacto")
     css = files["src/dashboard/dashboard.css"].decode("utf-8")
     if re.search(r"url\s*\(|@import", css, re.I):
         raise ValueError("Revisar nuevas dependencias CSS antes de publicarlas")
@@ -69,7 +76,7 @@ def prepare():
     if manifest.get("schema_version") != 1 or not isinstance(manifest.get("results"), dict):
         raise ValueError("Manifiesto de publicación no válido")
     results = manifest["results"]
-    if set(results) - set(RESULTS.values()):
+    if set(results) - (set(RESULTS.values()) | {GENERAL_RESULT}):
         raise ValueError("El manifiesto contiene resultados fuera de la lista permitida")
     files = {"src/dashboard/" + name: read_regular("src/dashboard/" + name) for name in ASSETS}
     files["index.html"] = read_regular("src/dashboard/pages-entry.html")
@@ -95,8 +102,23 @@ def prepare():
             files[relative] = content
         except (ValueError, TypeError, AttributeError) as error:
             errors.append(str(error))
+    try:
+        content = read_regular(GENERAL_RESULT)
+        if results.get(GENERAL_RESULT, {}).get("sha256") != hashlib.sha256(content).hexdigest():
+            raise ValueError(f"SHA-256 ausente o desactualizado: {GENERAL_RESULT}")
+        general = json.loads(content)
+        if (general.get("version_esquema") != 1 or len(general.get("conclusiones", [])) != 4
+                or {c["fecha"]: c["ruta"] for c in general.get("casos", [])} != RESULTS
+                or not general.get("contrastes") or not general.get("robustez")):
+            raise ValueError(f"Esquema incompatible: {GENERAL_RESULT}")
+        for case in general["casos"]:
+            if case["sha256"] != hashlib.sha256(read_regular(case["ruta"])).hexdigest():
+                raise ValueError("Los casos y el análisis general no corresponden a la misma revisión")
+        files[GENERAL_RESULT] = content
+    except (ValueError, TypeError, AttributeError, KeyError) as error:
+        errors.append(str(error))
     # Routes are checked even when the result files are blocked.
-    validate_routes({**dict.fromkeys(RESULTS.values(), b""), **files})
+    validate_routes({**dict.fromkeys([*RESULTS.values(), GENERAL_RESULT], b""), **files})
     if errors:
         raise ValueError("Publicación bloqueada:\n- " + "\n- ".join(errors))
     return files
