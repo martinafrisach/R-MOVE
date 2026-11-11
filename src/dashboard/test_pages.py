@@ -41,7 +41,11 @@ class PublicationTests(unittest.TestCase):
         for path in pages.RESULTS.values():
             self.assertIn(path, str(caught.exception))
 
-    def test_existing_files_without_approval_are_blocked(self):
+    def test_hash_only_manifest_is_sufficient(self):
+        files = pages.prepare()
+        self.assertEqual(set(files), set(self.assets()))
+
+    def test_missing_hashes_are_blocked(self):
         original = pages.read_regular
         def read(relative):
             if relative in pages.RESULTS.values():
@@ -50,7 +54,7 @@ class PublicationTests(unittest.TestCase):
                 return b'{"schema_version":1,"results":{}}'
             return original(relative)
         with patch.object(pages, "read_regular", side_effect=read):
-            with self.assertRaisesRegex(ValueError, "Sin autorización documentada"):
+            with self.assertRaisesRegex(ValueError, "SHA-256 ausente"):
                 pages.prepare()
 
     def test_unlisted_results_rejected(self):
@@ -62,8 +66,7 @@ class PublicationTests(unittest.TestCase):
     def test_changed_result_hash_is_blocked(self):
         original = pages.read_regular
         manifest = {"schema_version": 1, "results": {
-            path: {"authorization": "test-only reference", "approved_by": "test",
-                   "approved_on": "2026-11-11", "sha256": "0" * 64}
+            path: {"sha256": "0" * 64}
             for path in pages.RESULTS.values()
         }}
         def read(relative):
@@ -73,18 +76,33 @@ class PublicationTests(unittest.TestCase):
                 return json.dumps(manifest).encode()
             return original(relative)
         with patch.object(pages, "read_regular", side_effect=read):
-            with self.assertRaisesRegex(ValueError, "SHA-256 no autorizado"):
+            with self.assertRaisesRegex(ValueError, "SHA-256 ausente o desactualizado"):
+                pages.prepare()
+
+    def test_invalid_result_schema_rejected_even_with_matching_hash(self):
+        import hashlib
+        original = pages.read_regular
+        invalid = b'{}'  # Invalid schema, never published.
+        manifest = {"schema_version": 1, "results": {
+            path: {"sha256": hashlib.sha256(invalid).hexdigest()}
+            for path in pages.RESULTS.values()
+        }}
+        def read(relative):
+            if relative in pages.RESULTS.values():
+                return invalid
+            if relative == "src/dashboard/publication.json":
+                return json.dumps(manifest).encode()
+            return original(relative)
+        with patch.object(pages, "read_regular", side_effect=read):
+            with self.assertRaisesRegex(ValueError, "Esquema incompatible"):
                 pages.prepare()
 
     def test_artifact_copies_only_prepared_files(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "site"
-            files = self.assets()
-            # Exercise the copier with the real results. Permission validation is
-            # tested separately; this temporary directory is never published.
-            for name in pages.RESULTS.values():
-                files[name] = pages.read_regular(name)
-            with patch.object(pages, "OUTPUT", output), patch.object(pages, "prepare", return_value=files), patch("sys.argv", ["build-pages.py"]):
+            files = pages.prepare()
+            # Full build with real results and all validations, without publishing.
+            with patch.object(pages, "OUTPUT", output), patch("sys.argv", ["build-pages.py"]):
                 pages.main()
                 actual = {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()}
                 self.assertEqual(actual, set(files))

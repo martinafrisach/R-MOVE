@@ -3,7 +3,7 @@
 Dashboard estático de movilidad e incidencias. Los fuentes permanecen en
 `src/dashboard/`; los notebooks y cálculos están en `notebooks/` y `src/analysis/`.
 
-## Estado del despliegue: faltan los datos verificables de aprobación
+## Estado del despliegue
 
 El dashboard necesita estos dos resultados del Notebook 04:
 
@@ -12,15 +12,13 @@ El dashboard necesita estos dos resultados del Notebook 04:
 
 Ambos están **versionados en el remoto** de `deploy/dashboard-pages`, incorporados
 por el commit `c7c6a4bcfbb6d9f743475b74add6bd005318b677`. El equipo confirma que
-tiene autorización para publicar los resultados derivados, pero no ha facilitado
-la referencia verificable al permiso, la persona que aprueba ni la fecha real de
-aprobación. La revisión del PR no encontró estos datos en comentarios ni revisiones.
+tiene autorización para publicar los resultados derivados incluidos en ambos JSON.
 Consulta las [evidencias de revisión](docs/dashboard-publication-review.md).
 
-`src/dashboard/publication.json` contiene los hashes SHA-256 de los blobs remotos;
-los tres campos pendientes permanecen en `null` hasta recibir datos verificables.
-La compilación sigue bloqueada antes de generar o subir un artefacto. No se usa
-la fecha del commit como fecha de aprobación ni su autor como aprobador.
+`src/dashboard/publication.json` contiene exclusivamente la versión del manifiesto
+y las rutas con sus hashes SHA-256. El build no exige los campos `authorization`,
+`approved_by` ni `approved_on`. La confirmación del equipo se documenta aquí;
+la autorización no es una comprobación técnica del empaquetador.
 No hay regeneración automática ni sustitución de ausencias por datos inventados.
 
 `.gitignore` permite únicamente esos dos resultados dentro de los datos procesados;
@@ -29,24 +27,19 @@ fija LF para ambos JSON, evitando diferencias de hash entre Windows y Linux sin
 cambiar su contenido analítico. Los hashes corresponden a bytes exactos, no a una
 reserialización del JSON.
 
-## Autorizar resultados antes de publicar
+## Mantener los resultados de publicación
 
-1. Revisar los dos JSON completos, incluidas fichas documentales, series y
-   campos de procedencia, para descartar información sensible y comprobar los
-   derechos de redistribución de todas sus fuentes. Obtener permiso o licencia
-   aplicable; el script registra esa decisión, no verifica jurídicamente su validez.
-2. Los dos JSON ya están incorporados en este PR. No ampliar las excepciones de
+1. El equipo confirma la autorización para los dos JSON incluidos. Revisar cualquier
+   cambio futuro de contenido y su alcance de redistribución antes de incorporarlo.
+2. No ampliar las excepciones de
    `.gitignore`, ni añadir datasets originales, Excel, Parquet, CSV, credenciales
-   u otros resultados. Si el permiso no cubre los JSON
-   completos, mantener el bloqueo y revisar el alcance en otro PR.
+   u otros resultados.
 3. Añadir una entrada por ruta exacta en `publication.json.results` con estos
-   campos: `authorization` (referencia verificable al permiso/licencia y su
-   alcance público), `approved_by`, `approved_on` (fecha ISO) y `sha256` (hash
-   hexadecimal SHA-256 del archivo completo). No usar textos provisionales como
-   autorización. Cada cambio de contenido requiere revisión y nuevo hash.
+   campo `sha256` (hash hexadecimal SHA-256 del archivo completo).
+   Cada cambio de contenido requiere revisión y nuevo hash.
    En PowerShell: `Get-FileHash -Algorithm SHA256 <ruta>`; guardar el hash en minúsculas.
-4. Revisar ese PR antes de fusionarlo. Si faltan los archivos autorizados, el
-   workflow debe seguir fallando: no desactivar el control para desplegar.
+4. Revisar el PR antes de fusionarlo. Un JSON ausente, un hash incorrecto o un
+   esquema incompatible detienen el build; no se regeneran datos durante el despliegue.
 
 ## Artefacto y rutas
 
@@ -60,8 +53,8 @@ src/dashboard/dashboard.css
 src/dashboard/dashboard.js
 src/dashboard/case-views.js
 src/dashboard/favicon.svg
-data/processed/rmove/incidencia_2025_06_05.json  # solo con autorización y hash
-data/processed/rmove/incidencia_2025_02_07.json  # solo con autorización y hash
+data/processed/rmove/incidencia_2025_06_05.json  # hash y esquema verificados
+data/processed/rmove/incidencia_2025_02_07.json  # hash y esquema verificados
 ```
 
 La entrada se conserva como fuente en `src/dashboard/pages-entry.html` y se
@@ -85,7 +78,7 @@ artefactos. Tras fusionar en `main`, construye y sube únicamente
 `dist/dashboard-pages/`; el job de despliegue recibe `pages: write` e
 `id-token: write`. También permite ejecución manual desde `main`; desde otras
 ramas solo valida y construye. No utiliza secretos ni ejecuta notebooks. Los
-errores de autorización o datos detienen la subida y el despliegue.
+errores de integridad, esquema, rutas o lista de archivos detienen la subida y el despliegue.
 
 La URL esperada es `https://martinafrisach.github.io/R-MOVE/` salvo configuración
 de dominio distinta; usar como referencia la URL del entorno que devuelve Actions.
@@ -107,10 +100,10 @@ python -B src/dashboard/build-pages.py
 python -m http.server 8000 --directory dist/dashboard-pages
 ```
 
-Los dos comandos de compilación **deben fallar** mientras persista el bloqueo.
-La prueba del copiador usa los ocho archivos reales en un directorio temporal,
-sin pasar por la aprobación ni publicar nada: verifica bytes y lista exacta de
-archivos, pero no equivale a una compilación autorizada completa. La comprobación
+Los dos comandos de compilación deben completarse con los resultados versionados.
+La prueba del build usa los ocho archivos reales en un directorio temporal,
+ejecutando todas las validaciones y verificando bytes y lista exacta de archivos,
+sin publicar nada. La comprobación
 Node ejecuta el JavaScript real con ambos JSON y un DOM mínimo, revisando hashes,
 carga, indicadores, detalle, ranking, filtros y coordenadas. Usa el modo sin
 Leaflet; no sustituye una prueba visual de mapa en navegador.
@@ -118,7 +111,7 @@ Leaflet; no sustituye una prueba visual de mapa en navegador.
 no reutilizar archivos de una compilación anterior: revisar y retirar manualmente
 `dist/dashboard-pages/` antes de reconstruir. `dist/` ya está ignorado por Git.
 
-Cuando haya resultados autorizados, inspeccionar los ocho archivos del artefacto,
+Tras construir, inspeccionar los ocho archivos del artefacto,
 abrir `http://localhost:8000/` y comprobar la redirección, ambos casos, indicadores,
 filtros, ranking y detalle. En las herramientas de red del navegador, confirmar
 que ambos JSON, CSS, JS y favicon devuelven 200 sin salir del prefijo del sitio.

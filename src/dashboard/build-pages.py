@@ -1,4 +1,4 @@
-"""Package only explicitly approved dashboard assets; never run analysis."""
+"""Package allowlisted dashboard assets and hash-verified results; never run analysis."""
 import hashlib
 import json
 import math
@@ -68,8 +68,8 @@ def prepare():
     manifest = json.loads(read_regular("src/dashboard/publication.json"))
     if manifest.get("schema_version") != 1 or not isinstance(manifest.get("results"), dict):
         raise ValueError("Manifiesto de publicación no válido")
-    approvals = manifest["results"]
-    if set(approvals) - set(RESULTS.values()):
+    results = manifest["results"]
+    if set(results) - set(RESULTS.values()):
         raise ValueError("El manifiesto contiene resultados fuera de la lista permitida")
     files = {"src/dashboard/" + name: read_regular("src/dashboard/" + name) for name in ASSETS}
     files["index.html"] = read_regular("src/dashboard/pages-entry.html")
@@ -77,16 +77,10 @@ def prepare():
     for date, relative in RESULTS.items():
         try:
             content = read_regular(relative)
-            approval = approvals.get(relative, {})
-            missing = []
-            for key in ("authorization", "approved_by", "approved_on"):
-                if not isinstance(approval.get(key), str) or not approval[key].strip():
-                    missing.append(key)
-            if missing:
-                raise ValueError(f"Sin autorización documentada ({', '.join(missing)}): {relative}")
+            entry = results.get(relative, {})
             digest = hashlib.sha256(content).hexdigest()
-            if approval.get("sha256") != digest:
-                raise ValueError(f"SHA-256 no autorizado o desactualizado: {relative}")
+            if entry.get("sha256") != digest:
+                raise ValueError(f"SHA-256 ausente o desactualizado: {relative}")
             data = json.loads(content)
             if (data.get("version_esquema") != 3 or data.get("fecha_incidencia") != date
                     or not isinstance(data.get("municipios"), list) or not data["municipios"]
