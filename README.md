@@ -3,21 +3,31 @@
 Dashboard estático de movilidad e incidencias. Los fuentes permanecen en
 `src/dashboard/`; los notebooks y cálculos están en `notebooks/` y `src/analysis/`.
 
-## Estado del despliegue: bloqueado por autorización de resultados
+## Estado del despliegue: faltan los datos verificables de aprobación
 
 El dashboard necesita estos dos resultados del Notebook 04:
 
 - `data/processed/rmove/incidencia_2025_06_05.json`
 - `data/processed/rmove/incidencia_2025_02_07.json`
 
-Existen en el entorno local revisado, pero **no están versionados** y
-`data/processed/` está excluido por `.gitignore`. Un checkout limpio de Actions
-no dispone de ellos. No se ha encontrado evidencia de autorización de
-redistribución; su presencia local o generación por un notebook no constituye
-permiso para publicarlos. El manifiesto `src/dashboard/publication.json` está
-vacío intencionadamente. La compilación falla antes de subir un artefacto si
-falta un JSON, su autorización o coincide mal su hash. No hay datos de ejemplo,
-regeneración automática ni sustitución de ausencias por datos inventados.
+Ambos están **versionados en el remoto** de `deploy/dashboard-pages`, incorporados
+por el commit `c7c6a4bcfbb6d9f743475b74add6bd005318b677`. El equipo confirma que
+tiene autorización para publicar los resultados derivados, pero no ha facilitado
+la referencia verificable al permiso, la persona que aprueba ni la fecha real de
+aprobación. La revisión del PR no encontró estos datos en comentarios ni revisiones.
+Consulta las [evidencias de revisión](docs/dashboard-publication-review.md).
+
+`src/dashboard/publication.json` contiene los hashes SHA-256 de los blobs remotos;
+los tres campos pendientes permanecen en `null` hasta recibir datos verificables.
+La compilación sigue bloqueada antes de generar o subir un artefacto. No se usa
+la fecha del commit como fecha de aprobación ni su autor como aprobador.
+No hay regeneración automática ni sustitución de ausencias por datos inventados.
+
+`.gitignore` permite únicamente esos dos resultados dentro de los datos procesados;
+el resto de resultados y los datasets originales siguen ignorados. `.gitattributes`
+fija LF para ambos JSON, evitando diferencias de hash entre Windows y Linux sin
+cambiar su contenido analítico. Los hashes corresponden a bytes exactos, no a una
+reserialización del JSON.
 
 ## Autorizar resultados antes de publicar
 
@@ -25,10 +35,9 @@ regeneración automática ni sustitución de ausencias por datos inventados.
    campos de procedencia, para descartar información sensible y comprobar los
    derechos de redistribución de todas sus fuentes. Obtener permiso o licencia
    aplicable; el script registra esa decisión, no verifica jurídicamente su validez.
-2. Solo después de obtenerlo, incorporar **exclusivamente** esos dos JSON en un
-   PR con `git add -f` seguido de sus rutas exactas. No cambiar la exclusión
-   general de `data/processed/`, ni añadir datasets originales, Excel, Parquet,
-   CSV, credenciales u otros resultados. Si el permiso no cubre los JSON
+2. Los dos JSON ya están incorporados en este PR. No ampliar las excepciones de
+   `.gitignore`, ni añadir datasets originales, Excel, Parquet, CSV, credenciales
+   u otros resultados. Si el permiso no cubre los JSON
    completos, mantener el bloqueo y revisar el alcance en otro PR.
 3. Añadir una entrada por ruta exacta en `publication.json.results` con estos
    campos: `authorization` (referencia verificable al permiso/licencia y su
@@ -80,7 +89,9 @@ errores de autorización o datos detienen la subida y el despliegue.
 
 La URL esperada es `https://martinafrisach.github.io/R-MOVE/` salvo configuración
 de dominio distinta; usar como referencia la URL del entorno que devuelve Actions.
-Este PR prepara la configuración; no activa Pages ni publica los JSON locales.
+Este PR prepara la configuración y los resultados versionados; no activa Pages,
+no hace merge ni ejecuta ningún despliegue. Subir cambios a la rama del PR solo
+ejecuta las validaciones de `pull_request`, nunca el job de publicación.
 
 ## Validación
 
@@ -90,12 +101,19 @@ Desde la raíz, con Python 3.12+ y Node 22+:
 node --check src/dashboard/dashboard.js
 node --check src/dashboard/case-views.js
 python -B -m unittest discover -s src/dashboard -p test_pages.py -v
+node src/dashboard/verify-results.cjs
 python -B src/dashboard/build-pages.py --check
 python -B src/dashboard/build-pages.py
 python -m http.server 8000 --directory dist/dashboard-pages
 ```
 
 Los dos comandos de compilación **deben fallar** mientras persista el bloqueo.
+La prueba del copiador usa los ocho archivos reales en un directorio temporal,
+sin pasar por la aprobación ni publicar nada: verifica bytes y lista exacta de
+archivos, pero no equivale a una compilación autorizada completa. La comprobación
+Node ejecuta el JavaScript real con ambos JSON y un DOM mínimo, revisando hashes,
+carga, indicadores, detalle, ranking, filtros y coordenadas. Usa el modo sin
+Leaflet; no sustituye una prueba visual de mapa en navegador.
 `--check` valida sin escribir. El constructor rechaza una salida existente para
 no reutilizar archivos de una compilación anterior: revisar y retirar manualmente
 `dist/dashboard-pages/` antes de reconstruir. `dist/` ya está ignorado por Git.

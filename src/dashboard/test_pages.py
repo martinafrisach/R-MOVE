@@ -80,12 +80,17 @@ class PublicationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "site"
             files = self.assets()
-            # Only exercise the copier; no result JSON contents are fabricated.
-            files = {k: v for k, v in files.items() if k not in pages.RESULTS.values()}
+            # Exercise the copier with the real results. Permission validation is
+            # tested separately; this temporary directory is never published.
+            for name in pages.RESULTS.values():
+                files[name] = pages.read_regular(name)
             with patch.object(pages, "OUTPUT", output), patch.object(pages, "prepare", return_value=files), patch("sys.argv", ["build-pages.py"]):
                 pages.main()
                 actual = {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()}
                 self.assertEqual(actual, set(files))
+                self.assertEqual(len(actual), 8)
+                for name, content in files.items():
+                    self.assertEqual((output / name).read_bytes(), content)
                 with self.assertRaisesRegex(ValueError, "ya existe"):
                     pages.main()
 

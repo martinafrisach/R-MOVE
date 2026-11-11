@@ -13,9 +13,11 @@ Desde la raíz del repositorio ejecuta `python -m http.server 8000` y visita htt
 
 ## Datos
 
-Los JSON se generan localmente en `data/processed/rmove/` y no están versionados.
-Su publicación requiere autorización documentada para cada archivo y hash en
-`publication.json`; actualmente está bloqueada. Las referencias se calculan en
+Los dos JSON de `data/processed/rmove/` ya están versionados en la rama del PR.
+El equipo confirma disponer de autorización; faltan su referencia verificable,
+la persona que aprueba y la fecha real de aprobación. `publication.json` contiene
+los hashes correctos y mantiene los campos pendientes en `null`, bloqueando la
+publicación hasta completarlos. Las referencias se calculan en
 Notebook 04, no en JavaScript. La aplicación necesita Internet para cargar
 Leaflet y teselas de OpenStreetMap; si el proveedor bloquea las teselas se mantiene
 la geometría de las conexiones.

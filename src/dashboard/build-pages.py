@@ -78,9 +78,12 @@ def prepare():
         try:
             content = read_regular(relative)
             approval = approvals.get(relative, {})
+            missing = []
             for key in ("authorization", "approved_by", "approved_on"):
                 if not isinstance(approval.get(key), str) or not approval[key].strip():
-                    raise ValueError(f"Sin autorización documentada ({key}): {relative}")
+                    missing.append(key)
+            if missing:
+                raise ValueError(f"Sin autorización documentada ({', '.join(missing)}): {relative}")
             digest = hashlib.sha256(content).hexdigest()
             if approval.get("sha256") != digest:
                 raise ValueError(f"SHA-256 no autorizado o desactualizado: {relative}")

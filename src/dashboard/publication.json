@@ -1,4 +1,17 @@
 {
   "schema_version": 1,
-  "results": {}
+  "results": {
+    "data/processed/rmove/incidencia_2025_06_05.json": {
+      "authorization": null,
+      "approved_by": null,
+      "approved_on": null,
+      "sha256": "85052899df465ee9535361497f1bee06ee7890beceb317e4414625023e3a966d"
+    },
+    "data/processed/rmove/incidencia_2025_02_07.json": {
+      "authorization": null,
+      "approved_by": null,
+      "approved_on": null,
+      "sha256": "4f5ba94ec2d7817e89caf40007cf028a27b19873038b14c8395cd705e139167e"
+    }
+  }
 }

@@ -36,6 +36,8 @@ jobs:
           node --check src/dashboard/case-views.js
       - name: Test publication boundaries and routes
         run: python -B -m unittest discover -s src/dashboard -p 'test_pages.py' -v
+      - name: Check real result compatibility and hashes
+        run: node src/dashboard/verify-results.cjs
       - name: Build only authorized publication files
         run: python -B src/dashboard/build-pages.py
       - name: Configure Pages
