@@ -13,8 +13,6 @@ const scripts = ['case-views.js', 'dashboard.js'].map(name => fs.readFileSync(pa
 
 async function verify(date) {
   const elements = Object.fromEntries([...html.matchAll(/\bid="([^"]+)"/g)].map(([, id]) => [id, {value: '', innerHTML: '', textContent: '', hidden: false}]));
-  elements.event.value = date;
-  elements.sort.value = 'absolute';
   const loaded = [];
   const context = vm.createContext({
     document: {getElementById: id => { assert.ok(elements[id], `Missing element: ${id}`); return elements[id]; }},
@@ -31,7 +29,7 @@ async function verify(date) {
     }
   });
   for (const script of scripts) vm.runInContext(script, context);
-  await vm.runInContext('load()', context);
+  await vm.runInContext(`load(${JSON.stringify(date)})`, context);
   const data = JSON.parse(fs.readFileSync(path.join(root, loaded.at(-1))));
   assert.equal(data.version_esquema, 3);
   assert.equal(data.fecha_incidencia, date);
@@ -55,14 +53,43 @@ async function verify(date) {
   assert.equal(elements.app.hidden, false);
   assert.equal(Number(elements['kpi-relations'].textContent), data.relaciones.length);
   assert.match(elements['relation-detail'].innerHTML, /RELACIÓN SELECCIONADA/);
-  assert.ok(elements['top-relations'].innerHTML.includes('top-item'));
+  assert.equal((elements['top-relations'].innerHTML.match(/data-i=/g)||[]).length,data.relaciones.length,'Show every analysed relation initially');
+  assert.match(elements['top-relations'].innerHTML,/viajes<\/b>/);
+  assert.ok(!elements['top-relations'].innerHTML.includes('%'));
+  const listed=[...elements['top-relations'].innerHTML.matchAll(/data-i="(\d+)"/g)].map(match=>data.relaciones[Number(match[1])].diferencia_viajes);
+  assert.ok(listed.every((value,i)=>!i||listed[i-1]>=value),'Travel differences descend from most positive to most negative');
+  vm.runInContext('chooseRelation(0)',context);
+  assert.equal((elements['top-relations'].innerHTML.match(/data-i=/g)||[]).length,data.relaciones.length,'Selecting a relation keeps the full list');
   assert.ok(!elements.status.textContent.startsWith('No se pudieron'));
   for (const direction of ['out', 'in', 'both']) {
     elements.municipality.onchange({target: {value: data.municipios[0].codigo}});
     elements.direction.onchange({target: {value: direction}});
-    elements.sort.onchange({target: {value: 'percent'}});
     assert.ok(!elements['relation-detail'].innerHTML.includes('NaN'));
     assert.ok(!elements['top-relations'].innerHTML.includes('NaN'));
+    const code=data.municipios[0].codigo;
+    const expected=data.relaciones.filter(r=>direction==='out'?r.municipio_origen===code:direction==='in'?r.municipio_destino===code:r.municipio_origen===code||r.municipio_destino===code).length;
+    assert.equal((elements['top-relations'].innerHTML.match(/data-i=/g)||[]).length,expected,'Filters retain every matching relation');
+  }
+  const before=loaded.length;
+  await vm.runInContext("load('network')",context);
+  assert.equal(loaded.length,before,'Network-only mode must not load case results');
+  assert.equal(vm.runInContext('data',context),null);
+  assert.equal(elements.app.hidden,false);
+  assert.equal(elements['incident-title'].textContent,'Solo líneas de Rodalies');
+  for(const id of ['case-kpis','case-results','case-information','case-filters','railway-context','variation-legend'])assert.equal(elements[id].hidden,true);
+  await vm.runInContext(`load(${JSON.stringify(date)})`,context);
+  assert.equal(elements['case-results'].hidden,false);
+  assert.equal(elements['variation-legend'].hidden,false);
+  assert.equal(Number(elements['kpi-relations'].textContent),data.relaciones.length);
+  if(date==='2025-02-07') {
+    let complete;const normalFetch=context.fetch;
+    context.fetch=()=>new Promise(resolve=>{complete=resolve;});
+    const pending=vm.runInContext('load()',context);
+    await vm.runInContext("load('network')",context);
+    complete({ok:true,json:async()=>data});await pending;
+    assert.equal(vm.runInContext('data',context),null,'A pending case must not overwrite network-only mode');
+    assert.equal(elements['incident-title'].textContent,'Solo líneas de Rodalies');
+    context.fetch=normalFetch;
   }
   console.log(`${date}: ${data.municipios.length} municipalities, ${data.relaciones.length} relations; hashes, loading, detail and filters OK`);
 }

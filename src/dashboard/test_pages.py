@@ -125,7 +125,7 @@ class PublicationTests(unittest.TestCase):
                 pages.main()
                 actual = {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()}
                 self.assertEqual(actual, set(files))
-                self.assertEqual(len(actual), 13)
+                self.assertEqual(len(actual), 15)
                 for name, content in files.items():
                     self.assertEqual((output / name).read_bytes(), content)
                 with self.assertRaisesRegex(ValueError, "ya existe"):

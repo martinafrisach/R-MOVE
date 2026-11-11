@@ -11,7 +11,7 @@ from html.parser import HTMLParser
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "src/dashboard"
 OUTPUT = ROOT / "dist/dashboard-pages"
-ASSETS = ("index.html", "dashboard.css", "dashboard.js", "case-views.js", "overview.js", "favicon.svg")
+ASSETS = ("index.html", "dashboard.css", "dashboard.js", "case-views.js", "overview.js", "favicon.svg", "railway.js", "railway-network.geojson")
 RESULTS = {
     "2025-06-05": "data/processed/rmove/incidencia_2025_06_05.json",
     "2025-02-07": "data/processed/rmove/incidencia_2025_02_07.json",
