@@ -1,5 +1,8 @@
 # R-MOVE · dashboard minimalista
 
+Para empaquetado, validaciones y despliegue en GitHub Pages,
+consulta el [README principal](../../README.md). Los fuentes permanecen aquí.
+
 Vista compacta sobre los resultados reales del Notebook 04. Incluye solo: selector de caso, tres indicadores, mapa y detalle de una relación OD, y un ranking de cinco conexiones. Fuente y método en un desplegable.
 
 ## Instalación en el repositorio existente
@@ -10,7 +13,14 @@ Desde la raíz del repositorio ejecuta `python -m http.server 8000` y visita htt
 
 ## Datos
 
-El ZIP incluye los JSON de ambos casos exclusivamente para que funcione por sí solo. No incluye ni modifica datasets de origen. Las referencias se calculan en Notebook 04, no en JavaScript. La aplicación necesita Internet para cargar Leaflet y teselas de OpenStreetMap; si el proveedor bloquea las teselas se mantiene la geometría de las conexiones.
+Los dos JSON de `data/processed/rmove/` ya están versionados en la rama del PR.
+El equipo confirma disponer de autorización para publicar estos resultados derivados.
+`publication.json` contiene sus rutas y hashes SHA-256. El build verifica hashes,
+esquema, rutas y lista cerrada de archivos; no requiere campos de autorización.
+Las referencias se calculan en
+Notebook 04, no en JavaScript. La aplicación necesita Internet para cargar
+Leaflet y teselas de OpenStreetMap; si el proveedor bloquea las teselas se mantiene
+la geometría de las conexiones.
 
 ## Interpretación
 
