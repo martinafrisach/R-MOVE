@@ -10,20 +10,23 @@ const GENERAL_DATA='../../data/processed/rmove/general/dashboard_general.json';
   let overview=null,sequence=0,boardSequence=0,boardCases=[];
 
   function showView(view,date,syncHistory=true) {
-    const cases=view==='cases',general=view==='general';
-    byId('incident-board').hidden=cases||general;
+    const cases=view==='cases',general=view==='general',conclusions=view==='conclusions';
+    byId('incident-board').hidden=cases||general||conclusions;
     byId('general-view').hidden=!general;
+    byId('conclusions-view').hidden=!conclusions;
     byId('case-view').hidden=!cases;
     byId('view-nav').hidden=cases;
     byId('nav-general').setAttribute('aria-pressed',String(general));
-    byId('nav-cases').setAttribute('aria-pressed',String(!general));
+    byId('nav-cases').setAttribute('aria-pressed',String(!general&&!conclusions));
+    byId('nav-conclusions').setAttribute('aria-pressed',String(conclusions));
     if(syncHistory&&window.history?.pushState&&window.location){
       const address=new URL(window.location.href);
       if(cases){address.searchParams.set('view','cases');address.searchParams.set('date',date||currentCase);}
-      else if(general){address.searchParams.set('view','general');address.searchParams.delete('date');}
+      else if(general||conclusions){address.searchParams.set('view',view);address.searchParams.delete('date');}
       else{address.searchParams.delete('view');address.searchParams.delete('date');}
       if(address.href!==window.location.href)window.history.pushState(null,'',address);
     }
+    if(conclusions)window.RMoveConclusions?.show();
     if(cases){
       void load(date&&(date==='network'||Object.hasOwn(CASES,date))?date:currentCase).then(()=>{if(!byId('case-view').hidden)update();});
     }
@@ -129,6 +132,7 @@ const GENERAL_DATA='../../data/processed/rmove/general/dashboard_general.json';
   }
   byId('nav-general').onclick=()=>showView('general');
   byId('nav-cases').onclick=()=>showView('board');
+  byId('nav-conclusions').onclick=()=>showView('conclusions');
   byId('case-back').onclick=()=>showView('board');
   byId('board-network').onclick=()=>showView('cases','network');
   byId('board-search').oninput=renderBoard;
@@ -142,7 +146,8 @@ const GENERAL_DATA='../../data/processed/rmove/general/dashboard_general.json';
   window.RMoveOverview={showView,loadOverview,loadBoard};
   function openAddress(){
     const query=new URLSearchParams(window.location?.search||'');
-    showView(query.get('view')==='cases'?'cases':query.get('view')==='general'?'general':'board',query.get('date'),false);
+    const view=query.get('view');
+    showView(['cases','general','conclusions'].includes(view)?view:'board',query.get('date'),false);
   }
   if(window.location)openAddress();else showView('board',null,false);
   if(window.addEventListener)window.addEventListener('popstate',openAddress);

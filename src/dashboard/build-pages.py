@@ -11,7 +11,7 @@ from html.parser import HTMLParser
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "src/dashboard"
 OUTPUT = ROOT / "dist/dashboard-pages"
-ASSETS = ("index.html", "dashboard.css", "dashboard.js", "case-views.js", "overview.js", "favicon.svg", "railway.js", "railway-network.geojson")
+ASSETS = ("index.html", "dashboard.css", "dashboard.js", "case-views.js", "overview.js", "conclusions.js", "favicon.svg", "railway.js", "railway-network.geojson")
 RESULTS = {
     "2025-06-05": "data/processed/rmove/incidencia_2025_06_05.json",
     "2025-02-07": "data/processed/rmove/incidencia_2025_02_07.json",
@@ -20,6 +20,8 @@ RESULTS = {
     "2024-04-29": "data/processed/rmove/incidencia_2024_04_29.json",
 }
 GENERAL_RESULT = "data/processed/rmove/general/dashboard_general.json"
+CONCLUSIONS_RESULT = "data/processed/rmove/conclusiones/dashboard_conclusiones.json"
+CONCLUSION_GROUPS = {"dependientes", "cercanos", "metro_fgc", "sin_rodalies"}
 
 
 def read_regular(relative):
@@ -66,9 +68,36 @@ def validate_routes(files):
     overview = files["src/dashboard/overview.js"].decode("utf-8")
     if f"const GENERAL_DATA='../../{GENERAL_RESULT}';" not in overview:
         raise ValueError("La ruta general no coincide con el artefacto")
+    conclusions = files["src/dashboard/conclusions.js"].decode("utf-8")
+    if f"const CONCLUSIONS_DATA='../../{CONCLUSIONS_RESULT}';" not in conclusions:
+        raise ValueError("La ruta de conclusiones no coincide con el artefacto")
     css = files["src/dashboard/dashboard.css"].decode("utf-8")
     if re.search(r"url\s*\(|@import", css, re.I):
         raise ValueError("Revisar nuevas dependencias CSS antes de publicarlas")
+
+
+def finite(value):
+    return type(value) in (int, float) and math.isfinite(value)
+
+
+def validate_conclusions(data):
+    """Same checks as conclusions.js: the page never receives a file it would reject."""
+    bad = ValueError(f"Esquema incompatible: {CONCLUSIONS_RESULT}")
+    if (data.get("version_esquema") != 1 or len(data.get("conclusiones", [])) != 4
+            or not isinstance(data.get("kpis"), list) or not data.get("mapa")
+            or not data.get("evento") or not isinstance(data.get("barrios"), list)):
+        raise bad
+    for case in data["mapa"]:
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", case["fecha"]) or not case["municipios"]:
+            raise bad
+        for row in case["municipios"]:
+            if row["grupo"] not in CONCLUSION_GROUPS or not all(
+                    finite(row[k]) for k in ("lat", "lon", "efecto_pct", "viajes_referencia")):
+                raise bad
+    if not all(finite(e[k]) for e in data["evento"] for k in ("dia", "efecto_pct", "ic_inf", "ic_sup")):
+        raise bad
+    if not all(finite(b[k]) for b in data["barrios"] for k in ("con_estacion", "sin_estacion")):
+        raise bad
 
 
 def prepare():
@@ -76,7 +105,7 @@ def prepare():
     if manifest.get("schema_version") != 1 or not isinstance(manifest.get("results"), dict):
         raise ValueError("Manifiesto de publicación no válido")
     results = manifest["results"]
-    if set(results) - (set(RESULTS.values()) | {GENERAL_RESULT}):
+    if set(results) - (set(RESULTS.values()) | {GENERAL_RESULT, CONCLUSIONS_RESULT}):
         raise ValueError("El manifiesto contiene resultados fuera de la lista permitida")
     files = {"src/dashboard/" + name: read_regular("src/dashboard/" + name) for name in ASSETS}
     files["index.html"] = read_regular("src/dashboard/pages-entry.html")
@@ -117,8 +146,16 @@ def prepare():
         files[GENERAL_RESULT] = content
     except (ValueError, TypeError, AttributeError, KeyError) as error:
         errors.append(str(error))
+    try:
+        content = read_regular(CONCLUSIONS_RESULT)
+        if results.get(CONCLUSIONS_RESULT, {}).get("sha256") != hashlib.sha256(content).hexdigest():
+            raise ValueError(f"SHA-256 ausente o desactualizado: {CONCLUSIONS_RESULT}")
+        validate_conclusions(json.loads(content))
+        files[CONCLUSIONS_RESULT] = content
+    except (ValueError, TypeError, AttributeError, KeyError) as error:
+        errors.append(str(error))
     # Routes are checked even when the result files are blocked.
-    validate_routes({**dict.fromkeys([*RESULTS.values(), GENERAL_RESULT], b""), **files})
+    validate_routes({**dict.fromkeys([*RESULTS.values(), GENERAL_RESULT, CONCLUSIONS_RESULT], b""), **files})
     if errors:
         raise ValueError("Publicación bloqueada:\n- " + "\n- ".join(errors))
     return files

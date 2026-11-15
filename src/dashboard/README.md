@@ -77,3 +77,16 @@ regresa manteniendo la búsqueda. Los enlaces `?view=cases&date=...` siguen
 abriendo el caso directamente y `?view=general` abre el análisis general.
 La navegación se guarda en el historial del navegador. El panel tiene carga y
 reintento propios, independientes de los resultados del análisis general.
+
+## Página «Conclusiones» (`?view=conclusions`)
+
+Página nueva que resume M2 y M3. No cambia las otras vistas. `conclusions.js` lee
+`data/processed/rmove/conclusiones/dashboard_conclusiones.json`. Ese fichero lo genera la celda de
+exportación del notebook de M2 (`celda_export_conclusiones.py`).
+
+- Indicadores y cuatro tarjetas: el primer día, los barrios con estación, la duración y la relación con el análisis general.
+- Mapa por municipio de cada día de corte. El color indica la variación y el tamaño, los viajes habituales; el borde blanco marca p < 0,05. Debajo, la red de Rodalies como referencia. Filtros de día y grupo, ficha del municipio y ranking de las mayores caídas.
+- Event study (días −5 a +3) y barrios con y sin estación (ida/vuelta, M3).
+
+Al regenerar el JSON, copia el SHA-256 que imprime la celda en `publication.json`.
+Comprobación: `node src/dashboard/verify-conclusions.cjs`.

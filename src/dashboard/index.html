@@ -18,7 +18,7 @@
     >
 
     <!-- Estilos propios: versión actualizada para evitar caché -->
-    <link rel="stylesheet" href="dashboard.css?v=dark1">
+    <link rel="stylesheet" href="dashboard.css?v=dark2">
 </head>
 
 <body>
@@ -42,6 +42,7 @@
         <nav id="view-nav" class="view-nav" aria-label="Vistas del análisis">
             <button id="nav-general" type="button" aria-pressed="false" aria-controls="general-view">Análisis general</button>
             <button id="nav-cases" type="button" aria-pressed="true" aria-controls="incident-board">Incidencias</button>
+            <button id="nav-conclusions" type="button" aria-pressed="false" aria-controls="conclusions-view">Conclusiones</button>
         </nav>
 
         <section id="incident-board" aria-label="Selección de incidencias">
@@ -107,6 +108,75 @@
                 </section>
                 <details class="method-card"><summary>Cómo leer los resultados · Método y límites</summary><div id="general-method"></div></details>
                 <p class="footer-note" id="general-limitations">Muestra de incidencias documentadas, no un registro exhaustivo. Los días de comparación no tienen incidencias registradas; esto no garantiza que no hubiera problemas. Movilidad de todos los modos; asociaciones exploratorias sin atribución causal.</p>
+            </div>
+        </section>
+
+        <!-- CONCLUSIONES: síntesis de M2 (municipio → BCN) y M3 (barrios). Página nueva; no modifica las demás vistas. -->
+        <section id="conclusions-view" hidden aria-labelledby="conclusions-title">
+            <div class="general-intro">
+                <div><span class="eyebrow">CONCLUSIONES</span>
+                    <h1 id="conclusions-title">Qué pasa con los viajes cuando Rodalies se corta</h1>
+                    <p>Síntesis de los días de corte total: quién deja de viajar, a qué barrios, y cuánto dura.</p>
+                </div>
+                <span class="scope-tag" id="conclusions-period">2023–2025</span>
+            </div>
+            <p id="conclusions-status" role="status" aria-live="polite">Cargando las conclusiones…</p>
+            <div id="conclusions-content" hidden>
+                <div class="general-kpis" id="conclusions-kpis"></div>
+                <div class="research-grid" id="conclusions-cards"></div>
+
+                <div class="workspace concl-workspace">
+                    <section class="map-card">
+                        <div class="panel-head">
+                            <div>
+                                <span class="eyebrow">01 · EL DÍA DEL CORTE</span>
+                                <h2>Municipio a municipio</h2>
+                                <p id="concl-case-description"></p>
+                                <button id="concl-open-case" class="concl-open-case" type="button" hidden>Ver esta incidencia en el mapa de relaciones ↗</button>
+                            </div>
+                            <div class="filters">
+                                <label for="concl-case">Día<select id="concl-case"></select></label>
+                                <label for="concl-group">Grupo<select id="concl-group">
+                                    <option value="">Todos</option>
+                                    <option value="dependientes">Dependientes de Rodalies</option>
+                                    <option value="cercanos">Cercanos sin metro/FGC</option>
+                                    <option value="metro_fgc">Con metro/FGC</option>
+                                </select></label>
+                            </div>
+                        </div>
+                        <div id="concl-map" aria-label="Mapa de la variación de viajes a Barcelona por municipio el día del corte"></div>
+                        <div class="map-footer concl-legend" id="concl-legend" aria-label="Escala de colores">
+                            <span>Menos viajes</span><i class="concl-scale" aria-hidden="true"></i><span>Más viajes</span>
+                            <small>Municipios con Rodalies, comparados con los municipios sin Rodalies el mismo día. Círculo: tamaño según viajes habituales a Barcelona. Borde blanco: p &lt; 0,05. Líneas: red de Rodalies de referencia.</small>
+                        </div>
+                    </section>
+                    <div class="right">
+                        <section class="detail-card" id="concl-detail" aria-live="polite"><h2>Selecciona un municipio</h2></section>
+                        <section class="top-card">
+                            <div class="panel-head"><div><h2>Mayores caídas</h2><p>Del grupo seleccionado</p></div></div>
+                            <div id="concl-ranking" class="top-relations"></div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="overview-columns">
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">02 · DURACIÓN</span><h2>El efecto dura un día</h2></div></div>
+                        <p class="chart-caption">Variación de los viajes de los municipios dependientes frente al control, días antes y después del corte (regresión DiD). Línea: intervalo del 95 %.</p>
+                        <div id="concl-event" class="interval-chart"></div>
+                        <p class="chart-caption">Antes del corte no hay diferencias (las tendencias son paralelas). Después, los viajes vuelven a su nivel habitual.</p>
+                    </section>
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">03 · DENTRO DE BARCELONA</span><h2>La caída va a los barrios con estación</h2></div>
+                            <label class="sort-label" for="concl-direction">Sentido<select id="concl-direction"><option value="ida">Ida (hacia BCN)</option><option value="vuelta">Vuelta (desde BCN)</option></select></label>
+                        </div>
+                        <p class="chart-caption">Municipios dependientes (M3). Las magnitudes de M3 no se comparan con las de M2; lo relevante es la diferencia entre los dos tipos de barrio.</p>
+                        <div id="concl-barrios" class="interval-chart"></div>
+                    </section>
+                </div>
+
+                <details class="method-card"><summary>Cómo leer los resultados · Método y límites</summary><div id="concl-method"></div></details>
+                <p class="footer-note">Movilidad diaria de todos los modos de transporte. Los resultados describen días de corte total; los retrasos o cortes de unas horas no se detectan con datos diarios.</p>
             </div>
         </section>
 
@@ -306,7 +376,8 @@
     <!-- LÓGICA PRINCIPAL DEL DASHBOARD -->
     <script src="railway.js?v=12"></script>
     <script src="dashboard.js?v=railway11"></script>
-    <script src="overview.js?v=general6"></script>
+    <script src="overview.js?v=general7"></script>
+    <script src="conclusions.js?v=2"></script>
 
 </body>
 </html>

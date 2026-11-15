@@ -101,3 +101,18 @@ button:focus-visible,select:focus-visible,summary:focus-visible{outline-color:#f
 .leaflet-tooltip,.railway-station-label,.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#203444;color:#edf3f8;border-color:#587084;box-shadow:0 2px 8px #0005}
 .leaflet-tooltip-top:before{border-top-color:#587084}.leaflet-tooltip-bottom:before{border-bottom-color:#587084}.leaflet-tooltip-left:before{border-left-color:#587084}.leaflet-tooltip-right:before{border-right-color:#587084}
 .leaflet-container .leaflet-control-attribution{background:#14212ce8;color:#a8b9c7}.leaflet-control-attribution a{color:#91c8ff}.leaflet-bar a,.leaflet-bar a:hover{background:#1d2d3c;color:#edf3f8;border-color:#587084}.leaflet-popup-close-button{color:#c6d6e2!important}.railway-line-tag{background:#17232e;color:#fff;border-color:#c6d6e2}
+
+/* Página «Conclusiones» (síntesis M2 + M3). */
+.concl-workspace{margin-bottom:18px}
+#concl-map{height:520px;background:#14212c}
+#concl-map .leaflet-tile-pane{filter:grayscale(.85) invert(1) hue-rotate(180deg) brightness(.7) contrast(.9)}
+#concl-map .empty-state{padding:20px}
+.concl-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--edge)}
+.concl-legend small{flex-basis:100%}
+.concl-scale{display:inline-block;width:160px;height:10px;border-radius:5px;background:linear-gradient(90deg,#80baff,#6b7f90 50%,#ffb16e)}
+.concl-groups{grid-template-columns:1fr 1fr}.concl-groups>p{grid-column:1/-1;margin:0}
+.concl-groups div{display:grid;gap:2px}.concl-groups strong{font-size:20px}.concl-groups small{color:var(--muted);font-size:11px}
+#concl-ranking{max-height:330px}
+#concl-detail .detail-title h2{margin:6px 0 0}
+@media(max-width:1000px){#concl-map{height:410px}}
+.concl-open-case{margin-top:10px;background:var(--surface-raised);color:#ffc477;border:1px solid var(--edge);border-radius:8px;padding:7px 11px;font-size:12px;font-weight:650;cursor:pointer}.concl-open-case:hover{border-color:#ffac55}

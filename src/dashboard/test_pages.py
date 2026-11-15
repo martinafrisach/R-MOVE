@@ -17,6 +17,7 @@ class PublicationTests(unittest.TestCase):
         files["index.html"] = (pages.SOURCE / "pages-entry.html").read_bytes()
         files.update(dict.fromkeys(pages.RESULTS.values(), b""))
         files[pages.GENERAL_RESULT] = b""
+        files[pages.CONCLUSIONS_RESULT] = b""
         return files
 
     def test_relative_routes_under_project_prefix(self):
@@ -116,6 +117,28 @@ class PublicationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Esquema incompatible"):
                 pages.prepare()
 
+    def test_conclusions_schema_rejected_even_with_matching_hash(self):
+        import hashlib
+        original = pages.read_regular
+        invalid = json.dumps({"version_esquema": 1, "conclusiones": []}).encode()
+        manifest = json.loads(original("src/dashboard/publication.json"))
+        manifest["results"][pages.CONCLUSIONS_RESULT] = {"sha256": hashlib.sha256(invalid).hexdigest()}
+        def read(relative):
+            if relative == pages.CONCLUSIONS_RESULT:
+                return invalid
+            if relative == "src/dashboard/publication.json":
+                return json.dumps(manifest).encode()
+            return original(relative)
+        with patch.object(pages, "read_regular", side_effect=read):
+            with self.assertRaisesRegex(ValueError, "Esquema incompatible"):
+                pages.prepare()
+
+    def test_conclusions_route_must_match(self):
+        files = self.assets()
+        files["src/dashboard/conclusions.js"] = b"const CONCLUSIONS_DATA='../../otro.json';"
+        with self.assertRaisesRegex(ValueError, "conclusiones"):
+            pages.validate_routes(files)
+
     def test_artifact_copies_only_prepared_files(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "site"
@@ -125,7 +148,7 @@ class PublicationTests(unittest.TestCase):
                 pages.main()
                 actual = {p.relative_to(output).as_posix() for p in output.rglob("*") if p.is_file()}
                 self.assertEqual(actual, set(files))
-                self.assertEqual(len(actual), 15)
+                self.assertEqual(len(actual), 17)
                 for name, content in files.items():
                     self.assertEqual((output / name).read_bytes(), content)
                 with self.assertRaisesRegex(ValueError, "ya existe"):
