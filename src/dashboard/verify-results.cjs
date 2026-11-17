@@ -54,10 +54,23 @@ async function verify(date) {
   assert.equal(Number(elements['kpi-relations'].textContent), data.relaciones.length);
   assert.match(elements['relation-detail'].innerHTML, /RELACIÓN SELECCIONADA/);
   assert.equal((elements['top-relations'].innerHTML.match(/data-i=/g)||[]).length,data.relaciones.length,'Show every analysed relation initially');
-  assert.match(elements['top-relations'].innerHTML,/viajes<\/b>/);
-  assert.ok(!elements['top-relations'].innerHTML.includes('%'));
-  const listed=[...elements['top-relations'].innerHTML.matchAll(/data-i="(\d+)"/g)].map(match=>data.relaciones[Number(match[1])].diferencia_viajes);
-  assert.ok(listed.every((value,i)=>!i||listed[i-1]>=value),'Travel differences descend from most positive to most negative');
+  assert.match(elements['top-relations'].innerHTML,/ %<small>[^<]* viajes<\/small><\/b>/);
+  const order=()=>[...elements['top-relations'].innerHTML.matchAll(/data-i="(\d+)"/g)].map(match=>data.relaciones[Number(match[1])]);
+  let listed=order().map(r=>r.diferencia_viajes);
+  assert.ok(listed.every((value,i)=>!i||listed[i-1]<=value),'By default the largest drops in trips come first');
+  for(const [mode,key,dir] of [['up_n','diferencia_viajes',-1],['down_pct','variacion_observada_pct',1],['up_pct','variacion_observada_pct',-1]]){
+    elements['rel-sort'].value=mode;elements['rel-sort'].onchange();
+    listed=order().map(r=>r[key]);
+    assert.ok(listed.every((value,i)=>!i||dir*(value-listed[i-1])>=0),`Sort ${mode}`);
+  }
+  elements['rel-sort'].value='';elements['rel-unusual'].checked=true;elements['rel-unusual'].onchange();
+  assert.equal(order().length,data.relaciones.filter(r=>r.fuera_rango_intercuartil_viajes!==false).length,'Unusual-only filter');
+  assert.ok(order().every(r=>r.fuera_rango_intercuartil_viajes!==false));
+  elements['rel-unusual'].checked=false;elements['rel-unusual'].onchange();
+  assert.match(elements['rel-count'].textContent,/fuera de lo habitual/);
+  vm.runInContext('chooseRelation(0)',context);
+  assert.match(elements['relation-detail'].innerHTML,/Rango habitual/);
+  assert.ok(!elements['relation-detail'].innerHTML.includes('NaN'));
   vm.runInContext('chooseRelation(0)',context);
   assert.equal((elements['top-relations'].innerHTML.match(/data-i=/g)||[]).length,data.relaciones.length,'Selecting a relation keeps the full list');
   assert.ok(!elements.status.textContent.startsWith('No se pudieron'));

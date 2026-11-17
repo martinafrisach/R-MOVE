@@ -10,10 +10,12 @@ const GENERAL_DATA='../../data/processed/rmove/general/dashboard_general.json';
   let overview=null,sequence=0,boardSequence=0,boardCases=[];
 
   function showView(view,date,syncHistory=true) {
-    const cases=view==='cases',general=view==='general',conclusions=view==='conclusions';
-    byId('incident-board').hidden=cases||general||conclusions;
+    if(view==='results')view='conclusions';
+    const cases=view==='cases',general=view==='general',conclusions=view==='conclusions',incident=view==='incident';
+    byId('incident-board').hidden=cases||general||conclusions||incident;
     byId('general-view').hidden=!general;
     byId('conclusions-view').hidden=!conclusions;
+    byId('incident-view').hidden=!incident;
     byId('case-view').hidden=!cases;
     byId('view-nav').hidden=cases;
     byId('nav-general').setAttribute('aria-pressed',String(general));
@@ -22,43 +24,43 @@ const GENERAL_DATA='../../data/processed/rmove/general/dashboard_general.json';
     if(syncHistory&&window.history?.pushState&&window.location){
       const address=new URL(window.location.href);
       if(cases){address.searchParams.set('view','cases');address.searchParams.set('date',date||currentCase);}
-      else if(general||conclusions){address.searchParams.set('view',view);address.searchParams.delete('date');}
+      else if(incident){address.searchParams.set('view','incident');if(date)address.searchParams.set('date',date);else address.searchParams.delete('date');}
+      else if(general||conclusions){address.searchParams.set('view',general?'general':'results');address.searchParams.delete('date');}
       else{address.searchParams.delete('view');address.searchParams.delete('date');}
       if(address.href!==window.location.href)window.history.pushState(null,'',address);
     }
+    if(conclusions||incident)window.scrollTo?.(0,0);
     if(conclusions)window.RMoveConclusions?.show();
+    if(incident)void window.RMoveConclusions?.showIncident(date);
     if(cases){
       void load(date&&(date==='network'||Object.hasOwn(CASES,date))?date:currentCase).then(()=>{if(!byId('case-view').hidden)update();});
     }
   }
 
-  const lineColors={R1:'#78b3e0',R2:'#009949','R2 Nord':'#92c33e','R2 Sud':'#005b2e',R3:'#db3c37',R4:'#ee9a43',R7:'#ab74a4',R8:'#880063'};
+  const lineColors={R1:'#78b3e0',R2:'#009949','R2 Nord':'#92c33e','R2 Sud':'#00a35a',R3:'#db3c37',R4:'#ee9a43',R7:'#ab74a4',R8:'#880063'};
   function renderBoard(){
     const query=byId('board-search').value.trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
     const rows=boardCases.filter(item=>[item.date,item.title,item.section,item.lines,dateLabel(item.date)].join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(query));
     byId('board-count').textContent=`${rows.length} ${rows.length===1?'incidencia':'incidencias'}`;
-    byId('board-rows').innerHTML=rows.map(item=>{
+    byId('board-rows').innerHTML=rows.map((item,i)=>{
       const date=new Date(item.date+'T12:00:00Z');
       const day=date.toLocaleDateString('es-ES',{day:'2-digit',month:'short',timeZone:'UTC'});
       const chips=item.lines.split(';').map(line=>line.trim()).filter(Boolean).map(line=>`<span class="board-line" style="--line-color:${lineColors[line]||'#657b8d'}">${escape(line)}</span>`).join('');
-      return `<button type="button" class="board-row" data-case-date="${escape(item.date)}" aria-label="Abrir incidencia del ${escape(dateLabel(item.date))}: ${escape(item.title)}"><span class="board-date"><strong>${escape(day)}</strong><small>${date.getUTCFullYear()}</small></span><span class="board-incident"><strong>${escape(item.title)}</strong><small>${escape(item.section)}</small></span><span class="board-lines">${chips}</span><span class="board-open" aria-hidden="true">Ver análisis ↗</span></button>`;
+      return `<button type="button" class="board-row" style="--d:${i*80}ms" data-case-date="${escape(item.date)}" aria-label="Abrir incidencia del ${escape(dateLabel(item.date))}: ${escape(item.title)}"><span class="board-date"><strong>${escape(day)}</strong><small>${date.getUTCFullYear()}</small></span><span class="board-incident"><strong>${escape(item.title)}</strong><small>${escape(item.section)}</small></span><span class="board-lines">${chips}</span><span class="board-open" aria-hidden="true">${item.effect?`<b class="${item.effect.p_valor<0.05&&item.effect.efecto_pct<0?'down':''}">${item.effect.efecto_pct>0?'+':'−'}${Math.abs(item.effect.efecto_pct).toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1})} %</b><small>dependientes</small>`:''}Ver</span></button>`;
     }).join('');
     if(!rows.length&&boardCases.length)byId('board-status').textContent='No hay incidencias que coincidan con la búsqueda.';
-    else if(boardCases.length&&!byId('board-retry').hidden)byId('board-status').textContent='No se pudieron cargar algunas incidencias. Puedes reintentar.';
-    else if(boardCases.length)byId('board-status').textContent='';
+        else if(boardCases.length)byId('board-status').textContent='';
   }
+  // El panel lista los días de caos del notebook 04 (pestaña «Resultados» comparte el mismo JSON).
   async function loadBoard(){
     const id=++boardSequence;byId('board-status').textContent='Cargando incidencias…';byId('board-retry').hidden=true;
-    const results=await Promise.allSettled(Object.entries(CASES).map(async([date,path])=>{
-      const response=await fetch(path);if(!response.ok)throw Error(`HTTP ${response.status}`);
-      const json=await response.json();if(json.fecha_incidencia!==date||json.version_esquema!==3)throw Error('Caso incompatible');
-      const documented=json.incidencia_documentada||{};
-      return {date,title:documented.causa||json.descripcion||json.ambito,section:documented.tramo||json.ambito,lines:documented.lineas_afectadas||'Sin especificar'};
-    }));
-    if(id!==boardSequence)return;
-    boardCases=results.filter(r=>r.status==='fulfilled').map(r=>r.value).sort((a,b)=>b.date.localeCompare(a.date));
-    byId('board-retry').hidden=results.every(r=>r.status==='fulfilled');
-    if(!boardCases.length)byId('board-status').textContent='No se pudieron cargar las incidencias. Pulsa «Reintentar carga».';
+    try{
+      if(!window.RMoveConclusions)throw Error('módulo de resultados no cargado');
+      const json=await window.RMoveConclusions.ready;
+      if(id!==boardSequence)return;
+      boardCases=json.incidencias.map(c=>({date:c.fecha,title:c.titulo,section:[c.tipo,c.tramo||c.descripcion].filter(Boolean).join(': '),lines:(c.lineas||[]).join(';')||'Sin especificar',
+        effect:c.grupos.find(g=>g.grupo==='dependientes'),lost:c.perdidos})).sort((a,b)=>b.date.localeCompare(a.date));
+    }catch(error){if(id!==boardSequence)return;boardCases=[];byId('board-retry').hidden=false;byId('board-status').textContent=`No se pudieron cargar las incidencias (${error.message}). Pulsa «Reintentar carga».`;}
     renderBoard();
   }
 
@@ -136,18 +138,18 @@ const GENERAL_DATA='../../data/processed/rmove/general/dashboard_general.json';
   byId('case-back').onclick=()=>showView('board');
   byId('board-network').onclick=()=>showView('cases','network');
   byId('board-search').oninput=renderBoard;
-  byId('board-retry').onclick=loadBoard;
+  byId('board-retry').onclick=()=>{void window.RMoveConclusions?.loadConclusions();return loadBoard();};
   byId('general-direction').onchange=renderTables;
   byId('recurrence-exposure').onchange=renderTables;
   const openFromList=event=>{const button=event.target.closest('[data-case-date]');if(button)showView('cases',button.dataset.caseDate);};
-  byId('board-rows').onclick=openFromList;
+  byId('board-rows').onclick=event=>{const button=event.target.closest('[data-case-date]');if(button)showView('incident',button.dataset.caseDate);};
   byId('case-links').onclick=openFromList;
   byId('influence-dates').onclick=openFromList;
   window.RMoveOverview={showView,loadOverview,loadBoard};
   function openAddress(){
     const query=new URLSearchParams(window.location?.search||'');
     const view=query.get('view');
-    showView(['cases','general','conclusions'].includes(view)?view:'board',query.get('date'),false);
+    showView(['cases','general','conclusions','results','incident'].includes(view)?view:'board',query.get('date'),false);
   }
   if(window.location)openAddress();else showView('board',null,false);
   if(window.addEventListener)window.addEventListener('popstate',openAddress);

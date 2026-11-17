@@ -231,7 +231,7 @@ window.RMoveRailway = (() => {
       for(const id of stationSet) {
         const station=stationIndex[id],endpoint=id===activeRoute.stops[0]||id===activeRoute.stops.at(-1);
         L.circleMarker([...station.geometry.coordinates].reverse(),{pane:'railway-highlight',radius:endpoint?9:6,color:variationColor(active.variacion_observada_pct),weight:3,fillColor:endpoint?variationColor(active.variacion_observada_pct):'#fff',fillOpacity:1})
-          .bindTooltip(escape(station.properties.name),{permanent:endpoint||get('railway-labels').checked&&map.getZoom()>=12,direction:'top',className:'railway-station-label'}).addTo(highlightLayer);
+          .bindTooltip(escape(station.properties.name),{permanent:endpoint||get('railway-labels').checked&&map.getZoom()>=13,direction:'top',className:'railway-station-label'}).addTo(highlightLayer);
       }
       if(fit)map.fitBounds(activeRoute.stops.map(id=>[...stationIndex[id].geometry.coordinates].reverse()),{padding:[45,45]});
     } else if(active) detail.textContent='Sin recorrido ferroviario de referencia para esta relación con el filtro de línea actual. Selecciona «Todas las líneas» o consulta otra relación.';
@@ -271,7 +271,7 @@ window.RMoveRailway = (() => {
         const p = feature.properties, [lon, lat] = feature.geometry.coordinates;
         const marker = L.circleMarker([lat, lon], {pane: 'railway-stations', radius: lineId ? 5 : 4,
           color: colors[lineId || p.lines[0]], weight: 2, fillColor: '#fff', fillOpacity: 1});
-        marker.bindTooltip(escape(p.name), {permanent: get('railway-labels').checked && map.getZoom() >= 12,
+        marker.bindTooltip(escape(p.name), {permanent: get('railway-labels').checked && map.getZoom() >= 13,
           direction: 'top', offset: [0, -4], className: 'railway-station-label'});
         marker.bindPopup(`<strong>${escape(p.name)}</strong><p>Estación de Rodalies</p><div class="railway-badges">${p.lines.map(id => `<span style="background:${colors[id]}">${escape(lines.find(f => f.properties.id === id).properties.name)}</span>`).join('')}</div>`);
         marker.addTo(stationsLayer);

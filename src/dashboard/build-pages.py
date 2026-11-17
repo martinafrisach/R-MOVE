@@ -20,7 +20,7 @@ RESULTS = {
     "2024-04-29": "data/processed/rmove/incidencia_2024_04_29.json",
 }
 GENERAL_RESULT = "data/processed/rmove/general/dashboard_general.json"
-CONCLUSIONS_RESULT = "data/processed/rmove/conclusiones/dashboard_conclusiones.json"
+CONCLUSIONS_RESULT = "data/processed/rmove/resultados/dashboard_resultados.json"
 CONCLUSION_GROUPS = {"dependientes", "cercanos", "metro_fgc", "sin_rodalies"}
 
 
@@ -81,22 +81,31 @@ def finite(value):
 
 
 def validate_conclusions(data):
-    """Same checks as conclusions.js: the page never receives a file it would reject."""
+    """Same checks as conclusions.js: the «Resultados» page never receives a file it would reject."""
     bad = ValueError(f"Esquema incompatible: {CONCLUSIONS_RESULT}")
-    if (data.get("version_esquema") != 1 or len(data.get("conclusiones", [])) != 4
-            or not isinstance(data.get("kpis"), list) or not data.get("mapa")
-            or not data.get("evento") or not isinstance(data.get("barrios"), list)):
+    if (data.get("version_esquema") != 2 or len(data.get("conclusiones", [])) != 4
+            or not isinstance(data.get("kpis"), list) or not data.get("incidencias")
+            or not data.get("grupos") or not data.get("distancia") or not data.get("evento")
+            or not isinstance(data.get("barrios"), list) or not isinstance(data.get("placebo"), dict)):
         raise bad
-    for case in data["mapa"]:
+    for case in data["incidencias"]:
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", case["fecha"]) or not case["municipios"]:
+            raise bad
+        if not all(isinstance(case.get(k), list) for k in ("grupos", "serie", "tramos", "evento")):
+            raise bad
+        if not all(finite(case["perdidos"][k]) for k in ("viajes_perdidos", "viajes_dia_normal")):
             raise bad
         for row in case["municipios"]:
             if row["grupo"] not in CONCLUSION_GROUPS or not all(
                     finite(row[k]) for k in ("lat", "lon", "efecto_pct", "viajes_referencia")):
                 raise bad
+    if not all(finite(g[k]) for g in data["grupos"] + data["distancia"] for k in ("efecto_pct", "ic_inf", "ic_sup")):
+        raise bad
     if not all(finite(e[k]) for e in data["evento"] for k in ("dia", "efecto_pct", "ic_inf", "ic_sup")):
         raise bad
     if not all(finite(b[k]) for b in data["barrios"] for k in ("con_estacion", "sin_estacion")):
+        raise bad
+    if not finite(data["placebo"].get("real_pct")) or not isinstance(data["placebo"].get("valores_pct"), list):
         raise bad
 
 

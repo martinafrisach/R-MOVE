@@ -7,7 +7,7 @@ const path = require('node:path');
 const network = JSON.parse(fs.readFileSync(path.join(__dirname, 'railway-network.geojson')));
 const source = fs.readFileSync(path.join(__dirname, 'railway.js'), 'utf8');
 const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-assert.match(html, /<script src="railway.js\?v=12"><\/script>/);
+assert.match(html, /<script src="railway.js\?v=12-ux1"><\/script>/);
 assert.ok(html.indexOf('src="railway.js') < html.indexOf('src="dashboard.js'));
 const lines = network.features.filter(f => f.properties.kind === 'line');
 const stations = network.features.filter(f => f.properties.kind === 'station');
@@ -98,6 +98,8 @@ async function exercise(fail = false) {
   zoom=10;events.zoomend();
   assert.equal(groups[1].items[0].tooltip.opts.permanent,false);
   zoom=12;events.zoomend();
+  assert.equal(groups[1].items[0].tooltip.opts.permanent,false,'Station names stay hidden at the overview zoom to avoid overlaps');
+  zoom=13;events.zoomend();
   assert.equal(groups[1].items[0].tooltip.opts.permanent,true);
   elements['railway-labels'].checked=false;elements['railway-labels'].onchange();
   assert.equal(groups[1].items[0].tooltip.opts.permanent,false);

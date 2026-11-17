@@ -1,7 +1,11 @@
-﻿# R-MOVE
+# R-MOVE
 
 Motor Python de movilidad e incidencias documentadas y dashboard estático.
-El análisis vive en `src/analysis/`, los notebooks en `notebooks/` y la web en `src/dashboard/`.
+El análisis vive en `src/analysis/`, los notebooks en `notebooks/`, el dashboard clásico en `src/dashboard/` y el Observatorio en `src/dashboard-v2/`.
+
+> **¿Eres del equipo y acabas de clonar el repo?** Lee [CONTRIBUTING.md](CONTRIBUTING.md): instalación, de dónde sacar los datos (no están en Git), cómo ver los dashboards y cómo trabajar con ramas sin pisarnos.
+>
+> Inicio rápido: `pip install -r requirements.txt` → `python -m http.server 8000` → [dashboard clásico](http://localhost:8000/src/dashboard/) · [Observatorio](http://localhost:8000/src/dashboard-v2/)
 
 ## Dashboard
 

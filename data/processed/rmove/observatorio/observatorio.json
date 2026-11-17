@@ -1,0 +1,5285 @@
+{
+ "version_esquema": 1,
+ "fuente": "R-MOVE · M2 (municipio → Barcelona, notebook 04) y M3 (municipio ↔ barrio), Telefónica Smart Steps",
+ "periodo": {
+  "inicio": "2023-01-01",
+  "fin": "2025-08-31"
+ },
+ "respuesta": {
+  "titulo": "Sí, pero solo donde el tren no tiene alternativa",
+  "texto": "En los días de caos, los municipios que dependen de Rodalies hacen un 6,8 % menos de viajes a Barcelona (≈ 4.840 viajes menos al día). Donde hay metro, FGC o bus cercano, no cambia de forma clara."
+ },
+ "kpis": [
+  {
+   "valor": 4,
+   "decimales": 0,
+   "unidad": "",
+   "etiqueta": "Días de caos analizados"
+  },
+  {
+   "valor": 35,
+   "decimales": 0,
+   "unidad": "",
+   "etiqueta": "Municipios dependientes de Rodalies"
+  },
+  {
+   "valor": -6.8,
+   "decimales": 1,
+   "unidad": " %",
+   "etiqueta": "Viajes a Barcelona el día del caos (dependientes)"
+  },
+  {
+   "valor": -4840.0,
+   "decimales": 0,
+   "unidad": "",
+   "etiqueta": "Viajes perdidos por día de caos"
+  }
+ ],
+ "conclusiones": [
+  {
+   "pregunta": "¿Quién deja de viajar?",
+   "titulo": "Solo quien no tiene alternativa",
+   "texto": "Los municipios dependientes hacen un 6,8 % menos de viajes a Barcelona. Los cercanos o con metro/FGC no cambian de forma clara."
+  },
+  {
+   "pregunta": "¿Importa la distancia?",
+   "titulo": "Cuanto más lejos, más impacto",
+   "texto": "−1,4 % a menos de 15 km y −8,0 % a más de 30 km de Barcelona."
+  },
+  {
+   "pregunta": "¿Qué línea es más vulnerable?",
+   "titulo": "Depende de dónde falla el tren",
+   "texto": "En una avería cae la línea cortada (Maresme, 13/05/2024). En las huelgas, el Garraf (R2 Sud) cae siempre."
+  },
+  {
+   "pregunta": "¿Cuánto dura?",
+   "titulo": "Un día",
+   "texto": "El día del caos el efecto es de −6,8 %; al día siguiente los viajes vuelven a la normalidad."
+  }
+ ],
+ "tipos": [
+  {
+   "id": "averia",
+   "nombre": "Avería sin aviso",
+   "detalle": "Corte de una línea todo el día, sin tiempo para organizarse (como la R1 el 13/05/2024).",
+   "requiere_linea": true,
+   "coeficientes": {
+    "dependiente_linea_cortada": {
+     "efecto": -17.2,
+     "ic_inf": -23.6,
+     "ic_sup": -10.4,
+     "p": 0.0,
+     "observado": true,
+     "fuente": "Dependientes de la R1, avería 13/05/2024"
+    },
+    "dependiente_otra_linea": {
+     "efecto": -8.6,
+     "ic_inf": -13.8,
+     "ic_sup": -3.1,
+     "p": 0.003,
+     "observado": true,
+     "fuente": "Todos los dependientes, 13/05/2024 (incluye líneas que funcionaban)"
+    },
+    "cercanos": {
+     "efecto": 1.2,
+     "ic_inf": -4.9,
+     "ic_sup": 7.8,
+     "p": 0.7,
+     "observado": true,
+     "fuente": "Cercanos sin metro/FGC, 13/05/2024"
+    },
+    "metro_fgc": {
+     "efecto": 3.7,
+     "ic_inf": -0.3,
+     "ic_sup": 8.0,
+     "p": 0.07,
+     "observado": true,
+     "fuente": "Con metro/FGC, 13/05/2024"
+    },
+    "lineas_observadas": [
+     "R1"
+    ]
+   },
+   "referencia": [
+    "2024-05-13"
+   ],
+   "barrios": [
+    {
+     "caso": "Avería 13/05/2024",
+     "sentido": "ida",
+     "con_estacion": -26.6,
+     "sin_estacion": 2.8,
+     "p_diferencia": 0.003
+    },
+    {
+     "caso": "Avería 13/05/2024",
+     "sentido": "vuelta",
+     "con_estacion": -32.0,
+     "sin_estacion": 3.1,
+     "p_diferencia": 0.001
+    }
+   ]
+  },
+  {
+   "id": "huelga",
+   "nombre": "Huelga general",
+   "detalle": "Toda la red con servicios mínimos y gran afectación (como el 17/03/2025).",
+   "requiere_linea": false,
+   "coeficientes": {
+    "lineas": {
+     "R1": {
+      "efecto": -6.7,
+      "ic_inf": -11.8,
+      "ic_sup": -1.3,
+      "p": 0.017,
+      "observado": true,
+      "fuente": "Dependientes de R1, huelga 17/03/2025"
+     },
+     "R2N": {
+      "efecto": -7.6,
+      "ic_inf": -15.0,
+      "ic_sup": 0.5,
+      "p": 0.066,
+      "observado": true,
+      "fuente": "Dependientes de R2N, huelga 17/03/2025"
+     },
+     "R2N+R3": {
+      "efecto": -5.9,
+      "ic_inf": -9.7,
+      "ic_sup": -2.0,
+      "p": 0.004,
+      "observado": true,
+      "fuente": "Dependientes de R2N+R3, huelga 17/03/2025"
+     },
+     "R2S": {
+      "efecto": -17.0,
+      "ic_inf": -25.8,
+      "ic_sup": -7.1,
+      "p": 0.001,
+      "observado": true,
+      "fuente": "Dependientes de R2S, huelga 17/03/2025"
+     },
+     "R3": {
+      "efecto": -20.3,
+      "ic_inf": -27.9,
+      "ic_sup": -11.9,
+      "p": 0.0,
+      "observado": true,
+      "fuente": "Dependientes de R3, huelga 17/03/2025"
+     },
+     "R4": {
+      "efecto": -9.9,
+      "ic_inf": -19.8,
+      "ic_sup": 1.2,
+      "p": 0.077,
+      "observado": true,
+      "fuente": "Dependientes de R4, huelga 17/03/2025"
+     }
+    },
+    "grupos": {
+     "dependientes": {
+      "efecto": -10.8,
+      "ic_inf": -15.6,
+      "ic_sup": -5.6,
+      "p": 0.0,
+      "observado": true,
+      "fuente": "Grupo dependientes, huelga 17/03/2025"
+     },
+     "cercanos": {
+      "efecto": -2.6,
+      "ic_inf": -9.7,
+      "ic_sup": 5.2,
+      "p": 0.502,
+      "observado": true,
+      "fuente": "Grupo cercanos, huelga 17/03/2025"
+     },
+     "metro_fgc": {
+      "efecto": 5.3,
+      "ic_inf": 0.4,
+      "ic_sup": 10.5,
+      "p": 0.035,
+      "observado": true,
+      "fuente": "Grupo metro_fgc, huelga 17/03/2025"
+     }
+    }
+   },
+   "referencia": [
+    "2025-03-17"
+   ],
+   "barrios": [
+    {
+     "caso": "Huelga 17/03/2025",
+     "sentido": "ida",
+     "con_estacion": -18.4,
+     "sin_estacion": -10.1,
+     "p_diferencia": 0.235
+    },
+    {
+     "caso": "Huelga 17/03/2025",
+     "sentido": "vuelta",
+     "con_estacion": -14.1,
+     "sin_estacion": 4.1,
+     "p_diferencia": 0.018
+    }
+   ]
+  },
+  {
+   "id": "anunciada",
+   "nombre": "Huelga anunciada",
+   "detalle": "Huelga conocida con antelación: la gente se adapta (media del 26/03 y el 01/04/2025).",
+   "requiere_linea": false,
+   "coeficientes": {
+    "lineas": {
+     "R1": {
+      "efecto": -1.65,
+      "ic_inf": -6.75,
+      "ic_sup": 3.75,
+      "p": 0.675,
+      "observado": true,
+      "fuente": "Dependientes de R1, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "R2N": {
+      "efecto": 1.8,
+      "ic_inf": -7.2,
+      "ic_sup": 11.7,
+      "p": 0.735,
+      "observado": true,
+      "fuente": "Dependientes de R2N, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "R2N+R3": {
+      "efecto": 8.15,
+      "ic_inf": -3.5,
+      "ic_sup": 21.45,
+      "p": 0.251,
+      "observado": true,
+      "fuente": "Dependientes de R2N+R3, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "R2S": {
+      "efecto": -17.55,
+      "ic_inf": -24.8,
+      "ic_sup": -9.45,
+      "p": 0.005,
+      "observado": true,
+      "fuente": "Dependientes de R2S, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "R3": {
+      "efecto": -5.0,
+      "ic_inf": -16.95,
+      "ic_sup": 8.9,
+      "p": 0.671,
+      "observado": true,
+      "fuente": "Dependientes de R3, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "R4": {
+      "efecto": -4.9,
+      "ic_inf": -13.5,
+      "ic_sup": 4.6,
+      "p": 0.595,
+      "observado": true,
+      "fuente": "Dependientes de R4, media de las huelgas 26/03 y 01/04/2025"
+     }
+    },
+    "grupos": {
+     "dependientes": {
+      "efecto": -3.9,
+      "ic_inf": -9.0,
+      "ic_sup": 1.45,
+      "p": 0.341,
+      "observado": true,
+      "fuente": "Grupo dependientes, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "cercanos": {
+      "efecto": -4.5,
+      "ic_inf": -9.75,
+      "ic_sup": 1.1,
+      "p": 0.644,
+      "observado": true,
+      "fuente": "Grupo cercanos, media de las huelgas 26/03 y 01/04/2025"
+     },
+     "metro_fgc": {
+      "efecto": -1.0,
+      "ic_inf": -5.75,
+      "ic_sup": 4.05,
+      "p": 0.327,
+      "observado": true,
+      "fuente": "Grupo metro_fgc, media de las huelgas 26/03 y 01/04/2025"
+     }
+    }
+   },
+   "referencia": [
+    "2025-03-26",
+    "2025-04-01"
+   ],
+   "barrios": [
+    {
+     "caso": "Huelga 26/03/2025",
+     "sentido": "ida",
+     "con_estacion": -10.1,
+     "sin_estacion": 5.6,
+     "p_diferencia": 0.004
+    },
+    {
+     "caso": "Huelga 26/03/2025",
+     "sentido": "vuelta",
+     "con_estacion": -7.4,
+     "sin_estacion": 4.9,
+     "p_diferencia": 0.095
+    },
+    {
+     "caso": "Huelga 01/04/2025",
+     "sentido": "ida",
+     "con_estacion": -20.4,
+     "sin_estacion": 10.1,
+     "p_diferencia": 0.0009
+    },
+    {
+     "caso": "Huelga 01/04/2025",
+     "sentido": "vuelta",
+     "con_estacion": -17.9,
+     "sin_estacion": 7.5,
+     "p_diferencia": 0.002
+    }
+   ]
+  }
+ ],
+ "municipios": [
+  {
+   "codigo": "08006",
+   "nombre": "Arenys de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 38.1,
+   "lat": 41.5777,
+   "lon": 2.54934,
+   "viajes_referencia": 1608.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -23.8,
+     "p": 0.001
+    },
+    "2025-03-17": {
+     "efecto": -8.7,
+     "p": 0.242
+    },
+    "2025-03-26": {
+     "efecto": 0.7,
+     "p": 0.928
+    },
+    "2025-04-01": {
+     "efecto": -5.8,
+     "p": 0.441
+    }
+   },
+   "efecto_medio": -9.4,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 58.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 7.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 18
+  },
+  {
+   "codigo": "08015",
+   "nombre": "Badalona",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 9.3,
+   "lat": 41.44588,
+   "lon": 2.24892,
+   "viajes_referencia": 66871.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 9.4,
+     "p": 0.078
+    },
+    "2025-03-17": {
+     "efecto": 6.9,
+     "p": 0.187
+    },
+    "2025-03-26": {
+     "efecto": -2.7,
+     "p": 0.589
+    },
+    "2025-04-01": {
+     "efecto": 1.6,
+     "p": 0.757
+    }
+   },
+   "efecto_medio": 3.8,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "amb",
+    "t_alt": 32.0,
+    "t_rodalies": 25.0,
+    "penalizacion": 7.0,
+    "salidas_h_alt": 37.0,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 53
+  },
+  {
+   "codigo": "08017",
+   "nombre": "Balenyà",
+   "grupo": "dependientes",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 49.4,
+   "lat": 41.82843,
+   "lon": 2.24038,
+   "viajes_referencia": 207.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -0.5,
+     "p": 0.976
+    },
+    "2025-03-17": {
+     "efecto": -29.8,
+     "p": 0.07
+    },
+    "2025-03-26": {
+     "efecto": 2.1,
+     "p": 0.912
+    },
+    "2025-04-01": {
+     "efecto": -22.0,
+     "p": 0.204
+    }
+   },
+   "efecto_medio": -12.55,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 86.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 11
+  },
+  {
+   "codigo": "08029",
+   "nombre": "Cabrera de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 23.5,
+   "lat": 41.50677,
+   "lon": 2.40162,
+   "viajes_referencia": 1095.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -16.3,
+     "p": 0.129
+    },
+    "2025-03-17": {
+     "efecto": 6.6,
+     "p": 0.582
+    },
+    "2025-03-26": {
+     "efecto": 12.6,
+     "p": 0.308
+    },
+    "2025-04-01": {
+     "efecto": 1.1,
+     "p": 0.928
+    }
+   },
+   "efecto_medio": 1.0,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 84.0,
+    "t_rodalies": 43.0,
+    "penalizacion": 41.0,
+    "salidas_h_alt": 2.0,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 39
+  },
+  {
+   "codigo": "08032",
+   "nombre": "Caldes d'Estrac",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 36.0,
+   "lat": 41.56861,
+   "lon": 2.52598,
+   "viajes_referencia": 337.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -14.6,
+     "p": 0.43
+    },
+    "2025-03-17": {
+     "efecto": 1.2,
+     "p": 0.952
+    },
+    "2025-03-26": {
+     "efecto": 1.4,
+     "p": 0.944
+    },
+    "2025-04-01": {
+     "efecto": -9.0,
+     "p": 0.638
+    }
+   },
+   "efecto_medio": -5.25,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 55.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 23
+  },
+  {
+   "codigo": "08035",
+   "nombre": "Calella",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 48.5,
+   "lat": 41.61469,
+   "lon": 2.666,
+   "viajes_referencia": 1000.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -21.2,
+     "p": 0.004
+    },
+    "2025-03-17": {
+     "efecto": -19.1,
+     "p": 0.009
+    },
+    "2025-03-26": {
+     "efecto": 4.9,
+     "p": 0.562
+    },
+    "2025-04-01": {
+     "efecto": -9.8,
+     "p": 0.204
+    }
+   },
+   "efecto_medio": -11.3,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 75.0,
+    "t_rodalies": 75.0,
+    "penalizacion": -1.0,
+    "salidas_h_alt": 2.0,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 13
+  },
+  {
+   "codigo": "08040",
+   "nombre": "Canet de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 40.9,
+   "lat": 41.58667,
+   "lon": 2.58129,
+   "viajes_referencia": 1158.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -32.7,
+     "p": 0.0
+    },
+    "2025-03-17": {
+     "efecto": -8.2,
+     "p": 0.238
+    },
+    "2025-03-26": {
+     "efecto": -0.4,
+     "p": 0.952
+    },
+    "2025-04-01": {
+     "efecto": -10.8,
+     "p": 0.116
+    }
+   },
+   "efecto_medio": -13.03,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 65.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 9
+  },
+  {
+   "codigo": "08046",
+   "nombre": "Cardedeu",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2N"
+   ],
+   "lineas_clave": "R2N",
+   "dist_km": 31.8,
+   "lat": 41.6367,
+   "lon": 2.35626,
+   "viajes_referencia": 1837.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 10.9,
+     "p": 0.317
+    },
+    "2025-03-17": {
+     "efecto": -12.1,
+     "p": 0.215
+    },
+    "2025-03-26": {
+     "efecto": 6.7,
+     "p": 0.535
+    },
+    "2025-04-01": {
+     "efecto": 10.6,
+     "p": 0.332
+    }
+   },
+   "efecto_medio": 4.03,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 87.0,
+    "t_rodalies": 52.0,
+    "penalizacion": 36.0,
+    "salidas_h_alt": 1.0,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 54
+  },
+  {
+   "codigo": "08053",
+   "nombre": "Castellbell i el Vilar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 36.6,
+   "lat": 41.62868,
+   "lon": 1.86882,
+   "viajes_referencia": 467.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.4,
+     "p": 0.936
+    },
+    "2025-03-17": {
+     "efecto": -14.3,
+     "p": 0.373
+    },
+    "2025-03-26": {
+     "efecto": -18.8,
+     "p": 0.226
+    },
+    "2025-04-01": {
+     "efecto": -17.9,
+     "p": 0.254
+    }
+   },
+   "efecto_medio": -12.4,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "fgc",
+    "t_alt": 96.0,
+    "t_rodalies": 88.0,
+    "penalizacion": 8.0,
+    "salidas_h_alt": 1.5,
+    "salidas_h_rodalies": 1.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 12
+  },
+  {
+   "codigo": "08054",
+   "nombre": "Castellbisbal",
+   "grupo": "cercanos",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 19.3,
+   "lat": 41.47342,
+   "lon": 1.96757,
+   "viajes_referencia": 3768.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -2.2,
+     "p": 0.849
+    },
+    "2025-03-17": {
+     "efecto": -21.8,
+     "p": 0.043
+    },
+    "2025-03-26": {
+     "efecto": -20.2,
+     "p": 0.063
+    },
+    "2025-04-01": {
+     "efecto": -18.2,
+     "p": 0.099
+    }
+   },
+   "efecto_medio": -15.6,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "fgc",
+    "t_alt": 62.0,
+    "t_rodalies": 46.0,
+    "penalizacion": 15.0,
+    "salidas_h_alt": 2.5,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 5
+  },
+  {
+   "codigo": "08056",
+   "nombre": "Castelldefels",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2S"
+   ],
+   "lineas_clave": "R2S",
+   "dist_km": 21.0,
+   "lat": 41.27301,
+   "lon": 1.96814,
+   "viajes_referencia": 12682.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -0.8,
+     "p": 0.881
+    },
+    "2025-03-17": {
+     "efecto": -6.6,
+     "p": 0.18
+    },
+    "2025-03-26": {
+     "efecto": -8.4,
+     "p": 0.085
+    },
+    "2025-04-01": {
+     "efecto": -12.9,
+     "p": 0.007
+    }
+   },
+   "efecto_medio": -7.17,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "amb",
+    "t_alt": 52.0,
+    "t_rodalies": 35.0,
+    "penalizacion": 17.0,
+    "salidas_h_alt": 19.5,
+    "salidas_h_rodalies": 8.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 21
+  },
+  {
+   "codigo": "08067",
+   "nombre": "Centelles",
+   "grupo": "dependientes",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 46.0,
+   "lat": 41.79939,
+   "lon": 2.22264,
+   "viajes_referencia": 555.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.3,
+     "p": 0.944
+    },
+    "2025-03-17": {
+     "efecto": -21.5,
+     "p": 0.165
+    },
+    "2025-03-26": {
+     "efecto": -21.7,
+     "p": 0.162
+    },
+    "2025-04-01": {
+     "efecto": -21.6,
+     "p": 0.165
+    }
+   },
+   "efecto_medio": -15.88,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 84.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 4
+  },
+  {
+   "codigo": "08073",
+   "nombre": "Cornellà de Llobregat",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 8.8,
+   "lat": 41.35752,
+   "lon": 2.07055,
+   "viajes_referencia": 31753.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.2,
+     "p": 0.873
+    },
+    "2025-03-17": {
+     "efecto": 13.2,
+     "p": 0.093
+    },
+    "2025-03-26": {
+     "efecto": -4.2,
+     "p": 0.555
+    },
+    "2025-04-01": {
+     "efecto": 7.6,
+     "p": 0.327
+    }
+   },
+   "efecto_medio": 4.45,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "fgc",
+    "t_alt": 22.0,
+    "t_rodalies": 21.0,
+    "penalizacion": 2.0,
+    "salidas_h_alt": 14.0,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 56
+  },
+  {
+   "codigo": "08074",
+   "nombre": "Cubelles",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2S"
+   ],
+   "lineas_clave": "R2S",
+   "dist_km": 45.9,
+   "lat": 41.20432,
+   "lon": 1.67598,
+   "viajes_referencia": 741.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.8,
+     "p": 0.873
+    },
+    "2025-03-17": {
+     "efecto": -29.7,
+     "p": 0.001
+    },
+    "2025-03-26": {
+     "efecto": -33.2,
+     "p": 0.0
+    },
+    "2025-04-01": {
+     "efecto": -16.8,
+     "p": 0.089
+    }
+   },
+   "efecto_medio": -19.48,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 70.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 1
+  },
+  {
+   "codigo": "08086",
+   "nombre": "Franqueses del Vallès, Les",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2N",
+    "R3"
+   ],
+   "lineas_clave": "R2N+R3",
+   "dist_km": 28.3,
+   "lat": 41.62352,
+   "lon": 2.2948,
+   "viajes_referencia": 1782.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -4.9,
+     "p": 0.575
+    },
+    "2025-03-17": {
+     "efecto": -5.9,
+     "p": 0.49
+    },
+    "2025-03-26": {
+     "efecto": 21.8,
+     "p": 0.026
+    },
+    "2025-04-01": {
+     "efecto": 11.6,
+     "p": 0.215
+    }
+   },
+   "efecto_medio": 5.65,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 43.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 58
+  },
+  {
+   "codigo": "08088",
+   "nombre": "Garriga, La",
+   "grupo": "dependientes",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 34.5,
+   "lat": 41.68463,
+   "lon": 2.2888,
+   "viajes_referencia": 1915.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -13.5,
+     "p": 0.165
+    },
+    "2025-03-17": {
+     "efecto": -21.4,
+     "p": 0.021
+    },
+    "2025-03-26": {
+     "efecto": -6.1,
+     "p": 0.549
+    },
+    "2025-04-01": {
+     "efecto": 2.9,
+     "p": 0.787
+    }
+   },
+   "efecto_medio": -9.53,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 66.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 2.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 17
+  },
+  {
+   "codigo": "08089",
+   "nombre": "Gavà",
+   "grupo": "cercanos",
+   "lineas": [
+    "R2S"
+   ],
+   "lineas_clave": "R2S",
+   "dist_km": 16.2,
+   "lat": 41.30347,
+   "lon": 2.01053,
+   "viajes_referencia": 9137.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -1.5,
+     "p": 0.803
+    },
+    "2025-03-17": {
+     "efecto": 4.2,
+     "p": 0.509
+    },
+    "2025-03-26": {
+     "efecto": 1.6,
+     "p": 0.803
+    },
+    "2025-04-01": {
+     "efecto": 3.0,
+     "p": 0.631
+    }
+   },
+   "efecto_medio": 1.83,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "amb",
+    "t_alt": 45.0,
+    "t_rodalies": 32.0,
+    "penalizacion": 13.0,
+    "salidas_h_alt": 24.5,
+    "salidas_h_rodalies": 8.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 43
+  },
+  {
+   "codigo": "08091",
+   "nombre": "Gelida",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 26.2,
+   "lat": 41.44854,
+   "lon": 1.86553,
+   "viajes_referencia": 699.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 30.7,
+     "p": 0.063
+    },
+    "2025-03-17": {
+     "efecto": 0.2,
+     "p": 0.992
+    },
+    "2025-03-26": {
+     "efecto": 6.2,
+     "p": 0.674
+    },
+    "2025-04-01": {
+     "efecto": 3.1,
+     "p": 0.834
+    }
+   },
+   "efecto_medio": 10.05,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 66.0,
+    "t_rodalies": 68.0,
+    "penalizacion": -2.0,
+    "salidas_h_alt": 2.0,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 62
+  },
+  {
+   "codigo": "08096",
+   "nombre": "Granollers",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2N",
+    "R3"
+   ],
+   "lineas_clave": "R2N+R3",
+   "dist_km": 26.1,
+   "lat": 41.6056,
+   "lon": 2.28407,
+   "viajes_referencia": 7379.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -2.7,
+     "p": 0.638
+    },
+    "2025-03-17": {
+     "efecto": -6.0,
+     "p": 0.289
+    },
+    "2025-03-26": {
+     "efecto": -1.6,
+     "p": 0.787
+    },
+    "2025-04-01": {
+     "efecto": 2.2,
+     "p": 0.704
+    }
+   },
+   "efecto_medio": -2.02,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 52.0,
+    "t_rodalies": 39.0,
+    "penalizacion": 13.0,
+    "salidas_h_alt": 2.0,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 31
+  },
+  {
+   "codigo": "08101",
+   "nombre": "Hospitalet de Llobregat, L'",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R1",
+    "R2N",
+    "R2S",
+    "R4"
+   ],
+   "lineas_clave": "R1+R2N+R2S+R4",
+   "dist_km": 5.9,
+   "lat": 41.35956,
+   "lon": 2.1081,
+   "viajes_referencia": 116821.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 7.5,
+     "p": 0.129
+    },
+    "2025-03-17": {
+     "efecto": 4.4,
+     "p": 0.373
+    },
+    "2025-03-26": {
+     "efecto": -6.2,
+     "p": 0.18
+    },
+    "2025-04-01": {
+     "efecto": -2.9,
+     "p": 0.535
+    }
+   },
+   "efecto_medio": 0.7,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "fgc",
+    "t_alt": 13.0,
+    "t_rodalies": 14.0,
+    "penalizacion": -2.0,
+    "salidas_h_alt": 15.0,
+    "salidas_h_rodalies": 21.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 37
+  },
+  {
+   "codigo": "08105",
+   "nombre": "Llagosta, La",
+   "grupo": "cercanos",
+   "lineas": [
+    "R2N"
+   ],
+   "lineas_clave": "R2N",
+   "dist_km": 13.9,
+   "lat": 41.51046,
+   "lon": 2.19973,
+   "viajes_referencia": 2391.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 8.6,
+     "p": 0.478
+    },
+    "2025-03-17": {
+     "efecto": -12.5,
+     "p": 0.25
+    },
+    "2025-03-26": {
+     "efecto": -19.4,
+     "p": 0.061
+    },
+    "2025-04-01": {
+     "efecto": -16.4,
+     "p": 0.121
+    }
+   },
+   "efecto_medio": -9.92,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 45.0,
+    "t_rodalies": 28.0,
+    "penalizacion": 17.0,
+    "salidas_h_alt": 6.0,
+    "salidas_h_rodalies": 5.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 16
+  },
+  {
+   "codigo": "08106",
+   "nombre": "Llinars del Vallès",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2N"
+   ],
+   "lineas_clave": "R2N",
+   "dist_km": 34.1,
+   "lat": 41.63804,
+   "lon": 2.40446,
+   "viajes_referencia": 1257.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.0,
+     "p": 0.904
+    },
+    "2025-03-17": {
+     "efecto": -9.9,
+     "p": 0.23
+    },
+    "2025-03-26": {
+     "efecto": -3.6,
+     "p": 0.674
+    },
+    "2025-04-01": {
+     "efecto": 4.4,
+     "p": 0.617
+    }
+   },
+   "efecto_medio": -2.02,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 137.0,
+    "t_rodalies": 56.0,
+    "penalizacion": 81.0,
+    "salidas_h_alt": 0.5,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 32
+  },
+  {
+   "codigo": "08110",
+   "nombre": "Malgrat de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 55.4,
+   "lat": 41.6416,
+   "lon": 2.74128,
+   "viajes_referencia": 619.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -22.0,
+     "p": 0.023
+    },
+    "2025-03-17": {
+     "efecto": -13.5,
+     "p": 0.187
+    },
+    "2025-03-26": {
+     "efecto": -3.1,
+     "p": 0.772
+    },
+    "2025-04-01": {
+     "efecto": -6.0,
+     "p": 0.569
+    }
+   },
+   "efecto_medio": -11.15,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 87.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 3.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 14
+  },
+  {
+   "codigo": "08112",
+   "nombre": "Manlleu",
+   "grupo": "dependientes",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 68.6,
+   "lat": 41.99986,
+   "lon": 2.2693,
+   "viajes_referencia": 291.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 16.8,
+     "p": 0.478
+    },
+    "2025-03-17": {
+     "efecto": -22.5,
+     "p": 0.242
+    },
+    "2025-03-26": {
+     "efecto": -9.3,
+     "p": 0.653
+    },
+    "2025-04-01": {
+     "efecto": 24.3,
+     "p": 0.317
+    }
+   },
+   "efecto_medio": 2.33,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 110.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 1.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 47
+  },
+  {
+   "codigo": "08113",
+   "nombre": "Manresa",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 46.7,
+   "lat": 41.72039,
+   "lon": 1.82649,
+   "viajes_referencia": 2400.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 8.4,
+     "p": 0.271
+    },
+    "2025-03-17": {
+     "efecto": -2.0,
+     "p": 0.779
+    },
+    "2025-03-26": {
+     "efecto": -6.4,
+     "p": 0.368
+    },
+    "2025-04-01": {
+     "efecto": 2.8,
+     "p": 0.704
+    }
+   },
+   "efecto_medio": 0.7,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 94.0,
+    "t_rodalies": 91.0,
+    "penalizacion": 3.0,
+    "salidas_h_alt": 4.0,
+    "salidas_h_rodalies": 2.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 38
+  },
+  {
+   "codigo": "08114",
+   "nombre": "Martorell",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 22.7,
+   "lat": 41.47929,
+   "lon": 1.92533,
+   "viajes_referencia": 4368.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 2.3,
+     "p": 0.795
+    },
+    "2025-03-17": {
+     "efecto": 4.3,
+     "p": 0.624
+    },
+    "2025-03-26": {
+     "efecto": -2.8,
+     "p": 0.741
+    },
+    "2025-04-01": {
+     "efecto": -4.6,
+     "p": 0.582
+    }
+   },
+   "efecto_medio": -0.2,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "fgc",
+    "t_alt": 53.0,
+    "t_rodalies": 53.0,
+    "penalizacion": 0.0,
+    "salidas_h_alt": 8.5,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 36
+  },
+  {
+   "codigo": "08118",
+   "nombre": "Masnou, El",
+   "grupo": "cercanos",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 15.8,
+   "lat": 41.47803,
+   "lon": 2.31495,
+   "viajes_referencia": 4034.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -12.5,
+     "p": 0.412
+    },
+    "2025-03-17": {
+     "efecto": 16.2,
+     "p": 0.358
+    },
+    "2025-03-26": {
+     "efecto": 6.6,
+     "p": 0.697
+    },
+    "2025-04-01": {
+     "efecto": 8.4,
+     "p": 0.617
+    }
+   },
+   "efecto_medio": 4.67,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 35.0,
+    "t_rodalies": 32.0,
+    "penalizacion": 3.0,
+    "salidas_h_alt": 4.5,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 57
+  },
+  {
+   "codigo": "08121",
+   "nombre": "Mataró",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 28.2,
+   "lat": 41.53339,
+   "lon": 2.44553,
+   "viajes_referencia": 11010.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -0.3,
+     "p": 0.952
+    },
+    "2025-03-17": {
+     "efecto": -5.1,
+     "p": 0.294
+    },
+    "2025-03-26": {
+     "efecto": -0.6,
+     "p": 0.897
+    },
+    "2025-04-01": {
+     "efecto": -2.4,
+     "p": 0.624
+    }
+   },
+   "efecto_medio": -2.1,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 36.0,
+    "t_rodalies": 48.0,
+    "penalizacion": -12.0,
+    "salidas_h_alt": 14.0,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 30
+  },
+  {
+   "codigo": "08123",
+   "nombre": "Molins de Rei",
+   "grupo": "cercanos",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 12.6,
+   "lat": 41.4099,
+   "lon": 2.02077,
+   "viajes_referencia": 5497.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -5.7,
+     "p": 0.542
+    },
+    "2025-03-17": {
+     "efecto": 4.9,
+     "p": 0.624
+    },
+    "2025-03-26": {
+     "efecto": 1.4,
+     "p": 0.889
+    },
+    "2025-04-01": {
+     "efecto": 9.8,
+     "p": 0.332
+    }
+   },
+   "efecto_medio": 2.6,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 50.0,
+    "t_rodalies": 33.0,
+    "penalizacion": 17.0,
+    "salidas_h_alt": 7.5,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 48
+  },
+  {
+   "codigo": "08124",
+   "nombre": "Mollet del Vallès",
+   "grupo": "cercanos",
+   "lineas": [
+    "R2N",
+    "R3"
+   ],
+   "lineas_clave": "R2N+R3",
+   "dist_km": 16.8,
+   "lat": 41.53511,
+   "lon": 2.21192,
+   "viajes_referencia": 7759.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.0,
+     "p": 0.849
+    },
+    "2025-03-17": {
+     "efecto": -7.5,
+     "p": 0.134
+    },
+    "2025-03-26": {
+     "efecto": -2.7,
+     "p": 0.603
+    },
+    "2025-04-01": {
+     "efecto": 2.1,
+     "p": 0.689
+    }
+   },
+   "efecto_medio": -1.77,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 36.0,
+    "t_rodalies": 30.0,
+    "penalizacion": 5.0,
+    "salidas_h_alt": 10.0,
+    "salidas_h_rodalies": 7.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 33
+  },
+  {
+   "codigo": "08125",
+   "nombre": "Montcada i Reixac",
+   "grupo": "cercanos",
+   "lineas": [
+    "R2N",
+    "R3",
+    "R4",
+    "R7"
+   ],
+   "lineas_clave": "R2N+R3+R4+R7",
+   "dist_km": 10.7,
+   "lat": 41.48319,
+   "lon": 2.18048,
+   "viajes_referencia": 18478.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 3.2,
+     "p": 0.764
+    },
+    "2025-03-17": {
+     "efecto": 33.6,
+     "p": 0.007
+    },
+    "2025-03-26": {
+     "efecto": -11.4,
+     "p": 0.263
+    },
+    "2025-04-01": {
+     "efecto": 0.3,
+     "p": 0.976
+    }
+   },
+   "efecto_medio": 6.43,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 27.0,
+    "t_rodalies": 20.0,
+    "penalizacion": 7.0,
+    "salidas_h_alt": 10.5,
+    "salidas_h_rodalies": 16.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 60
+  },
+  {
+   "codigo": "08126",
+   "nombre": "Montgat",
+   "grupo": "cercanos",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 12.7,
+   "lat": 41.4659,
+   "lon": 2.27943,
+   "viajes_referencia": 4092.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -11.4,
+     "p": 0.28
+    },
+    "2025-03-17": {
+     "efecto": 1.1,
+     "p": 0.92
+    },
+    "2025-03-26": {
+     "efecto": 0.8,
+     "p": 0.944
+    },
+    "2025-04-01": {
+     "efecto": 2.9,
+     "p": 0.803
+    }
+   },
+   "efecto_medio": -1.65,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 59.0,
+    "t_rodalies": 27.0,
+    "penalizacion": 32.0,
+    "salidas_h_alt": 1.5,
+    "salidas_h_rodalies": 8.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 34
+  },
+  {
+   "codigo": "08135",
+   "nombre": "Montmeló",
+   "grupo": "cercanos",
+   "lineas": [
+    "R2N"
+   ],
+   "lineas_clave": "R2N",
+   "dist_km": 19.1,
+   "lat": 41.54965,
+   "lon": 2.24544,
+   "viajes_referencia": 1067.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -3.0,
+     "p": 0.795
+    },
+    "2025-03-17": {
+     "efecto": -12.6,
+     "p": 0.258
+    },
+    "2025-03-26": {
+     "efecto": -8.6,
+     "p": 0.453
+    },
+    "2025-04-01": {
+     "efecto": -5.2,
+     "p": 0.66
+    }
+   },
+   "efecto_medio": -7.35,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 35.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 5.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 20
+  },
+  {
+   "codigo": "08158",
+   "nombre": "Papiol, El",
+   "grupo": "cercanos",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 14.8,
+   "lat": 41.43537,
+   "lon": 2.00258,
+   "viajes_referencia": 1021.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 43.4,
+     "p": 0.05
+    },
+    "2025-03-17": {
+     "efecto": -16.6,
+     "p": 0.327
+    },
+    "2025-03-26": {
+     "efecto": -24.0,
+     "p": 0.136
+    },
+    "2025-04-01": {
+     "efecto": -6.8,
+     "p": 0.704
+    }
+   },
+   "efecto_medio": -1.0,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 74.0,
+    "t_rodalies": 38.0,
+    "penalizacion": 35.0,
+    "salidas_h_alt": 1.5,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 35
+  },
+  {
+   "codigo": "08159",
+   "nombre": "Parets del Vallès",
+   "grupo": "cercanos",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 19.4,
+   "lat": 41.55627,
+   "lon": 2.226,
+   "viajes_referencia": 3539.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -6.7,
+     "p": 0.312
+    },
+    "2025-03-17": {
+     "efecto": -9.6,
+     "p": 0.136
+    },
+    "2025-03-26": {
+     "efecto": -2.8,
+     "p": 0.674
+    },
+    "2025-04-01": {
+     "efecto": 7.0,
+     "p": 0.317
+    }
+   },
+   "efecto_medio": -3.02,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 42.0,
+    "t_rodalies": 52.0,
+    "penalizacion": -10.0,
+    "salidas_h_alt": 5.5,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 28
+  },
+  {
+   "codigo": "08163",
+   "nombre": "Pineda de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 50.9,
+   "lat": 41.62244,
+   "lon": 2.69355,
+   "viajes_referencia": 1348.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -11.5,
+     "p": 0.107
+    },
+    "2025-03-17": {
+     "efecto": -9.5,
+     "p": 0.19
+    },
+    "2025-03-26": {
+     "efecto": 5.0,
+     "p": 0.516
+    },
+    "2025-04-01": {
+     "efecto": -11.2,
+     "p": 0.119
+    }
+   },
+   "efecto_medio": -6.8,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 79.0,
+    "t_rodalies": 81.0,
+    "penalizacion": -2.0,
+    "salidas_h_alt": 2.0,
+    "salidas_h_rodalies": 3.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 22
+  },
+  {
+   "codigo": "08169",
+   "nombre": "Prat de Llobregat, El",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R2N",
+    "R2S"
+   ],
+   "lineas_clave": "R2N+R2S",
+   "dist_km": 10.6,
+   "lat": 41.31756,
+   "lon": 2.08137,
+   "viajes_referencia": 37027.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 6.8,
+     "p": 0.522
+    },
+    "2025-03-17": {
+     "efecto": 13.7,
+     "p": 0.211
+    },
+    "2025-03-26": {
+     "efecto": -4.0,
+     "p": 0.697
+    },
+    "2025-04-01": {
+     "efecto": 6.7,
+     "p": 0.522
+    }
+   },
+   "efecto_medio": 5.8,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "amb",
+    "t_alt": 27.0,
+    "t_rodalies": 25.0,
+    "penalizacion": 2.0,
+    "salidas_h_alt": 46.0,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 59
+  },
+  {
+   "codigo": "08172",
+   "nombre": "Premià de Mar",
+   "grupo": "cercanos",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 19.1,
+   "lat": 41.48775,
+   "lon": 2.35486,
+   "viajes_referencia": 4229.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 7.4,
+     "p": 0.555
+    },
+    "2025-03-17": {
+     "efecto": -10.4,
+     "p": 0.368
+    },
+    "2025-03-26": {
+     "efecto": -13.8,
+     "p": 0.219
+    },
+    "2025-04-01": {
+     "efecto": 3.4,
+     "p": 0.779
+    }
+   },
+   "efecto_medio": -3.35,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 43.0,
+    "t_rodalies": 38.0,
+    "penalizacion": 5.0,
+    "salidas_h_alt": 5.5,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 26
+  },
+  {
+   "codigo": "08187",
+   "nombre": "Sabadell",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 18.4,
+   "lat": 41.5457,
+   "lon": 2.10574,
+   "viajes_referencia": 20364.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -4.0,
+     "p": 0.263
+    },
+    "2025-03-17": {
+     "efecto": 3.9,
+     "p": 0.289
+    },
+    "2025-03-26": {
+     "efecto": -1.5,
+     "p": 0.682
+    },
+    "2025-04-01": {
+     "efecto": 7.0,
+     "p": 0.059
+    }
+   },
+   "efecto_medio": 1.35,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 48.0,
+    "t_rodalies": 39.0,
+    "penalizacion": 9.0,
+    "salidas_h_alt": 7.5,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 42
+  },
+  {
+   "codigo": "08194",
+   "nombre": "Sant Adrià de Besòs",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 6.6,
+   "lat": 41.42443,
+   "lon": 2.23048,
+   "viajes_referencia": 27946.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 9.7,
+     "p": 0.238
+    },
+    "2025-03-17": {
+     "efecto": 0.4,
+     "p": 0.96
+    },
+    "2025-03-26": {
+     "efecto": -20.6,
+     "p": 0.003
+    },
+    "2025-04-01": {
+     "efecto": -6.5,
+     "p": 0.395
+    }
+   },
+   "efecto_medio": -4.25,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "amb",
+    "t_alt": 19.0,
+    "t_rodalies": 21.0,
+    "penalizacion": -2.0,
+    "salidas_h_alt": 19.5,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 25
+  },
+  {
+   "codigo": "08197",
+   "nombre": "Sant Andreu de Llavaneres",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 33.2,
+   "lat": 41.55555,
+   "lon": 2.49826,
+   "viajes_referencia": 1321.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -8.5,
+     "p": 0.25
+    },
+    "2025-03-17": {
+     "efecto": -6.6,
+     "p": 0.379
+    },
+    "2025-03-26": {
+     "efecto": 17.3,
+     "p": 0.039
+    },
+    "2025-04-01": {
+     "efecto": 10.3,
+     "p": 0.204
+    }
+   },
+   "efecto_medio": 3.13,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 52.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 51
+  },
+  {
+   "codigo": "08202",
+   "nombre": "Sant Celoni",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2N"
+   ],
+   "lineas_clave": "R2N",
+   "dist_km": 42.7,
+   "lat": 41.68579,
+   "lon": 2.49073,
+   "viajes_referencia": 1550.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 7.6,
+     "p": 0.596
+    },
+    "2025-03-17": {
+     "efecto": 4.8,
+     "p": 0.741
+    },
+    "2025-03-26": {
+     "efecto": 16.0,
+     "p": 0.289
+    },
+    "2025-04-01": {
+     "efecto": 2.7,
+     "p": 0.849
+    }
+   },
+   "efecto_medio": 7.78,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 65.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 3.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 61
+  },
+  {
+   "codigo": "08211",
+   "nombre": "Sant Feliu de Llobregat",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 10.1,
+   "lat": 41.383,
+   "lon": 2.04792,
+   "viajes_referencia": 10480.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.2,
+     "p": 0.803
+    },
+    "2025-03-17": {
+     "efecto": 4.8,
+     "p": 0.352
+    },
+    "2025-03-26": {
+     "efecto": 1.0,
+     "p": 0.834
+    },
+    "2025-04-01": {
+     "efecto": 2.0,
+     "p": 0.689
+    }
+   },
+   "efecto_medio": 2.25,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 45.0,
+    "t_rodalies": 27.0,
+    "penalizacion": 18.0,
+    "salidas_h_alt": 7.0,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 45
+  },
+  {
+   "codigo": "08217",
+   "nombre": "Sant Joan Despí",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 9.3,
+   "lat": 41.36858,
+   "lon": 2.06021,
+   "viajes_referencia": 12126.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -2.0,
+     "p": 0.865
+    },
+    "2025-03-17": {
+     "efecto": 6.9,
+     "p": 0.555
+    },
+    "2025-03-26": {
+     "efecto": 3.7,
+     "p": 0.749
+    },
+    "2025-04-01": {
+     "efecto": 7.8,
+     "p": 0.509
+    }
+   },
+   "efecto_medio": 4.1,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "amb",
+    "t_alt": 27.0,
+    "t_rodalies": 23.0,
+    "penalizacion": 4.0,
+    "salidas_h_alt": 15.5,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 55
+  },
+  {
+   "codigo": "08219",
+   "nombre": "Vilassar de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 22.3,
+   "lat": 41.50063,
+   "lon": 2.38986,
+   "viajes_referencia": 3630.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -21.0,
+     "p": 0.0
+    },
+    "2025-03-17": {
+     "efecto": -3.0,
+     "p": 0.562
+    },
+    "2025-03-26": {
+     "efecto": -4.6,
+     "p": 0.373
+    },
+    "2025-04-01": {
+     "efecto": -8.4,
+     "p": 0.101
+    }
+   },
+   "efecto_medio": -9.25,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 84.0,
+    "t_rodalies": 41.0,
+    "penalizacion": 43.0,
+    "salidas_h_alt": 1.5,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 19
+  },
+  {
+   "codigo": "08235",
+   "nombre": "Sant Pol de Mar",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 44.8,
+   "lat": 41.60175,
+   "lon": 2.6246,
+   "viajes_referencia": 561.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -30.9,
+     "p": 0.007
+    },
+    "2025-03-17": {
+     "efecto": -8.0,
+     "p": 0.542
+    },
+    "2025-03-26": {
+     "efecto": -8.8,
+     "p": 0.509
+    },
+    "2025-04-01": {
+     "efecto": 4.6,
+     "p": 0.741
+    }
+   },
+   "efecto_medio": -10.78,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 75.0,
+    "t_rodalies": 70.0,
+    "penalizacion": 5.0,
+    "salidas_h_alt": 1.5,
+    "salidas_h_rodalies": 4.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 15
+  },
+  {
+   "codigo": "08240",
+   "nombre": "Sant Sadurní d'Anoia",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 31.4,
+   "lat": 41.42052,
+   "lon": 1.79469,
+   "viajes_referencia": 910.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 2.7,
+     "p": 0.826
+    },
+    "2025-03-17": {
+     "efecto": -1.1,
+     "p": 0.928
+    },
+    "2025-03-26": {
+     "efecto": 7.5,
+     "p": 0.549
+    },
+    "2025-04-01": {
+     "efecto": 5.6,
+     "p": 0.653
+    }
+   },
+   "efecto_medio": 3.67,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 60.0,
+    "t_rodalies": 73.0,
+    "penalizacion": -13.0,
+    "salidas_h_alt": 2.5,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 52
+  },
+  {
+   "codigo": "08252",
+   "nombre": "Barberà del Vallès",
+   "grupo": "cercanos",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 14.6,
+   "lat": 41.51366,
+   "lon": 2.11845,
+   "viajes_referencia": 6466.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 6.5,
+     "p": 0.165
+    },
+    "2025-03-17": {
+     "efecto": -3.8,
+     "p": 0.39
+    },
+    "2025-03-26": {
+     "efecto": -13.2,
+     "p": 0.002
+    },
+    "2025-04-01": {
+     "efecto": -7.7,
+     "p": 0.077
+    }
+   },
+   "efecto_medio": -4.55,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 38.0,
+    "t_rodalies": 36.0,
+    "penalizacion": 3.0,
+    "salidas_h_alt": 6.5,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 24
+  },
+  {
+   "codigo": "08259",
+   "nombre": "Santa Maria de Palautordera",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2N"
+   ],
+   "lineas_clave": "R2N",
+   "dist_km": 39.6,
+   "lat": 41.67195,
+   "lon": 2.45421,
+   "viajes_referencia": 513.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -24.3,
+     "p": 0.134
+    },
+    "2025-03-17": {
+     "efecto": -12.0,
+     "p": 0.49
+    },
+    "2025-03-26": {
+     "efecto": -10.0,
+     "p": 0.569
+    },
+    "2025-04-01": {
+     "efecto": -9.4,
+     "p": 0.596
+    }
+   },
+   "efecto_medio": -13.93,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 61.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 3.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 8
+  },
+  {
+   "codigo": "08260",
+   "nombre": "Santa Perpètua de Mogoda",
+   "grupo": "cercanos",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 15.5,
+   "lat": 41.52622,
+   "lon": 2.18629,
+   "viajes_referencia": 6541.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -5.3,
+     "p": 0.298
+    },
+    "2025-03-17": {
+     "efecto": -3.8,
+     "p": 0.453
+    },
+    "2025-03-26": {
+     "efecto": -6.6,
+     "p": 0.194
+    },
+    "2025-04-01": {
+     "efecto": 2.3,
+     "p": 0.66
+    }
+   },
+   "efecto_medio": -3.35,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 45.0,
+    "t_rodalies": 42.0,
+    "penalizacion": 3.0,
+    "salidas_h_alt": 14.0,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 27
+  },
+  {
+   "codigo": "08262",
+   "nombre": "Sant Vicenç de Castellet",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 40.3,
+   "lat": 41.66883,
+   "lon": 1.86264,
+   "viajes_referencia": 297.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -22.2,
+     "p": 0.11
+    },
+    "2025-03-17": {
+     "efecto": 3.7,
+     "p": 0.818
+    },
+    "2025-03-26": {
+     "efecto": 20.6,
+     "p": 0.234
+    },
+    "2025-04-01": {
+     "efecto": 1.9,
+     "p": 0.904
+    }
+   },
+   "efecto_medio": 1.0,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "fgc",
+    "t_alt": 93.0,
+    "t_rodalies": 86.0,
+    "penalizacion": 7.0,
+    "salidas_h_alt": 2.5,
+    "salidas_h_rodalies": 2.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 40
+  },
+  {
+   "codigo": "08266",
+   "nombre": "Cerdanyola del Vallès",
+   "grupo": "cercanos",
+   "lineas": [
+    "R4",
+    "R7"
+   ],
+   "lineas_clave": "R4+R7",
+   "dist_km": 12.3,
+   "lat": 41.49478,
+   "lon": 2.13145,
+   "viajes_referencia": 14765.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 4.2,
+     "p": 0.562
+    },
+    "2025-03-17": {
+     "efecto": 4.1,
+     "p": 0.575
+    },
+    "2025-03-26": {
+     "efecto": -4.3,
+     "p": 0.542
+    },
+    "2025-04-01": {
+     "efecto": 0.7,
+     "p": 0.92
+    }
+   },
+   "efecto_medio": 1.18,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 36.0,
+    "t_rodalies": 31.0,
+    "penalizacion": 6.0,
+    "salidas_h_alt": 11.0,
+    "salidas_h_rodalies": 8.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 41
+  },
+  {
+   "codigo": "08270",
+   "nombre": "Sitges",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2S"
+   ],
+   "lineas_clave": "R2S",
+   "dist_km": 30.4,
+   "lat": 41.24686,
+   "lon": 1.8561,
+   "viajes_referencia": 5959.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -7.2,
+     "p": 0.484
+    },
+    "2025-03-17": {
+     "efecto": -14.8,
+     "p": 0.129
+    },
+    "2025-03-26": {
+     "efecto": -12.5,
+     "p": 0.208
+    },
+    "2025-04-01": {
+     "efecto": -22.1,
+     "p": 0.018
+    }
+   },
+   "efecto_medio": -14.15,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 56.0,
+    "t_rodalies": 45.0,
+    "penalizacion": 11.0,
+    "salidas_h_alt": 4.5,
+    "salidas_h_rodalies": 5.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 7
+  },
+  {
+   "codigo": "08273",
+   "nombre": "Subirats",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 33.4,
+   "lat": 41.39573,
+   "lon": 1.76817,
+   "viajes_referencia": 371.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -17.4,
+     "p": 0.465
+    },
+    "2025-03-17": {
+     "efecto": -32.2,
+     "p": 0.136
+    },
+    "2025-03-26": {
+     "efecto": -3.2,
+     "p": 0.904
+    },
+    "2025-04-01": {
+     "efecto": -23.3,
+     "p": 0.308
+    }
+   },
+   "efecto_medio": -19.03,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 109.0,
+    "t_rodalies": 77.0,
+    "penalizacion": 32.0,
+    "salidas_h_alt": 1.0,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 2
+  },
+  {
+   "codigo": "08279",
+   "nombre": "Terrassa",
+   "grupo": "metro_fgc",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 23.4,
+   "lat": 41.56866,
+   "lon": 2.027,
+   "viajes_referencia": 16755.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 1.7,
+     "p": 0.596
+    },
+    "2025-03-17": {
+     "efecto": 3.2,
+     "p": 0.322
+    },
+    "2025-03-26": {
+     "efecto": -1.8,
+     "p": 0.575
+    },
+    "2025-04-01": {
+     "efecto": 5.5,
+     "p": 0.097
+    }
+   },
+   "efecto_medio": 2.15,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "fgc",
+    "t_alt": 44.0,
+    "t_rodalies": 49.0,
+    "penalizacion": -5.0,
+    "salidas_h_alt": 12.5,
+    "salidas_h_rodalies": 6.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 44
+  },
+  {
+   "codigo": "08284",
+   "nombre": "Tordera",
+   "grupo": "dependientes",
+   "lineas": [
+    "R1"
+   ],
+   "lineas_clave": "R1",
+   "dist_km": 58.0,
+   "lat": 41.70717,
+   "lon": 2.71957,
+   "viajes_referencia": 989.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 4.2,
+     "p": 0.719
+    },
+    "2025-03-17": {
+     "efecto": -3.9,
+     "p": 0.726
+    },
+    "2025-03-26": {
+     "efecto": -7.5,
+     "p": 0.503
+    },
+    "2025-04-01": {
+     "efecto": -3.2,
+     "p": 0.779
+    }
+   },
+   "efecto_medio": -2.6,
+   "alternativa": {
+    "clase": "débil",
+    "mejor": "bus_interurbano",
+    "t_alt": 155.0,
+    "t_rodalies": 103.0,
+    "penalizacion": 52.0,
+    "salidas_h_alt": 0.5,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 29
+  },
+  {
+   "codigo": "08291",
+   "nombre": "Vacarisses",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 31.8,
+   "lat": 41.59442,
+   "lon": 1.90528,
+   "viajes_referencia": 421.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -24.4,
+     "p": 0.078
+    },
+    "2025-03-17": {
+     "efecto": -20.5,
+     "p": 0.15
+    },
+    "2025-03-26": {
+     "efecto": -15.4,
+     "p": 0.289
+    },
+    "2025-04-01": {
+     "efecto": -9.4,
+     "p": 0.535
+    }
+   },
+   "efecto_medio": -17.43,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 80.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 1.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 3
+  },
+  {
+   "codigo": "08298",
+   "nombre": "Vic",
+   "grupo": "dependientes",
+   "lineas": [
+    "R3"
+   ],
+   "lineas_clave": "R3",
+   "dist_km": 60.8,
+   "lat": 41.9311,
+   "lon": 2.24886,
+   "viajes_referencia": 1968.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 2.6,
+     "p": 0.92
+    },
+    "2025-03-17": {
+     "efecto": -4.2,
+     "p": 0.873
+    },
+    "2025-03-26": {
+     "efecto": 5.8,
+     "p": 0.834
+    },
+    "2025-04-01": {
+     "efecto": 6.7,
+     "p": 0.803
+    }
+   },
+   "efecto_medio": 2.73,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 75.0,
+    "t_rodalies": 94.0,
+    "penalizacion": -19.0,
+    "salidas_h_alt": 5.5,
+    "salidas_h_rodalies": 2.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 49
+  },
+  {
+   "codigo": "08300",
+   "nombre": "Viladecavalls",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 26.1,
+   "lat": 41.56633,
+   "lon": 1.96578,
+   "viajes_referencia": 605.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -5.8,
+     "p": 0.682
+    },
+    "2025-03-17": {
+     "efecto": -17.0,
+     "p": 0.204
+    },
+    "2025-03-26": {
+     "efecto": -17.7,
+     "p": 0.184
+    },
+    "2025-04-01": {
+     "efecto": -10.7,
+     "p": 0.441
+    }
+   },
+   "efecto_medio": -12.8,
+   "alternativa": {
+    "clase": "sin alternativa",
+    "mejor": null,
+    "t_alt": null,
+    "t_rodalies": 67.0,
+    "penalizacion": null,
+    "salidas_h_alt": null,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 10
+  },
+  {
+   "codigo": "08301",
+   "nombre": "Viladecans",
+   "grupo": "cercanos",
+   "lineas": [
+    "R2S"
+   ],
+   "lineas_clave": "R2S",
+   "dist_km": 14.6,
+   "lat": 41.30951,
+   "lon": 2.02742,
+   "viajes_referencia": 14643.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": 4.1,
+     "p": 0.49
+    },
+    "2025-03-17": {
+     "efecto": 6.8,
+     "p": 0.258
+    },
+    "2025-03-26": {
+     "efecto": -0.6,
+     "p": 0.92
+    },
+    "2025-04-01": {
+     "efecto": -1.0,
+     "p": 0.865
+    }
+   },
+   "efecto_medio": 2.32,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "amb",
+    "t_alt": 34.0,
+    "t_rodalies": 29.0,
+    "penalizacion": 5.0,
+    "salidas_h_alt": 32.5,
+    "salidas_h_rodalies": 7.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 46
+  },
+  {
+   "codigo": "08305",
+   "nombre": "Vilafranca del Penedès",
+   "grupo": "dependientes",
+   "lineas": [
+    "R4"
+   ],
+   "lineas_clave": "R4",
+   "dist_km": 39.1,
+   "lat": 41.34481,
+   "lon": 1.7032,
+   "viajes_referencia": 1819.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -3.1,
+     "p": 0.81
+    },
+    "2025-03-17": {
+     "efecto": 10.2,
+     "p": 0.447
+    },
+    "2025-03-26": {
+     "efecto": 6.2,
+     "p": 0.638
+    },
+    "2025-04-01": {
+     "efecto": -1.0,
+     "p": 0.944
+    }
+   },
+   "efecto_medio": 3.07,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 63.0,
+    "t_rodalies": 87.0,
+    "penalizacion": -24.0,
+    "salidas_h_alt": 4.0,
+    "salidas_h_rodalies": 2.0
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 50
+  },
+  {
+   "codigo": "08307",
+   "nombre": "Vilanova i la Geltrú",
+   "grupo": "dependientes",
+   "lineas": [
+    "R2S"
+   ],
+   "lineas_clave": "R2S",
+   "dist_km": 41.0,
+   "lat": 41.22032,
+   "lon": 1.73077,
+   "viajes_referencia": 4145.0,
+   "efectos": {
+    "2024-05-13": {
+     "efecto": -15.7,
+     "p": 0.018
+    },
+    "2025-03-17": {
+     "efecto": -15.0,
+     "p": 0.025
+    },
+    "2025-03-26": {
+     "efecto": -12.8,
+     "p": 0.059
+    },
+    "2025-04-01": {
+     "efecto": -18.9,
+     "p": 0.004
+    }
+   },
+   "efecto_medio": -15.6,
+   "alternativa": {
+    "clase": "fuerte",
+    "mejor": "bus_interurbano",
+    "t_alt": 62.0,
+    "t_rodalies": 60.0,
+    "penalizacion": 2.0,
+    "salidas_h_alt": 8.5,
+    "salidas_h_rodalies": 5.5
+   },
+   "vulnerabilidad": null,
+   "rango_vulnerabilidad": 6
+  }
+ ],
+ "incidencias": [
+  {
+   "fecha": "2024-05-13",
+   "titulo": "Robo de cobre en Montcada",
+   "tipo": "Avería",
+   "descripcion": "Primer día laborable tras el robo de cable en Montcada Bifurcació (domingo 12/05). Avería sin aviso previo.",
+   "tramo": "R1 solo entre Badalona y Arenys · R3 solo hasta Montcada Ripollet · R4 Nord hasta Cerdanyola y R4 Sud hasta L'Hospitalet · R7 sin servicio",
+   "lineas": [
+    "R1",
+    "R2 Nord",
+    "R3",
+    "R4",
+    "R7"
+   ],
+   "lectura": "Caída concentrada en la línea cortada: el Maresme (R1), sobre todo al norte de Arenys, donde no había tren.",
+   "grupos": [
+    {
+     "grupo": "dependientes",
+     "municipios": 35,
+     "efecto_pct": -8.6,
+     "ic_inf": -13.8,
+     "ic_sup": -3.1,
+     "p_valor": 0.003
+    },
+    {
+     "grupo": "cercanos",
+     "municipios": 16,
+     "efecto_pct": 1.2,
+     "ic_inf": -4.9,
+     "ic_sup": 7.8,
+     "p_valor": 0.7
+    },
+    {
+     "grupo": "metro_fgc",
+     "municipios": 11,
+     "efecto_pct": 3.7,
+     "ic_inf": -0.3,
+     "ic_sup": 8.0,
+     "p_valor": 0.07
+    }
+   ],
+   "perdidos": {
+    "viajes_dia_normal": 73490.0,
+    "viajes_perdidos": 6320.0,
+    "efecto_pct": -8.6,
+    "p_valor": 0.003
+   },
+   "serie": [
+    {
+     "fecha": "2024-04-26",
+     "dependientes": 101.21,
+     "control": 100.0,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-04-29",
+     "dependientes": 87.45,
+     "control": 92.66,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-04-30",
+     "dependientes": 104.87,
+     "control": 103.68,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-02",
+     "dependientes": 100.28,
+     "control": 99.76,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-03",
+     "dependientes": 95.66,
+     "control": 95.17,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-06",
+     "dependientes": 96.1,
+     "control": 94.48,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-07",
+     "dependientes": 100.8,
+     "control": 101.43,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-08",
+     "dependientes": 100.0,
+     "control": 104.57,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-09",
+     "dependientes": 103.35,
+     "control": 105.74,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-10",
+     "dependientes": 99.92,
+     "control": 100.58,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-13",
+     "dependientes": 91.2,
+     "control": 98.14,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2024-05-14",
+     "dependientes": 92.81,
+     "control": 99.28,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-15",
+     "dependientes": 96.99,
+     "control": 100.54,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-16",
+     "dependientes": 102.05,
+     "control": 101.12,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-17",
+     "dependientes": 94.52,
+     "control": 93.25,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-21",
+     "dependientes": 99.31,
+     "control": 101.76,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-22",
+     "dependientes": 101.98,
+     "control": 101.91,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-23",
+     "dependientes": 102.21,
+     "control": 105.1,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-24",
+     "dependientes": 97.13,
+     "control": 98.63,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-27",
+     "dependientes": 94.21,
+     "control": 97.25,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-05-28",
+     "dependientes": 101.98,
+     "control": 101.13,
+     "limpio": false,
+     "caos": false
+    }
+   ],
+   "banda_normal": {
+    "inf": 95.79,
+    "sup": 102.71
+   },
+   "tramos": [
+    {
+     "tramo": "R1 · norte de Arenys (sin tren)",
+     "linea": "R1",
+     "afectada": true,
+     "municipios": 6,
+     "viajes_esperados": 5772.0,
+     "viajes_perdidos": 1163.0,
+     "cambio_pct": -20.16,
+     "normal_inf": -9.99,
+     "normal_sup": 9.13,
+     "p_valor": 0.0114,
+     "lista": "Canet de Mar, Sant Pol de Mar, Calella, Pineda de Mar, Malgrat de Mar, Tordera"
+    },
+    {
+     "tramo": "R1 · hasta Arenys (transbordo en Badalona)",
+     "linea": "R1",
+     "afectada": true,
+     "municipios": 11,
+     "viajes_esperados": 122320.0,
+     "viajes_perdidos": -4110.0,
+     "cambio_pct": 3.36,
+     "normal_inf": -3.52,
+     "normal_sup": 4.41,
+     "p_valor": 0.9205,
+     "lista": "Sant Adrià de Besòs, Badalona, Montgat, Masnou, El, Premià de Mar, Vilassar de Mar, Cabrera de Mar, Mataró, Sant Andreu de Llavaneres, Caldes d'Estrac, Arenys de Mar"
+    },
+    {
+     "tramo": "R3 · solo hasta Montcada Ripollet",
+     "linea": "R3",
+     "afectada": true,
+     "municipios": 11,
+     "viajes_esperados": 50594.0,
+     "viajes_perdidos": 2058.0,
+     "cambio_pct": -4.07,
+     "normal_inf": -5.35,
+     "normal_sup": 3.89,
+     "p_valor": 0.1136,
+     "lista": "Montcada i Reixac, Santa Perpètua de Mogoda, Mollet del Vallès, Parets del Vallès, Granollers, Franqueses del Vallès, Les, Garriga, La, Centelles, Balenyà, Vic, Manlleu"
+    },
+    {
+     "tramo": "R4 Nord · solo hasta Cerdanyola",
+     "linea": "R4 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 76973.0,
+     "viajes_perdidos": -879.0,
+     "cambio_pct": 1.14,
+     "normal_inf": -3.31,
+     "normal_sup": 7.27,
+     "p_valor": 0.6591,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès, Barberà del Vallès, Sabadell, Terrassa, Viladecavalls, Vacarisses, Castellbell i el Vilar, Sant Vicenç de Castellet, Manresa"
+    },
+    {
+     "tramo": "R4 Sud · solo hasta L'Hospitalet",
+     "linea": "R4 Sud",
+     "afectada": true,
+     "municipios": 12,
+     "viajes_esperados": 182686.0,
+     "viajes_perdidos": -7184.0,
+     "cambio_pct": 3.93,
+     "normal_inf": -2.72,
+     "normal_sup": 4.54,
+     "p_valor": 0.9545,
+     "lista": "Hospitalet de Llobregat, L', Cornellà de Llobregat, Sant Joan Despí, Sant Feliu de Llobregat, Molins de Rei, Papiol, El, Castellbisbal, Martorell, Gelida, Sant Sadurní d'Anoia, Subirats, Vilafranca del Penedès"
+    },
+    {
+     "tramo": "R7 · sin servicio",
+     "linea": "R7",
+     "afectada": true,
+     "municipios": 2,
+     "viajes_esperados": 31464.0,
+     "viajes_perdidos": -1315.0,
+     "cambio_pct": 4.18,
+     "normal_inf": -9.48,
+     "normal_sup": 13.68,
+     "p_valor": 0.7159,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès"
+    },
+    {
+     "tramo": "R2 Nord · casi toda la red (verificar)",
+     "linea": "R2 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 42948.0,
+     "viajes_perdidos": -96.0,
+     "cambio_pct": 0.22,
+     "normal_inf": -4.83,
+     "normal_sup": 9.34,
+     "p_valor": 0.5341,
+     "lista": "Montcada i Reixac, Llagosta, La, Mollet del Vallès, Montmeló, Granollers, Franqueses del Vallès, Les, Cardedeu, Llinars del Vallès, Santa Maria de Palautordera, Sant Celoni"
+    },
+    {
+     "tramo": "R2 Sud · funcionaba (referencia)",
+     "linea": "R2 Sud",
+     "afectada": false,
+     "municipios": 8,
+     "viajes_esperados": 197507.0,
+     "viajes_perdidos": -6365.0,
+     "cambio_pct": 3.22,
+     "normal_inf": -3.06,
+     "normal_sup": 7.35,
+     "p_valor": 0.8295,
+     "lista": "Hospitalet de Llobregat, L', Prat de Llobregat, El, Viladecans, Gavà, Castelldefels, Sitges, Vilanova i la Geltrú, Cubelles"
+    }
+   ],
+   "lineas_dependientes": [
+    {
+     "linea": "R1",
+     "municipios": 12,
+     "efecto_pct": -17.2,
+     "ic_inf": -23.6,
+     "ic_sup": -10.4,
+     "p_valor": 0.0,
+     "viajes_perdidos": 4166.0
+    },
+    {
+     "linea": "R2N",
+     "municipios": 4,
+     "efecto_pct": -2.3,
+     "ic_inf": -16.4,
+     "ic_sup": 14.2,
+     "p_valor": 0.772,
+     "viajes_perdidos": 121.0
+    },
+    {
+     "linea": "R2N+R3",
+     "municipios": 2,
+     "efecto_pct": -3.8,
+     "ic_inf": -7.0,
+     "ic_sup": -0.5,
+     "p_valor": 0.027,
+     "viajes_perdidos": 349.0
+    },
+    {
+     "linea": "R2S",
+     "municipios": 4,
+     "efecto_pct": -5.7,
+     "ic_inf": -12.9,
+     "ic_sup": 2.1,
+     "p_valor": 0.144,
+     "viajes_perdidos": 1346.0
+    },
+    {
+     "linea": "R3",
+     "municipios": 5,
+     "efecto_pct": 0.9,
+     "ic_inf": -7.9,
+     "ic_sup": 10.5,
+     "p_valor": 0.849,
+     "viajes_perdidos": -45.0
+    },
+    {
+     "linea": "R4",
+     "municipios": 8,
+     "efecto_pct": -6.1,
+     "ic_inf": -17.0,
+     "ic_sup": 6.1,
+     "p_valor": 0.309,
+     "viajes_perdidos": 365.0
+    }
+   ],
+   "evento": [
+    {
+     "dia": -5,
+     "efecto_pct": 1.28,
+     "ic_inf": -4.69,
+     "ic_sup": 7.63
+    },
+    {
+     "dia": -4,
+     "efecto_pct": 1.51,
+     "ic_inf": -3.22,
+     "ic_sup": 6.47
+    },
+    {
+     "dia": -3,
+     "efecto_pct": -1.42,
+     "ic_inf": -7.37,
+     "ic_sup": 4.91
+    },
+    {
+     "dia": -2,
+     "efecto_pct": -2.21,
+     "ic_inf": -6.98,
+     "ic_sup": 2.81
+    },
+    {
+     "dia": -1,
+     "efecto_pct": -2.91,
+     "ic_inf": -7.48,
+     "ic_sup": 1.88
+    },
+    {
+     "dia": 0,
+     "efecto_pct": -8.55,
+     "ic_inf": -13.77,
+     "ic_sup": -3.02
+    },
+    {
+     "dia": 1,
+     "efecto_pct": -0.98,
+     "ic_inf": -6.59,
+     "ic_sup": 4.97
+    },
+    {
+     "dia": 2,
+     "efecto_pct": 1.82,
+     "ic_inf": -3.33,
+     "ic_sup": 7.25
+    },
+    {
+     "dia": 3,
+     "efecto_pct": 1.09,
+     "ic_inf": -4.31,
+     "ic_sup": 6.79
+    }
+   ]
+  },
+  {
+   "fecha": "2025-03-17",
+   "titulo": "Huelga de Rodalies",
+   "tipo": "Huelga",
+   "descripcion": "Huelga de los sindicatos minoritarios contra el traspaso de Rodalies: retrasos y supresiones en toda la red.",
+   "tramo": "Toda la red",
+   "lineas": [
+    "R1",
+    "R2 Nord",
+    "R2 Sud",
+    "R3",
+    "R4",
+    "R7"
+   ],
+   "lectura": "Caos generalizado: caen los corredores más alejados, Osona (R3), Garraf (R2 Sud) y Maresme norte (R1).",
+   "grupos": [
+    {
+     "grupo": "dependientes",
+     "municipios": 35,
+     "efecto_pct": -10.8,
+     "ic_inf": -15.6,
+     "ic_sup": -5.6,
+     "p_valor": 0.0
+    },
+    {
+     "grupo": "cercanos",
+     "municipios": 16,
+     "efecto_pct": -2.6,
+     "ic_inf": -9.7,
+     "ic_sup": 5.2,
+     "p_valor": 0.502
+    },
+    {
+     "grupo": "metro_fgc",
+     "municipios": 11,
+     "efecto_pct": 5.3,
+     "ic_inf": 0.4,
+     "ic_sup": 10.5,
+     "p_valor": 0.035
+    }
+   ],
+   "perdidos": {
+    "viajes_dia_normal": 70112.0,
+    "viajes_perdidos": 7572.0,
+    "efecto_pct": -10.8,
+    "p_valor": 0.0
+   },
+   "serie": [
+    {
+     "fecha": "2025-03-03",
+     "dependientes": 97.09,
+     "control": 89.08,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-04",
+     "dependientes": 102.14,
+     "control": 100.19,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-05",
+     "dependientes": 99.98,
+     "control": 103.08,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-06",
+     "dependientes": 99.08,
+     "control": 101.53,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-07",
+     "dependientes": 75.73,
+     "control": 77.84,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-10",
+     "dependientes": 97.49,
+     "control": 97.26,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-11",
+     "dependientes": 101.68,
+     "control": 103.39,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-12",
+     "dependientes": 104.93,
+     "control": 102.69,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-13",
+     "dependientes": 107.58,
+     "control": 102.96,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-14",
+     "dependientes": 90.22,
+     "control": 93.6,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-17",
+     "dependientes": 90.15,
+     "control": 97.59,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-03-18",
+     "dependientes": 98.32,
+     "control": 100.3,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-19",
+     "dependientes": 88.1,
+     "control": 95.26,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-20",
+     "dependientes": 101.94,
+     "control": 103.26,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-21",
+     "dependientes": 90.73,
+     "control": 96.39,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-24",
+     "dependientes": 95.59,
+     "control": 97.29,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-25",
+     "dependientes": 99.5,
+     "control": 101.46,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-26",
+     "dependientes": 103.49,
+     "control": 100.26,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-03-27",
+     "dependientes": 112.02,
+     "control": 106.73,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-28",
+     "dependientes": 104.35,
+     "control": 100.42,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-31",
+     "dependientes": 98.85,
+     "control": 96.82,
+     "limpio": false,
+     "caos": false
+    }
+   ],
+   "banda_normal": {
+    "inf": 97.79,
+    "sup": 110.87
+   },
+   "tramos": [
+    {
+     "tramo": "R1 · toda la línea",
+     "linea": "R1",
+     "afectada": true,
+     "municipios": 17,
+     "viajes_esperados": 130412.0,
+     "viajes_perdidos": 5575.0,
+     "cambio_pct": -4.28,
+     "normal_inf": -4.16,
+     "normal_sup": 2.88,
+     "p_valor": 0.0351,
+     "lista": "Sant Adrià de Besòs, Badalona, Montgat, Masnou, El, Premià de Mar, Vilassar de Mar, Cabrera de Mar, Mataró, Sant Andreu de Llavaneres, Caldes d'Estrac, Arenys de Mar, Canet de Mar, Sant Pol de Mar, Calella, Pineda de Mar, Malgrat de Mar, Tordera"
+    },
+    {
+     "tramo": "R2N · toda la línea",
+     "linea": "R2 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 43592.0,
+     "viajes_perdidos": -1297.0,
+     "cambio_pct": 2.97,
+     "normal_inf": -4.12,
+     "normal_sup": 6.68,
+     "p_valor": 0.807,
+     "lista": "Montcada i Reixac, Llagosta, La, Mollet del Vallès, Montmeló, Granollers, Franqueses del Vallès, Les, Cardedeu, Llinars del Vallès, Santa Maria de Palautordera, Sant Celoni"
+    },
+    {
+     "tramo": "R2S · toda la línea",
+     "linea": "R2 Sud",
+     "afectada": true,
+     "municipios": 8,
+     "viajes_esperados": 198163.0,
+     "viajes_perdidos": 2107.0,
+     "cambio_pct": -1.06,
+     "normal_inf": -3.27,
+     "normal_sup": 4.14,
+     "p_valor": 0.2632,
+     "lista": "Hospitalet de Llobregat, L', Prat de Llobregat, El, Viladecans, Gavà, Castelldefels, Sitges, Vilanova i la Geltrú, Cubelles"
+    },
+    {
+     "tramo": "R3 · toda la línea",
+     "linea": "R3",
+     "afectada": true,
+     "municipios": 11,
+     "viajes_esperados": 50556.0,
+     "viajes_perdidos": -135.0,
+     "cambio_pct": 0.27,
+     "normal_inf": -3.48,
+     "normal_sup": 5.07,
+     "p_valor": 0.614,
+     "lista": "Montcada i Reixac, Santa Perpètua de Mogoda, Mollet del Vallès, Parets del Vallès, Granollers, Franqueses del Vallès, Les, Garriga, La, Centelles, Balenyà, Vic, Manlleu"
+    },
+    {
+     "tramo": "R4 Nord · toda la línea",
+     "linea": "R4 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 77387.0,
+     "viajes_perdidos": -3916.0,
+     "cambio_pct": 5.06,
+     "normal_inf": -3.05,
+     "normal_sup": 4.04,
+     "p_valor": 1.0,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès, Barberà del Vallès, Sabadell, Terrassa, Viladecavalls, Vacarisses, Castellbell i el Vilar, Sant Vicenç de Castellet, Manresa"
+    },
+    {
+     "tramo": "R4 Sud · toda la línea",
+     "linea": "R4 Sud",
+     "afectada": true,
+     "municipios": 12,
+     "viajes_esperados": 190612.0,
+     "viajes_perdidos": 6027.0,
+     "cambio_pct": -3.16,
+     "normal_inf": -2.91,
+     "normal_sup": 6.29,
+     "p_valor": 0.0175,
+     "lista": "Hospitalet de Llobregat, L', Cornellà de Llobregat, Sant Joan Despí, Sant Feliu de Llobregat, Molins de Rei, Papiol, El, Castellbisbal, Martorell, Gelida, Sant Sadurní d'Anoia, Subirats, Vilafranca del Penedès"
+    },
+    {
+     "tramo": "R7 · toda la línea",
+     "linea": "R7",
+     "afectada": true,
+     "municipios": 2,
+     "viajes_esperados": 32445.0,
+     "viajes_perdidos": -4433.0,
+     "cambio_pct": 13.66,
+     "normal_inf": -6.81,
+     "normal_sup": 13.35,
+     "p_valor": 0.9649,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès"
+    }
+   ],
+   "lineas_dependientes": [
+    {
+     "linea": "R1",
+     "municipios": 12,
+     "efecto_pct": -6.7,
+     "ic_inf": -11.8,
+     "ic_sup": -1.3,
+     "p_valor": 0.017,
+     "viajes_perdidos": 1608.0
+    },
+    {
+     "linea": "R2N",
+     "municipios": 4,
+     "efecto_pct": -7.6,
+     "ic_inf": -15.0,
+     "ic_sup": 0.5,
+     "p_valor": 0.066,
+     "viajes_perdidos": 401.0
+    },
+    {
+     "linea": "R2N+R3",
+     "municipios": 2,
+     "efecto_pct": -5.9,
+     "ic_inf": -9.7,
+     "ic_sup": -2.0,
+     "p_valor": 0.004,
+     "viajes_perdidos": 539.0
+    },
+    {
+     "linea": "R2S",
+     "municipios": 4,
+     "efecto_pct": -17.0,
+     "ic_inf": -25.8,
+     "ic_sup": -7.1,
+     "p_valor": 0.001,
+     "viajes_perdidos": 3667.0
+    },
+    {
+     "linea": "R3",
+     "municipios": 5,
+     "efecto_pct": -20.3,
+     "ic_inf": -27.9,
+     "ic_sup": -11.9,
+     "p_valor": 0.0,
+     "viajes_perdidos": 1011.0
+    },
+    {
+     "linea": "R4",
+     "municipios": 8,
+     "efecto_pct": -9.9,
+     "ic_inf": -19.8,
+     "ic_sup": 1.2,
+     "p_valor": 0.077,
+     "viajes_perdidos": 523.0
+    }
+   ],
+   "evento": [
+    {
+     "dia": -5,
+     "efecto_pct": -4.39,
+     "ic_inf": -8.9,
+     "ic_sup": 0.35
+    },
+    {
+     "dia": -4,
+     "efecto_pct": -0.98,
+     "ic_inf": -5.39,
+     "ic_sup": 3.63
+    },
+    {
+     "dia": -3,
+     "efecto_pct": -4.46,
+     "ic_inf": -9.45,
+     "ic_sup": 0.81
+    },
+    {
+     "dia": -2,
+     "efecto_pct": -0.09,
+     "ic_inf": -5.71,
+     "ic_sup": 5.86
+    },
+    {
+     "dia": -1,
+     "efecto_pct": -4.61,
+     "ic_inf": -9.73,
+     "ic_sup": 0.78
+    },
+    {
+     "dia": 0,
+     "efecto_pct": -10.84,
+     "ic_inf": -15.79,
+     "ic_sup": -5.6
+    },
+    {
+     "dia": 1,
+     "efecto_pct": 3.07,
+     "ic_inf": -2.79,
+     "ic_sup": 9.28
+    },
+    {
+     "dia": 2,
+     "efecto_pct": -2.42,
+     "ic_inf": -6.82,
+     "ic_sup": 2.2
+    },
+    {
+     "dia": 3,
+     "efecto_pct": -0.86,
+     "ic_inf": -6.26,
+     "ic_sup": 4.86
+    }
+   ]
+  },
+  {
+   "fecha": "2025-03-26",
+   "titulo": "Huelga de 24 horas",
+   "tipo": "Huelga",
+   "descripcion": "Jornada de huelga anunciada en Rodalies.",
+   "tramo": "Toda la red",
+   "lineas": [
+    "R1",
+    "R2 Nord",
+    "R2 Sud",
+    "R3",
+    "R4",
+    "R7"
+   ],
+   "lectura": "Huelga anunciada: el Garraf (R2 Sud) es el corredor que más cae.",
+   "grupos": [
+    {
+     "grupo": "dependientes",
+     "municipios": 35,
+     "efecto_pct": -2.6,
+     "ic_inf": -7.8,
+     "ic_sup": 2.9,
+     "p_valor": 0.341
+    },
+    {
+     "grupo": "cercanos",
+     "municipios": 16,
+     "efecto_pct": -7.7,
+     "ic_inf": -13.0,
+     "ic_sup": -2.1,
+     "p_valor": 0.008
+    },
+    {
+     "grupo": "metro_fgc",
+     "municipios": 11,
+     "efecto_pct": -4.3,
+     "ic_inf": -9.2,
+     "ic_sup": 0.9,
+     "p_valor": 0.099
+    }
+   ],
+   "perdidos": {
+    "viajes_dia_normal": 70112.0,
+    "viajes_perdidos": 1823.0,
+    "efecto_pct": -2.6,
+    "p_valor": 0.341
+   },
+   "serie": [
+    {
+     "fecha": "2025-03-12",
+     "dependientes": 100.03,
+     "control": 99.84,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-13",
+     "dependientes": 102.56,
+     "control": 100.1,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-14",
+     "dependientes": 86.01,
+     "control": 91.0,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-17",
+     "dependientes": 85.95,
+     "control": 94.87,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-03-18",
+     "dependientes": 93.73,
+     "control": 97.52,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-19",
+     "dependientes": 83.99,
+     "control": 92.62,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-20",
+     "dependientes": 97.19,
+     "control": 100.39,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-21",
+     "dependientes": 86.5,
+     "control": 93.72,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-24",
+     "dependientes": 91.13,
+     "control": 94.59,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-25",
+     "dependientes": 94.85,
+     "control": 98.64,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-26",
+     "dependientes": 98.66,
+     "control": 97.48,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-03-27",
+     "dependientes": 106.79,
+     "control": 103.76,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-28",
+     "dependientes": 99.48,
+     "control": 97.63,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-31",
+     "dependientes": 94.24,
+     "control": 94.13,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-01",
+     "dependientes": 89.43,
+     "control": 96.53,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-04-02",
+     "dependientes": 91.29,
+     "control": 92.79,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-03",
+     "dependientes": 103.91,
+     "control": 101.36,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-04",
+     "dependientes": 98.47,
+     "control": 97.06,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-07",
+     "dependientes": 94.37,
+     "control": 96.57,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-08",
+     "dependientes": 97.9,
+     "control": 99.7,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-09",
+     "dependientes": 100.52,
+     "control": 103.13,
+     "limpio": true,
+     "caos": false
+    }
+   ],
+   "banda_normal": {
+    "inf": 95.76,
+    "sup": 106.07
+   },
+   "tramos": [
+    {
+     "tramo": "R1 · toda la línea",
+     "linea": "R1",
+     "afectada": true,
+     "municipios": 17,
+     "viajes_esperados": 133561.0,
+     "viajes_perdidos": 6934.0,
+     "cambio_pct": -5.19,
+     "normal_inf": -4.16,
+     "normal_sup": 2.88,
+     "p_valor": 0.0351,
+     "lista": "Sant Adrià de Besòs, Badalona, Montgat, Masnou, El, Premià de Mar, Vilassar de Mar, Cabrera de Mar, Mataró, Sant Andreu de Llavaneres, Caldes d'Estrac, Arenys de Mar, Canet de Mar, Sant Pol de Mar, Calella, Pineda de Mar, Malgrat de Mar, Tordera"
+    },
+    {
+     "tramo": "R2N · toda la línea",
+     "linea": "R2 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 44899.0,
+     "viajes_perdidos": 1734.0,
+     "cambio_pct": -3.86,
+     "normal_inf": -4.12,
+     "normal_sup": 6.68,
+     "p_valor": 0.0702,
+     "lista": "Montcada i Reixac, Llagosta, La, Mollet del Vallès, Montmeló, Granollers, Franqueses del Vallès, Les, Cardedeu, Llinars del Vallès, Santa Maria de Palautordera, Sant Celoni"
+    },
+    {
+     "tramo": "R2S · toda la línea",
+     "linea": "R2 Sud",
+     "afectada": true,
+     "municipios": 8,
+     "viajes_esperados": 202332.0,
+     "viajes_perdidos": 8935.0,
+     "cambio_pct": -4.42,
+     "normal_inf": -3.27,
+     "normal_sup": 4.14,
+     "p_valor": 0.0175,
+     "lista": "Hospitalet de Llobregat, L', Prat de Llobregat, El, Viladecans, Gavà, Castelldefels, Sitges, Vilanova i la Geltrú, Cubelles"
+    },
+    {
+     "tramo": "R3 · toda la línea",
+     "linea": "R3",
+     "afectada": true,
+     "municipios": 11,
+     "viajes_esperados": 51496.0,
+     "viajes_perdidos": 1918.0,
+     "cambio_pct": -3.73,
+     "normal_inf": -3.48,
+     "normal_sup": 5.07,
+     "p_valor": 0.0175,
+     "lista": "Montcada i Reixac, Santa Perpètua de Mogoda, Mollet del Vallès, Parets del Vallès, Granollers, Franqueses del Vallès, Les, Garriga, La, Centelles, Balenyà, Vic, Manlleu"
+    },
+    {
+     "tramo": "R4 Nord · toda la línea",
+     "linea": "R4 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 80661.0,
+     "viajes_perdidos": 2156.0,
+     "cambio_pct": -2.67,
+     "normal_inf": -3.05,
+     "normal_sup": 4.04,
+     "p_valor": 0.0526,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès, Barberà del Vallès, Sabadell, Terrassa, Viladecavalls, Vacarisses, Castellbell i el Vilar, Sant Vicenç de Castellet, Manresa"
+    },
+    {
+     "tramo": "R4 Sud · toda la línea",
+     "linea": "R4 Sud",
+     "afectada": true,
+     "municipios": 12,
+     "viajes_esperados": 194939.0,
+     "viajes_perdidos": 8136.0,
+     "cambio_pct": -4.17,
+     "normal_inf": -2.91,
+     "normal_sup": 6.29,
+     "p_valor": 0.0175,
+     "lista": "Hospitalet de Llobregat, L', Cornellà de Llobregat, Sant Joan Despí, Sant Feliu de Llobregat, Molins de Rei, Papiol, El, Castellbisbal, Martorell, Gelida, Sant Sadurní d'Anoia, Subirats, Vilafranca del Penedès"
+    },
+    {
+     "tramo": "R7 · toda la línea",
+     "linea": "R7",
+     "afectada": true,
+     "municipios": 2,
+     "viajes_esperados": 33385.0,
+     "viajes_perdidos": 1738.0,
+     "cambio_pct": -5.21,
+     "normal_inf": -6.81,
+     "normal_sup": 13.35,
+     "p_valor": 0.0877,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès"
+    }
+   ],
+   "lineas_dependientes": [
+    {
+     "linea": "R1",
+     "municipios": 12,
+     "efecto_pct": 1.1,
+     "ic_inf": -4.2,
+     "ic_sup": 6.8,
+     "p_valor": 0.675,
+     "viajes_perdidos": -264.0
+    },
+    {
+     "linea": "R2N",
+     "municipios": 4,
+     "efecto_pct": 1.8,
+     "ic_inf": -8.2,
+     "ic_sup": 12.9,
+     "p_valor": 0.735,
+     "viajes_perdidos": -95.0
+    },
+    {
+     "linea": "R2N+R3",
+     "municipios": 2,
+     "efecto_pct": 9.5,
+     "ic_inf": -6.3,
+     "ic_sup": 28.0,
+     "p_valor": 0.251,
+     "viajes_perdidos": -868.0
+    },
+    {
+     "linea": "R2S",
+     "municipios": 4,
+     "efecto_pct": -17.3,
+     "ic_inf": -27.5,
+     "ic_sup": -5.8,
+     "p_valor": 0.005,
+     "viajes_perdidos": 3731.0
+    },
+    {
+     "linea": "R3",
+     "municipios": 5,
+     "efecto_pct": -6.4,
+     "ic_inf": -15.4,
+     "ic_sup": 3.6,
+     "p_valor": 0.199,
+     "viajes_perdidos": 319.0
+    },
+    {
+     "linea": "R4",
+     "municipios": 8,
+     "efecto_pct": -2.8,
+     "ic_inf": -12.4,
+     "ic_sup": 7.9,
+     "p_valor": 0.595,
+     "viajes_perdidos": 148.0
+    }
+   ],
+   "evento": [
+    {
+     "dia": -5,
+     "efecto_pct": -0.95,
+     "ic_inf": -5.4,
+     "ic_sup": 3.7
+    },
+    {
+     "dia": -4,
+     "efecto_pct": -4.43,
+     "ic_inf": -9.46,
+     "ic_sup": 0.88
+    },
+    {
+     "dia": -3,
+     "efecto_pct": -0.09,
+     "ic_inf": -5.71,
+     "ic_sup": 5.86
+    },
+    {
+     "dia": -2,
+     "efecto_pct": -4.61,
+     "ic_inf": -9.73,
+     "ic_sup": 0.78
+    },
+    {
+     "dia": -1,
+     "efecto_pct": 3.07,
+     "ic_inf": -2.79,
+     "ic_sup": 9.28
+    },
+    {
+     "dia": 0,
+     "efecto_pct": -2.61,
+     "ic_inf": -7.8,
+     "ic_sup": 2.88
+    },
+    {
+     "dia": 1,
+     "efecto_pct": -2.39,
+     "ic_inf": -6.87,
+     "ic_sup": 2.31
+    },
+    {
+     "dia": 2,
+     "efecto_pct": -0.86,
+     "ic_inf": -6.26,
+     "ic_sup": 4.86
+    },
+    {
+     "dia": 3,
+     "efecto_pct": 1.52,
+     "ic_inf": -3.94,
+     "ic_sup": 7.29
+    }
+   ]
+  },
+  {
+   "fecha": "2025-04-01",
+   "titulo": "Huelga de 24 horas",
+   "tipo": "Huelga",
+   "descripcion": "Jornada de huelga anunciada en Rodalies. Coincide con averías de electrificación en la R4 (Castellbisbal) y la R2 Nord (vía única La Llagosta–Sant Andreu) desde el 31/03.",
+   "tramo": "Toda la red",
+   "lineas": [
+    "R1",
+    "R2 Nord",
+    "R2 Sud",
+    "R3",
+    "R4",
+    "R7"
+   ],
+   "lectura": "Huelga anunciada: el Garraf (R2 Sud) vuelve a ser el corredor más afectado.",
+   "grupos": [
+    {
+     "grupo": "dependientes",
+     "municipios": 35,
+     "efecto_pct": -5.2,
+     "ic_inf": -10.2,
+     "ic_sup": -0.0,
+     "p_valor": 0.049
+    },
+    {
+     "grupo": "cercanos",
+     "municipios": 16,
+     "efecto_pct": -1.3,
+     "ic_inf": -6.5,
+     "ic_sup": 4.3,
+     "p_valor": 0.644
+    },
+    {
+     "grupo": "metro_fgc",
+     "municipios": 11,
+     "efecto_pct": 2.3,
+     "ic_inf": -2.3,
+     "ic_sup": 7.2,
+     "p_valor": 0.327
+    }
+   ],
+   "perdidos": {
+    "viajes_dia_normal": 70112.0,
+    "viajes_perdidos": 3646.0,
+    "efecto_pct": -5.2,
+    "p_valor": 0.049
+   },
+   "serie": [
+    {
+     "fecha": "2025-03-18",
+     "dependientes": 93.73,
+     "control": 97.52,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-19",
+     "dependientes": 83.99,
+     "control": 92.62,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-20",
+     "dependientes": 97.19,
+     "control": 100.39,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-21",
+     "dependientes": 86.5,
+     "control": 93.72,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-24",
+     "dependientes": 91.13,
+     "control": 94.59,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-25",
+     "dependientes": 94.85,
+     "control": 98.64,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-26",
+     "dependientes": 98.66,
+     "control": 97.48,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-03-27",
+     "dependientes": 106.79,
+     "control": 103.76,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-28",
+     "dependientes": 99.48,
+     "control": 97.63,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-03-31",
+     "dependientes": 94.24,
+     "control": 94.13,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-01",
+     "dependientes": 89.43,
+     "control": 96.53,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2025-04-02",
+     "dependientes": 91.29,
+     "control": 92.79,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-03",
+     "dependientes": 103.91,
+     "control": 101.36,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-04",
+     "dependientes": 98.47,
+     "control": 97.06,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-07",
+     "dependientes": 94.37,
+     "control": 96.57,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-08",
+     "dependientes": 97.9,
+     "control": 99.7,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-09",
+     "dependientes": 100.52,
+     "control": 103.13,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-10",
+     "dependientes": 99.93,
+     "control": 104.47,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-11",
+     "dependientes": 92.69,
+     "control": 89.36,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-14",
+     "dependientes": 61.77,
+     "control": 59.65,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2025-04-15",
+     "dependientes": 89.76,
+     "control": 80.38,
+     "limpio": false,
+     "caos": false
+    }
+   ],
+   "banda_normal": {
+    "inf": 95.76,
+    "sup": 106.07
+   },
+   "tramos": [
+    {
+     "tramo": "R1 · toda la línea",
+     "linea": "R1",
+     "afectada": true,
+     "municipios": 17,
+     "viajes_esperados": 132050.0,
+     "viajes_perdidos": 7689.0,
+     "cambio_pct": -5.82,
+     "normal_inf": -4.16,
+     "normal_sup": 2.88,
+     "p_valor": 0.0175,
+     "lista": "Sant Adrià de Besòs, Badalona, Montgat, Masnou, El, Premià de Mar, Vilassar de Mar, Cabrera de Mar, Mataró, Sant Andreu de Llavaneres, Caldes d'Estrac, Arenys de Mar, Canet de Mar, Sant Pol de Mar, Calella, Pineda de Mar, Malgrat de Mar, Tordera"
+    },
+    {
+     "tramo": "R2N · toda la línea",
+     "linea": "R2 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 43833.0,
+     "viajes_perdidos": 1081.0,
+     "cambio_pct": -2.47,
+     "normal_inf": -4.12,
+     "normal_sup": 6.68,
+     "p_valor": 0.193,
+     "lista": "Montcada i Reixac, Llagosta, La, Mollet del Vallès, Montmeló, Granollers, Franqueses del Vallès, Les, Cardedeu, Llinars del Vallès, Santa Maria de Palautordera, Sant Celoni"
+    },
+    {
+     "tramo": "R2S · toda la línea",
+     "linea": "R2 Sud",
+     "afectada": true,
+     "municipios": 8,
+     "viajes_esperados": 201074.0,
+     "viajes_perdidos": 14328.0,
+     "cambio_pct": -7.13,
+     "normal_inf": -3.27,
+     "normal_sup": 4.14,
+     "p_valor": 0.0175,
+     "lista": "Hospitalet de Llobregat, L', Prat de Llobregat, El, Viladecans, Gavà, Castelldefels, Sitges, Vilanova i la Geltrú, Cubelles"
+    },
+    {
+     "tramo": "R3 · toda la línea",
+     "linea": "R3",
+     "afectada": true,
+     "municipios": 11,
+     "viajes_esperados": 50689.0,
+     "viajes_perdidos": 1003.0,
+     "cambio_pct": -1.98,
+     "normal_inf": -3.48,
+     "normal_sup": 5.07,
+     "p_valor": 0.2281,
+     "lista": "Montcada i Reixac, Santa Perpètua de Mogoda, Mollet del Vallès, Parets del Vallès, Granollers, Franqueses del Vallès, Les, Garriga, La, Centelles, Balenyà, Vic, Manlleu"
+    },
+    {
+     "tramo": "R4 Nord · toda la línea",
+     "linea": "R4 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 79049.0,
+     "viajes_perdidos": -196.0,
+     "cambio_pct": 0.25,
+     "normal_inf": -3.05,
+     "normal_sup": 4.04,
+     "p_valor": 0.5965,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès, Barberà del Vallès, Sabadell, Terrassa, Viladecavalls, Vacarisses, Castellbell i el Vilar, Sant Vicenç de Castellet, Manresa"
+    },
+    {
+     "tramo": "R4 Sud · toda la línea",
+     "linea": "R4 Sud",
+     "afectada": true,
+     "municipios": 12,
+     "viajes_esperados": 192380.0,
+     "viajes_perdidos": 10115.0,
+     "cambio_pct": -5.26,
+     "normal_inf": -2.91,
+     "normal_sup": 6.29,
+     "p_valor": 0.0175,
+     "lista": "Hospitalet de Llobregat, L', Cornellà de Llobregat, Sant Joan Despí, Sant Feliu de Llobregat, Molins de Rei, Papiol, El, Castellbisbal, Martorell, Gelida, Sant Sadurní d'Anoia, Subirats, Vilafranca del Penedès"
+    },
+    {
+     "tramo": "R7 · toda la línea",
+     "linea": "R7",
+     "afectada": true,
+     "municipios": 2,
+     "viajes_esperados": 33043.0,
+     "viajes_perdidos": 781.0,
+     "cambio_pct": -2.36,
+     "normal_inf": -6.81,
+     "normal_sup": 13.35,
+     "p_valor": 0.2632,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès"
+    }
+   ],
+   "lineas_dependientes": [
+    {
+     "linea": "R1",
+     "municipios": 12,
+     "efecto_pct": -4.4,
+     "ic_inf": -9.3,
+     "ic_sup": 0.7,
+     "p_valor": 0.09,
+     "viajes_perdidos": 1056.0
+    },
+    {
+     "linea": "R2N",
+     "municipios": 4,
+     "efecto_pct": 1.8,
+     "ic_inf": -6.2,
+     "ic_sup": 10.5,
+     "p_valor": 0.665,
+     "viajes_perdidos": -95.0
+    },
+    {
+     "linea": "R2N+R3",
+     "municipios": 2,
+     "efecto_pct": 6.8,
+     "ic_inf": -0.7,
+     "ic_sup": 14.9,
+     "p_valor": 0.074,
+     "viajes_perdidos": -622.0
+    },
+    {
+     "linea": "R2S",
+     "municipios": 4,
+     "efecto_pct": -17.8,
+     "ic_inf": -22.1,
+     "ic_sup": -13.1,
+     "p_valor": 0.0,
+     "viajes_perdidos": 3839.0
+    },
+    {
+     "linea": "R3",
+     "municipios": 5,
+     "efecto_pct": -3.6,
+     "ic_inf": -18.5,
+     "ic_sup": 14.2,
+     "p_valor": 0.671,
+     "viajes_perdidos": 179.0
+    },
+    {
+     "linea": "R4",
+     "municipios": 8,
+     "efecto_pct": -7.0,
+     "ic_inf": -14.6,
+     "ic_sup": 1.3,
+     "p_valor": 0.095,
+     "viajes_perdidos": 370.0
+    }
+   ],
+   "evento": [
+    {
+     "dia": -5,
+     "efecto_pct": -0.05,
+     "ic_inf": -5.69,
+     "ic_sup": 5.93
+    },
+    {
+     "dia": -4,
+     "efecto_pct": -4.61,
+     "ic_inf": -9.73,
+     "ic_sup": 0.78
+    },
+    {
+     "dia": -3,
+     "efecto_pct": 3.07,
+     "ic_inf": -2.79,
+     "ic_sup": 9.28
+    },
+    {
+     "dia": -2,
+     "efecto_pct": -2.28,
+     "ic_inf": -6.69,
+     "ic_sup": 2.33
+    },
+    {
+     "dia": -1,
+     "efecto_pct": -0.81,
+     "ic_inf": -6.28,
+     "ic_sup": 4.97
+    },
+    {
+     "dia": 0,
+     "efecto_pct": -5.18,
+     "ic_inf": -10.16,
+     "ic_sup": 0.08
+    },
+    {
+     "dia": 1,
+     "efecto_pct": 1.63,
+     "ic_inf": -3.76,
+     "ic_sup": 7.33
+    },
+    {
+     "dia": 2,
+     "efecto_pct": 2.15,
+     "ic_inf": -2.55,
+     "ic_sup": 7.08
+    },
+    {
+     "dia": 3,
+     "efecto_pct": -2.42,
+     "ic_inf": -8.13,
+     "ic_sup": 3.64
+    }
+   ]
+  }
+ ],
+ "grupos": [
+  {
+   "grupo": "dependientes",
+   "etiqueta": "Dependientes (≥20 km, sin metro/FGC)",
+   "municipios": 35,
+   "efecto_pct": -6.8,
+   "ic_inf": -10.2,
+   "ic_sup": -3.3,
+   "p_valor": 0.0
+  },
+  {
+   "grupo": "cercanos",
+   "etiqueta": "Cercanos sin metro/FGC (<20 km)",
+   "municipios": 16,
+   "efecto_pct": -2.7,
+   "ic_inf": -6.2,
+   "ic_sup": 1.0,
+   "p_valor": 0.146
+  },
+  {
+   "grupo": "metro_fgc",
+   "etiqueta": "Con metro/FGC",
+   "municipios": 11,
+   "efecto_pct": 1.7,
+   "ic_inf": -1.2,
+   "ic_sup": 4.6,
+   "p_valor": 0.246
+  }
+ ],
+ "distancia": [
+  {
+   "banda": "< 15 km",
+   "municipios": 8,
+   "efecto_pct": -1.4,
+   "ic_inf": -5.5,
+   "ic_sup": 2.8,
+   "p_valor": 0.493
+  },
+  {
+   "banda": "15–30 km",
+   "municipios": 16,
+   "efecto_pct": -3.2,
+   "ic_inf": -7.1,
+   "ic_sup": 0.8,
+   "p_valor": 0.11
+  },
+  {
+   "banda": "> 30 km",
+   "municipios": 27,
+   "efecto_pct": -8.0,
+   "ic_inf": -11.7,
+   "ic_sup": -4.2,
+   "p_valor": 0.0
+  }
+ ],
+ "evento": [
+  {
+   "dia": -5,
+   "efecto_pct": -1.7,
+   "ic_inf": -5.18,
+   "ic_sup": 1.91
+  },
+  {
+   "dia": -4,
+   "efecto_pct": 0.33,
+   "ic_inf": -2.73,
+   "ic_sup": 3.49
+  },
+  {
+   "dia": -3,
+   "efecto_pct": -3.0,
+   "ic_inf": -7.17,
+   "ic_sup": 1.37
+  },
+  {
+   "dia": -2,
+   "efecto_pct": -1.22,
+   "ic_inf": -4.97,
+   "ic_sup": 2.67
+  },
+  {
+   "dia": -1,
+   "efecto_pct": -2.82,
+   "ic_inf": -6.5,
+   "ic_sup": 1.0
+  },
+  {
+   "dia": 0,
+   "efecto_pct": -6.85,
+   "ic_inf": -10.37,
+   "ic_sup": -3.19
+  },
+  {
+   "dia": 1,
+   "efecto_pct": 0.32,
+   "ic_inf": -3.17,
+   "ic_sup": 3.93
+  },
+  {
+   "dia": 2,
+   "efecto_pct": 1.89,
+   "ic_inf": -2.01,
+   "ic_sup": 5.95
+  },
+  {
+   "dia": 3,
+   "efecto_pct": -0.85,
+   "ic_inf": -5.02,
+   "ic_sup": 3.5
+  }
+ ],
+ "placebo": {
+  "real_pct": -6.81,
+  "p_valor": 0.005,
+  "valores_pct": [
+   2.85,
+   -2.38,
+   2.03,
+   0.37,
+   -1.73,
+   2.38,
+   0.53,
+   0.0,
+   0.66,
+   1.53,
+   -0.11,
+   -0.27,
+   3.51,
+   -0.22,
+   1.06,
+   -1.25,
+   -0.72,
+   0.02,
+   1.93,
+   -1.04,
+   -1.22,
+   0.24,
+   0.11,
+   -1.86,
+   1.2,
+   0.16,
+   0.6,
+   -2.07,
+   -3.13,
+   -0.78,
+   0.44,
+   -1.27,
+   0.68,
+   -0.73,
+   -0.64,
+   1.23,
+   -4.26,
+   0.76,
+   0.13,
+   -0.26,
+   1.23,
+   0.38,
+   0.1,
+   1.24,
+   0.72,
+   0.87,
+   1.39,
+   1.17,
+   0.29,
+   -0.53,
+   -0.48,
+   0.07,
+   0.8,
+   -0.49,
+   0.8,
+   -0.51,
+   -1.66,
+   3.4,
+   3.43,
+   -3.35,
+   -0.28,
+   -2.11,
+   -2.31,
+   0.65,
+   -0.87,
+   -1.35,
+   -0.97,
+   1.33,
+   2.32,
+   1.15,
+   0.41,
+   -0.01,
+   -1.67,
+   -1.75,
+   1.42,
+   1.0,
+   1.81,
+   0.4,
+   0.42,
+   0.11,
+   1.95,
+   0.21,
+   3.49,
+   -3.53,
+   0.91,
+   -1.17,
+   3.29,
+   0.36,
+   2.69,
+   -0.42,
+   -0.73,
+   2.04,
+   -4.01,
+   0.27,
+   0.24,
+   0.53,
+   2.5,
+   -1.0,
+   -1.29,
+   -0.25,
+   -3.06,
+   -1.58,
+   -0.68,
+   1.52,
+   -3.43,
+   1.55,
+   1.31,
+   -0.33,
+   1.8,
+   -0.62,
+   0.15,
+   0.82,
+   -0.12,
+   0.13,
+   0.05,
+   1.42,
+   1.88,
+   1.1,
+   2.63,
+   -1.16,
+   -1.77,
+   1.49,
+   -0.11,
+   0.6,
+   -0.26,
+   -1.14,
+   -1.62,
+   -0.51,
+   1.14,
+   1.53,
+   2.33,
+   -0.73,
+   0.89,
+   2.02,
+   -0.31,
+   0.6,
+   -0.74,
+   -0.34,
+   -0.14,
+   1.36,
+   0.8,
+   -0.94,
+   0.24,
+   -2.42,
+   1.64,
+   1.83,
+   -0.32,
+   -0.78,
+   2.67,
+   1.86,
+   -1.29,
+   2.28,
+   -0.55,
+   -1.3,
+   -0.3,
+   1.08,
+   0.17,
+   1.82,
+   0.28,
+   1.25,
+   -1.29,
+   2.06,
+   1.53,
+   -0.27,
+   -0.64,
+   1.37,
+   0.28,
+   1.03,
+   1.0,
+   -1.22,
+   2.26,
+   1.09,
+   1.53,
+   2.32,
+   -0.15,
+   1.76,
+   1.15,
+   1.22,
+   0.27,
+   -1.74,
+   1.1,
+   0.44,
+   0.36,
+   1.6,
+   -1.81,
+   0.35,
+   0.14,
+   1.67,
+   1.75,
+   -4.57,
+   -1.28,
+   -1.05,
+   0.24,
+   0.95,
+   -0.96,
+   0.45,
+   -0.45,
+   0.47,
+   1.03,
+   -2.38
+  ]
+ },
+ "barrios": [
+  {
+   "caso": "Todos los días de caos",
+   "sentido": "ida",
+   "con_estacion": -19.0,
+   "sin_estacion": 1.8,
+   "p_diferencia": 0.0009
+  },
+  {
+   "caso": "Todos los días de caos",
+   "sentido": "vuelta",
+   "con_estacion": -18.3,
+   "sin_estacion": 4.9,
+   "p_diferencia": 0.0009
+  },
+  {
+   "caso": "Huelga 17/03/2025",
+   "sentido": "ida",
+   "con_estacion": -18.4,
+   "sin_estacion": -10.1,
+   "p_diferencia": 0.235
+  },
+  {
+   "caso": "Huelga 17/03/2025",
+   "sentido": "vuelta",
+   "con_estacion": -14.1,
+   "sin_estacion": 4.1,
+   "p_diferencia": 0.018
+  },
+  {
+   "caso": "Avería 13/05/2024",
+   "sentido": "ida",
+   "con_estacion": -26.6,
+   "sin_estacion": 2.8,
+   "p_diferencia": 0.003
+  },
+  {
+   "caso": "Avería 13/05/2024",
+   "sentido": "vuelta",
+   "con_estacion": -32.0,
+   "sin_estacion": 3.1,
+   "p_diferencia": 0.001
+  },
+  {
+   "caso": "Huelga 26/03/2025",
+   "sentido": "ida",
+   "con_estacion": -10.1,
+   "sin_estacion": 5.6,
+   "p_diferencia": 0.004
+  },
+  {
+   "caso": "Huelga 26/03/2025",
+   "sentido": "vuelta",
+   "con_estacion": -7.4,
+   "sin_estacion": 4.9,
+   "p_diferencia": 0.095
+  },
+  {
+   "caso": "Huelga 01/04/2025",
+   "sentido": "ida",
+   "con_estacion": -20.4,
+   "sin_estacion": 10.1,
+   "p_diferencia": 0.0009
+  },
+  {
+   "caso": "Huelga 01/04/2025",
+   "sentido": "vuelta",
+   "con_estacion": -17.9,
+   "sin_estacion": 7.5,
+   "p_diferencia": 0.002
+  }
+ ],
+ "perdidos_media": {
+  "viajes_perdidos": 4840.0,
+  "viajes_dia_normal": 70956.0
+ },
+ "alternativa": [
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "Todos los días de caos",
+   "municipios": 16,
+   "efecto": -8.694,
+   "ic_inf": -12.9282,
+   "ic_sup": -4.2538,
+   "p_cluster": 0.0003,
+   "p_placebo": 0.001
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "13/05/2024",
+   "municipios": 16,
+   "efecto": -10.0877,
+   "ic_inf": -16.9789,
+   "ic_sup": -2.6244,
+   "p_cluster": 0.0096,
+   "p_placebo": 0.001
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "17/03/2025",
+   "municipios": 16,
+   "efecto": -14.2654,
+   "ic_inf": -19.8658,
+   "ic_sup": -8.2735,
+   "p_cluster": 0.0,
+   "p_placebo": 0.001
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "26/03/2025",
+   "municipios": 16,
+   "efecto": -5.0827,
+   "ic_inf": -12.7119,
+   "ic_sup": 3.2134,
+   "p_cluster": 0.2192,
+   "p_placebo": 0.1678
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "01/04/2025",
+   "municipios": 16,
+   "efecto": -5.1281,
+   "ic_inf": -11.5064,
+   "ic_sup": 1.7099,
+   "p_cluster": 0.1363,
+   "p_placebo": 0.1608
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "Todos los días de caos",
+   "municipios": 21,
+   "efecto": -5.0524,
+   "ic_inf": -8.6897,
+   "ic_sup": -1.2702,
+   "p_cluster": 0.0099,
+   "p_placebo": 0.001
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "13/05/2024",
+   "municipios": 21,
+   "efecto": -4.4287,
+   "ic_inf": -11.7862,
+   "ic_sup": 3.5425,
+   "p_cluster": 0.2643,
+   "p_placebo": 0.1429
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "17/03/2025",
+   "municipios": 21,
+   "efecto": -8.139,
+   "ic_inf": -13.5835,
+   "ic_sup": -2.3515,
+   "p_cluster": 0.007,
+   "p_placebo": 0.007
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "26/03/2025",
+   "municipios": 21,
+   "efecto": -3.1595,
+   "ic_inf": -8.9219,
+   "ic_sup": 2.9674,
+   "p_cluster": 0.3013,
+   "p_placebo": 0.2817
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "01/04/2025",
+   "municipios": 21,
+   "efecto": -4.4476,
+   "ic_inf": -9.6127,
+   "ic_sup": 1.0126,
+   "p_cluster": 0.1074,
+   "p_placebo": 0.1399
+  },
+  {
+   "grupo": "Alternativa fuerte",
+   "dia": "Todos los días de caos",
+   "municipios": 25,
+   "efecto": -0.9702,
+   "ic_inf": -3.9513,
+   "ic_sup": 2.1035,
+   "p_cluster": 0.5281,
+   "p_placebo": 0.5924
+  },
+  {
+   "grupo": "Alternativa fuerte",
+   "dia": "13/05/2024",
+   "municipios": 25,
+   "efecto": 0.0482,
+   "ic_inf": -3.9306,
+   "ic_sup": 4.1917,
+   "p_cluster": 0.9812,
+   "p_placebo": 0.8382
+  },
+  {
+   "grupo": "Alternativa fuerte",
+   "dia": "17/03/2025",
+   "municipios": 25,
+   "efecto": 1.2567,
+   "ic_inf": -4.2116,
+   "ic_sup": 7.0371,
+   "p_cluster": 0.6562,
+   "p_placebo": 0.8322
+  },
+  {
+   "grupo": "Alternativa fuerte",
+   "dia": "26/03/2025",
+   "municipios": 25,
+   "efecto": -4.5381,
+   "ic_inf": -8.7413,
+   "ic_sup": -0.1412,
+   "p_cluster": 0.0434,
+   "p_placebo": 0.1429
+  },
+  {
+   "grupo": "Alternativa fuerte",
+   "dia": "01/04/2025",
+   "municipios": 25,
+   "efecto": -0.5021,
+   "ic_inf": -5.0789,
+   "ic_sup": 4.2953,
+   "p_cluster": 0.8324,
+   "p_placebo": 0.7782
+  }
+ ],
+ "distancia_alternativa": [
+  {
+   "dias": "Todos los días de caos",
+   "variable": "Efecto base (distancia media, alternativa tan rápida como el tren)",
+   "efecto": -2.61,
+   "IC95": "[-5.5, +0.4]",
+   "p": 0.09
+  },
+  {
+   "dias": "Todos los días de caos",
+   "variable": "+10 km de distancia",
+   "efecto": -1.129,
+   "IC95": "[-2.5, +0.2]",
+   "p": 0.104
+  },
+  {
+   "dias": "Todos los días de caos",
+   "variable": "+10 min de penalización",
+   "efecto": -0.6815,
+   "IC95": "[-1.6, +0.3]",
+   "p": 0.1668
+  },
+  {
+   "dias": "Todos los días de caos",
+   "variable": "Sin alternativa directa",
+   "efecto": -5.0395,
+   "IC95": "[-9.7, -0.1]",
+   "p": 0.0441
+  },
+  {
+   "dias": "Avería 13/05 + huelga 17/03",
+   "variable": "Efecto base (distancia media, alternativa tan rápida como el tren)",
+   "efecto": -2.7239,
+   "IC95": "[-6.1, +0.8]",
+   "p": 0.1238
+  },
+  {
+   "dias": "Avería 13/05 + huelga 17/03",
+   "variable": "+10 km de distancia",
+   "efecto": -2.4434,
+   "IC95": "[-4.2, -0.6]",
+   "p": 0.0082
+  },
+  {
+   "dias": "Avería 13/05 + huelga 17/03",
+   "variable": "+10 min de penalización",
+   "efecto": -0.8084,
+   "IC95": "[-2.1, +0.5]",
+   "p": 0.2137
+  },
+  {
+   "dias": "Avería 13/05 + huelga 17/03",
+   "variable": "Sin alternativa directa",
+   "efecto": -7.1908,
+   "IC95": "[-12.1, -2.0]",
+   "p": 0.0075
+  }
+ ],
+ "duracion": {
+  "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (event study, días +1 a +3 ≈ 0).",
+  "incidencia_larga": "Montcada 2024, 5.º día del corte (17/05/2024): −9,9 % en M3, no significativo. La gente se adapta: el efecto se diluye en pocos días.",
+  "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular."
+ },
+ "metodo": {
+  "comparacion": "Cada día de caos se compara con días limpios (laborables sin lluvia, festivos, verano, eventos ni incidencias), descontando lo que hacen ese mismo día los municipios sin Rodalies (control).",
+  "efecto": "Regresión de diferencias en diferencias con efectos fijos de municipio × día de la semana y de fecha; errores agrupados por municipio. «Efecto claro» = p < 0,05.",
+  "tramos": "Volumen total de los municipios del tramo afectado frente a lo esperado: viajes del control ese día × proporción habitual tramo/control (días limpios del mismo año y día de la semana).",
+  "perdidos": "Viajes perdidos = viajes de un día normal × efecto estimado. Es una aproximación.",
+  "placebo": "200 grupos de días normales al azar tratados como si fueran días de caos.",
+  "barrios": "M3: regresión con efecto fijo día × tipo de barrio; municipios dependientes con ≥ 200 viajes/día hacia cada tipo."
+ },
+ "limitaciones": [
+  "Datos diarios de todos los modos de transporte: no identifican el tren ni la hora.",
+  "Solo cuatro días de caos válidos; en los municipios pequeños la significación individual es baja.",
+  "Los municipios de control pueden notar el caos de forma indirecta: el efecto real podría ser algo mayor.",
+  "Las magnitudes de M3 no son comparables con las de M2; se comparan direcciones y diferencias dentro de M3."
+ ],
+ "hay_vulnerabilidad": false
+}

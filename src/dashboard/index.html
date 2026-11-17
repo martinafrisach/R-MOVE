@@ -18,7 +18,7 @@
     >
 
     <!-- Estilos propios: versión actualizada para evitar caché -->
-    <link rel="stylesheet" href="dashboard.css?v=dark2">
+    <link rel="stylesheet" href="dashboard.css?v=dark5-ux1">
 </head>
 
 <body>
@@ -42,16 +42,16 @@
         <nav id="view-nav" class="view-nav" aria-label="Vistas del análisis">
             <button id="nav-general" type="button" aria-pressed="false" aria-controls="general-view">Análisis general</button>
             <button id="nav-cases" type="button" aria-pressed="true" aria-controls="incident-board">Incidencias</button>
-            <button id="nav-conclusions" type="button" aria-pressed="false" aria-controls="conclusions-view">Conclusiones</button>
+            <button id="nav-conclusions" type="button" aria-pressed="false" aria-controls="conclusions-view">Resultados</button>
         </nav>
 
         <section id="incident-board" aria-label="Selección de incidencias">
             <div class="board-intro">
-                <div><span class="eyebrow">EXPLORA LA MOVILIDAD</span></div>
-                <button id="board-network" type="button">Ver solo la red de Rodalies ↗</button>
+                <div><span class="eyebrow">EXPLORA LA MOVILIDAD</span><p>Días de caos analizados en el notebook 04: una avería y tres huelgas.</p></div>
+                <button id="board-network" type="button">Ver la red de Rodalies</button>
             </div>
             <div class="departures-board">
-                <div class="board-heading"><div><span class="board-symbol" aria-hidden="true">R</span><h2>Incidencias analizadas</h2></div><span id="board-count" role="status" aria-live="polite"></span></div>
+                <div class="board-heading"><div><span class="board-symbol" aria-hidden="true">R</span><h2>Días de caos analizados</h2></div><span id="board-count" role="status" aria-live="polite"></span></div>
                 <div class="board-search"><label for="board-search">Buscar incidencia</label><input id="board-search" type="search" placeholder="Título, fecha, línea o estación…" autocomplete="off"></div>
                 <div class="board-columns" aria-hidden="true"><span>Fecha</span><span>Incidencia / tramo</span><span>Líneas</span><span></span></div>
                 <p id="board-status" role="status" aria-live="polite">Cargando incidencias…</p>
@@ -111,72 +111,166 @@
             </div>
         </section>
 
-        <!-- CONCLUSIONES: síntesis de M2 (municipio → BCN) y M3 (barrios). Página nueva; no modifica las demás vistas. -->
+        <!-- RESULTADOS: notebook 04 (M2, municipio → BCN) y M3 (barrios). -->
         <section id="conclusions-view" hidden aria-labelledby="conclusions-title">
             <div class="general-intro">
-                <div><span class="eyebrow">CONCLUSIONES</span>
-                    <h1 id="conclusions-title">Qué pasa con los viajes cuando Rodalies se corta</h1>
-                    <p>Síntesis de los días de corte total: quién deja de viajar, a qué barrios, y cuánto dura.</p>
+                <div><span class="eyebrow">RESULTADOS</span>
+                    <h1 id="conclusions-title">¿Las incidencias de Rodalies hacen que la gente deje de ir a Barcelona?</h1>
+                    <p>Comparamos cuatro días de caos en Rodalies con días normales y con los municipios que no tienen estación.</p>
                 </div>
                 <span class="scope-tag" id="conclusions-period">2023–2025</span>
             </div>
-            <p id="conclusions-status" role="status" aria-live="polite">Cargando las conclusiones…</p>
+            <p id="conclusions-status" role="status" aria-live="polite">Cargando los resultados…</p>
             <div id="conclusions-content" hidden>
+                <div class="res-answer" id="res-answer"></div>
                 <div class="general-kpis" id="conclusions-kpis"></div>
                 <div class="research-grid" id="conclusions-cards"></div>
+
+                <p class="res-note">En los gráficos, <span class="sw strong"></span> significativo (p &lt; 0,05) y <span class="sw weak"></span> no significativo. Las barras horizontales son intervalos de confianza del 95 %.</p>
+
+                <nav class="res-index" id="res-index" aria-label="Secciones de resultados">
+                    <button type="button" data-sec="res-sec-who">Quién lo nota</button>
+                    <button type="button" data-sec="res-sec-loss">Viajes perdidos</button>
+                    <button type="button" data-sec="res-sec-lines">Cada línea</button>
+                    <button type="button" data-sec="res-sec-real">¿Es real?</button>
+                    <button type="button" data-sec="res-sec-time">Cuánto dura</button>
+                    <button type="button" data-sec="res-sec-bcn">Barrios de BCN</button>
+                </nav>
+
+                <div class="overview-columns res-columns">
+                    <section class="overview-card" id="res-sec-who">
+                        <div class="panel-head"><div><span class="eyebrow">Quién lo nota</span><h2 id="res-who-title">Solo los municipios sin alternativa</h2></div>
+                            <div class="res-toggle" role="group" aria-label="Agrupar municipios">
+                                <button type="button" data-who="grupos" aria-pressed="true">Por alternativa</button>
+                                <button type="button" data-who="distancia" aria-pressed="false">Por distancia</button>
+                            </div>
+                        </div>
+                        <p class="chart-caption" id="res-who-caption"></p>
+                        <div id="res-who" class="interval-chart"></div>
+                    </section>
+                    <section class="overview-card" id="res-sec-loss">
+                        <div class="panel-head"><div><span class="eyebrow">Viajes perdidos</span><h2>Viajes que no se hacen</h2></div></div>
+                        <p class="chart-caption">Viajes a Barcelona desde los 35 municipios dependientes: día normal frente al día de caos.</p>
+                        <div id="res-loss" class="interval-chart"></div>
+                    </section>
+                </div>
+
+                <section class="overview-card res-wide" id="res-sec-lines">
+                    <div class="panel-head"><div><span class="eyebrow">Por línea</span><h2>Cada incidencia golpea a una línea distinta</h2></div></div>
+                    <p class="chart-caption">Variación de los viajes a Barcelona de los municipios dependientes de cada línea (regresión DiD). En negrita, los valores significativos.</p>
+                    <div id="res-lines" class="interval-chart res-heat"></div>
+                </section>
+
+                <div class="overview-columns res-columns">
+                    <section class="overview-card" id="res-sec-real">
+                        <div class="panel-head"><div><span class="eyebrow">Validación</span><h2>La prueba del día falso</h2></div></div>
+                        <p class="chart-caption" id="res-placebo-caption"></p>
+                        <div id="res-placebo" class="interval-chart"></div>
+                    </section>
+                    <section class="overview-card" id="res-sec-time">
+                        <div class="panel-head"><div><span class="eyebrow">Duración</span><h2>El efecto dura un día</h2></div>
+                            <label class="sort-label" for="res-event-case">Incidencia<select id="res-event-case"></select></label>
+                        </div>
+                        <p class="chart-caption">Event study: efecto en los municipios dependientes del día −5 al +3.</p>
+                        <div id="concl-event" class="interval-chart"></div>
+                                            </section>
+                </div>
+
+                <section class="overview-card res-wide" id="res-sec-bcn">
+                    <div class="panel-head"><div><span class="eyebrow">M3 · Barrios de destino</span><h2>La caída va a los barrios con estación</h2></div>
+                        <label class="sort-label" for="concl-direction">Sentido<select id="concl-direction"><option value="ida">Ida (hacia BCN)</option><option value="vuelta">Vuelta (desde BCN)</option></select></label>
+                    </div>
+                    <p class="chart-caption">Viajes de los municipios dependientes hacia barrios con y sin estación de Rodalies. Las cifras de M3 no son comparables con las de M2.</p>
+                    <div id="concl-barrios" class="interval-chart"></div>
+                </section>
+
+                <details class="method-card"><summary>Método y límites</summary><div id="concl-method"></div></details>
+                <p class="footer-note">Fuente: Telefónica (movilidad diaria, todos los modos). Con datos diarios no se detectan retrasos ni cortes de pocas horas.</p>
+            </div>
+        </section>
+
+        <!-- FICHA DE INCIDENCIA (notebook 04): se abre desde el panel «Incidencias». -->
+        <section id="incident-view" hidden aria-labelledby="inc-title">
+            <button id="inc-back" class="case-back" type="button">← Volver al listado de incidencias</button>
+            <p id="inc-status" role="status" aria-live="polite"></p>
+            <div id="inc-content" hidden>
+                <div class="inc-hero">
+                    <div class="inc-date" id="inc-date"></div>
+                    <div class="inc-head">
+                        <span class="eyebrow" id="inc-type"></span>
+                        <h1 id="inc-title"></h1>
+                        <p id="inc-description"></p>
+                        <div class="inc-meta"><div class="board-lines" id="inc-lines"></div><span id="inc-tramo"></span></div>
+                    </div>
+                    <div class="inc-actions">
+                        <div><button id="inc-prev" type="button" aria-label="Incidencia anterior">Anterior</button>
+                        <button id="inc-next" type="button" aria-label="Incidencia siguiente">Siguiente</button></div>
+                    </div>
+                </div>
+                <p class="inc-reading" id="inc-reading"></p>
+                <div class="general-kpis inc-kpis" id="inc-kpis"></div>
+
+                <div class="overview-columns res-columns">
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">Serie diaria</span><h2>Viajes alrededor del día de caos</h2></div></div>
+                        <p class="chart-caption">Índice de viajes a Barcelona (100 = día normal) de los municipios dependientes y del grupo de control. Los puntos vacíos son días excluidos (lluvia, eventos u otras incidencias).</p>
+                        <div id="inc-series" class="interval-chart"></div>
+                    </section>
+                    <section class="overview-card">
+                        <div class="panel-head"><div><span class="eyebrow">Duración</span><h2>Días antes y después</h2></div></div>
+                        <p class="chart-caption">Event study de esta incidencia. Al usar un solo día por punto, los intervalos son más amplios que en la media.</p>
+                        <div id="inc-event" class="interval-chart"></div>
+                    </section>
+                </div>
+
+                <section class="overview-card res-wide">
+                    <div class="panel-head"><div><span class="eyebrow">Por tramo</span><h2>¿Baja el volumen total de cada línea?</h2></div></div>
+                    <p class="chart-caption" id="inc-tramos-caption">Viajes totales a Barcelona de todos los municipios del tramo afectado frente a lo esperado. La franja gris es la variación habitual. Como pesan mucho los municipios grandes (con metro, FGC o bus), el efecto suele ser menor que en los dependientes.</p>
+                    <div id="inc-tramos" class="interval-chart"></div>
+                    <div class="res-legend" id="inc-tramos-legend"></div>
+                </section>
 
                 <div class="workspace concl-workspace">
                     <section class="map-card">
                         <div class="panel-head">
                             <div>
-                                <span class="eyebrow">01 · EL DÍA DEL CORTE</span>
-                                <h2>Municipio a municipio</h2>
-                                <p id="concl-case-description"></p>
-                                <button id="concl-open-case" class="concl-open-case" type="button" hidden>Ver esta incidencia en el mapa de relaciones ↗</button>
+                                <span class="eyebrow">Por municipio</span>
+                                <h2>Dónde cae</h2>
+                                <p id="inc-map-count"></p>
+                                <button id="concl-open-case" class="concl-open-case" type="button" hidden>Relaciones OD de este día</button>
                             </div>
                             <div class="filters">
-                                <label for="concl-case">Día<select id="concl-case"></select></label>
                                 <label for="concl-group">Grupo<select id="concl-group">
                                     <option value="">Todos</option>
                                     <option value="dependientes">Dependientes de Rodalies</option>
                                     <option value="cercanos">Cercanos sin metro/FGC</option>
                                     <option value="metro_fgc">Con metro/FGC</option>
                                 </select></label>
+                                <label class="switch" for="inc-show-all"><input id="inc-show-all" type="checkbox"><span aria-hidden="true"></span>Mostrar todos</label>
                             </div>
                         </div>
-                        <div id="concl-map" aria-label="Mapa de la variación de viajes a Barcelona por municipio el día del corte"></div>
-                        <div class="map-footer concl-legend" id="concl-legend" aria-label="Escala de colores">
-                            <span>Menos viajes</span><i class="concl-scale" aria-hidden="true"></i><span>Más viajes</span>
-                            <small>Municipios con Rodalies, comparados con los municipios sin Rodalies el mismo día. Círculo: tamaño según viajes habituales a Barcelona. Borde blanco: p &lt; 0,05. Líneas: red de Rodalies de referencia.</small>
+                        <div id="concl-map" aria-label="Mapa de la variación de viajes a Barcelona por municipio el día de caos"></div>
+                        <div class="map-footer concl-legend" id="concl-legend" aria-label="Leyenda del mapa">
+                            <div class="scale-wrap"><span>Menos viajes</span>
+                                <div class="scale-col"><i class="concl-scale" aria-hidden="true"></i>
+                                    <div class="concl-ticks" aria-hidden="true"><span>−30 %</span><span>−15</span><span>0</span><span>+15</span><span>+30 %</span></div></div>
+                                <span>Más viajes</span></div>
+                            <span class="key"><i class="key-sig" aria-hidden="true"></i>Significativo (p &lt; 0,05)</span>
+                            <span class="key"><i class="key-ns" aria-hidden="true"></i>No significativo (con «Mostrar todos»)</span>
+                            <span class="key"><i class="key-ring" aria-hidden="true"></i>20 km de Barcelona</span>
+                            <small id="inc-lines-note"></small>
+                            <small>El tamaño del círculo depende de los viajes habituales a Barcelona. El color se satura a partir de ±30 %.</small>
                         </div>
                     </section>
                     <div class="right">
                         <section class="detail-card" id="concl-detail" aria-live="polite"><h2>Selecciona un municipio</h2></section>
                         <section class="top-card">
-                            <div class="panel-head"><div><h2>Mayores caídas</h2><p>Del grupo seleccionado</p></div></div>
+                            <div class="panel-head"><div><h2>Mayores caídas</h2><p id="inc-rank-sub">Significativas</p></div></div>
                             <div id="concl-ranking" class="top-relations"></div>
                         </section>
                     </div>
                 </div>
-
-                <div class="overview-columns">
-                    <section class="overview-card">
-                        <div class="panel-head"><div><span class="eyebrow">02 · DURACIÓN</span><h2>El efecto dura un día</h2></div></div>
-                        <p class="chart-caption">Variación de los viajes de los municipios dependientes frente al control, días antes y después del corte (regresión DiD). Línea: intervalo del 95 %.</p>
-                        <div id="concl-event" class="interval-chart"></div>
-                        <p class="chart-caption">Antes del corte no hay diferencias (las tendencias son paralelas). Después, los viajes vuelven a su nivel habitual.</p>
-                    </section>
-                    <section class="overview-card">
-                        <div class="panel-head"><div><span class="eyebrow">03 · DENTRO DE BARCELONA</span><h2>La caída va a los barrios con estación</h2></div>
-                            <label class="sort-label" for="concl-direction">Sentido<select id="concl-direction"><option value="ida">Ida (hacia BCN)</option><option value="vuelta">Vuelta (desde BCN)</option></select></label>
-                        </div>
-                        <p class="chart-caption">Municipios dependientes (M3). Las magnitudes de M3 no se comparan con las de M2; lo relevante es la diferencia entre los dos tipos de barrio.</p>
-                        <div id="concl-barrios" class="interval-chart"></div>
-                    </section>
-                </div>
-
-                <details class="method-card"><summary>Cómo leer los resultados · Método y límites</summary><div id="concl-method"></div></details>
-                <p class="footer-note">Movilidad diaria de todos los modos de transporte. Los resultados describen días de corte total; los retrasos o cortes de unas horas no se detectan con datos diarios.</p>
+                <p class="footer-note">El efecto de cada municipio descuenta la variación media de los municipios sin Rodalies. En los municipios pequeños la variación diaria es alta.</p>
             </div>
         </section>
 
@@ -267,7 +361,7 @@
                         <label for="railway-line">Línea
                             <select id="railway-line" disabled><option value="">Todas las líneas</option></select>
                         </label>
-                        <label><input id="railway-labels" type="checkbox" checked> Mostrar estaciones</label>
+                        <label title="Los nombres aparecen al acercar el mapa"><input id="railway-labels" type="checkbox" checked> Nombres de estaciones</label>
 
                         <small id="railway-count" role="status" aria-live="polite"></small>
                     </div>
@@ -298,6 +392,8 @@
                                 <i class="dot up"></i>
                                 Más viajes
                             </span>
+
+                            <span class="legend-note">Trazo discontinuo: recorrido ferroviario de referencia entre los dos municipios. «Habitual»: dentro del rango de los días comparables (percentiles 25–75).</span>
 
                         </div>
 
@@ -334,8 +430,16 @@
 
                             <div>
                                 <h2>Relaciones analizadas</h2>
-
-
+                                <p id="rel-count" class="rel-count" aria-live="polite"></p>
+                            </div>
+                            <div class="rel-tools">
+                                <label class="sort-label" for="rel-sort">Ordenar<select id="rel-sort">
+                                    <option value="down_n">Mayores caídas (viajes)</option>
+                                    <option value="up_n">Mayores subidas (viajes)</option>
+                                    <option value="down_pct">Mayores caídas (%)</option>
+                                    <option value="up_pct">Mayores subidas (%)</option>
+                                </select></label>
+                                <label class="switch" for="rel-unusual" title="Oculta las relaciones cuyo valor queda entre el percentil 25 y el 75 de los días comparables"><input id="rel-unusual" type="checkbox"><span aria-hidden="true"></span>Solo fuera de lo habitual</label>
                             </div>
 
 
@@ -371,13 +475,13 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- FUNCIONES AUXILIARES -->
-    <script src="case-views.js?v=minimal2"></script>
+    <script src="case-views.js?v=minimal2-ux1"></script>
 
     <!-- LÓGICA PRINCIPAL DEL DASHBOARD -->
-    <script src="railway.js?v=12"></script>
-    <script src="dashboard.js?v=railway11"></script>
-    <script src="overview.js?v=general7"></script>
-    <script src="conclusions.js?v=2"></script>
+    <script src="railway.js?v=12-ux1"></script>
+    <script src="dashboard.js?v=railway11-ux1"></script>
+    <script src="conclusions.js?v=5-ux1"></script>
+    <script src="overview.js?v=general9"></script>
 
 </body>
 </html>

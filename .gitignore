@@ -1,7 +1,9 @@
-
 # ============================================
 # R-MOVE - Git ignore rules
 # ============================================
+# Los datos NO van a Git (son grandes y algunos son de acceso restringido).
+# Se comparten aparte: ver CONTRIBUTING.md -> "Datos".
+# Solo se suben los resultados ligeros que necesitan los dashboards.
 
 # Datos originales (siempre ignorados)
 /data/raw/**
@@ -13,13 +15,22 @@
 !/data/processed/**/
 !/data/processed/**/.gitkeep
 
-# Excepciones: resultados del dashboard R-MOVE
+# Excepciones: resultados del dashboard clásico (src/dashboard)
 !/data/processed/rmove/incidencia_2025_06_05.json
 !/data/processed/rmove/incidencia_2025_02_07.json
 !/data/processed/rmove/incidencia_2025_03_17.json
 !/data/processed/rmove/incidencia_2023_05_02.json
 !/data/processed/rmove/incidencia_2024_04_29.json
 !/data/processed/rmove/general/dashboard_general.json
+!/data/processed/rmove/resultados/dashboard_resultados.json
+
+# Excepciones: observatorio (src/dashboard-v2) y sus entradas ligeras de M2
+!/data/processed/rmove/observatorio/observatorio.json
+!/data/processed/rmove/observatorio/municipios_mapa.geojson
+!/data/processed/rmove/observatorio/vulnerabilidad.json
+!/data/processed/rmove/m2_conectividad_municipios.parquet
+!/data/processed/rmove/m2_robustez_conectividad.parquet
+!/data/processed/rmove/m2_distancia_vs_alternativa.parquet
 
 # Entornos virtuales
 .venv/
@@ -40,8 +51,10 @@ dist/
 # Jupyter Notebooks
 .ipynb_checkpoints/
 *.nbconvert.ipynb
+notebooks/_backup/
+*_tmp.ipynb
 
-# Credenciales y configuración privada
+# Credenciales y configuración privada (copiar .env.example a .env)
 .env
 .env.*
 !.env.example
@@ -49,9 +62,13 @@ dist/
 *.pem
 *.key
 
+# Paquete de datos para compartir (se genera con scripts/datos.py)
+/datos_rmove*.zip
+
 # Sistema operativo y editores
 .DS_Store
 Thumbs.db
+desktop.ini
 .vscode/
 .idea/
 

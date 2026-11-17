@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-MOVE · Observatorio de incidencias de Rodalies</title>
+  <link rel="icon" type="image/svg+xml" href="../dashboard/favicon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="observatorio.css?v=3">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#relato">
+      <span class="brandicon">R</span>
+      <span><strong>Observatorio R-MOVE</strong><small>Qué pasa con la movilidad hacia Barcelona cuando falla Rodalies</small></span>
+    </a>
+    <nav class="modes" aria-label="Modos del observatorio">
+      <a href="#relato" data-mode="relato"><b>1</b> El relato</a>
+      <a href="#simulador" data-mode="simulador"><b>2</b> ¿Y si…?</a>
+      <a href="#municipio" data-mode="municipio"><b>3</b> Mi municipio</a>
+      <a href="#laboratorio" data-mode="laboratorio"><b>4</b> Laboratorio</a>
+    </nav>
+    <a class="classic" href="../dashboard/" title="Abrir el dashboard anterior">Dashboard clásico ↗</a>
+  </header>
+
+  <p id="status" role="status"></p>
+
+  <!-- 1 · EL RELATO (scrollytelling: mapa a pantalla completa y tarjetas que pasan por encima) -->
+  <section id="mode-relato" class="mode" hidden>
+    <div class="story">
+      <div class="story-stage" aria-hidden="false">
+        <div id="map-relato" class="story-map"></div>
+        <div class="story-legend" id="legend-relato"></div>
+        <ol class="story-progress" id="story-progress" aria-label="Pasos del relato"></ol>
+      </div>
+      <div class="story-steps">
+        <article class="step step-hero" data-step="normal" data-nombre="Un día normal">
+          <p class="eyebrow">Observatorio R-MOVE · Rodalies y movilidad</p>
+          <h1>¿Qué pasa cuando el tren falla?</h1>
+          <p class="lead">Cada laborable llegan a Barcelona <strong id="r-viajes">—</strong> viajes desde <strong>35 municipios que dependen de Rodalies</strong>: tienen estación, no tienen metro ni FGC y están a más de 20 km.</p>
+          <p class="muted small">En naranja, esos municipios. Datos de telefonía móvil (Telefónica), 2023–2025.</p>
+          <p class="scroll-cue"><span></span>Desliza para empezar</p>
+        </article>
+        <article class="step" data-step="averia" data-nombre="Avería sin aviso">
+          <p class="eyebrow">13 de mayo de 2024 · Avería sin aviso</p>
+          <h2>Un robo de cobre en Montcada corta la R1 y el Maresme se apaga.</h2>
+          <div class="big-stat"><strong class="down" id="r-r1">—</strong><span>viajes a Barcelona desde los municipios de la R1</span></div>
+          <p>Al norte de Arenys, donde no había tren, la caída llega al <strong id="r-norte">—</strong>. Los municipios con metro, FGC o buen bus ni lo notan.</p>
+        </article>
+        <article class="step" data-step="huelga" data-nombre="Huelga general">
+          <p class="eyebrow">17 de marzo de 2025 · Huelga general</p>
+          <h2>Cuando para toda la red, sufren los corredores más alejados.</h2>
+          <div class="big-stat"><strong class="down" id="r-huelga">—</strong><span>viajes desde los municipios dependientes</span></div>
+          <p>Osona (R3) y el Garraf (R2 Sud) son los que más caen. Cuanto más lejos de Barcelona, más impacto.</p>
+        </article>
+        <article class="step" data-step="anunciada" data-nombre="Huelga anunciada">
+          <p class="eyebrow">26 de marzo y 1 de abril de 2025 · Huelgas anunciadas</p>
+          <h2>Con aviso, la gente no deja de ir a Barcelona: cambia de puerta.</h2>
+          <p>El total casi no cambia. Pero mirando a qué barrio llegan los viajes:</p>
+          <div class="doors" id="r-puertas"></div>
+          <p class="muted small">Se llega por carretera a otros barrios. Solo el Garraf sigue cayendo en todas las huelgas.</p>
+        </article>
+        <article class="step" data-step="duracion" data-nombre="¿Cuánto dura?">
+          <p class="eyebrow">¿Cuánto dura?</p>
+          <h2>Un día. Al siguiente, todo vuelve a la normalidad.</h2>
+          <div class="mini-chart" id="r-evento"></div>
+          <p class="muted small">Efecto en los municipios dependientes cada día alrededor del caos (media de los cuatro días e intervalo del 95 %).</p>
+        </article>
+        <article class="step" data-step="brecha" data-nombre="¿Quién lo sufre?">
+          <p class="eyebrow">¿Quién lo sufre?</p>
+          <h2>Quien no tiene alternativa al tren.</h2>
+          <div class="bars" id="r-brecha"></div>
+          <p class="pending small" id="r-pendiente">Pendiente: la brecha por <strong>motorización y renta</strong>. Se añadirá aquí cuando esté el análisis.</p>
+        </article>
+        <article class="step step-end" data-step="fin" data-nombre="¿Y mañana?">
+          <p class="eyebrow">Y ahora</p>
+          <h2>Si mañana hay huelga, ¿qué le pasará a tu municipio?</h2>
+          <p>Con lo aprendido en estos cuatro días se puede anticipar el impacto y saber qué hacer.</p>
+          <p class="cta"><a href="#simulador" class="btn">Probar el simulador</a> <a href="#municipio" class="btn ghost">Buscar mi municipio</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · SIMULADOR: planificador tipo «Google Maps» --------------------------------- -->
+  <section id="mode-simulador" class="mode" hidden>
+    <div class="planner">
+      <div id="map-sim" class="planner-map"></div>
+      <aside class="planner-panel" id="sim-panel" aria-label="Planificador">
+        <div class="pp-head"><p class="eyebrow">Planificador de incidencias</p><h1>¿Y si mañana falla el tren?</h1></div>
+        <div class="pp-tabs" id="sim-tipos" role="tablist" aria-label="Tipo de incidencia"></div>
+        <p class="pp-det" id="sim-tipo-det"></p>
+        <div class="pp-lines" id="sim-lineas"></div>
+        <div class="pp-route">
+          <div class="pp-stop"><i class="dotA">A</i><input id="sim-origen" placeholder="Tu municipio (o clic en el mapa)" autocomplete="off" aria-label="Municipio de origen"><button type="button" id="sim-limpiar" class="x" aria-label="Quitar municipio" hidden>×</button><ul class="ac" id="sim-ac" role="listbox" hidden></ul></div>
+          <div class="pp-stop"><i class="dotB">B</i><span>Barcelona</span></div>
+        </div>
+        <div class="pp-dur" id="sim-dur" role="group" aria-label="Duración"><button type="button" data-dur="1">1 día</button><button type="button" data-dur="3">3 días</button><button type="button" data-dur="5">1 semana</button></div>
+        <div id="sim-result" class="pp-result"></div>
+        <details class="pp-more"><summary>Más datos del escenario</summary><div id="sim-mas"></div></details>
+      </aside>
+      <div class="story-legend" id="legend-sim"></div>
+    </div>
+  </section>
+
+  <!-- 3 · MI MUNICIPIO ----------------------------------------------------- -->
+  <section id="mode-municipio" class="mode" hidden>
+    <div id="mun-landing" class="planner">
+      <div id="map-mun-landing" class="planner-map"></div>
+      <div class="planner-panel search-panel">
+        <p class="eyebrow">Mi municipio</p>
+        <h1>¿Cómo le afectan las incidencias a tu municipio?</h1>
+        <div class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg><input id="mun-buscar" placeholder="Busca tu municipio: Mataró, Vic, Sitges…" autocomplete="off" aria-label="Buscar municipio"><ul class="ac" id="mun-ac" role="listbox" hidden></ul></div>
+        <p class="muted small">O haz clic en el mapa. Los que más sufren:</p>
+        <div class="mchips" id="mun-top"></div>
+      </div>
+      <div class="story-legend" id="legend-mun"></div>
+    </div>
+    <div id="mun-ficha" class="page" hidden></div>
+  </section>
+
+  <!-- 4 · LABORATORIO ------------------------------------------------------ -->
+  <section id="mode-laboratorio" class="mode page" hidden>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Laboratorio</p>
+        <h1>Cómo lo sabemos</h1>
+        <p class="sub">Los casos uno por uno, las pruebas que validan el método y sus límites.</p>
+      </div>
+      <nav class="seg" id="lab-nav">
+        <button data-lab="casos" class="active">Casos</button>
+        <button data-lab="validacion">Validaciones</button>
+        <button data-lab="factores">Qué lo explica</button>
+        <button data-lab="metodo">Método y límites</button>
+      </nav>
+    </div>
+    <div id="lab-casos" class="lab"></div>
+    <div id="lab-validacion" class="lab" hidden></div>
+    <div id="lab-factores" class="lab" hidden></div>
+    <div id="lab-metodo" class="lab" hidden></div>
+  </section>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <footer class="foot" id="foot"></footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="observatorio.js?v=3"></script>
+</body>
+</html>

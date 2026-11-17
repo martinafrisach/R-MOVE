@@ -1,3 +1,4 @@
+# Python 3.12 recomendado (es la versión del workflow de GitHub)
 pandas
 numpy
 pyarrow
@@ -7,12 +8,15 @@ seaborn
 scikit-learn
 scipy
 statsmodels
+pyfixest
 requests
 python-dotenv
 jupyter
 ipykernel
 folium
 geopandas
+shapely
+pyproj
 streamlit
 plotly
 holidays

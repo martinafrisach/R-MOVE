@@ -1,7 +1,19 @@
-# Stable publication hashes on Windows and Linux; JSON content is unchanged.
+# Finales de línea LF en el repositorio (Windows, Mac y Linux trabajan igual).
+* text=auto
+
+# Hashes de publicación estables en Windows y Linux; el contenido JSON no cambia.
 /data/processed/rmove/incidencia_2025_06_05.json text eol=lf
 /data/processed/rmove/incidencia_2025_02_07.json text eol=lf
 /data/processed/rmove/incidencia_2025_03_17.json text eol=lf
 /data/processed/rmove/incidencia_2023_05_02.json text eol=lf
 /data/processed/rmove/incidencia_2024_04_29.json text eol=lf
 /data/processed/rmove/general/dashboard_general.json text eol=lf
+/data/processed/rmove/resultados/dashboard_resultados.json text eol=lf
+/data/processed/rmove/observatorio/*.json text eol=lf
+/data/processed/rmove/observatorio/*.geojson text eol=lf
+
+# Binarios
+*.parquet binary
+*.png binary
+*.xlsx binary
+*.zip binary

@@ -78,15 +78,22 @@ abriendo el caso directamente y `?view=general` abre el análisis general.
 La navegación se guarda en el historial del navegador. El panel tiene carga y
 reintento propios, independientes de los resultados del análisis general.
 
-## Página «Conclusiones» (`?view=conclusions`)
+## Pestañas «Incidencias» y «Resultados» (notebook 04)
 
-Página nueva que resume M2 y M3. No cambia las otras vistas. `conclusions.js` lee
-`data/processed/rmove/conclusiones/dashboard_conclusiones.json`. Ese fichero lo genera la celda de
-exportación del notebook de M2 (`celda_export_conclusiones.py`).
+Ambas leen `data/processed/rmove/resultados/dashboard_resultados.json` (esquema 2), que genera la celda
+`exportar_resultados()` al final de `notebooks/04_impacto_movilidad_incidencias_v2.ipynb`. `conclusions.js`
+valida el fichero y dibuja los gráficos; no estima nada en el navegador. Se carga antes que `overview.js`.
 
-- Indicadores y cuatro tarjetas: el primer día, los barrios con estación, la duración y la relación con el análisis general.
-- Mapa por municipio de cada día de corte. El color indica la variación y el tamaño, los viajes habituales; el borde blanco marca p < 0,05. Debajo, la red de Rodalies como referencia. Filtros de día y grupo, ficha del municipio y ranking de las mayores caídas.
-- Event study (días −5 a +3) y barrios con y sin estación (ida/vuelta, M3).
+- **Incidencias** (sin parámetros): el panel de salidas lista los días de caos del notebook (avería del 13/05/2024
+  y huelgas del 17/03, 26/03 y 01/04/2025) con el efecto en los municipios dependientes. Cada fila abre la
+  **ficha** (`?view=incident&date=AAAA-MM-DD`): el día visto directamente (dependientes frente a control), cuánto
+  dura, el volumen total por tramo de línea afectado y el mapa municipio a municipio con ficha y ranking.
+  Si el día también tiene estudio OD (17/03/2025), un botón abre `?view=cases&date=...`.
+- **Resultados** (`?view=results`; `?view=conclusions` sigue funcionando): respuesta corta, KPI, cuatro tarjetas,
+  quién lo nota (por alternativa o distancia), viajes perdidos, matriz línea × día, prueba del día falso,
+  duración (media o por incidencia) y barrios con/sin estación (M3).
+
+Las relaciones OD de los cinco casos del motor (`?view=cases&date=...`) siguen disponibles desde «Análisis general».
 
 Al regenerar el JSON, copia el SHA-256 que imprime la celda en `publication.json`.
-Comprobación: `node src/dashboard/verify-conclusions.cjs`.
+Comprobación: `node src/dashboard/verify-conclusions.cjs` y `node src/dashboard/verify-overview.cjs`.

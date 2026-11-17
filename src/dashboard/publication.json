@@ -19,8 +19,8 @@
     "data/processed/rmove/general/dashboard_general.json": {
       "sha256": "de2774a2f635765741ad7d56148455d98400dfece0b72e3bdd36f640b388adba"
     },
-    "data/processed/rmove/conclusiones/dashboard_conclusiones.json": {
-      "sha256": "bc5cf493fc6a9f6ceb5ca0202006c3f91081b83be5a9c87ea1138cd08ba04794"
+    "data/processed/rmove/resultados/dashboard_resultados.json": {
+      "sha256": "98d5f320bb7e2bd817253269bf354dba1bf2f149a5723ac8eff35391763ce08f"
     }
   }
 }

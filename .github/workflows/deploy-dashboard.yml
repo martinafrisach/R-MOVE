@@ -41,6 +41,7 @@ jobs:
         run: |
           node src/dashboard/verify-results.cjs
           node src/dashboard/verify-overview.cjs
+          node src/dashboard/verify-conclusions.cjs
       - name: Build only authorized publication files
         run: python -B src/dashboard/build-pages.py
       - name: Configure Pages

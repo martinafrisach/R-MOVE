@@ -7,13 +7,18 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const CASES={'2025-06-05':'../../data/processed/rmove/incidencia_2025_06_05.json','2025-02-07':'../../data/processed/rmove/incidencia_2025_02_07.json','2025-03-17':'../../data/processed/rmove/incidencia_2025_03_17.json','2023-05-02':'../../data/processed/rmove/incidencia_2023_05_02.json','2024-04-29':'../../data/processed/rmove/incidencia_2024_04_29.json'};
 let currentCase=Object.keys(CASES)[0];
 let data=null,places={},map=null,bg=null,selected=null,municipality='',direction='both',request=0;
-function filtered(){return data.relaciones.map((r,i)=>({...r,i})).filter(r=>!municipality||(direction==='out'?r.municipio_origen===municipality:direction==='in'?r.municipio_destino===municipality:r.municipio_origen===municipality||r.municipio_destino===municipality));}
-function ranked(rows){return [...rows].sort((a,b)=>b.diferencia_viajes-a.diferencia_viajes);}
+const unusualOnly=()=>Boolean($('rel-unusual').checked);
+function filtered(){return data.relaciones.map((r,i)=>({...r,i})).filter(r=>(!unusualOnly()||r.fuera_rango_intercuartil_viajes!==false)&&(!municipality||(direction==='out'?r.municipio_origen===municipality:direction==='in'?r.municipio_destino===municipality:r.municipio_origen===municipality||r.municipio_destino===municipality)));}
+// Orden de la lista: por defecto, las mayores caídas en viajes primero (lo relevante en una incidencia).
+const SORTS={down_n:(a,b)=>a.diferencia_viajes-b.diferencia_viajes,up_n:(a,b)=>b.diferencia_viajes-a.diferencia_viajes,down_pct:(a,b)=>a.variacion_observada_pct-b.variacion_observada_pct,up_pct:(a,b)=>b.variacion_observada_pct-a.variacion_observada_pct};
+function ranked(rows){return [...rows].sort(SORTS[$('rel-sort').value]||SORTS.down_n);}
 function chooseMunicipality(code){municipality=code;selected=null;$('municipality').value=code;update();}
 function chooseRelation(i){const r=data?.relaciones[i];if(!r)return;selected=i;update();}
 function showRanking(){
- const rows=ranked(filtered());
- $('top-relations').innerHTML=rows.map(r=>`<button class="top-item ${selected===r.i?'active':''}" data-i="${r.i}"><span>${esc(r.relacion)}</span><b class="${r.variacion_observada_pct<0?'down':r.variacion_observada_pct>0?'up':'neutral'}">${signed(r.diferencia_viajes,Number.isInteger(r.diferencia_viajes)?0:1)} viajes</b></button>`).join('');
+ const rows=ranked(filtered()),all=data.relaciones.length,unusual=data.relaciones.filter(r=>r.fuera_rango_intercuartil_viajes!==false).length;
+ $('rel-count').textContent=`${rows.length} de ${all} relaciones · ${unusual} fuera de lo habitual`;
+ $('top-relations').innerHTML=rows.length?rows.map(r=>{const habitual=r.fuera_rango_intercuartil_viajes===false,cls=r.variacion_observada_pct<0?'down':r.variacion_observada_pct>0?'up':'neutral';
+  return `<button class="top-item${habitual?' habitual':''} ${selected===r.i?'active':''}" data-i="${r.i}"><span>${esc(r.relacion)}${habitual?'<small class="rank-sub">Dentro de lo habitual</small>':''}</span><b class="${cls}">${signed(r.variacion_observada_pct,1)} %<small>${signed(r.diferencia_viajes,Number.isInteger(r.diferencia_viajes)?0:1)} viajes</small></b></button>`;}).join(''):'<p class="empty-state">Ninguna relación cumple los filtros.</p>';
 }
 function initMap(){if(!window.L){$('status').textContent='Mapa no disponible: Leaflet no se ha cargado. Comprueba la conexión a Internet.';return false;}if(!map){map=L.map('map');bg=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'});bg.on('tileerror',()=>{if(map.hasLayer(bg))map.removeLayer(bg);});bg.addTo(map);if(window.RMoveRailway)window.RMoveRailway.mount(map);}return true;}
 function drawMap(){if($('case-view')?.hidden)return;if(!initMap())return;const rows=filtered();
@@ -41,4 +46,5 @@ function render(){setNetworkMode(false);const f=data.incidencia_documentada||{};
  // Seleccionar la primera relación del listado ordenado.
  const first=ranked(rr.map((r,i)=>({...r,i})))[0];if(first)selected=first.i;update();}
 async function load(date=currentCase){currentCase=date;const id=++request;if(date==='network'){renderNetwork();return;}$('app').hidden=true;$('status').textContent='Cargando resultados…';try{const res=await fetch(CASES[date]);if(!res.ok)throw Error(`HTTP ${res.status}`);const json=await res.json();if(id!==request)return;if(json.version_esquema!==3||json.fecha_incidencia!==date||!Array.isArray(json.relaciones)||!Array.isArray(json.municipios)||!json.relaciones.length)throw Error('JSON de resultados no válido');for(const r of json.relaciones)if(r.estado!=='ok'||!Number.isFinite(r.variacion_observada_pct)||!Number.isFinite(r.diferencia_viajes))throw Error('Relación no válida: '+r.relacion);data=json;render();}catch(e){if(id!==request)return;$('status').textContent=`No se pudieron cargar los datos (${e.message}). Abre /src/dashboard/ sirviendo la raíz del repositorio con python -m http.server 8000.`;}}
-$('municipality').onchange=e=>chooseMunicipality(e.target.value);$('direction').onchange=e=>{direction=e.target.value;selected=null;update();};$('top-relations').onclick=e=>{const button=e.target.closest('[data-i]');if(button)chooseRelation(Number(button.dataset.i));};
+$('municipality').onchange=e=>chooseMunicipality(e.target.value);$('direction').onchange=e=>{direction=e.target.value;selected=null;update();};$('rel-sort').onchange=()=>update();$('rel-unusual').onchange=()=>{const rows=filtered();if(selected!==null&&!rows.some(r=>r.i===selected))selected=ranked(rows)[0]?.i??null;update();};
+$('top-relations').onclick=e=>{const button=e.target.closest('[data-i]');if(button)chooseRelation(Number(button.dataset.i));};
