@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>R-MOVE · Observatorio de incidencias de Rodalies</title>
-  <link rel="icon" type="image/svg+xml" href="../dashboard/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="observatorio.css?v=3">
+  <link rel="stylesheet" href="observatorio.css?v=4">
 </head>
 <body>
   <header class="topbar">
@@ -20,7 +20,6 @@
       <a href="#municipio" data-mode="municipio"><b>3</b> Mi municipio</a>
       <a href="#laboratorio" data-mode="laboratorio"><b>4</b> Laboratorio</a>
     </nav>
-    <a class="classic" href="../dashboard/" title="Abrir el dashboard anterior">Dashboard clásico ↗</a>
   </header>
 
   <p id="status" role="status"></p>
@@ -51,14 +50,14 @@
           <p class="eyebrow">17 de marzo de 2025 · Huelga general</p>
           <h2>Cuando para toda la red, sufren los corredores más alejados.</h2>
           <div class="big-stat"><strong class="down" id="r-huelga">—</strong><span>viajes desde los municipios dependientes</span></div>
-          <p>Osona (R3) y el Garraf (R2 Sud) son los que más caen. Cuanto más lejos de Barcelona, más impacto.</p>
+          <p>Osona (R3), el Vallès Oriental (R2 Nord) y Granollers son los que más caen. Cuanto más lejos de Barcelona, más impacto.</p>
         </article>
         <article class="step" data-step="anunciada" data-nombre="Huelga anunciada">
           <p class="eyebrow">26 de marzo y 1 de abril de 2025 · Huelgas anunciadas</p>
           <h2>Con aviso, la gente no deja de ir a Barcelona: cambia de puerta.</h2>
           <p>El total casi no cambia. Pero mirando a qué barrio llegan los viajes:</p>
           <div class="doors" id="r-puertas"></div>
-          <p class="muted small">Se llega por carretera a otros barrios. Solo el Garraf sigue cayendo en todas las huelgas.</p>
+          <p class="muted small">Se llega por carretera a otros barrios. El Garraf (R2 Sud) es el corredor que más cae el 1 de abril.</p>
         </article>
         <article class="step" data-step="duracion" data-nombre="¿Cuánto dura?">
           <p class="eyebrow">¿Cuánto dura?</p>
@@ -144,6 +143,6 @@
   <footer class="foot" id="foot"></footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="observatorio.js?v=3"></script>
+  <script src="observatorio.js?v=4"></script>
 </body>
 </html>

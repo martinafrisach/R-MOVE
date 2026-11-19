@@ -1,10 +1,8 @@
 """Genera el JSON del observatorio R-MOVE (dashboard v2).
 
 Lee los ficheros que ya exporta el análisis (no recalcula ningún modelo):
-  - data/processed/rmove/resultados/dashboard_resultados.json  (M2 + M3)
-  - data/processed/rmove/m2_conectividad_municipios.parquet     (alternativas)
-  - data/processed/rmove/m2_robustez_conectividad.parquet       (efecto por tipo de alternativa)
-  - data/processed/rmove/m2_distancia_vs_alternativa.parquet    (modelo distancia + alternativa)
+  - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 04: resultados del clustering + M3)
+  - data/processed/rmove/m2_conectividad_municipios.parquet     (alternativa en transporte público por municipio)
 Opcional (si existe, el observatorio lo muestra):
   - data/processed/rmove/observatorio/vulnerabilidad.json       (motorización y renta por municipio)
 
@@ -39,7 +37,7 @@ M3_ANUNCIADAS = [
 
 # Evidencia sobre la duración (vida media): M2 event study + M3 (Montcada día 5).
 DURACION = {
-    "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (event study, días +1 a +3 ≈ 0).",
+    "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (días +1 a +3 sin caída).",
     "incidencia_larga": "Montcada 2024, 5.º día del corte (17/05/2024): −9,9 % en M3, no significativo. La gente se adapta: el efecto se diluye en pocos días.",
     "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular.",
 }
@@ -70,8 +68,7 @@ def main():
         assert f in inc, f"Falta la incidencia {f} en dashboard_resultados.json"
 
     conect = pd.read_parquet(DATA / "m2_conectividad_municipios.parquet")
-    robustez = pd.read_parquet(DATA / "m2_robustez_conectividad.parquet")
-    dist_alt = pd.read_parquet(DATA / "m2_distancia_vs_alternativa.parquet")
+    assert "alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 04 (B.8)"
 
     # ------------------------------------------------------------------ coeficientes del simulador
     def grupos_de(fecha):
@@ -184,14 +181,13 @@ def main():
                                               "grupos", "perdidos", "serie", "banda_normal", "tramos",
                                               "lineas_dependientes", "evento")})
 
-    rob = robustez.rename(columns={"clasificación": "clasificacion", "día": "dia", "efecto_%": "efecto",
-                                   "IC95_inf": "ic_inf", "IC95_sup": "ic_sup"})
-    rob = rob[rob["clasificacion"] == "Nueva"][["grupo", "dia", "municipios", "efecto", "ic_inf", "ic_sup", "p_cluster", "p_placebo"]]
-    da = dist_alt.rename(columns={"días": "dias", "efecto_%": "efecto"})
-    da = da[da["modelo"].str.startswith("3.")][["dias", "variable", "efecto", "IC95", "p"]]
+    # Efecto según la alternativa en transporte público (clustering, notebook 04)
+    alternativa = [{"grupo": a["grupo"], "dia": a["dia"], "municipios": a["municipios"], "efecto": num(a["efecto_pct"]),
+                    "ic_inf": num(a["ic_inf"]), "ic_sup": num(a["ic_sup"]), "p": num(a["p_valor"], 4)}
+                   for a in res["alternativa"]]
 
     salida = {
-        "version_esquema": 1,
+        "version_esquema": 2,
         "fuente": res["fuente"],
         "periodo": res["periodo"],
         "respuesta": res["respuesta"],
@@ -206,8 +202,7 @@ def main():
         "placebo": res["placebo"],
         "barrios": barrios_m3,
         "perdidos_media": res["perdidos_media"],
-        "alternativa": json.loads(rob.round(4).to_json(orient="records", force_ascii=False)),
-        "distancia_alternativa": json.loads(da.round(4).to_json(orient="records", force_ascii=False)),
+        "alternativa": alternativa,
         "duracion": DURACION,
         "metodo": res["metodo"],
         "limitaciones": res["limitaciones"],

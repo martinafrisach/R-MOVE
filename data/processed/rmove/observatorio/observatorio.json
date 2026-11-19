@@ -1,5 +1,5 @@
 {
- "version_esquema": 1,
+ "version_esquema": 2,
  "fuente": "R-MOVE · M2 (municipio → Barcelona, notebook 04) y M3 (municipio ↔ barrio), Telefónica Smart Steps",
  "periodo": {
   "inicio": "2023-01-01",
@@ -7,7 +7,7 @@
  },
  "respuesta": {
   "titulo": "Sí, pero solo donde el tren no tiene alternativa",
-  "texto": "En los días de caos, los municipios que dependen de Rodalies hacen un 6,8 % menos de viajes a Barcelona (≈ 4.840 viajes menos al día). Donde hay metro, FGC o bus cercano, no cambia de forma clara."
+  "texto": "En los días de caos, los municipios que dependen de Rodalies hacen un 6,2 % menos de viajes a Barcelona (≈ 4.401 viajes menos al día). Donde hay metro o FGC no cambia, y los municipios cercanos solo lo notan un poco."
  },
  "kpis": [
   {
@@ -23,13 +23,13 @@
    "etiqueta": "Municipios dependientes de Rodalies"
   },
   {
-   "valor": -6.8,
+   "valor": -6.2,
    "decimales": 1,
    "unidad": " %",
    "etiqueta": "Viajes a Barcelona el día del caos (dependientes)"
   },
   {
-   "valor": -4840.0,
+   "valor": -4400.0,
    "decimales": 0,
    "unidad": "",
    "etiqueta": "Viajes perdidos por día de caos"
@@ -39,22 +39,22 @@
   {
    "pregunta": "¿Quién deja de viajar?",
    "titulo": "Solo quien no tiene alternativa",
-   "texto": "Los municipios dependientes hacen un 6,8 % menos de viajes a Barcelona. Los cercanos o con metro/FGC no cambian de forma clara."
+   "texto": "Los municipios dependientes hacen un 6,2 % menos de viajes a Barcelona. Los que tienen metro o FGC no cambian y los cercanos solo caen un poco."
   },
   {
    "pregunta": "¿Importa la distancia?",
    "titulo": "Cuanto más lejos, más impacto",
-   "texto": "−1,4 % a menos de 15 km y −8,0 % a más de 30 km de Barcelona."
+   "texto": "+0,1 % a menos de 15 km y −7,4 % a más de 30 km de Barcelona."
   },
   {
    "pregunta": "¿Qué línea es más vulnerable?",
    "titulo": "Depende de dónde falla el tren",
-   "texto": "En una avería cae la línea cortada (Maresme, 13/05/2024). En las huelgas, el Garraf (R2 Sud) cae siempre."
+   "texto": "En una avería cae la línea cortada (Maresme, 13/05/2024). En la huelga general caen casi todos los corredores; en las huelgas anunciadas, sobre todo el Garraf (R2 Sud)."
   },
   {
    "pregunta": "¿Cuánto dura?",
    "titulo": "Un día",
-   "texto": "El día del caos el efecto es de −6,8 %; al día siguiente los viajes vuelven a la normalidad."
+   "texto": "El día del caos el efecto es de −6,2 %; al día siguiente los viajes vuelven a la normalidad."
   }
  ],
  "tipos": [
@@ -65,34 +65,34 @@
    "requiere_linea": true,
    "coeficientes": {
     "dependiente_linea_cortada": {
-     "efecto": -17.2,
-     "ic_inf": -23.6,
-     "ic_sup": -10.4,
-     "p": 0.0,
+     "efecto": -13.8,
+     "ic_inf": -18.2,
+     "ic_sup": -5.8,
+     "p": 0.008,
      "observado": true,
      "fuente": "Dependientes de la R1, avería 13/05/2024"
     },
     "dependiente_otra_linea": {
-     "efecto": -8.6,
-     "ic_inf": -13.8,
-     "ic_sup": -3.1,
-     "p": 0.003,
+     "efecto": -10.5,
+     "ic_inf": -15.0,
+     "ic_sup": -4.7,
+     "p": 0.004,
      "observado": true,
      "fuente": "Todos los dependientes, 13/05/2024 (incluye líneas que funcionaban)"
     },
     "cercanos": {
-     "efecto": 1.2,
-     "ic_inf": -4.9,
-     "ic_sup": 7.8,
-     "p": 0.7,
+     "efecto": -0.4,
+     "ic_inf": -6.4,
+     "ic_sup": 3.7,
+     "p": 0.439,
      "observado": true,
      "fuente": "Cercanos sin metro/FGC, 13/05/2024"
     },
     "metro_fgc": {
-     "efecto": 3.7,
+     "efecto": 4.2,
      "ic_inf": -0.3,
-     "ic_sup": 8.0,
-     "p": 0.07,
+     "ic_sup": 7.6,
+     "p": 0.966,
      "observado": true,
      "fuente": "Con metro/FGC, 13/05/2024"
     },
@@ -128,76 +128,76 @@
    "coeficientes": {
     "lineas": {
      "R1": {
-      "efecto": -6.7,
-      "ic_inf": -11.8,
-      "ic_sup": -1.3,
-      "p": 0.017,
+      "efecto": -7.7,
+      "ic_inf": -12.5,
+      "ic_sup": 0.8,
+      "p": 0.038,
       "observado": true,
       "fuente": "Dependientes de R1, huelga 17/03/2025"
      },
      "R2N": {
-      "efecto": -7.6,
-      "ic_inf": -15.0,
-      "ic_sup": 0.5,
-      "p": 0.066,
+      "efecto": -11.2,
+      "ic_inf": -19.0,
+      "ic_sup": 1.2,
+      "p": 0.046,
       "observado": true,
       "fuente": "Dependientes de R2N, huelga 17/03/2025"
      },
      "R2N+R3": {
-      "efecto": -5.9,
-      "ic_inf": -9.7,
-      "ic_sup": -2.0,
-      "p": 0.004,
+      "efecto": -11.4,
+      "ic_inf": -17.8,
+      "ic_sup": -3.7,
+      "p": 0.008,
       "observado": true,
       "fuente": "Dependientes de R2N+R3, huelga 17/03/2025"
      },
      "R2S": {
-      "efecto": -17.0,
-      "ic_inf": -25.8,
-      "ic_sup": -7.1,
-      "p": 0.001,
+      "efecto": -8.9,
+      "ic_inf": -16.9,
+      "ic_sup": 2.6,
+      "p": 0.05,
       "observado": true,
       "fuente": "Dependientes de R2S, huelga 17/03/2025"
      },
      "R3": {
-      "efecto": -20.3,
-      "ic_inf": -27.9,
-      "ic_sup": -11.9,
-      "p": 0.0,
+      "efecto": -15.4,
+      "ic_inf": -41.2,
+      "ic_sup": 12.2,
+      "p": 0.053,
       "observado": true,
       "fuente": "Dependientes de R3, huelga 17/03/2025"
      },
      "R4": {
-      "efecto": -9.9,
-      "ic_inf": -19.8,
-      "ic_sup": 1.2,
-      "p": 0.077,
+      "efecto": -3.4,
+      "ic_inf": -18.4,
+      "ic_sup": 10.1,
+      "p": 0.286,
       "observado": true,
       "fuente": "Dependientes de R4, huelga 17/03/2025"
      }
     },
     "grupos": {
      "dependientes": {
-      "efecto": -10.8,
-      "ic_inf": -15.6,
-      "ic_sup": -5.6,
-      "p": 0.0,
+      "efecto": -8.9,
+      "ic_inf": -13.4,
+      "ic_sup": -2.9,
+      "p": 0.011,
       "observado": true,
       "fuente": "Grupo dependientes, huelga 17/03/2025"
      },
      "cercanos": {
-      "efecto": -2.6,
-      "ic_inf": -9.7,
-      "ic_sup": 5.2,
-      "p": 0.502,
+      "efecto": -0.1,
+      "ic_inf": -6.1,
+      "ic_sup": 4.0,
+      "p": 0.473,
       "observado": true,
       "fuente": "Grupo cercanos, huelga 17/03/2025"
      },
      "metro_fgc": {
-      "efecto": 5.3,
-      "ic_inf": 0.4,
-      "ic_sup": 10.5,
-      "p": 0.035,
+      "efecto": -0.1,
+      "ic_inf": -4.4,
+      "ic_sup": 3.2,
+      "p": 0.492,
       "observado": true,
       "fuente": "Grupo metro_fgc, huelga 17/03/2025"
      }
@@ -231,76 +231,76 @@
    "coeficientes": {
     "lineas": {
      "R1": {
-      "efecto": -1.65,
-      "ic_inf": -6.75,
-      "ic_sup": 3.75,
-      "p": 0.675,
+      "efecto": 0.4,
+      "ic_inf": -4.75,
+      "ic_sup": 9.7,
+      "p": 0.977,
       "observado": true,
       "fuente": "Dependientes de R1, media de las huelgas 26/03 y 01/04/2025"
      },
      "R2N": {
-      "efecto": 1.8,
-      "ic_inf": -7.2,
-      "ic_sup": 11.7,
-      "p": 0.735,
+      "efecto": 1.75,
+      "ic_inf": -7.15,
+      "ic_sup": 15.95,
+      "p": 0.809,
       "observado": true,
       "fuente": "Dependientes de R2N, media de las huelgas 26/03 y 01/04/2025"
      },
      "R2N+R3": {
-      "efecto": 8.15,
-      "ic_inf": -3.5,
-      "ic_sup": 21.45,
-      "p": 0.251,
+      "efecto": 1.65,
+      "ic_inf": -5.75,
+      "ic_sup": 10.5,
+      "p": 0.836,
       "observado": true,
       "fuente": "Dependientes de R2N+R3, media de las huelgas 26/03 y 01/04/2025"
      },
      "R2S": {
-      "efecto": -17.55,
-      "ic_inf": -24.8,
-      "ic_sup": -9.45,
-      "p": 0.005,
+      "efecto": -9.45,
+      "ic_inf": -17.5,
+      "ic_sup": 1.95,
+      "p": 0.179,
       "observado": true,
       "fuente": "Dependientes de R2S, media de las huelgas 26/03 y 01/04/2025"
      },
      "R3": {
-      "efecto": -5.0,
-      "ic_inf": -16.95,
-      "ic_sup": 8.9,
-      "p": 0.671,
+      "efecto": -1.3,
+      "ic_inf": -31.4,
+      "ic_sup": 30.85,
+      "p": 0.45,
       "observado": true,
       "fuente": "Dependientes de R3, media de las huelgas 26/03 y 01/04/2025"
      },
      "R4": {
-      "efecto": -4.9,
-      "ic_inf": -13.5,
-      "ic_sup": 4.6,
-      "p": 0.595,
+      "efecto": -2.15,
+      "ic_inf": -17.35,
+      "ic_sup": 11.55,
+      "p": 0.618,
       "observado": true,
       "fuente": "Dependientes de R4, media de las huelgas 26/03 y 01/04/2025"
      }
     },
     "grupos": {
      "dependientes": {
-      "efecto": -3.9,
-      "ic_inf": -9.0,
-      "ic_sup": 1.45,
-      "p": 0.341,
+      "efecto": -2.5,
+      "ic_inf": -7.35,
+      "ic_sup": 3.9,
+      "p": 0.702,
       "observado": true,
       "fuente": "Grupo dependientes, media de las huelgas 26/03 y 01/04/2025"
      },
      "cercanos": {
-      "efecto": -4.5,
-      "ic_inf": -9.75,
-      "ic_sup": 1.1,
-      "p": 0.644,
+      "efecto": -4.2,
+      "ic_inf": -10.0,
+      "ic_sup": -0.3,
+      "p": 0.031,
       "observado": true,
       "fuente": "Grupo cercanos, media de las huelgas 26/03 y 01/04/2025"
      },
      "metro_fgc": {
-      "efecto": -1.0,
-      "ic_inf": -5.75,
-      "ic_sup": 4.05,
-      "p": 0.327,
+      "efecto": -4.05,
+      "ic_inf": -8.15,
+      "ic_sup": -0.85,
+      "p": 0.011,
       "observado": true,
       "fuente": "Grupo metro_fgc, media de las huelgas 26/03 y 01/04/2025"
      }
@@ -357,23 +357,23 @@
    "viajes_referencia": 1608.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -23.8,
-     "p": 0.001
+     "efecto": -27.1,
+     "p": 0.008
     },
     "2025-03-17": {
-     "efecto": -8.7,
-     "p": 0.242
+     "efecto": -5.4,
+     "p": 0.382
     },
     "2025-03-26": {
-     "efecto": 0.7,
-     "p": 0.928
+     "efecto": 12.2,
+     "p": 0.115
     },
     "2025-04-01": {
-     "efecto": -5.8,
-     "p": 0.441
+     "efecto": -3.8,
+     "p": 0.519
     }
    },
-   "efecto_medio": -9.4,
+   "efecto_medio": -6.03,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -384,7 +384,7 @@
     "salidas_h_rodalies": 7.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 18
+   "rango_vulnerabilidad": 24
   },
   {
    "codigo": "08015",
@@ -400,23 +400,23 @@
    "viajes_referencia": 66871.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 9.4,
-     "p": 0.078
+     "efecto": 5.8,
+     "p": 0.046
     },
     "2025-03-17": {
-     "efecto": 6.9,
-     "p": 0.187
+     "efecto": -1.2,
+     "p": 0.611
     },
     "2025-03-26": {
-     "efecto": -2.7,
-     "p": 0.589
+     "efecto": -3.6,
+     "p": 0.092
     },
     "2025-04-01": {
-     "efecto": 1.6,
-     "p": 0.757
+     "efecto": -4.8,
+     "p": 0.031
     }
    },
-   "efecto_medio": 3.8,
+   "efecto_medio": -0.95,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -427,7 +427,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 53
+   "rango_vulnerabilidad": 43
   },
   {
    "codigo": "08017",
@@ -443,23 +443,23 @@
    "viajes_referencia": 207.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -0.5,
-     "p": 0.976
+     "efecto": -9.3,
+     "p": 0.588
     },
     "2025-03-17": {
-     "efecto": -29.8,
-     "p": 0.07
+     "efecto": -31.6,
+     "p": 0.092
     },
     "2025-03-26": {
-     "efecto": 2.1,
-     "p": 0.912
+     "efecto": 6.4,
+     "p": 0.756
     },
     "2025-04-01": {
-     "efecto": -22.0,
-     "p": 0.204
+     "efecto": -23.2,
+     "p": 0.221
     }
    },
-   "efecto_medio": -12.55,
+   "efecto_medio": -14.43,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -470,7 +470,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 11
+   "rango_vulnerabilidad": 2
   },
   {
    "codigo": "08029",
@@ -486,23 +486,23 @@
    "viajes_referencia": 1095.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -16.3,
-     "p": 0.129
+     "efecto": -12.9,
+     "p": 0.092
     },
     "2025-03-17": {
-     "efecto": 6.6,
-     "p": 0.582
+     "efecto": 4.7,
+     "p": 0.649
     },
     "2025-03-26": {
-     "efecto": 12.6,
-     "p": 0.308
+     "efecto": 17.5,
+     "p": 0.122
     },
     "2025-04-01": {
-     "efecto": 1.1,
-     "p": 0.928
+     "efecto": 0.7,
+     "p": 0.947
     }
    },
-   "efecto_medio": 1.0,
+   "efecto_medio": 2.5,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -513,7 +513,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 39
+   "rango_vulnerabilidad": 53
   },
   {
    "codigo": "08032",
@@ -529,23 +529,23 @@
    "viajes_referencia": 337.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -14.6,
-     "p": 0.43
+     "efecto": -15.0,
+     "p": 0.305
     },
     "2025-03-17": {
-     "efecto": 1.2,
-     "p": 0.952
+     "efecto": -8.9,
+     "p": 0.55
     },
     "2025-03-26": {
-     "efecto": 1.4,
-     "p": 0.944
+     "efecto": -1.1,
+     "p": 0.939
     },
     "2025-04-01": {
-     "efecto": -9.0,
-     "p": 0.638
+     "efecto": -13.4,
+     "p": 0.366
     }
    },
-   "efecto_medio": -5.25,
+   "efecto_medio": -9.6,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -556,7 +556,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 23
+   "rango_vulnerabilidad": 14
   },
   {
    "codigo": "08035",
@@ -572,23 +572,23 @@
    "viajes_referencia": 1000.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -21.2,
-     "p": 0.004
+     "efecto": -20.4,
+     "p": 0.015
     },
     "2025-03-17": {
-     "efecto": -19.1,
-     "p": 0.009
+     "efecto": -19.9,
+     "p": 0.015
     },
     "2025-03-26": {
-     "efecto": 4.9,
-     "p": 0.562
+     "efecto": 9.6,
+     "p": 0.183
     },
     "2025-04-01": {
-     "efecto": -9.8,
-     "p": 0.204
+     "efecto": -10.9,
+     "p": 0.237
     }
    },
-   "efecto_medio": -11.3,
+   "efecto_medio": -10.4,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -599,7 +599,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 13
+   "rango_vulnerabilidad": 12
   },
   {
    "codigo": "08040",
@@ -615,23 +615,23 @@
    "viajes_referencia": 1158.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -32.7,
-     "p": 0.0
+     "efecto": -35.9,
+     "p": 0.008
     },
     "2025-03-17": {
-     "efecto": -8.2,
-     "p": 0.238
+     "efecto": -10.2,
+     "p": 0.176
     },
     "2025-03-26": {
-     "efecto": -0.4,
-     "p": 0.952
+     "efecto": 4.1,
+     "p": 0.519
     },
     "2025-04-01": {
-     "efecto": -10.8,
-     "p": 0.116
+     "efecto": -13.1,
+     "p": 0.084
     }
    },
-   "efecto_medio": -13.03,
+   "efecto_medio": -13.77,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -642,7 +642,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 9
+   "rango_vulnerabilidad": 4
   },
   {
    "codigo": "08046",
@@ -658,23 +658,23 @@
    "viajes_referencia": 1837.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 10.9,
-     "p": 0.317
+     "efecto": 8.0,
+     "p": 0.282
     },
     "2025-03-17": {
-     "efecto": -12.1,
-     "p": 0.215
+     "efecto": -15.3,
+     "p": 0.092
     },
     "2025-03-26": {
-     "efecto": 6.7,
-     "p": 0.535
+     "efecto": 11.0,
+     "p": 0.153
     },
     "2025-04-01": {
-     "efecto": 10.6,
-     "p": 0.332
+     "efecto": 10.5,
+     "p": 0.16
     }
    },
-   "efecto_medio": 4.03,
+   "efecto_medio": 3.55,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -685,7 +685,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 54
+   "rango_vulnerabilidad": 56
   },
   {
    "codigo": "08053",
@@ -701,23 +701,23 @@
    "viajes_referencia": 467.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.4,
-     "p": 0.936
+     "efecto": -3.2,
+     "p": 0.794
     },
     "2025-03-17": {
-     "efecto": -14.3,
-     "p": 0.373
+     "efecto": 1.5,
+     "p": 0.924
     },
     "2025-03-26": {
-     "efecto": -18.8,
-     "p": 0.226
+     "efecto": -2.0,
+     "p": 0.893
     },
     "2025-04-01": {
-     "efecto": -17.9,
-     "p": 0.254
+     "efecto": -8.1,
+     "p": 0.481
     }
    },
-   "efecto_medio": -12.4,
+   "efecto_medio": -2.95,
    "alternativa": {
     "clase": "débil",
     "mejor": "fgc",
@@ -728,7 +728,7 @@
     "salidas_h_rodalies": 1.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 12
+   "rango_vulnerabilidad": 35
   },
   {
    "codigo": "08054",
@@ -744,23 +744,23 @@
    "viajes_referencia": 3768.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -2.2,
-     "p": 0.849
+     "efecto": -0.9,
+     "p": 0.901
     },
     "2025-03-17": {
-     "efecto": -21.8,
-     "p": 0.043
+     "efecto": -14.4,
+     "p": 0.061
     },
     "2025-03-26": {
-     "efecto": -20.2,
-     "p": 0.063
+     "efecto": -10.6,
+     "p": 0.214
     },
     "2025-04-01": {
-     "efecto": -18.2,
-     "p": 0.099
+     "efecto": -14.3,
+     "p": 0.069
     }
    },
-   "efecto_medio": -15.6,
+   "efecto_medio": -10.05,
    "alternativa": {
     "clase": "débil",
     "mejor": "fgc",
@@ -771,7 +771,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 5
+   "rango_vulnerabilidad": 13
   },
   {
    "codigo": "08056",
@@ -787,23 +787,23 @@
    "viajes_referencia": 12682.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -0.8,
-     "p": 0.881
+     "efecto": -7.7,
+     "p": 0.122
     },
     "2025-03-17": {
-     "efecto": -6.6,
-     "p": 0.18
+     "efecto": -8.0,
+     "p": 0.122
     },
     "2025-03-26": {
-     "efecto": -8.4,
-     "p": 0.085
+     "efecto": -4.1,
+     "p": 0.397
     },
     "2025-04-01": {
-     "efecto": -12.9,
-     "p": 0.007
+     "efecto": -13.6,
+     "p": 0.053
     }
    },
-   "efecto_medio": -7.17,
+   "efecto_medio": -8.35,
    "alternativa": {
     "clase": "débil",
     "mejor": "amb",
@@ -814,7 +814,7 @@
     "salidas_h_rodalies": 8.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 21
+   "rango_vulnerabilidad": 19
   },
   {
    "codigo": "08067",
@@ -830,23 +830,23 @@
    "viajes_referencia": 555.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.3,
-     "p": 0.944
+     "efecto": -1.5,
+     "p": 0.885
     },
     "2025-03-17": {
-     "efecto": -21.5,
-     "p": 0.165
+     "efecto": 2.2,
+     "p": 0.893
     },
     "2025-03-26": {
-     "efecto": -21.7,
-     "p": 0.162
+     "efecto": -0.3,
+     "p": 0.969
     },
     "2025-04-01": {
-     "efecto": -21.6,
-     "p": 0.165
+     "efecto": -3.5,
+     "p": 0.763
     }
    },
-   "efecto_medio": -15.88,
+   "efecto_medio": -0.77,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -857,7 +857,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 4
+   "rango_vulnerabilidad": 45
   },
   {
    "codigo": "08073",
@@ -873,23 +873,23 @@
    "viajes_referencia": 31753.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.2,
-     "p": 0.873
+     "efecto": 4.1,
+     "p": 0.321
     },
     "2025-03-17": {
-     "efecto": 13.2,
-     "p": 0.093
+     "efecto": 2.9,
+     "p": 0.466
     },
     "2025-03-26": {
-     "efecto": -4.2,
-     "p": 0.555
+     "efecto": -6.6,
+     "p": 0.084
     },
     "2025-04-01": {
-     "efecto": 7.6,
-     "p": 0.327
+     "efecto": -1.1,
+     "p": 0.779
     }
    },
-   "efecto_medio": 4.45,
+   "efecto_medio": -0.17,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "fgc",
@@ -900,7 +900,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 56
+   "rango_vulnerabilidad": 48
   },
   {
    "codigo": "08074",
@@ -916,23 +916,23 @@
    "viajes_referencia": 741.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.8,
-     "p": 0.873
+     "efecto": -0.5,
+     "p": 0.992
     },
     "2025-03-17": {
-     "efecto": -29.7,
-     "p": 0.001
+     "efecto": -20.9,
+     "p": 0.053
     },
     "2025-03-26": {
-     "efecto": -33.2,
-     "p": 0.0
+     "efecto": -23.2,
+     "p": 0.046
     },
     "2025-04-01": {
-     "efecto": -16.8,
-     "p": 0.089
+     "efecto": -9.8,
+     "p": 0.298
     }
    },
-   "efecto_medio": -19.48,
+   "efecto_medio": -13.6,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -943,7 +943,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 1
+   "rango_vulnerabilidad": 5
   },
   {
    "codigo": "08086",
@@ -960,23 +960,23 @@
    "viajes_referencia": 1782.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -4.9,
-     "p": 0.575
+     "efecto": -14.0,
+     "p": 0.061
     },
     "2025-03-17": {
-     "efecto": -5.9,
-     "p": 0.49
+     "efecto": -15.4,
+     "p": 0.038
     },
     "2025-03-26": {
-     "efecto": 21.8,
-     "p": 0.026
+     "efecto": 16.5,
+     "p": 0.061
     },
     "2025-04-01": {
-     "efecto": 11.6,
-     "p": 0.215
+     "efecto": 3.5,
+     "p": 0.702
     }
    },
-   "efecto_medio": 5.65,
+   "efecto_medio": -2.35,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -987,7 +987,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 58
+   "rango_vulnerabilidad": 37
   },
   {
    "codigo": "08088",
@@ -1003,23 +1003,23 @@
    "viajes_referencia": 1915.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -13.5,
-     "p": 0.165
+     "efecto": -6.0,
+     "p": 0.412
     },
     "2025-03-17": {
-     "efecto": -21.4,
-     "p": 0.021
+     "efecto": -28.0,
+     "p": 0.008
     },
     "2025-03-26": {
-     "efecto": -6.1,
-     "p": 0.549
+     "efecto": -9.1,
+     "p": 0.198
     },
     "2025-04-01": {
-     "efecto": 2.9,
-     "p": 0.787
+     "efecto": -8.6,
+     "p": 0.237
     }
    },
-   "efecto_medio": -9.53,
+   "efecto_medio": -12.93,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -1030,7 +1030,7 @@
     "salidas_h_rodalies": 2.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 17
+   "rango_vulnerabilidad": 7
   },
   {
    "codigo": "08089",
@@ -1046,23 +1046,23 @@
    "viajes_referencia": 9137.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -1.5,
-     "p": 0.803
+     "efecto": -5.6,
+     "p": 0.168
     },
     "2025-03-17": {
-     "efecto": 4.2,
-     "p": 0.509
+     "efecto": -5.3,
+     "p": 0.168
     },
     "2025-03-26": {
-     "efecto": 1.6,
-     "p": 0.803
+     "efecto": -1.7,
+     "p": 0.55
     },
     "2025-04-01": {
-     "efecto": 3.0,
-     "p": 0.631
+     "efecto": -6.1,
+     "p": 0.153
     }
    },
-   "efecto_medio": 1.83,
+   "efecto_medio": -4.67,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -1073,7 +1073,7 @@
     "salidas_h_rodalies": 8.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 43
+   "rango_vulnerabilidad": 26
   },
   {
    "codigo": "08091",
@@ -1089,23 +1089,23 @@
    "viajes_referencia": 699.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 30.7,
-     "p": 0.063
+     "efecto": 10.8,
+     "p": 0.405
     },
     "2025-03-17": {
-     "efecto": 0.2,
-     "p": 0.992
+     "efecto": 4.7,
+     "p": 0.763
     },
     "2025-03-26": {
-     "efecto": 6.2,
-     "p": 0.674
+     "efecto": 10.7,
+     "p": 0.405
     },
     "2025-04-01": {
-     "efecto": 3.1,
-     "p": 0.834
+     "efecto": 4.9,
+     "p": 0.748
     }
    },
-   "efecto_medio": 10.05,
+   "efecto_medio": 7.78,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1116,7 +1116,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 62
+   "rango_vulnerabilidad": 60
   },
   {
    "codigo": "08096",
@@ -1133,23 +1133,23 @@
    "viajes_referencia": 7379.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -2.7,
-     "p": 0.638
+     "efecto": -2.4,
+     "p": 0.58
     },
     "2025-03-17": {
-     "efecto": -6.0,
-     "p": 0.289
+     "efecto": -11.0,
+     "p": 0.015
     },
     "2025-03-26": {
-     "efecto": -1.6,
-     "p": 0.787
+     "efecto": 0.4,
+     "p": 1.0
     },
     "2025-04-01": {
-     "efecto": 2.2,
-     "p": 0.704
+     "efecto": -2.8,
+     "p": 0.542
     }
    },
-   "efecto_medio": -2.02,
+   "efecto_medio": -3.95,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1160,7 +1160,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 31
+   "rango_vulnerabilidad": 32
   },
   {
    "codigo": "08101",
@@ -1179,23 +1179,23 @@
    "viajes_referencia": 116821.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 7.5,
-     "p": 0.129
+     "efecto": 4.6,
+     "p": 0.244
     },
     "2025-03-17": {
-     "efecto": 4.4,
-     "p": 0.373
+     "efecto": -1.0,
+     "p": 0.557
     },
     "2025-03-26": {
-     "efecto": -6.2,
-     "p": 0.18
+     "efecto": -2.4,
+     "p": 0.176
     },
     "2025-04-01": {
-     "efecto": -2.9,
-     "p": 0.535
+     "efecto": -5.1,
+     "p": 0.015
     }
    },
-   "efecto_medio": 0.7,
+   "efecto_medio": -0.97,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "fgc",
@@ -1206,7 +1206,7 @@
     "salidas_h_rodalies": 21.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 37
+   "rango_vulnerabilidad": 42
   },
   {
    "codigo": "08105",
@@ -1222,23 +1222,23 @@
    "viajes_referencia": 2391.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 8.6,
-     "p": 0.478
+     "efecto": -4.3,
+     "p": 0.511
     },
     "2025-03-17": {
-     "efecto": -12.5,
-     "p": 0.25
+     "efecto": -11.2,
+     "p": 0.092
     },
     "2025-03-26": {
-     "efecto": -19.4,
-     "p": 0.061
+     "efecto": -13.8,
+     "p": 0.038
     },
     "2025-04-01": {
-     "efecto": -16.4,
-     "p": 0.121
+     "efecto": -17.1,
+     "p": 0.008
     }
    },
-   "efecto_medio": -9.92,
+   "efecto_medio": -11.6,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1249,7 +1249,7 @@
     "salidas_h_rodalies": 5.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 16
+   "rango_vulnerabilidad": 9
   },
   {
    "codigo": "08106",
@@ -1265,23 +1265,23 @@
    "viajes_referencia": 1257.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.0,
-     "p": 0.904
+     "efecto": 2.1,
+     "p": 0.847
     },
     "2025-03-17": {
-     "efecto": -9.9,
-     "p": 0.23
+     "efecto": -12.0,
+     "p": 0.206
     },
     "2025-03-26": {
-     "efecto": -3.6,
-     "p": 0.674
+     "efecto": -4.6,
+     "p": 0.664
     },
     "2025-04-01": {
-     "efecto": 4.4,
-     "p": 0.617
+     "efecto": -3.6,
+     "p": 0.733
     }
    },
-   "efecto_medio": -2.02,
+   "efecto_medio": -4.53,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1292,7 +1292,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 32
+   "rango_vulnerabilidad": 27
   },
   {
    "codigo": "08110",
@@ -1308,23 +1308,23 @@
    "viajes_referencia": 619.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -22.0,
-     "p": 0.023
+     "efecto": -23.9,
+     "p": 0.031
     },
     "2025-03-17": {
-     "efecto": -13.5,
-     "p": 0.187
+     "efecto": -10.6,
+     "p": 0.359
     },
     "2025-03-26": {
-     "efecto": -3.1,
-     "p": 0.772
+     "efecto": -2.3,
+     "p": 0.855
     },
     "2025-04-01": {
-     "efecto": -6.0,
-     "p": 0.569
+     "efecto": -7.7,
+     "p": 0.473
     }
    },
-   "efecto_medio": -11.15,
+   "efecto_medio": -11.12,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -1335,7 +1335,7 @@
     "salidas_h_rodalies": 3.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 14
+   "rango_vulnerabilidad": 11
   },
   {
    "codigo": "08112",
@@ -1351,23 +1351,23 @@
    "viajes_referencia": 291.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 16.8,
-     "p": 0.478
+     "efecto": -10.8,
+     "p": 0.603
     },
     "2025-03-17": {
-     "efecto": -22.5,
-     "p": 0.242
+     "efecto": -15.4,
+     "p": 0.443
     },
     "2025-03-26": {
-     "efecto": -9.3,
-     "p": 0.653
+     "efecto": -4.1,
+     "p": 0.84
     },
     "2025-04-01": {
-     "efecto": 24.3,
-     "p": 0.317
+     "efecto": 29.7,
+     "p": 0.183
     }
    },
-   "efecto_medio": 2.33,
+   "efecto_medio": -0.15,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -1378,7 +1378,7 @@
     "salidas_h_rodalies": 1.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 47
+   "rango_vulnerabilidad": 49
   },
   {
    "codigo": "08113",
@@ -1394,23 +1394,23 @@
    "viajes_referencia": 2400.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 8.4,
-     "p": 0.271
+     "efecto": 6.4,
+     "p": 0.382
     },
     "2025-03-17": {
-     "efecto": -2.0,
-     "p": 0.779
+     "efecto": -1.5,
+     "p": 0.824
     },
     "2025-03-26": {
-     "efecto": -6.4,
-     "p": 0.368
+     "efecto": 0.3,
+     "p": 0.992
     },
     "2025-04-01": {
-     "efecto": 2.8,
-     "p": 0.704
+     "efecto": 4.9,
+     "p": 0.496
     }
    },
-   "efecto_medio": 0.7,
+   "efecto_medio": 2.53,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1421,7 +1421,7 @@
     "salidas_h_rodalies": 2.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 38
+   "rango_vulnerabilidad": 54
   },
   {
    "codigo": "08114",
@@ -1437,23 +1437,23 @@
    "viajes_referencia": 4368.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 2.3,
-     "p": 0.795
+     "efecto": -6.0,
+     "p": 0.328
     },
     "2025-03-17": {
-     "efecto": 4.3,
-     "p": 0.624
+     "efecto": 9.2,
+     "p": 0.191
     },
     "2025-03-26": {
-     "efecto": -2.8,
-     "p": 0.741
+     "efecto": 8.1,
+     "p": 0.237
     },
     "2025-04-01": {
-     "efecto": -4.6,
-     "p": 0.582
+     "efecto": 0.2,
+     "p": 0.992
     }
    },
-   "efecto_medio": -0.2,
+   "efecto_medio": 2.87,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "fgc",
@@ -1464,7 +1464,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 36
+   "rango_vulnerabilidad": 55
   },
   {
    "codigo": "08118",
@@ -1480,23 +1480,23 @@
    "viajes_referencia": 4034.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -12.5,
-     "p": 0.412
+     "efecto": -27.8,
+     "p": 0.008
     },
     "2025-03-17": {
-     "efecto": 16.2,
-     "p": 0.358
+     "efecto": -2.7,
+     "p": 0.573
     },
     "2025-03-26": {
-     "efecto": 6.6,
-     "p": 0.697
+     "efecto": 0.8,
+     "p": 0.863
     },
     "2025-04-01": {
-     "efecto": 8.4,
-     "p": 0.617
+     "efecto": -6.0,
+     "p": 0.344
     }
    },
-   "efecto_medio": 4.67,
+   "efecto_medio": -8.93,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1507,7 +1507,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 57
+   "rango_vulnerabilidad": 16
   },
   {
    "codigo": "08121",
@@ -1523,23 +1523,23 @@
    "viajes_referencia": 11010.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -0.3,
-     "p": 0.952
+     "efecto": -5.5,
+     "p": 0.229
     },
     "2025-03-17": {
-     "efecto": -5.1,
-     "p": 0.294
+     "efecto": -5.7,
+     "p": 0.214
     },
     "2025-03-26": {
-     "efecto": -0.6,
-     "p": 0.897
+     "efecto": 7.0,
+     "p": 0.076
     },
     "2025-04-01": {
-     "efecto": -2.4,
-     "p": 0.624
+     "efecto": -0.7,
+     "p": 0.878
     }
    },
-   "efecto_medio": -2.1,
+   "efecto_medio": -1.22,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1550,7 +1550,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 30
+   "rango_vulnerabilidad": 41
   },
   {
    "codigo": "08123",
@@ -1566,23 +1566,23 @@
    "viajes_referencia": 5497.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -5.7,
-     "p": 0.542
+     "efecto": 1.9,
+     "p": 0.756
     },
     "2025-03-17": {
-     "efecto": 4.9,
-     "p": 0.624
+     "efecto": -6.0,
+     "p": 0.176
     },
     "2025-03-26": {
-     "efecto": 1.4,
-     "p": 0.889
+     "efecto": -1.8,
+     "p": 0.695
     },
     "2025-04-01": {
-     "efecto": 9.8,
-     "p": 0.332
+     "efecto": 0.0,
+     "p": 0.962
     }
    },
-   "efecto_medio": 2.6,
+   "efecto_medio": -1.47,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1593,7 +1593,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 48
+   "rango_vulnerabilidad": 40
   },
   {
    "codigo": "08124",
@@ -1610,23 +1610,23 @@
    "viajes_referencia": 7759.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.0,
-     "p": 0.849
+     "efecto": -2.0,
+     "p": 0.496
     },
     "2025-03-17": {
-     "efecto": -7.5,
-     "p": 0.134
+     "efecto": -11.9,
+     "p": 0.008
     },
     "2025-03-26": {
-     "efecto": -2.7,
-     "p": 0.603
+     "efecto": -0.8,
+     "p": 0.725
     },
     "2025-04-01": {
-     "efecto": 2.1,
-     "p": 0.689
+     "efecto": -3.3,
+     "p": 0.351
     }
    },
-   "efecto_medio": -1.77,
+   "efecto_medio": -4.5,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1637,7 +1637,7 @@
     "salidas_h_rodalies": 7.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 33
+   "rango_vulnerabilidad": 28
   },
   {
    "codigo": "08125",
@@ -1656,23 +1656,23 @@
    "viajes_referencia": 18478.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 3.2,
-     "p": 0.764
+     "efecto": 5.7,
+     "p": 0.557
     },
     "2025-03-17": {
-     "efecto": 33.6,
-     "p": 0.007
+     "efecto": 25.2,
+     "p": 0.061
     },
     "2025-03-26": {
-     "efecto": -11.4,
-     "p": 0.263
+     "efecto": -7.8,
+     "p": 0.183
     },
     "2025-04-01": {
-     "efecto": 0.3,
-     "p": 0.976
+     "efecto": -1.9,
+     "p": 0.794
     }
    },
-   "efecto_medio": 6.43,
+   "efecto_medio": 5.3,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1683,7 +1683,7 @@
     "salidas_h_rodalies": 16.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 60
+   "rango_vulnerabilidad": 58
   },
   {
    "codigo": "08126",
@@ -1699,23 +1699,23 @@
    "viajes_referencia": 4092.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -11.4,
-     "p": 0.28
+     "efecto": -14.1,
+     "p": 0.031
     },
     "2025-03-17": {
-     "efecto": 1.1,
-     "p": 0.92
+     "efecto": -10.0,
+     "p": 0.084
     },
     "2025-03-26": {
-     "efecto": 0.8,
-     "p": 0.944
+     "efecto": -3.3,
+     "p": 0.489
     },
     "2025-04-01": {
-     "efecto": 2.9,
-     "p": 0.803
+     "efecto": -6.7,
+     "p": 0.221
     }
    },
-   "efecto_medio": -1.65,
+   "efecto_medio": -8.53,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1726,7 +1726,7 @@
     "salidas_h_rodalies": 8.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 34
+   "rango_vulnerabilidad": 18
   },
   {
    "codigo": "08135",
@@ -1743,22 +1743,22 @@
    "efectos": {
     "2024-05-13": {
      "efecto": -3.0,
-     "p": 0.795
+     "p": 0.725
     },
     "2025-03-17": {
-     "efecto": -12.6,
-     "p": 0.258
+     "efecto": -14.3,
+     "p": 0.115
     },
     "2025-03-26": {
-     "efecto": -8.6,
-     "p": 0.453
+     "efecto": -6.9,
+     "p": 0.504
     },
     "2025-04-01": {
-     "efecto": -5.2,
-     "p": 0.66
+     "efecto": -10.4,
+     "p": 0.244
     }
    },
-   "efecto_medio": -7.35,
+   "efecto_medio": -8.65,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -1769,7 +1769,7 @@
     "salidas_h_rodalies": 5.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 20
+   "rango_vulnerabilidad": 17
   },
   {
    "codigo": "08158",
@@ -1785,23 +1785,23 @@
    "viajes_referencia": 1021.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 43.4,
-     "p": 0.05
+     "efecto": 48.2,
+     "p": 0.069
     },
     "2025-03-17": {
-     "efecto": -16.6,
-     "p": 0.327
+     "efecto": -5.0,
+     "p": 0.702
     },
     "2025-03-26": {
-     "efecto": -24.0,
-     "p": 0.136
+     "efecto": -9.8,
+     "p": 0.481
     },
     "2025-04-01": {
-     "efecto": -6.8,
-     "p": 0.704
+     "efecto": 2.6,
+     "p": 0.878
     }
    },
-   "efecto_medio": -1.0,
+   "efecto_medio": 9.0,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1812,7 +1812,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 35
+   "rango_vulnerabilidad": 61
   },
   {
    "codigo": "08159",
@@ -1828,23 +1828,23 @@
    "viajes_referencia": 3539.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -6.7,
-     "p": 0.312
+     "efecto": -8.4,
+     "p": 0.168
     },
     "2025-03-17": {
-     "efecto": -9.6,
-     "p": 0.136
+     "efecto": -14.7,
+     "p": 0.023
     },
     "2025-03-26": {
-     "efecto": -2.8,
-     "p": 0.674
+     "efecto": -4.6,
+     "p": 0.435
     },
     "2025-04-01": {
-     "efecto": 7.0,
-     "p": 0.317
+     "efecto": -2.1,
+     "p": 0.779
     }
    },
-   "efecto_medio": -3.02,
+   "efecto_medio": -7.45,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1855,7 +1855,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 28
+   "rango_vulnerabilidad": 21
   },
   {
    "codigo": "08163",
@@ -1871,23 +1871,23 @@
    "viajes_referencia": 1348.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -11.5,
-     "p": 0.107
+     "efecto": -14.1,
+     "p": 0.069
     },
     "2025-03-17": {
-     "efecto": -9.5,
-     "p": 0.19
+     "efecto": -11.3,
+     "p": 0.168
     },
     "2025-03-26": {
-     "efecto": 5.0,
-     "p": 0.516
+     "efecto": 7.1,
+     "p": 0.336
     },
     "2025-04-01": {
-     "efecto": -11.2,
-     "p": 0.119
+     "efecto": -14.5,
+     "p": 0.061
     }
    },
-   "efecto_medio": -6.8,
+   "efecto_medio": -8.2,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1898,7 +1898,7 @@
     "salidas_h_rodalies": 3.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 22
+   "rango_vulnerabilidad": 20
   },
   {
    "codigo": "08169",
@@ -1915,23 +1915,23 @@
    "viajes_referencia": 37027.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 6.8,
-     "p": 0.522
+     "efecto": 13.4,
+     "p": 0.153
     },
     "2025-03-17": {
-     "efecto": 13.7,
-     "p": 0.211
+     "efecto": 14.5,
+     "p": 0.13
     },
     "2025-03-26": {
-     "efecto": -4.0,
-     "p": 0.697
+     "efecto": -5.5,
+     "p": 0.511
     },
     "2025-04-01": {
-     "efecto": 6.7,
-     "p": 0.522
+     "efecto": -0.1,
+     "p": 0.977
     }
    },
-   "efecto_medio": 5.8,
+   "efecto_medio": 5.57,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -1958,23 +1958,23 @@
    "viajes_referencia": 4229.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 7.4,
-     "p": 0.555
+     "efecto": -2.9,
+     "p": 0.634
     },
     "2025-03-17": {
-     "efecto": -10.4,
-     "p": 0.368
+     "efecto": -19.7,
+     "p": 0.099
     },
     "2025-03-26": {
-     "efecto": -13.8,
-     "p": 0.219
+     "efecto": -16.7,
+     "p": 0.13
     },
     "2025-04-01": {
-     "efecto": 3.4,
-     "p": 0.779
+     "efecto": -8.0,
+     "p": 0.298
     }
    },
-   "efecto_medio": -3.35,
+   "efecto_medio": -11.82,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1985,7 +1985,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 26
+   "rango_vulnerabilidad": 8
   },
   {
    "codigo": "08187",
@@ -2001,23 +2001,23 @@
    "viajes_referencia": 20364.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -4.0,
-     "p": 0.263
+     "efecto": -6.2,
+     "p": 0.046
     },
     "2025-03-17": {
-     "efecto": 3.9,
-     "p": 0.289
+     "efecto": -4.2,
+     "p": 0.122
     },
     "2025-03-26": {
-     "efecto": -1.5,
-     "p": 0.682
+     "efecto": -0.2,
+     "p": 0.962
     },
     "2025-04-01": {
-     "efecto": 7.0,
-     "p": 0.059
+     "efecto": 1.3,
+     "p": 0.664
     }
    },
-   "efecto_medio": 1.35,
+   "efecto_medio": -2.32,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2028,7 +2028,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 42
+   "rango_vulnerabilidad": 38
   },
   {
    "codigo": "08194",
@@ -2044,23 +2044,23 @@
    "viajes_referencia": 27946.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 9.7,
-     "p": 0.238
+     "efecto": 14.3,
+     "p": 0.084
     },
     "2025-03-17": {
-     "efecto": 0.4,
-     "p": 0.96
+     "efecto": -7.9,
+     "p": 0.168
     },
     "2025-03-26": {
-     "efecto": -20.6,
-     "p": 0.003
+     "efecto": -20.9,
+     "p": 0.008
     },
     "2025-04-01": {
-     "efecto": -6.5,
-     "p": 0.395
+     "efecto": -12.9,
+     "p": 0.053
     }
    },
-   "efecto_medio": -4.25,
+   "efecto_medio": -6.85,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -2071,7 +2071,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 25
+   "rango_vulnerabilidad": 22
   },
   {
    "codigo": "08197",
@@ -2087,23 +2087,23 @@
    "viajes_referencia": 1321.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -8.5,
-     "p": 0.25
+     "efecto": -13.2,
+     "p": 0.076
     },
     "2025-03-17": {
-     "efecto": -6.6,
-     "p": 0.379
+     "efecto": -12.9,
+     "p": 0.076
     },
     "2025-03-26": {
-     "efecto": 17.3,
-     "p": 0.039
+     "efecto": 23.3,
+     "p": 0.053
     },
     "2025-04-01": {
-     "efecto": 10.3,
-     "p": 0.204
+     "efecto": 9.2,
+     "p": 0.267
     }
    },
-   "efecto_medio": 3.13,
+   "efecto_medio": 1.6,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -2114,7 +2114,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 51
+   "rango_vulnerabilidad": 52
   },
   {
    "codigo": "08202",
@@ -2130,23 +2130,23 @@
    "viajes_referencia": 1550.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 7.6,
-     "p": 0.596
+     "efecto": 13.0,
+     "p": 0.16
     },
     "2025-03-17": {
-     "efecto": 4.8,
-     "p": 0.741
+     "efecto": -1.2,
+     "p": 0.847
     },
     "2025-03-26": {
-     "efecto": 16.0,
-     "p": 0.289
+     "efecto": 11.9,
+     "p": 0.168
     },
     "2025-04-01": {
-     "efecto": 2.7,
-     "p": 0.849
+     "efecto": -5.9,
+     "p": 0.397
     }
    },
-   "efecto_medio": 7.78,
+   "efecto_medio": 4.45,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -2157,7 +2157,7 @@
     "salidas_h_rodalies": 3.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 61
+   "rango_vulnerabilidad": 57
   },
   {
    "codigo": "08211",
@@ -2173,23 +2173,23 @@
    "viajes_referencia": 10480.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.2,
-     "p": 0.803
+     "efecto": -2.6,
+     "p": 0.45
     },
     "2025-03-17": {
-     "efecto": 4.8,
-     "p": 0.352
+     "efecto": -2.8,
+     "p": 0.397
     },
     "2025-03-26": {
-     "efecto": 1.0,
-     "p": 0.834
+     "efecto": 0.8,
+     "p": 0.748
     },
     "2025-04-01": {
-     "efecto": 2.0,
-     "p": 0.689
+     "efecto": -3.4,
+     "p": 0.29
     }
    },
-   "efecto_medio": 2.25,
+   "efecto_medio": -2.0,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2200,7 +2200,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 45
+   "rango_vulnerabilidad": 39
   },
   {
    "codigo": "08217",
@@ -2216,23 +2216,23 @@
    "viajes_referencia": 12126.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -2.0,
-     "p": 0.865
+     "efecto": 2.7,
+     "p": 0.656
     },
     "2025-03-17": {
-     "efecto": 6.9,
-     "p": 0.555
+     "efecto": -9.8,
+     "p": 0.221
     },
     "2025-03-26": {
-     "efecto": 3.7,
-     "p": 0.749
+     "efecto": -2.0,
+     "p": 0.779
     },
     "2025-04-01": {
-     "efecto": 7.8,
-     "p": 0.509
+     "efecto": -4.5,
+     "p": 0.542
     }
    },
-   "efecto_medio": 4.1,
+   "efecto_medio": -3.4,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -2243,7 +2243,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 55
+   "rango_vulnerabilidad": 33
   },
   {
    "codigo": "08219",
@@ -2259,23 +2259,23 @@
    "viajes_referencia": 3630.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -21.0,
-     "p": 0.0
+     "efecto": -23.2,
+     "p": 0.008
     },
     "2025-03-17": {
-     "efecto": -3.0,
-     "p": 0.562
+     "efecto": -8.4,
+     "p": 0.168
     },
     "2025-03-26": {
-     "efecto": -4.6,
-     "p": 0.373
+     "efecto": -1.8,
+     "p": 0.687
     },
     "2025-04-01": {
-     "efecto": -8.4,
-     "p": 0.101
+     "efecto": -11.7,
+     "p": 0.099
     }
    },
-   "efecto_medio": -9.25,
+   "efecto_medio": -11.27,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2286,7 +2286,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 19
+   "rango_vulnerabilidad": 10
   },
   {
    "codigo": "08235",
@@ -2302,23 +2302,23 @@
    "viajes_referencia": 561.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -30.9,
-     "p": 0.007
+     "efecto": -26.6,
+     "p": 0.031
     },
     "2025-03-17": {
-     "efecto": -8.0,
-     "p": 0.542
+     "efecto": -2.8,
+     "p": 0.84
     },
     "2025-03-26": {
-     "efecto": -8.8,
-     "p": 0.509
+     "efecto": -3.0,
+     "p": 0.824
     },
     "2025-04-01": {
-     "efecto": 4.6,
-     "p": 0.741
+     "efecto": 6.8,
+     "p": 0.626
     }
    },
-   "efecto_medio": -10.78,
+   "efecto_medio": -6.4,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2329,7 +2329,7 @@
     "salidas_h_rodalies": 4.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 15
+   "rango_vulnerabilidad": 23
   },
   {
    "codigo": "08240",
@@ -2345,23 +2345,23 @@
    "viajes_referencia": 910.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 2.7,
-     "p": 0.826
+     "efecto": -4.4,
+     "p": 0.695
     },
     "2025-03-17": {
-     "efecto": -1.1,
-     "p": 0.928
+     "efecto": -9.0,
+     "p": 0.412
     },
     "2025-03-26": {
-     "efecto": 7.5,
-     "p": 0.549
+     "efecto": 3.5,
+     "p": 0.756
     },
     "2025-04-01": {
-     "efecto": 5.6,
-     "p": 0.653
+     "efecto": -7.9,
+     "p": 0.481
     }
    },
-   "efecto_medio": 3.67,
+   "efecto_medio": -4.45,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2372,7 +2372,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 52
+   "rango_vulnerabilidad": 29
   },
   {
    "codigo": "08252",
@@ -2388,23 +2388,23 @@
    "viajes_referencia": 6466.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 6.5,
-     "p": 0.165
+     "efecto": 3.3,
+     "p": 0.458
     },
     "2025-03-17": {
-     "efecto": -3.8,
-     "p": 0.39
+     "efecto": -2.1,
+     "p": 0.603
     },
     "2025-03-26": {
-     "efecto": -13.2,
-     "p": 0.002
+     "efecto": -7.1,
+     "p": 0.107
     },
     "2025-04-01": {
-     "efecto": -7.7,
-     "p": 0.077
+     "efecto": -7.1,
+     "p": 0.107
     }
    },
-   "efecto_medio": -4.55,
+   "efecto_medio": -3.25,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2415,7 +2415,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 24
+   "rango_vulnerabilidad": 34
   },
   {
    "codigo": "08259",
@@ -2431,23 +2431,23 @@
    "viajes_referencia": 513.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -24.3,
-     "p": 0.134
+     "efecto": -30.4,
+     "p": 0.061
     },
     "2025-03-17": {
-     "efecto": -12.0,
-     "p": 0.49
+     "efecto": -17.0,
+     "p": 0.282
     },
     "2025-03-26": {
-     "efecto": -10.0,
-     "p": 0.569
+     "efecto": -8.6,
+     "p": 0.534
     },
     "2025-04-01": {
-     "efecto": -9.4,
-     "p": 0.596
+     "efecto": -8.5,
+     "p": 0.534
     }
    },
-   "efecto_medio": -13.93,
+   "efecto_medio": -16.12,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -2458,7 +2458,7 @@
     "salidas_h_rodalies": 3.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 8
+   "rango_vulnerabilidad": 1
   },
   {
    "codigo": "08260",
@@ -2474,23 +2474,23 @@
    "viajes_referencia": 6541.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -5.3,
-     "p": 0.298
+     "efecto": -2.1,
+     "p": 0.656
     },
     "2025-03-17": {
-     "efecto": -3.8,
-     "p": 0.453
+     "efecto": -5.5,
+     "p": 0.168
     },
     "2025-03-26": {
-     "efecto": -6.6,
-     "p": 0.194
+     "efecto": -2.6,
+     "p": 0.557
     },
     "2025-04-01": {
-     "efecto": 2.3,
-     "p": 0.66
+     "efecto": -0.6,
+     "p": 0.84
     }
    },
-   "efecto_medio": -3.35,
+   "efecto_medio": -2.7,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2501,7 +2501,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 27
+   "rango_vulnerabilidad": 36
   },
   {
    "codigo": "08262",
@@ -2517,23 +2517,23 @@
    "viajes_referencia": 297.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -22.2,
-     "p": 0.11
+     "efecto": -17.4,
+     "p": 0.168
     },
     "2025-03-17": {
-     "efecto": 3.7,
-     "p": 0.818
+     "efecto": 15.5,
+     "p": 0.336
     },
     "2025-03-26": {
-     "efecto": 20.6,
-     "p": 0.234
+     "efecto": 38.8,
+     "p": 0.069
     },
     "2025-04-01": {
-     "efecto": 1.9,
-     "p": 0.904
+     "efecto": 7.1,
+     "p": 0.656
     }
    },
-   "efecto_medio": 1.0,
+   "efecto_medio": 11.0,
    "alternativa": {
     "clase": "débil",
     "mejor": "fgc",
@@ -2544,7 +2544,7 @@
     "salidas_h_rodalies": 2.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 40
+   "rango_vulnerabilidad": 62
   },
   {
    "codigo": "08266",
@@ -2561,23 +2561,23 @@
    "viajes_referencia": 14765.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 4.2,
-     "p": 0.562
+     "efecto": 5.8,
+     "p": 0.137
     },
     "2025-03-17": {
-     "efecto": 4.1,
-     "p": 0.575
+     "efecto": -0.2,
+     "p": 0.885
     },
     "2025-03-26": {
-     "efecto": -4.3,
-     "p": 0.542
+     "efecto": -1.0,
+     "p": 0.756
     },
     "2025-04-01": {
-     "efecto": 0.7,
-     "p": 0.92
+     "efecto": -2.0,
+     "p": 0.588
     }
    },
-   "efecto_medio": 1.18,
+   "efecto_medio": 0.65,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2588,7 +2588,7 @@
     "salidas_h_rodalies": 8.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 41
+   "rango_vulnerabilidad": 50
   },
   {
    "codigo": "08270",
@@ -2604,23 +2604,23 @@
    "viajes_referencia": 5959.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -7.2,
-     "p": 0.484
+     "efecto": -6.3,
+     "p": 0.328
     },
     "2025-03-17": {
-     "efecto": -14.8,
-     "p": 0.129
+     "efecto": -2.0,
+     "p": 0.725
     },
     "2025-03-26": {
-     "efecto": -12.5,
-     "p": 0.208
+     "efecto": 3.7,
+     "p": 0.702
     },
     "2025-04-01": {
-     "efecto": -22.1,
-     "p": 0.018
+     "efecto": -13.0,
+     "p": 0.053
     }
    },
-   "efecto_medio": -14.15,
+   "efecto_medio": -4.4,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2631,7 +2631,7 @@
     "salidas_h_rodalies": 5.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 7
+   "rango_vulnerabilidad": 30
   },
   {
    "codigo": "08273",
@@ -2647,23 +2647,23 @@
    "viajes_referencia": 371.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -17.4,
-     "p": 0.465
+     "efecto": -4.4,
+     "p": 0.702
     },
     "2025-03-17": {
-     "efecto": -32.2,
-     "p": 0.136
+     "efecto": -17.7,
+     "p": 0.229
     },
     "2025-03-26": {
-     "efecto": -3.2,
-     "p": 0.904
+     "efecto": 8.8,
+     "p": 0.573
     },
     "2025-04-01": {
-     "efecto": -23.3,
-     "p": 0.308
+     "efecto": -7.5,
+     "p": 0.542
     }
    },
-   "efecto_medio": -19.03,
+   "efecto_medio": -5.2,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2674,7 +2674,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 2
+   "rango_vulnerabilidad": 25
   },
   {
    "codigo": "08279",
@@ -2690,23 +2690,23 @@
    "viajes_referencia": 16755.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 1.7,
-     "p": 0.596
+     "efecto": -0.3,
+     "p": 0.878
     },
     "2025-03-17": {
-     "efecto": 3.2,
-     "p": 0.322
+     "efecto": -3.0,
+     "p": 0.305
     },
     "2025-03-26": {
-     "efecto": -1.8,
-     "p": 0.575
+     "efecto": 0.4,
+     "p": 0.985
     },
     "2025-04-01": {
-     "efecto": 5.5,
-     "p": 0.097
+     "efecto": 1.9,
+     "p": 0.656
     }
    },
-   "efecto_medio": 2.15,
+   "efecto_medio": -0.25,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "fgc",
@@ -2717,7 +2717,7 @@
     "salidas_h_rodalies": 6.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 44
+   "rango_vulnerabilidad": 47
   },
   {
    "codigo": "08284",
@@ -2733,23 +2733,23 @@
    "viajes_referencia": 989.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 4.2,
-     "p": 0.719
+     "efecto": -1.0,
+     "p": 0.893
     },
     "2025-03-17": {
-     "efecto": -3.9,
-     "p": 0.726
+     "efecto": 0.2,
+     "p": 0.985
     },
     "2025-03-26": {
-     "efecto": -7.5,
-     "p": 0.503
+     "efecto": -2.2,
+     "p": 0.809
     },
     "2025-04-01": {
-     "efecto": -3.2,
-     "p": 0.779
+     "efecto": -0.3,
+     "p": 0.962
     }
    },
-   "efecto_medio": -2.6,
+   "efecto_medio": -0.82,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2760,7 +2760,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 29
+   "rango_vulnerabilidad": 44
   },
   {
    "codigo": "08291",
@@ -2776,23 +2776,23 @@
    "viajes_referencia": 421.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -24.4,
-     "p": 0.078
+     "efecto": -25.7,
+     "p": 0.038
     },
     "2025-03-17": {
-     "efecto": -20.5,
-     "p": 0.15
+     "efecto": -8.1,
+     "p": 0.542
     },
     "2025-03-26": {
-     "efecto": -15.4,
-     "p": 0.289
+     "efecto": -3.1,
+     "p": 0.832
     },
     "2025-04-01": {
-     "efecto": -9.4,
-     "p": 0.535
+     "efecto": -1.0,
+     "p": 0.954
     }
    },
-   "efecto_medio": -17.43,
+   "efecto_medio": -9.47,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -2803,7 +2803,7 @@
     "salidas_h_rodalies": 1.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 3
+   "rango_vulnerabilidad": 15
   },
   {
    "codigo": "08298",
@@ -2819,23 +2819,23 @@
    "viajes_referencia": 1968.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 2.6,
-     "p": 0.92
+     "efecto": -44.1,
+     "p": 0.061
     },
     "2025-03-17": {
-     "efecto": -4.2,
-     "p": 0.873
+     "efecto": -9.4,
+     "p": 0.389
     },
     "2025-03-26": {
-     "efecto": 5.8,
-     "p": 0.834
+     "efecto": 1.8,
+     "p": 0.916
     },
     "2025-04-01": {
-     "efecto": 6.7,
-     "p": 0.803
+     "efecto": -1.0,
+     "p": 0.901
     }
    },
-   "efecto_medio": 2.73,
+   "efecto_medio": -13.18,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2846,7 +2846,7 @@
     "salidas_h_rodalies": 2.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 49
+   "rango_vulnerabilidad": 6
   },
   {
    "codigo": "08300",
@@ -2862,23 +2862,23 @@
    "viajes_referencia": 605.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -5.8,
-     "p": 0.682
+     "efecto": -11.4,
+     "p": 0.237
     },
     "2025-03-17": {
-     "efecto": -17.0,
-     "p": 0.204
+     "efecto": -4.0,
+     "p": 0.656
     },
     "2025-03-26": {
-     "efecto": -17.7,
-     "p": 0.184
+     "efecto": -2.7,
+     "p": 0.84
     },
     "2025-04-01": {
-     "efecto": -10.7,
-     "p": 0.441
+     "efecto": 1.7,
+     "p": 0.901
     }
    },
-   "efecto_medio": -12.8,
+   "efecto_medio": -4.1,
    "alternativa": {
     "clase": "sin alternativa",
     "mejor": null,
@@ -2889,7 +2889,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 10
+   "rango_vulnerabilidad": 31
   },
   {
    "codigo": "08301",
@@ -2905,23 +2905,23 @@
    "viajes_referencia": 14643.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": 4.1,
-     "p": 0.49
+     "efecto": 8.7,
+     "p": 0.084
     },
     "2025-03-17": {
-     "efecto": 6.8,
-     "p": 0.258
+     "efecto": 2.9,
+     "p": 0.565
     },
     "2025-03-26": {
-     "efecto": -0.6,
-     "p": 0.92
+     "efecto": 0.1,
+     "p": 0.947
     },
     "2025-04-01": {
-     "efecto": -1.0,
-     "p": 0.865
+     "efecto": -6.2,
+     "p": 0.183
     }
    },
-   "efecto_medio": 2.32,
+   "efecto_medio": 1.37,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -2932,7 +2932,7 @@
     "salidas_h_rodalies": 7.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 46
+   "rango_vulnerabilidad": 51
   },
   {
    "codigo": "08305",
@@ -2948,23 +2948,23 @@
    "viajes_referencia": 1819.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -3.1,
-     "p": 0.81
+     "efecto": -2.4,
+     "p": 0.71
     },
     "2025-03-17": {
-     "efecto": 10.2,
-     "p": 0.447
+     "efecto": 3.7,
+     "p": 0.786
     },
     "2025-03-26": {
-     "efecto": 6.2,
-     "p": 0.638
+     "efecto": 4.3,
+     "p": 0.733
     },
     "2025-04-01": {
-     "efecto": -1.0,
-     "p": 0.944
+     "efecto": -8.5,
+     "p": 0.336
     }
    },
-   "efecto_medio": 3.07,
+   "efecto_medio": -0.73,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2975,7 +2975,7 @@
     "salidas_h_rodalies": 2.0
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 50
+   "rango_vulnerabilidad": 46
   },
   {
    "codigo": "08307",
@@ -2991,23 +2991,23 @@
    "viajes_referencia": 4145.0,
    "efectos": {
     "2024-05-13": {
-     "efecto": -15.7,
-     "p": 0.018
+     "efecto": -18.2,
+     "p": 0.038
     },
     "2025-03-17": {
-     "efecto": -15.0,
-     "p": 0.025
+     "efecto": -14.0,
+     "p": 0.084
     },
     "2025-03-26": {
-     "efecto": -12.8,
-     "p": 0.059
+     "efecto": -6.5,
+     "p": 0.29
     },
     "2025-04-01": {
-     "efecto": -18.9,
-     "p": 0.004
+     "efecto": -17.4,
+     "p": 0.038
     }
    },
-   "efecto_medio": -15.6,
+   "efecto_medio": -14.03,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -3018,7 +3018,7 @@
     "salidas_h_rodalies": 5.5
    },
    "vulnerabilidad": null,
-   "rango_vulnerabilidad": 6
+   "rango_vulnerabilidad": 3
   }
  ],
  "incidencias": [
@@ -3035,38 +3035,38 @@
     "R4",
     "R7"
    ],
-   "lectura": "Caída concentrada en la línea cortada: el Maresme (R1), sobre todo al norte de Arenys, donde no había tren.",
+   "lectura": "Caída concentrada en la línea cortada: el Maresme (R1), sobre todo al norte de Arenys, donde no había tren. Osona (R3), que solo llegaba hasta Montcada, también cae.",
    "grupos": [
     {
      "grupo": "dependientes",
      "municipios": 35,
-     "efecto_pct": -8.6,
-     "ic_inf": -13.8,
-     "ic_sup": -3.1,
-     "p_valor": 0.003
+     "efecto_pct": -10.5,
+     "ic_inf": -15.0,
+     "ic_sup": -4.7,
+     "p_valor": 0.004
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
-     "efecto_pct": 1.2,
-     "ic_inf": -4.9,
-     "ic_sup": 7.8,
-     "p_valor": 0.7
+     "efecto_pct": -0.4,
+     "ic_inf": -6.4,
+     "ic_sup": 3.7,
+     "p_valor": 0.439
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
-     "efecto_pct": 3.7,
+     "efecto_pct": 4.2,
      "ic_inf": -0.3,
-     "ic_sup": 8.0,
-     "p_valor": 0.07
+     "ic_sup": 7.6,
+     "p_valor": 0.966
     }
    ],
    "perdidos": {
-    "viajes_dia_normal": 73490.0,
-    "viajes_perdidos": 6320.0,
-    "efecto_pct": -8.6,
-    "p_valor": 0.003
+    "viajes_dia_normal": 73455.0,
+    "viajes_perdidos": 7713.0,
+    "efecto_pct": -10.5,
+    "p_valor": 0.004
    },
    "serie": [
     {
@@ -3331,112 +3331,112 @@
     {
      "linea": "R1",
      "municipios": 12,
-     "efecto_pct": -17.2,
-     "ic_inf": -23.6,
-     "ic_sup": -10.4,
-     "p_valor": 0.0,
-     "viajes_perdidos": 4166.0
+     "efecto_pct": -13.8,
+     "ic_inf": -18.2,
+     "ic_sup": -5.8,
+     "p_valor": 0.008,
+     "viajes_perdidos": 3335.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
-     "efecto_pct": -2.3,
-     "ic_inf": -16.4,
-     "ic_sup": 14.2,
-     "p_valor": 0.772,
-     "viajes_perdidos": 121.0
+     "efecto_pct": 5.9,
+     "ic_inf": -3.4,
+     "ic_sup": 20.7,
+     "p_valor": 0.893,
+     "viajes_perdidos": -286.0
     },
     {
      "linea": "R2N+R3",
      "municipios": 2,
-     "efecto_pct": -3.8,
-     "ic_inf": -7.0,
-     "ic_sup": -0.5,
-     "p_valor": 0.027,
-     "viajes_perdidos": 349.0
+     "efecto_pct": -5.2,
+     "ic_inf": -12.1,
+     "ic_sup": 3.1,
+     "p_valor": 0.122,
+     "viajes_perdidos": 462.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
-     "efecto_pct": -5.7,
-     "ic_inf": -12.9,
-     "ic_sup": 2.1,
-     "p_valor": 0.144,
-     "viajes_perdidos": 1346.0
+     "efecto_pct": -9.3,
+     "ic_inf": -17.3,
+     "ic_sup": 2.2,
+     "p_valor": 0.05,
+     "viajes_perdidos": 2159.0
     },
     {
      "linea": "R3",
      "municipios": 5,
-     "efecto_pct": 0.9,
-     "ic_inf": -7.9,
-     "ic_sup": 10.5,
-     "p_valor": 0.849,
-     "viajes_perdidos": -45.0
+     "efecto_pct": -28.5,
+     "ic_inf": -50.3,
+     "ic_sup": -5.2,
+     "p_valor": 0.027,
+     "viajes_perdidos": 1946.0
     },
     {
      "linea": "R4",
      "municipios": 8,
-     "efecto_pct": -6.1,
-     "ic_inf": -17.0,
-     "ic_sup": 6.1,
-     "p_valor": 0.309,
-     "viajes_perdidos": 365.0
+     "efecto_pct": -5.8,
+     "ic_inf": -20.5,
+     "ic_sup": 7.3,
+     "p_valor": 0.172,
+     "viajes_perdidos": 332.0
     }
    ],
    "evento": [
     {
      "dia": -5,
-     "efecto_pct": 1.28,
-     "ic_inf": -4.69,
-     "ic_sup": 7.63
+     "efecto_pct": -3.02,
+     "ic_inf": -7.85,
+     "ic_sup": 3.31
     },
     {
      "dia": -4,
-     "efecto_pct": 1.51,
-     "ic_inf": -3.22,
-     "ic_sup": 6.47
+     "efecto_pct": -1.86,
+     "ic_inf": -6.75,
+     "ic_sup": 4.54
     },
     {
      "dia": -3,
-     "efecto_pct": -1.42,
-     "ic_inf": -7.37,
-     "ic_sup": 4.91
+     "efecto_pct": -5.92,
+     "ic_inf": -10.61,
+     "ic_sup": 0.21
     },
     {
      "dia": -2,
-     "efecto_pct": -2.21,
-     "ic_inf": -6.98,
-     "ic_sup": 2.81
+     "efecto_pct": -3.85,
+     "ic_inf": -8.64,
+     "ic_sup": 2.43
     },
     {
      "dia": -1,
-     "efecto_pct": -2.91,
-     "ic_inf": -7.48,
-     "ic_sup": 1.88
+     "efecto_pct": -2.15,
+     "ic_inf": -7.03,
+     "ic_sup": 4.23
     },
     {
      "dia": 0,
-     "efecto_pct": -8.55,
-     "ic_inf": -13.77,
-     "ic_sup": -3.02
+     "efecto_pct": -10.5,
+     "ic_inf": -14.96,
+     "ic_sup": -4.66
     },
     {
      "dia": 1,
-     "efecto_pct": -0.98,
-     "ic_inf": -6.59,
-     "ic_sup": 4.97
+     "efecto_pct": 3.1,
+     "ic_inf": -2.04,
+     "ic_sup": 9.83
     },
     {
      "dia": 2,
-     "efecto_pct": 1.82,
-     "ic_inf": -3.33,
-     "ic_sup": 7.25
+     "efecto_pct": 1.83,
+     "ic_inf": -3.25,
+     "ic_sup": 8.47
     },
     {
      "dia": 3,
-     "efecto_pct": 1.09,
-     "ic_inf": -4.31,
-     "ic_sup": 6.79
+     "efecto_pct": 3.77,
+     "ic_inf": -1.4,
+     "ic_sup": 10.54
     }
    ]
   },
@@ -3454,38 +3454,38 @@
     "R4",
     "R7"
    ],
-   "lectura": "Caos generalizado: caen los corredores más alejados, Osona (R3), Garraf (R2 Sud) y Maresme norte (R1).",
+   "lectura": "Caos generalizado: caen los corredores más alejados, Osona (R3), el Vallès Oriental (R2 Nord), Granollers y el Maresme (R1).",
    "grupos": [
     {
      "grupo": "dependientes",
      "municipios": 35,
-     "efecto_pct": -10.8,
-     "ic_inf": -15.6,
-     "ic_sup": -5.6,
-     "p_valor": 0.0
+     "efecto_pct": -8.9,
+     "ic_inf": -13.4,
+     "ic_sup": -2.9,
+     "p_valor": 0.011
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
-     "efecto_pct": -2.6,
-     "ic_inf": -9.7,
-     "ic_sup": 5.2,
-     "p_valor": 0.502
+     "efecto_pct": -0.1,
+     "ic_inf": -6.1,
+     "ic_sup": 4.0,
+     "p_valor": 0.473
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
-     "efecto_pct": 5.3,
-     "ic_inf": 0.4,
-     "ic_sup": 10.5,
-     "p_valor": 0.035
+     "efecto_pct": -0.1,
+     "ic_inf": -4.4,
+     "ic_sup": 3.2,
+     "p_valor": 0.492
     }
    ],
    "perdidos": {
-    "viajes_dia_normal": 70112.0,
-    "viajes_perdidos": 7572.0,
-    "efecto_pct": -10.8,
-    "p_valor": 0.0
+    "viajes_dia_normal": 71160.0,
+    "viajes_perdidos": 6333.0,
+    "efecto_pct": -8.9,
+    "p_valor": 0.011
    },
    "serie": [
     {
@@ -3737,112 +3737,112 @@
     {
      "linea": "R1",
      "municipios": 12,
-     "efecto_pct": -6.7,
-     "ic_inf": -11.8,
-     "ic_sup": -1.3,
-     "p_valor": 0.017,
-     "viajes_perdidos": 1608.0
+     "efecto_pct": -7.7,
+     "ic_inf": -12.5,
+     "ic_sup": 0.8,
+     "p_valor": 0.038,
+     "viajes_perdidos": 1853.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
-     "efecto_pct": -7.6,
-     "ic_inf": -15.0,
-     "ic_sup": 0.5,
-     "p_valor": 0.066,
-     "viajes_perdidos": 401.0
+     "efecto_pct": -11.2,
+     "ic_inf": -19.0,
+     "ic_sup": 1.2,
+     "p_valor": 0.046,
+     "viajes_perdidos": 591.0
     },
     {
      "linea": "R2N+R3",
      "municipios": 2,
-     "efecto_pct": -5.9,
-     "ic_inf": -9.7,
-     "ic_sup": -2.0,
-     "p_valor": 0.004,
-     "viajes_perdidos": 539.0
+     "efecto_pct": -11.4,
+     "ic_inf": -17.8,
+     "ic_sup": -3.7,
+     "p_valor": 0.008,
+     "viajes_perdidos": 1066.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
-     "efecto_pct": -17.0,
-     "ic_inf": -25.8,
-     "ic_sup": -7.1,
-     "p_valor": 0.001,
-     "viajes_perdidos": 3667.0
+     "efecto_pct": -8.9,
+     "ic_inf": -16.9,
+     "ic_sup": 2.6,
+     "p_valor": 0.05,
+     "viajes_perdidos": 1952.0
     },
     {
      "linea": "R3",
      "municipios": 5,
-     "efecto_pct": -20.3,
-     "ic_inf": -27.9,
-     "ic_sup": -11.9,
-     "p_valor": 0.0,
-     "viajes_perdidos": 1011.0
+     "efecto_pct": -15.4,
+     "ic_inf": -41.2,
+     "ic_sup": 12.2,
+     "p_valor": 0.053,
+     "viajes_perdidos": 791.0
     },
     {
      "linea": "R4",
      "municipios": 8,
-     "efecto_pct": -9.9,
-     "ic_inf": -19.8,
-     "ic_sup": 1.2,
-     "p_valor": 0.077,
-     "viajes_perdidos": 523.0
+     "efecto_pct": -3.4,
+     "ic_inf": -18.4,
+     "ic_sup": 10.1,
+     "p_valor": 0.286,
+     "viajes_perdidos": 188.0
     }
    ],
    "evento": [
     {
      "dia": -5,
-     "efecto_pct": -4.39,
-     "ic_inf": -8.9,
-     "ic_sup": 0.35
+     "efecto_pct": 0.06,
+     "ic_inf": -4.93,
+     "ic_sup": 6.58
     },
     {
      "dia": -4,
-     "efecto_pct": -0.98,
-     "ic_inf": -5.39,
-     "ic_sup": 3.63
+     "efecto_pct": 2.08,
+     "ic_inf": -3.01,
+     "ic_sup": 8.73
     },
     {
      "dia": -3,
-     "efecto_pct": -4.46,
-     "ic_inf": -9.45,
-     "ic_sup": 0.81
+     "efecto_pct": 2.83,
+     "ic_inf": -2.3,
+     "ic_sup": 9.53
     },
     {
      "dia": -2,
-     "efecto_pct": -0.09,
-     "ic_inf": -5.71,
-     "ic_sup": 5.86
+     "efecto_pct": -0.44,
+     "ic_inf": -5.4,
+     "ic_sup": 6.06
     },
     {
      "dia": -1,
-     "efecto_pct": -4.61,
-     "ic_inf": -9.73,
-     "ic_sup": 0.78
+     "efecto_pct": -1.15,
+     "ic_inf": -6.08,
+     "ic_sup": 5.29
     },
     {
      "dia": 0,
-     "efecto_pct": -10.84,
-     "ic_inf": -15.79,
-     "ic_sup": -5.6
+     "efecto_pct": -8.86,
+     "ic_inf": -13.41,
+     "ic_sup": -2.92
     },
     {
      "dia": 1,
-     "efecto_pct": 3.07,
-     "ic_inf": -2.79,
-     "ic_sup": 9.28
+     "efecto_pct": -3.48,
+     "ic_inf": -8.3,
+     "ic_sup": 2.81
     },
     {
      "dia": 2,
-     "efecto_pct": -2.42,
-     "ic_inf": -6.82,
-     "ic_sup": 2.2
+     "efecto_pct": 6.8,
+     "ic_inf": 1.47,
+     "ic_sup": 13.76
     },
     {
      "dia": 3,
-     "efecto_pct": -0.86,
-     "ic_inf": -6.26,
-     "ic_sup": 4.86
+     "efecto_pct": 2.56,
+     "ic_inf": -2.56,
+     "ic_sup": 9.25
     }
    ]
   },
@@ -3860,38 +3860,38 @@
     "R4",
     "R7"
    ],
-   "lectura": "Huelga anunciada: el Garraf (R2 Sud) es el corredor que más cae.",
+   "lectura": "Huelga anunciada: el total no cambia y ninguna línea cae de forma clara; los viajes se redistribuyen hacia barrios sin estación (M3).",
    "grupos": [
     {
      "grupo": "dependientes",
      "municipios": 35,
-     "efecto_pct": -2.6,
-     "ic_inf": -7.8,
-     "ic_sup": 2.9,
-     "p_valor": 0.341
+     "efecto_pct": 1.8,
+     "ic_inf": -3.3,
+     "ic_sup": 8.5,
+     "p_valor": 0.702
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
-     "efecto_pct": -7.7,
-     "ic_inf": -13.0,
-     "ic_sup": -2.1,
-     "p_valor": 0.008
+     "efecto_pct": -4.0,
+     "ic_inf": -9.8,
+     "ic_sup": -0.1,
+     "p_valor": 0.031
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
      "efecto_pct": -4.3,
-     "ic_inf": -9.2,
-     "ic_sup": 0.9,
-     "p_valor": 0.099
+     "ic_inf": -8.4,
+     "ic_sup": -1.1,
+     "p_valor": 0.008
     }
    ],
    "perdidos": {
-    "viajes_dia_normal": 70112.0,
-    "viajes_perdidos": 1823.0,
-    "efecto_pct": -2.6,
-    "p_valor": 0.341
+    "viajes_dia_normal": 71160.0,
+    "viajes_perdidos": -1281.0,
+    "efecto_pct": 1.8,
+    "p_valor": 0.702
    },
    "serie": [
     {
@@ -4143,112 +4143,112 @@
     {
      "linea": "R1",
      "municipios": 12,
-     "efecto_pct": 1.1,
-     "ic_inf": -4.2,
-     "ic_sup": 6.8,
-     "p_valor": 0.675,
-     "viajes_perdidos": -264.0
+     "efecto_pct": 5.5,
+     "ic_inf": 0.1,
+     "ic_sup": 15.3,
+     "p_valor": 0.977,
+     "viajes_perdidos": -1324.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
-     "efecto_pct": 1.8,
-     "ic_inf": -8.2,
-     "ic_sup": 12.9,
-     "p_valor": 0.735,
-     "viajes_perdidos": -95.0
+     "efecto_pct": 4.4,
+     "ic_inf": -4.7,
+     "ic_sup": 19.0,
+     "p_valor": 0.809,
+     "viajes_perdidos": -232.0
     },
     {
      "linea": "R2N+R3",
      "municipios": 2,
-     "efecto_pct": 9.5,
-     "ic_inf": -6.3,
-     "ic_sup": 28.0,
-     "p_valor": 0.251,
-     "viajes_perdidos": -868.0
+     "efecto_pct": 4.3,
+     "ic_inf": -3.3,
+     "ic_sup": 13.3,
+     "p_valor": 0.836,
+     "viajes_perdidos": -402.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
-     "efecto_pct": -17.3,
-     "ic_inf": -27.5,
-     "ic_sup": -5.8,
-     "p_valor": 0.005,
-     "viajes_perdidos": 3731.0
+     "efecto_pct": -4.1,
+     "ic_inf": -12.6,
+     "ic_sup": 8.0,
+     "p_valor": 0.179,
+     "viajes_perdidos": 899.0
     },
     {
      "linea": "R3",
      "municipios": 5,
-     "efecto_pct": -6.4,
-     "ic_inf": -15.4,
-     "ic_sup": 3.6,
-     "p_valor": 0.199,
-     "viajes_perdidos": 319.0
+     "efecto_pct": -1.0,
+     "ic_inf": -31.2,
+     "ic_sup": 31.3,
+     "p_valor": 0.45,
+     "viajes_perdidos": 51.0
     },
     {
      "linea": "R4",
      "municipios": 8,
-     "efecto_pct": -2.8,
-     "ic_inf": -12.4,
-     "ic_sup": 7.9,
-     "p_valor": 0.595,
-     "viajes_perdidos": 148.0
+     "efecto_pct": 2.6,
+     "ic_inf": -13.4,
+     "ic_sup": 16.9,
+     "p_valor": 0.618,
+     "viajes_perdidos": -144.0
     }
    ],
    "evento": [
     {
      "dia": -5,
-     "efecto_pct": -0.95,
-     "ic_inf": -5.4,
-     "ic_sup": 3.7
+     "efecto_pct": 2.08,
+     "ic_inf": -3.01,
+     "ic_sup": 8.73
     },
     {
      "dia": -4,
-     "efecto_pct": -4.43,
-     "ic_inf": -9.46,
-     "ic_sup": 0.88
+     "efecto_pct": 2.83,
+     "ic_inf": -2.3,
+     "ic_sup": 9.53
     },
     {
      "dia": -3,
-     "efecto_pct": -0.09,
-     "ic_inf": -5.71,
-     "ic_sup": 5.86
+     "efecto_pct": -0.44,
+     "ic_inf": -5.4,
+     "ic_sup": 6.06
     },
     {
      "dia": -2,
-     "efecto_pct": -4.61,
-     "ic_inf": -9.73,
-     "ic_sup": 0.78
+     "efecto_pct": -1.15,
+     "ic_inf": -6.08,
+     "ic_sup": 5.29
     },
     {
      "dia": -1,
-     "efecto_pct": 3.07,
-     "ic_inf": -2.79,
-     "ic_sup": 9.28
+     "efecto_pct": -3.48,
+     "ic_inf": -8.3,
+     "ic_sup": 2.81
     },
     {
      "dia": 0,
-     "efecto_pct": -2.61,
-     "ic_inf": -7.8,
-     "ic_sup": 2.88
+     "efecto_pct": 1.82,
+     "ic_inf": -3.26,
+     "ic_sup": 8.46
     },
     {
      "dia": 1,
-     "efecto_pct": -2.39,
-     "ic_inf": -6.87,
-     "ic_sup": 2.31
+     "efecto_pct": 6.8,
+     "ic_inf": 1.47,
+     "ic_sup": 13.76
     },
     {
      "dia": 2,
-     "efecto_pct": -0.86,
-     "ic_inf": -6.26,
-     "ic_sup": 4.86
+     "efecto_pct": 2.56,
+     "ic_inf": -2.56,
+     "ic_sup": 9.25
     },
     {
      "dia": 3,
-     "efecto_pct": 1.52,
-     "ic_inf": -3.94,
-     "ic_sup": 7.29
+     "efecto_pct": 6.38,
+     "ic_inf": 1.08,
+     "ic_sup": 13.32
     }
    ]
   },
@@ -4266,38 +4266,38 @@
     "R4",
     "R7"
    ],
-   "lectura": "Huelga anunciada: el Garraf (R2 Sud) vuelve a ser el corredor más afectado.",
+   "lectura": "Huelga anunciada: el Garraf (R2 Sud) es el corredor más afectado.",
    "grupos": [
     {
      "grupo": "dependientes",
      "municipios": 35,
-     "efecto_pct": -5.2,
-     "ic_inf": -10.2,
-     "ic_sup": -0.0,
-     "p_valor": 0.049
+     "efecto_pct": -6.8,
+     "ic_inf": -11.4,
+     "ic_sup": -0.7,
+     "p_valor": 0.023
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
-     "efecto_pct": -1.3,
-     "ic_inf": -6.5,
-     "ic_sup": 4.3,
-     "p_valor": 0.644
+     "efecto_pct": -4.4,
+     "ic_inf": -10.2,
+     "ic_sup": -0.5,
+     "p_valor": 0.019
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
-     "efecto_pct": 2.3,
-     "ic_inf": -2.3,
-     "ic_sup": 7.2,
-     "p_valor": 0.327
+     "efecto_pct": -3.8,
+     "ic_inf": -7.9,
+     "ic_sup": -0.6,
+     "p_valor": 0.011
     }
    ],
    "perdidos": {
-    "viajes_dia_normal": 70112.0,
-    "viajes_perdidos": 3646.0,
-    "efecto_pct": -5.2,
-    "p_valor": 0.049
+    "viajes_dia_normal": 71160.0,
+    "viajes_perdidos": 4839.0,
+    "efecto_pct": -6.8,
+    "p_valor": 0.023
    },
    "serie": [
     {
@@ -4549,112 +4549,112 @@
     {
      "linea": "R1",
      "municipios": 12,
-     "efecto_pct": -4.4,
-     "ic_inf": -9.3,
-     "ic_sup": 0.7,
-     "p_valor": 0.09,
-     "viajes_perdidos": 1056.0
+     "efecto_pct": -4.7,
+     "ic_inf": -9.6,
+     "ic_sup": 4.1,
+     "p_valor": 0.099,
+     "viajes_perdidos": 1131.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
-     "efecto_pct": 1.8,
-     "ic_inf": -6.2,
-     "ic_sup": 10.5,
-     "p_valor": 0.665,
-     "viajes_perdidos": -95.0
+     "efecto_pct": -0.9,
+     "ic_inf": -9.6,
+     "ic_sup": 12.9,
+     "p_valor": 0.42,
+     "viajes_perdidos": 47.0
     },
     {
      "linea": "R2N+R3",
      "municipios": 2,
-     "efecto_pct": 6.8,
-     "ic_inf": -0.7,
-     "ic_sup": 14.9,
-     "p_valor": 0.074,
-     "viajes_perdidos": -622.0
+     "efecto_pct": -1.0,
+     "ic_inf": -8.2,
+     "ic_sup": 7.7,
+     "p_valor": 0.401,
+     "viajes_perdidos": 94.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
-     "efecto_pct": -17.8,
-     "ic_inf": -22.1,
-     "ic_sup": -13.1,
-     "p_valor": 0.0,
-     "viajes_perdidos": 3839.0
+     "efecto_pct": -14.8,
+     "ic_inf": -22.4,
+     "ic_sup": -4.1,
+     "p_valor": 0.019,
+     "viajes_perdidos": 3245.0
     },
     {
      "linea": "R3",
      "municipios": 5,
-     "efecto_pct": -3.6,
-     "ic_inf": -18.5,
-     "ic_sup": 14.2,
-     "p_valor": 0.671,
-     "viajes_perdidos": 179.0
+     "efecto_pct": -1.6,
+     "ic_inf": -31.6,
+     "ic_sup": 30.4,
+     "p_valor": 0.412,
+     "viajes_perdidos": 82.0
     },
     {
      "linea": "R4",
      "municipios": 8,
-     "efecto_pct": -7.0,
-     "ic_inf": -14.6,
-     "ic_sup": 1.3,
-     "p_valor": 0.095,
-     "viajes_perdidos": 370.0
+     "efecto_pct": -6.9,
+     "ic_inf": -21.3,
+     "ic_sup": 6.2,
+     "p_valor": 0.149,
+     "viajes_perdidos": 382.0
     }
    ],
    "evento": [
     {
      "dia": -5,
-     "efecto_pct": -0.05,
-     "ic_inf": -5.69,
-     "ic_sup": 5.93
+     "efecto_pct": -0.44,
+     "ic_inf": -5.4,
+     "ic_sup": 6.06
     },
     {
      "dia": -4,
-     "efecto_pct": -4.61,
-     "ic_inf": -9.73,
-     "ic_sup": 0.78
+     "efecto_pct": -1.15,
+     "ic_inf": -6.08,
+     "ic_sup": 5.29
     },
     {
      "dia": -3,
-     "efecto_pct": 3.07,
-     "ic_inf": -2.79,
-     "ic_sup": 9.28
+     "efecto_pct": -3.48,
+     "ic_inf": -8.3,
+     "ic_sup": 2.81
     },
     {
      "dia": -2,
-     "efecto_pct": -2.28,
-     "ic_inf": -6.69,
-     "ic_sup": 2.33
+     "efecto_pct": 6.8,
+     "ic_inf": 1.47,
+     "ic_sup": 13.76
     },
     {
      "dia": -1,
-     "efecto_pct": -0.81,
-     "ic_inf": -6.28,
-     "ic_sup": 4.97
+     "efecto_pct": 2.56,
+     "ic_inf": -2.56,
+     "ic_sup": 9.25
     },
     {
      "dia": 0,
-     "efecto_pct": -5.18,
-     "ic_inf": -10.16,
-     "ic_sup": 0.08
+     "efecto_pct": -6.8,
+     "ic_inf": -11.45,
+     "ic_sup": -0.72
     },
     {
      "dia": 1,
-     "efecto_pct": 1.63,
-     "ic_inf": -3.76,
-     "ic_sup": 7.33
+     "efecto_pct": 6.38,
+     "ic_inf": 1.08,
+     "ic_sup": 13.32
     },
     {
      "dia": 2,
-     "efecto_pct": 2.15,
-     "ic_inf": -2.55,
-     "ic_sup": 7.08
+     "efecto_pct": 3.05,
+     "ic_inf": -2.08,
+     "ic_sup": 9.77
     },
     {
      "dia": 3,
-     "efecto_pct": -2.42,
-     "ic_inf": -8.13,
-     "ic_sup": 3.64
+     "efecto_pct": 0.72,
+     "ic_inf": -4.31,
+     "ic_sup": 7.28
     }
    ]
   }
@@ -4664,8 +4664,8 @@
    "grupo": "dependientes",
    "etiqueta": "Dependientes (≥20 km, sin metro/FGC)",
    "municipios": 35,
-   "efecto_pct": -6.8,
-   "ic_inf": -10.2,
+   "efecto_pct": -6.2,
+   "ic_inf": -8.9,
    "ic_sup": -3.3,
    "p_valor": 0.0
   },
@@ -4673,307 +4673,307 @@
    "grupo": "cercanos",
    "etiqueta": "Cercanos sin metro/FGC (<20 km)",
    "municipios": 16,
-   "efecto_pct": -2.7,
-   "ic_inf": -6.2,
-   "ic_sup": 1.0,
-   "p_valor": 0.146
+   "efecto_pct": -2.3,
+   "ic_inf": -4.8,
+   "ic_sup": -0.1,
+   "p_valor": 0.021
   },
   {
    "grupo": "metro_fgc",
    "etiqueta": "Con metro/FGC",
    "municipios": 11,
-   "efecto_pct": 1.7,
-   "ic_inf": -1.2,
-   "ic_sup": 4.6,
-   "p_valor": 0.246
+   "efecto_pct": -1.0,
+   "ic_inf": -3.3,
+   "ic_sup": 0.5,
+   "p_valor": 0.083
   }
  ],
  "distancia": [
   {
    "banda": "< 15 km",
    "municipios": 8,
-   "efecto_pct": -1.4,
-   "ic_inf": -5.5,
-   "ic_sup": 2.8,
-   "p_valor": 0.493
+   "efecto_pct": 0.1,
+   "ic_inf": -3.5,
+   "ic_sup": 3.1,
+   "p_valor": 0.491
   },
   {
    "banda": "15–30 km",
    "municipios": 16,
-   "efecto_pct": -3.2,
-   "ic_inf": -7.1,
-   "ic_sup": 0.8,
-   "p_valor": 0.11
+   "efecto_pct": -5.5,
+   "ic_inf": -7.7,
+   "ic_sup": -3.2,
+   "p_valor": 0.0
   },
   {
    "banda": "> 30 km",
    "municipios": 27,
-   "efecto_pct": -8.0,
-   "ic_inf": -11.7,
-   "ic_sup": -4.2,
+   "efecto_pct": -7.4,
+   "ic_inf": -11.6,
+   "ic_sup": -3.9,
    "p_valor": 0.0
   }
  ],
  "evento": [
   {
    "dia": -5,
-   "efecto_pct": -1.7,
-   "ic_inf": -5.18,
-   "ic_sup": 1.91
+   "efecto_pct": -0.07,
+   "ic_inf": -3.37,
+   "ic_sup": 3.53
   },
   {
    "dia": -4,
-   "efecto_pct": 0.33,
-   "ic_inf": -2.73,
-   "ic_sup": 3.49
+   "efecto_pct": -0.95,
+   "ic_inf": -3.82,
+   "ic_sup": 2.11
   },
   {
    "dia": -3,
-   "efecto_pct": -3.0,
-   "ic_inf": -7.17,
-   "ic_sup": 1.37
+   "efecto_pct": -1.48,
+   "ic_inf": -4.72,
+   "ic_sup": 2.13
   },
   {
    "dia": -2,
-   "efecto_pct": -1.22,
-   "ic_inf": -4.97,
-   "ic_sup": 2.67
+   "efecto_pct": 0.74,
+   "ic_inf": -2.57,
+   "ic_sup": 4.31
   },
   {
    "dia": -1,
-   "efecto_pct": -2.82,
-   "ic_inf": -6.5,
-   "ic_sup": 1.0
+   "efecto_pct": -1.08,
+   "ic_inf": -3.9,
+   "ic_sup": 1.96
   },
   {
    "dia": 0,
-   "efecto_pct": -6.85,
-   "ic_inf": -10.37,
-   "ic_sup": -3.19
+   "efecto_pct": -6.2,
+   "ic_inf": -8.9,
+   "ic_sup": -3.33
   },
   {
    "dia": 1,
-   "efecto_pct": 0.32,
-   "ic_inf": -3.17,
-   "ic_sup": 3.93
+   "efecto_pct": 3.12,
+   "ic_inf": 0.14,
+   "ic_sup": 6.34
   },
   {
    "dia": 2,
-   "efecto_pct": 1.89,
-   "ic_inf": -2.01,
-   "ic_sup": 5.95
+   "efecto_pct": 2.48,
+   "ic_inf": -0.92,
+   "ic_sup": 6.18
   },
   {
    "dia": 3,
-   "efecto_pct": -0.85,
-   "ic_inf": -5.02,
-   "ic_sup": 3.5
+   "efecto_pct": 3.73,
+   "ic_inf": 0.35,
+   "ic_sup": 7.59
   }
  ],
  "placebo": {
-  "real_pct": -6.81,
-  "p_valor": 0.005,
+  "real_pct": -6.2,
+  "p_valor": 0.0001,
   "valores_pct": [
-   2.85,
-   -2.38,
-   2.03,
-   0.37,
-   -1.73,
-   2.38,
-   0.53,
-   0.0,
-   0.66,
-   1.53,
-   -0.11,
-   -0.27,
-   3.51,
-   -0.22,
-   1.06,
-   -1.25,
-   -0.72,
-   0.02,
-   1.93,
-   -1.04,
-   -1.22,
-   0.24,
-   0.11,
-   -1.86,
-   1.2,
-   0.16,
-   0.6,
-   -2.07,
-   -3.13,
-   -0.78,
-   0.44,
-   -1.27,
-   0.68,
-   -0.73,
-   -0.64,
-   1.23,
-   -4.26,
-   0.76,
-   0.13,
-   -0.26,
-   1.23,
-   0.38,
-   0.1,
-   1.24,
-   0.72,
-   0.87,
-   1.39,
-   1.17,
-   0.29,
-   -0.53,
-   -0.48,
-   0.07,
-   0.8,
-   -0.49,
-   0.8,
-   -0.51,
-   -1.66,
-   3.4,
-   3.43,
-   -3.35,
-   -0.28,
-   -2.11,
-   -2.31,
-   0.65,
-   -0.87,
-   -1.35,
-   -0.97,
-   1.33,
-   2.32,
-   1.15,
-   0.41,
-   -0.01,
-   -1.67,
-   -1.75,
-   1.42,
-   1.0,
-   1.81,
-   0.4,
-   0.42,
-   0.11,
-   1.95,
-   0.21,
-   3.49,
-   -3.53,
+   -0.69,
+   0.01,
+   -0.82,
+   -1.44,
+   0.26,
+   1.89,
+   1.78,
+   -1.54,
+   -0.02,
+   0.77,
+   0.06,
+   1.65,
+   1.75,
+   0.9,
    0.91,
-   -1.17,
-   3.29,
-   0.36,
-   2.69,
-   -0.42,
-   -0.73,
-   2.04,
-   -4.01,
-   0.27,
-   0.24,
-   0.53,
-   2.5,
-   -1.0,
-   -1.29,
-   -0.25,
-   -3.06,
-   -1.58,
-   -0.68,
-   1.52,
-   -3.43,
-   1.55,
-   1.31,
-   -0.33,
-   1.8,
-   -0.62,
-   0.15,
-   0.82,
-   -0.12,
-   0.13,
-   0.05,
-   1.42,
-   1.88,
-   1.1,
-   2.63,
-   -1.16,
-   -1.77,
-   1.49,
-   -0.11,
-   0.6,
-   -0.26,
-   -1.14,
-   -1.62,
-   -0.51,
-   1.14,
-   1.53,
-   2.33,
-   -0.73,
-   0.89,
-   2.02,
-   -0.31,
-   0.6,
-   -0.74,
-   -0.34,
-   -0.14,
-   1.36,
-   0.8,
-   -0.94,
-   0.24,
-   -2.42,
-   1.64,
-   1.83,
+   0.79,
+   0.52,
+   -0.9,
+   0.49,
+   -0.92,
+   0.11,
+   -1.82,
+   1.71,
    -0.32,
-   -0.78,
-   2.67,
-   1.86,
-   -1.29,
-   2.28,
+   1.41,
+   2.05,
+   -0.73,
+   -0.15,
+   -0.72,
+   1.09,
+   -0.62,
+   -2.05,
+   1.23,
+   -0.62,
+   0.02,
+   -2.84,
    -0.55,
-   -1.3,
+   -0.39,
+   2.04,
+   1.29,
+   -1.78,
+   2.56,
+   -0.78,
+   -2.71,
+   2.84,
+   -4.63,
+   -0.08,
+   1.41,
+   -1.83,
+   1.6,
+   2.74,
+   -3.54,
+   0.71,
+   -1.04,
+   -0.22,
+   -0.96,
+   0.17,
+   -0.83,
    -0.3,
+   -1.38,
+   0.31,
+   -0.35,
+   2.49,
+   -0.82,
+   0.17,
+   -2.2,
+   0.16,
+   -1.32,
+   0.82,
+   -0.53,
+   -0.04,
+   0.51,
+   -1.63,
+   1.15,
+   0.11,
+   2.53,
+   -1.06,
+   1.9,
+   2.4,
+   -3.36,
+   2.36,
+   0.18,
+   2.54,
+   1.14,
+   -1.01,
+   0.81,
+   -3.16,
+   2.07,
+   0.48,
+   -3.19,
+   0.06,
+   0.75,
+   1.14,
+   2.46,
+   3.88,
+   -1.77,
+   -0.81,
+   -0.15,
+   1.2,
+   0.8,
+   1.46,
+   -0.05,
+   0.94,
+   -2.9,
+   -0.34,
+   0.87,
+   0.66,
+   0.18,
+   1.12,
+   1.33,
+   -0.39,
+   -2.33,
+   0.2,
+   0.92,
+   2.4,
+   2.29,
+   1.31,
+   -1.18,
+   -1.68,
+   0.56,
+   -1.5,
+   -0.11,
+   1.32,
+   0.55,
+   0.25,
+   0.42,
+   2.14,
+   1.66,
+   -1.29,
+   1.16,
+   0.4,
+   -2.38,
+   -0.25,
+   0.56,
+   -3.38,
+   -2.54,
+   2.32,
+   1.16,
+   0.17,
+   -0.3,
+   -0.83,
+   1.79,
+   1.9,
+   -0.19,
+   -1.49,
+   0.57,
+   2.03,
+   0.96,
+   -0.01,
+   -0.99,
+   -1.82,
+   0.86,
+   -0.5,
+   -3.09,
+   -0.29,
+   -0.88,
+   1.96,
+   0.32,
+   1.57,
+   0.2,
+   1.52,
+   -1.59,
+   1.43,
+   0.46,
+   0.21,
+   0.62,
+   0.41,
+   -0.79,
+   1.89,
+   -0.22,
+   2.08,
+   -2.1,
+   -1.47,
+   -0.84,
+   -0.87,
+   -3.3,
    1.08,
    0.17,
-   1.82,
-   0.28,
-   1.25,
-   -1.29,
-   2.06,
-   1.53,
-   -0.27,
-   -0.64,
-   1.37,
-   0.28,
-   1.03,
-   1.0,
-   -1.22,
-   2.26,
-   1.09,
-   1.53,
-   2.32,
-   -0.15,
-   1.76,
-   1.15,
-   1.22,
-   0.27,
-   -1.74,
-   1.1,
-   0.44,
-   0.36,
-   1.6,
-   -1.81,
-   0.35,
-   0.14,
-   1.67,
-   1.75,
-   -4.57,
-   -1.28,
-   -1.05,
-   0.24,
-   0.95,
-   -0.96,
-   0.45,
-   -0.45,
-   0.47,
-   1.03,
-   -2.38
+   1.31,
+   -0.07,
+   -2.97,
+   2.3,
+   -2.8,
+   -0.55,
+   -0.52,
+   -0.49,
+   -1.01,
+   0.5,
+   -2.14,
+   1.07,
+   -0.04,
+   2.39,
+   -0.62,
+   2.08,
+   2.3,
+   0.58,
+   2.13,
+   1.45,
+   -0.72,
+   0.74
   ]
  },
  "barrios": [
@@ -5049,227 +5049,155 @@
   }
  ],
  "perdidos_media": {
-  "viajes_perdidos": 4840.0,
-  "viajes_dia_normal": 70956.0
+  "viajes_perdidos": 4401.0,
+  "viajes_dia_normal": 71734.0
  },
  "alternativa": [
   {
    "grupo": "Sin alternativa directa",
    "dia": "Todos los días de caos",
    "municipios": 16,
-   "efecto": -8.694,
-   "ic_inf": -12.9282,
-   "ic_sup": -4.2538,
-   "p_cluster": 0.0003,
-   "p_placebo": 0.001
-  },
-  {
-   "grupo": "Sin alternativa directa",
-   "dia": "13/05/2024",
-   "municipios": 16,
-   "efecto": -10.0877,
-   "ic_inf": -16.9789,
-   "ic_sup": -2.6244,
-   "p_cluster": 0.0096,
-   "p_placebo": 0.001
-  },
-  {
-   "grupo": "Sin alternativa directa",
-   "dia": "17/03/2025",
-   "municipios": 16,
-   "efecto": -14.2654,
-   "ic_inf": -19.8658,
-   "ic_sup": -8.2735,
-   "p_cluster": 0.0,
-   "p_placebo": 0.001
-  },
-  {
-   "grupo": "Sin alternativa directa",
-   "dia": "26/03/2025",
-   "municipios": 16,
-   "efecto": -5.0827,
-   "ic_inf": -12.7119,
-   "ic_sup": 3.2134,
-   "p_cluster": 0.2192,
-   "p_placebo": 0.1678
-  },
-  {
-   "grupo": "Sin alternativa directa",
-   "dia": "01/04/2025",
-   "municipios": 16,
-   "efecto": -5.1281,
-   "ic_inf": -11.5064,
-   "ic_sup": 1.7099,
-   "p_cluster": 0.1363,
-   "p_placebo": 0.1608
+   "efecto": -6.8,
+   "ic_inf": -10.7,
+   "ic_sup": -2.9,
+   "p": 0.0
   },
   {
    "grupo": "Alternativa débil",
    "dia": "Todos los días de caos",
    "municipios": 21,
-   "efecto": -5.0524,
-   "ic_inf": -8.6897,
-   "ic_sup": -1.2702,
-   "p_cluster": 0.0099,
-   "p_placebo": 0.001
-  },
-  {
-   "grupo": "Alternativa débil",
-   "dia": "13/05/2024",
-   "municipios": 21,
-   "efecto": -4.4287,
-   "ic_inf": -11.7862,
-   "ic_sup": 3.5425,
-   "p_cluster": 0.2643,
-   "p_placebo": 0.1429
-  },
-  {
-   "grupo": "Alternativa débil",
-   "dia": "17/03/2025",
-   "municipios": 21,
-   "efecto": -8.139,
-   "ic_inf": -13.5835,
-   "ic_sup": -2.3515,
-   "p_cluster": 0.007,
-   "p_placebo": 0.007
-  },
-  {
-   "grupo": "Alternativa débil",
-   "dia": "26/03/2025",
-   "municipios": 21,
-   "efecto": -3.1595,
-   "ic_inf": -8.9219,
-   "ic_sup": 2.9674,
-   "p_cluster": 0.3013,
-   "p_placebo": 0.2817
-  },
-  {
-   "grupo": "Alternativa débil",
-   "dia": "01/04/2025",
-   "municipios": 21,
-   "efecto": -4.4476,
-   "ic_inf": -9.6127,
-   "ic_sup": 1.0126,
-   "p_cluster": 0.1074,
-   "p_placebo": 0.1399
+   "efecto": -5.1,
+   "ic_inf": -7.3,
+   "ic_sup": -2.9,
+   "p": 0.0
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "Todos los días de caos",
    "municipios": 25,
-   "efecto": -0.9702,
-   "ic_inf": -3.9513,
-   "ic_sup": 2.1035,
-   "p_cluster": 0.5281,
-   "p_placebo": 0.5924
+   "efecto": -1.3,
+   "ic_inf": -3.1,
+   "ic_sup": 0.1,
+   "p": 0.034
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "13/05/2024",
+   "municipios": 16,
+   "efecto": -12.8,
+   "ic_inf": -19.5,
+   "ic_sup": -5.3,
+   "p": 0.004
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "13/05/2024",
+   "municipios": 21,
+   "efecto": -4.8,
+   "ic_inf": -9.0,
+   "ic_sup": -0.2,
+   "p": 0.027
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "13/05/2024",
    "municipios": 25,
-   "efecto": 0.0482,
-   "ic_inf": -3.9306,
-   "ic_sup": 4.1917,
-   "p_cluster": 0.9812,
-   "p_placebo": 0.8382
+   "efecto": 2.4,
+   "ic_inf": -0.7,
+   "ic_sup": 5.5,
+   "p": 0.916
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "17/03/2025",
+   "municipios": 16,
+   "efecto": -13.0,
+   "ic_inf": -19.7,
+   "ic_sup": -5.5,
+   "p": 0.004
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "17/03/2025",
+   "municipios": 21,
+   "efecto": -7.8,
+   "ic_inf": -11.8,
+   "ic_sup": -3.3,
+   "p": 0.004
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "17/03/2025",
    "municipios": 25,
-   "efecto": 1.2567,
-   "ic_inf": -4.2116,
-   "ic_sup": 7.0371,
-   "p_cluster": 0.6562,
-   "p_placebo": 0.8322
+   "efecto": 0.1,
+   "ic_inf": -3.0,
+   "ic_sup": 3.1,
+   "p": 0.58
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "26/03/2025",
+   "municipios": 16,
+   "efecto": 3.6,
+   "ic_inf": -4.3,
+   "ic_sup": 12.6,
+   "p": 0.798
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "26/03/2025",
+   "municipios": 21,
+   "efecto": -1.2,
+   "ic_inf": -5.5,
+   "ic_sup": 3.6,
+   "p": 0.305
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "26/03/2025",
    "municipios": 25,
-   "efecto": -4.5381,
-   "ic_inf": -8.7413,
-   "ic_sup": -0.1412,
-   "p_cluster": 0.0434,
-   "p_placebo": 0.1429
+   "efecto": -3.8,
+   "ic_inf": -6.8,
+   "ic_sup": -1.0,
+   "p": 0.008
+  },
+  {
+   "grupo": "Sin alternativa directa",
+   "dia": "01/04/2025",
+   "municipios": 16,
+   "efecto": -4.1,
+   "ic_inf": -11.5,
+   "ic_sup": 4.2,
+   "p": 0.156
+  },
+  {
+   "grupo": "Alternativa débil",
+   "dia": "01/04/2025",
+   "municipios": 21,
+   "efecto": -6.5,
+   "ic_inf": -10.6,
+   "ic_sup": -1.9,
+   "p": 0.004
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "01/04/2025",
    "municipios": 25,
-   "efecto": -0.5021,
-   "ic_inf": -5.0789,
-   "ic_sup": 4.2953,
-   "p_cluster": 0.8324,
-   "p_placebo": 0.7782
-  }
- ],
- "distancia_alternativa": [
-  {
-   "dias": "Todos los días de caos",
-   "variable": "Efecto base (distancia media, alternativa tan rápida como el tren)",
-   "efecto": -2.61,
-   "IC95": "[-5.5, +0.4]",
-   "p": 0.09
-  },
-  {
-   "dias": "Todos los días de caos",
-   "variable": "+10 km de distancia",
-   "efecto": -1.129,
-   "IC95": "[-2.5, +0.2]",
-   "p": 0.104
-  },
-  {
-   "dias": "Todos los días de caos",
-   "variable": "+10 min de penalización",
-   "efecto": -0.6815,
-   "IC95": "[-1.6, +0.3]",
-   "p": 0.1668
-  },
-  {
-   "dias": "Todos los días de caos",
-   "variable": "Sin alternativa directa",
-   "efecto": -5.0395,
-   "IC95": "[-9.7, -0.1]",
-   "p": 0.0441
-  },
-  {
-   "dias": "Avería 13/05 + huelga 17/03",
-   "variable": "Efecto base (distancia media, alternativa tan rápida como el tren)",
-   "efecto": -2.7239,
-   "IC95": "[-6.1, +0.8]",
-   "p": 0.1238
-  },
-  {
-   "dias": "Avería 13/05 + huelga 17/03",
-   "variable": "+10 km de distancia",
-   "efecto": -2.4434,
-   "IC95": "[-4.2, -0.6]",
-   "p": 0.0082
-  },
-  {
-   "dias": "Avería 13/05 + huelga 17/03",
-   "variable": "+10 min de penalización",
-   "efecto": -0.8084,
-   "IC95": "[-2.1, +0.5]",
-   "p": 0.2137
-  },
-  {
-   "dias": "Avería 13/05 + huelga 17/03",
-   "variable": "Sin alternativa directa",
-   "efecto": -7.1908,
-   "IC95": "[-12.1, -2.0]",
-   "p": 0.0075
+   "efecto": -3.9,
+   "ic_inf": -6.9,
+   "ic_sup": -1.1,
+   "p": 0.008
   }
  ],
  "duracion": {
-  "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (event study, días +1 a +3 ≈ 0).",
+  "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (días +1 a +3 sin caída).",
   "incidencia_larga": "Montcada 2024, 5.º día del corte (17/05/2024): −9,9 % en M3, no significativo. La gente se adapta: el efecto se diluye en pocos días.",
   "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular."
  },
  "metodo": {
   "comparacion": "Cada día de caos se compara con días limpios (laborables sin lluvia, festivos, verano, eventos ni incidencias), descontando lo que hacen ese mismo día los municipios sin Rodalies (control).",
-  "efecto": "Regresión de diferencias en diferencias con efectos fijos de municipio × día de la semana y de fecha; errores agrupados por municipio. «Efecto claro» = p < 0,05.",
+  "efecto": "Clustering: cada año los días limpios se agrupan en 4 tipos (K-means sobre el volumen de los municipios sin Rodalies y la época del año). Efecto = (viajes del grupo / su mediana en los días limpios del mismo tipo) ÷ (lo mismo para el control) − 1. p e intervalo a partir de los días limpios tratados como falsos días de caos. «Efecto claro» = p < 0,05.",
+  "comprobacion": "Regresión de diferencias en diferencias con efectos fijos de municipio × día de la semana y de fecha (errores agrupados por municipio): da la misma dirección y significación.",
   "tramos": "Volumen total de los municipios del tramo afectado frente a lo esperado: viajes del control ese día × proporción habitual tramo/control (días limpios del mismo año y día de la semana).",
   "perdidos": "Viajes perdidos = viajes de un día normal × efecto estimado. Es una aproximación.",
   "placebo": "200 grupos de días normales al azar tratados como si fueran días de caos.",

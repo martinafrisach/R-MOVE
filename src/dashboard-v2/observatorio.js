@@ -1,13 +1,13 @@
 /* Observatorio R-MOVE · dashboard v2
  * Cuatro modos: relato (scrollytelling), simulador «¿Y si…?», Mi municipio y laboratorio.
- * Solo lee data/processed/rmove/observatorio/observatorio.json (generado por build_observatorio.py)
- * y la cartografía del dashboard clásico. No recalcula modelos: consulta coeficientes ya estimados.
+ * Solo lee data/processed/rmove/observatorio/observatorio.json (generado por build_observatorio.py a partir de
+ * los resultados del clustering del notebook 04) y la red de Rodalies. No recalcula modelos: consulta coeficientes ya estimados.
  */
 (function () {
   'use strict';
 
   const DATA_URL = '../../data/processed/rmove/observatorio/observatorio.json';
-  const RAIL_URL = '../dashboard/railway-network.geojson';
+  const RAIL_URL = 'railway-network.geojson';
   const BCN = [41.3870, 2.1700];
   const BOUNDS = [[41.17, 1.62], [42.05, 2.82]];
   const FECHAS = { averia: '2024-05-13', huelga: '2025-03-17', anunciadas: ['2025-03-26', '2025-04-01'] };
@@ -336,15 +336,16 @@
         rail = () => 'cut';
         leyenda = leyendaClases('17/03/2025 · Huelga general').replace('</ul>', lineaLeyenda('Servicios mínimos en toda la red', true) + '</ul>');
         anno(41.9301, 2.2549, `<b>${pct(lineaDe('R3').efecto_pct, 0)}</b>Osona · R3`);
-        anno(41.2372, 1.8059, `<b>${pct(lineaDe('R2S').efecto_pct, 0)}</b>Garraf · R2 Sud`);
+        anno(41.6386, 2.3622, `<b>${pct(lineaDe('R2N').efecto_pct, 0)}</b>Vallès Oriental · R2 Nord`);
         anno(41.6137, 2.6547, `<b>${pct(lineaDe('R1').efecto_pct, 0)}</b>Maresme · R1`);
+        anno(41.2372, 1.8059, `<b>${pct(lineaDe('R2S').efecto_pct, 0)}</b>Garraf · R2 Sud`);
         break;
       case 'anunciada': {
         relleno = porClase(FECHAS.anunciadas);
         rail = () => 'cut';
         leyenda = leyendaClases('Huelgas anunciadas · media');
-        const r2s = D.tipos.find((t) => t.id === 'anunciada').coeficientes.lineas.R2S;
-        anno(41.2372, 1.8059, `<b>${pct(r2s.efecto, 0)}</b>Garraf · R2 Sud<small>el único que sigue cayendo</small>`);
+        const r2s = D.incidencias.find((i) => i.fecha === '2025-04-01').lineas_dependientes.find((l) => l.linea === 'R2S');
+        anno(41.2372, 1.8059, `<b>${pct(r2s.efecto_pct, 0)}</b>Garraf · R2 Sud<small>el que más cae el 1 de abril</small>`);
         anno(41.387, 2.170, 'Barcelona<small style="color:inherit;opacity:.8">los viajes llegan a otros barrios</small>', 'place');
         break;
       }
@@ -847,15 +848,15 @@
     $('lab-factores').innerHTML = `<div class="lab-grid">
       <div class="card"><div class="card-head"><h2>Cuanto más lejos, más cae: ${pct(lejos.efecto_pct)} a ${esc(lejos.banda)}</h2><small>Municipios con Rodalies, todos los días de caos</small></div><div class="pad" id="lab-dist"></div></div>
       <div class="card"><div class="card-head"><h2>Donde hay metro o FGC, no pasa nada</h2><small>Efecto por grupo, todos los días de caos</small></div><div class="pad" id="lab-grupos"></div></div>
-      <div class="card wide2"><div class="card-head"><h2>Sin alternativa al tren, la caída se repite en cada incidencia</h2><small>Efecto según la alternativa en transporte público (GTFS). Color intenso: efecto claro (p &lt; 0,05). Pasa el cursor para ver el intervalo.</small></div>
-        <div class="pad"><table class="heat"><thead><tr><th></th>${grupos.map((g) => `<th>${g}</th>`).join('')}</tr></thead><tbody>${dias.map((d) => `<tr><th>${esc(d)}</th>${grupos.map((g) => { const x = alt.find((a) => a.dia === d && a.grupo === g); if (!x) return '<td></td>'; const k = claseDe(x.efecto), cl = x.p_cluster < 0.05; return `<td style="--bg:${cl ? colClase(k) : 'var(--surface-2)'};--fg:${cl ? tintaSobre(k) : 'var(--muted)'}" data-tip="${esc(`<b>${g}</b>, ${d}<br>${pct(x.efecto)} [${pct(x.ic_inf)}, ${pct(x.ic_sup)}]<br>p = ${nf(x.p_cluster, 3)} · ${x.municipios} municipios`)}">${pct(x.efecto)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></div>
-      <details class="card wide2 det"><summary>Modelo con distancia y alternativa a la vez</summary><div class="table-wrap"><table class="tbl"><thead><tr><th>Días</th><th>Variable</th><th class="num">Efecto</th><th class="num">IC 95 %</th><th class="num">p</th></tr></thead><tbody>${D.distancia_alternativa.map((x) => `<tr class="${x.p >= 0.05 ? 'ns' : ''}"><td>${esc(x.dias)}</td><td>${esc(x.variable)}</td><td class="num">${pct(x.efecto)}</td><td class="num">${esc(x.IC95)}</td><td class="num">${nf(x.p, 3)}</td></tr>`).join('')}</tbody></table></div></details></div>`;
+      <div class="card wide2"><div class="card-head"><h2>Sin alternativa al tren, la caída se repite en cada incidencia</h2><small>Efecto según la alternativa en transporte público (GTFS), municipios con Rodalies. Color intenso: efecto claro (p &lt; 0,05). Pasa el cursor para ver el intervalo.</small></div>
+        <div class="pad"><table class="heat"><thead><tr><th></th>${grupos.map((g) => `<th>${g}</th>`).join('')}</tr></thead><tbody>${dias.map((d) => `<tr><th>${esc(d)}</th>${grupos.map((g) => { const x = alt.find((a) => a.dia === d && a.grupo === g); if (!x) return '<td></td>'; const k = claseDe(x.efecto), cl = x.p < 0.05; return `<td style="--bg:${cl ? colClase(k) : 'var(--surface-2)'};--fg:${cl ? tintaSobre(k) : 'var(--muted)'}" data-tip="${esc(`<b>${g}</b>, ${d}<br>${pct(x.efecto)} [${pct(x.ic_inf)}, ${pct(x.ic_sup)}]<br>${pval(x.p)} · ${x.municipios} municipios`)}">${pct(x.efecto)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></div>
+</div>`;
     forest($('lab-dist'), D.distancia.map((g) => ({ label: g.banda + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 120 });
     forest($('lab-grupos'), D.grupos.map((g) => ({ label: g.etiqueta.replace(/ \(.*\)/, ''), efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 170 });
   }
 
   function pintarMetodo() {
-    const titulos = { comparacion: ['Con qué se compara', 'calendario'], efecto: ['Cómo se mide el efecto', 'rayo'], tramos: ['Tramos de la red', 'tren'], perdidos: ['Viajes perdidos', 'bus'], placebo: ['Prueba placebo', 'huelga'], barrios: ['Barrios (M3)', 'casa'] };
+    const titulos = { comparacion: ['Con qué se compara', 'calendario'], efecto: ['Cómo se mide el efecto', 'rayo'], comprobacion: ['Comprobación', 'lupa'], tramos: ['Tramos de la red', 'tren'], perdidos: ['Viajes perdidos', 'bus'], placebo: ['Prueba placebo', 'huelga'], barrios: ['Barrios (M3)', 'casa'] };
     $('lab-metodo').innerHTML = `
       <div class="method-grid">${Object.entries(D.metodo).map(([k, v]) => `<div class="card mcard"><span class="ric">${ICON[(titulos[k] || ['', 'lupa'])[1]]}</span><h3>${(titulos[k] || [k])[0]}</h3><p>${esc(v)}</p></div>`).join('')}</div>
       <div class="lab-grid">
@@ -865,6 +866,7 @@
           <li><b>Días de caos:</b> ${D.incidencias.map((i) => fecha(i.fecha)).join(', ')}. El 19/03/2025 se excluye por lluvia.</li>
           <li><b>Municipios:</b> ≥ 200 viajes/día a Barcelona. Dependientes: con Rodalies, sin metro ni FGC y a ≥ 20 km.</li>
           <li><b>Alternativa:</b> GTFS de bus interurbano, AMB, FGC y Rodalies (tiempo puerta a puerta y frecuencia).</li>
+          <li><b>Método:</b> clustering de días (4 tipos por año según el volumen de los municipios sin Rodalies y la época del año). Comprobado con una regresión de diferencias en diferencias, que da la misma dirección y significación.</li>
           <li><b>Simulador:</b> viajes de un día normal × coeficiente del escenario. La avería solo se ha observado en la R1.</li></ul></div>
         <div class="card"><div class="card-head"><h2>Limitaciones</h2></div><ul class="checks warn">${D.limitaciones.map((l) => `<li>${esc(l)}</li>`).join('')}<li>${esc(D.duracion.pendiente)}</li></ul></div>
       </div>`;
@@ -888,7 +890,7 @@
   ]).then(([d, rail]) => {
     D = d; RAIL = rail;
     PC = new Map(D.municipios.map((m) => [m.codigo, m]));
-    if (!RAIL) $('status').textContent = 'No se ha encontrado la cartografía de Rodalies (../dashboard/railway-network.geojson): los mapas se muestran sin la red.';
+    if (!RAIL) $('status').textContent = 'No se ha encontrado la cartografía de Rodalies (railway-network.geojson): los mapas se muestran sin la red.';
     $('foot').textContent = `${D.fuente} · ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}. Observatorio R-MOVE v2 · Team 202_E.`;
     cargarBase().then((b) => { b.features.forEach((f) => COMARCA.set(f.properties.codigo, f.properties.comarca)); }).catch(() => {});
     addEventListener('hashchange', route);

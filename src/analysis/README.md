@@ -1,5 +1,7 @@
 # Mediana de días comparables · R-MOVE
 
+> **Nota (19/11/2026):** este motor alimentaba el dashboard clásico (`src/dashboard/`), que se ha retirado. El dashboard del proyecto es el Observatorio (`src/dashboard-v2/`), que lee los resultados del notebook 04 y no usa este motor.
+
 La referencia principal es la mediana de viajes del mismo día semanal. El Notebook 02 la compara con la media y el último día comparable. Se conservan las exploraciones de movilidad, incidencias y OD originales.
 
 ## Regla compartida

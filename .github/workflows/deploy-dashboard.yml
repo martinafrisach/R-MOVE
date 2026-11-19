@@ -1,4 +1,4 @@
-name: Deploy R-MOVE dashboard
+name: Deploy R-MOVE Observatorio
 
 on:
   pull_request:
@@ -31,19 +31,11 @@ jobs:
         with:
           node-version: '22'
       - name: Check JavaScript syntax
-        run: |
-          node --check src/dashboard/dashboard.js
-          node --check src/dashboard/case-views.js
-          node --check src/dashboard/overview.js
-      - name: Test publication boundaries and routes
-        run: python -B -m unittest discover -s src/dashboard -p 'test_pages.py' -v
-      - name: Check real result compatibility and hashes
-        run: |
-          node src/dashboard/verify-results.cjs
-          node src/dashboard/verify-overview.cjs
-          node src/dashboard/verify-conclusions.cjs
-      - name: Build only authorized publication files
-        run: python -B src/dashboard/build-pages.py
+        run: node --check src/dashboard-v2/observatorio.js
+      - name: Validate Observatorio files and data
+        run: python -B src/dashboard-v2/build_pages.py --check
+      - name: Build only the Observatorio publication files
+        run: python -B src/dashboard-v2/build_pages.py
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v5
