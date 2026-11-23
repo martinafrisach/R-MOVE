@@ -383,7 +383,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 7.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 439,
+    "renta": 17130,
+    "turismos_hogar": 1.1,
+    "conductores": 559,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 24
   },
   {
@@ -426,7 +433,14 @@
     "salidas_h_alt": 37.0,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 343,
+    "renta": 14942,
+    "turismos_hogar": 0.91,
+    "conductores": 482,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 43
   },
   {
@@ -469,7 +483,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 606,
+    "renta": 14917,
+    "turismos_hogar": 1.58,
+    "conductores": 634,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 2
   },
   {
@@ -512,7 +533,14 @@
     "salidas_h_alt": 2.0,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 600,
+    "renta": 23467,
+    "turismos_hogar": 1.68,
+    "conductores": 680,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 53
   },
   {
@@ -555,7 +583,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 513,
+    "renta": 19806,
+    "turismos_hogar": 1.26,
+    "conductores": 569,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 14
   },
   {
@@ -598,7 +633,14 @@
     "salidas_h_alt": 2.0,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 369,
+    "renta": 14337,
+    "turismos_hogar": 0.92,
+    "conductores": 489,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 12
   },
   {
@@ -641,7 +683,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 435,
+    "renta": 16194,
+    "turismos_hogar": 1.09,
+    "conductores": 575,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 4
   },
   {
@@ -684,7 +733,14 @@
     "salidas_h_alt": 1.0,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 486,
+    "renta": 18311,
+    "turismos_hogar": 1.31,
+    "conductores": 619,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 56
   },
   {
@@ -727,7 +783,14 @@
     "salidas_h_alt": 1.5,
     "salidas_h_rodalies": 1.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 549,
+    "renta": 15226,
+    "turismos_hogar": 1.37,
+    "conductores": 582,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 35
   },
   {
@@ -770,7 +833,14 @@
     "salidas_h_alt": 2.5,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 582,
+    "renta": 17338,
+    "turismos_hogar": 1.69,
+    "conductores": 627,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 13
   },
   {
@@ -813,7 +883,14 @@
     "salidas_h_alt": 19.5,
     "salidas_h_rodalies": 8.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 430,
+    "renta": 19246,
+    "turismos_hogar": 1.16,
+    "conductores": 544,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 19
   },
   {
@@ -856,7 +933,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 559,
+    "renta": 16804,
+    "turismos_hogar": 1.4,
+    "conductores": 644,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 45
   },
   {
@@ -889,7 +973,7 @@
      "p": 0.779
     }
    },
-   "efecto_medio": -0.17,
+   "efecto_medio": -0.18,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "fgc",
@@ -899,7 +983,14 @@
     "salidas_h_alt": 14.0,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 333,
+    "renta": 15282,
+    "turismos_hogar": 0.86,
+    "conductores": 480,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 48
   },
   {
@@ -942,7 +1033,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 482,
+    "renta": 16750,
+    "turismos_hogar": 1.16,
+    "conductores": 588,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 5
   },
   {
@@ -986,7 +1084,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 534,
+    "renta": 15805,
+    "turismos_hogar": 1.49,
+    "conductores": 589,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 37
   },
   {
@@ -1029,7 +1134,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 2.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 510,
+    "renta": 19016,
+    "turismos_hogar": 1.33,
+    "conductores": 624,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 7
   },
   {
@@ -1072,7 +1184,14 @@
     "salidas_h_alt": 24.5,
     "salidas_h_rodalies": 8.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 429,
+    "renta": 17595,
+    "turismos_hogar": 1.16,
+    "conductores": 559,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 26
   },
   {
@@ -1115,7 +1234,14 @@
     "salidas_h_alt": 2.0,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 489,
+    "renta": 16860,
+    "turismos_hogar": 1.25,
+    "conductores": 598,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 60
   },
   {
@@ -1159,7 +1285,14 @@
     "salidas_h_alt": 2.0,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 461,
+    "renta": 16629,
+    "turismos_hogar": 1.2,
+    "conductores": 558,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 32
   },
   {
@@ -1205,7 +1338,14 @@
     "salidas_h_alt": 15.0,
     "salidas_h_rodalies": 21.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 267,
+    "renta": 13548,
+    "turismos_hogar": 0.73,
+    "conductores": 397,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 42
   },
   {
@@ -1248,7 +1388,14 @@
     "salidas_h_alt": 6.0,
     "salidas_h_rodalies": 5.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 429,
+    "renta": 14058,
+    "turismos_hogar": 1.12,
+    "conductores": 519,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 9
   },
   {
@@ -1291,7 +1438,14 @@
     "salidas_h_alt": 0.5,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 533,
+    "renta": 17544,
+    "turismos_hogar": 1.41,
+    "conductores": 615,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 27
   },
   {
@@ -1334,7 +1488,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 3.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 439,
+    "renta": 15010,
+    "turismos_hogar": 1.1,
+    "conductores": 581,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 11
   },
   {
@@ -1377,7 +1538,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 1.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 498,
+    "renta": 14042,
+    "turismos_hogar": 1.4,
+    "conductores": 585,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 49
   },
   {
@@ -1420,7 +1588,14 @@
     "salidas_h_alt": 4.0,
     "salidas_h_rodalies": 2.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 461,
+    "renta": 15366,
+    "turismos_hogar": 1.15,
+    "conductores": 554,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 54
   },
   {
@@ -1463,7 +1638,14 @@
     "salidas_h_alt": 8.5,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 702,
+    "renta": 15239,
+    "turismos_hogar": 1.96,
+    "conductores": 543,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 55
   },
   {
@@ -1506,7 +1688,14 @@
     "salidas_h_alt": 4.5,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 459,
+    "renta": 19884,
+    "turismos_hogar": 1.17,
+    "conductores": 625,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 16
   },
   {
@@ -1539,7 +1728,7 @@
      "p": 0.878
     }
    },
-   "efecto_medio": -1.22,
+   "efecto_medio": -1.23,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -1549,7 +1738,14 @@
     "salidas_h_alt": 14.0,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 402,
+    "renta": 14878,
+    "turismos_hogar": 1.05,
+    "conductores": 542,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 41
   },
   {
@@ -1582,7 +1778,7 @@
      "p": 0.962
     }
    },
-   "efecto_medio": -1.47,
+   "efecto_medio": -1.48,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -1592,7 +1788,14 @@
     "salidas_h_alt": 7.5,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 440,
+    "renta": 18826,
+    "turismos_hogar": 1.14,
+    "conductores": 582,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 40
   },
   {
@@ -1636,7 +1839,14 @@
     "salidas_h_alt": 10.0,
     "salidas_h_rodalies": 7.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 453,
+    "renta": 15552,
+    "turismos_hogar": 1.18,
+    "conductores": 564,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 28
   },
   {
@@ -1682,7 +1892,14 @@
     "salidas_h_alt": 10.5,
     "salidas_h_rodalies": 16.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 480,
+    "renta": 15012,
+    "turismos_hogar": 1.3,
+    "conductores": 546,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 58
   },
   {
@@ -1725,7 +1942,14 @@
     "salidas_h_alt": 1.5,
     "salidas_h_rodalies": 8.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 488,
+    "renta": 18698,
+    "turismos_hogar": 1.27,
+    "conductores": 603,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 18
   },
   {
@@ -1768,7 +1992,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 5.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 518,
+    "renta": 16415,
+    "turismos_hogar": 1.35,
+    "conductores": 607,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 17
   },
   {
@@ -1811,7 +2042,14 @@
     "salidas_h_alt": 1.5,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 526,
+    "renta": 17767,
+    "turismos_hogar": 1.37,
+    "conductores": 630,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 61
   },
   {
@@ -1854,7 +2092,14 @@
     "salidas_h_alt": 5.5,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 548,
+    "renta": 17384,
+    "turismos_hogar": 1.48,
+    "conductores": 648,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 21
   },
   {
@@ -1897,7 +2142,14 @@
     "salidas_h_alt": 2.0,
     "salidas_h_rodalies": 3.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 479,
+    "renta": 14272,
+    "turismos_hogar": 1.2,
+    "conductores": 562,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 20
   },
   {
@@ -1931,7 +2183,7 @@
      "p": 0.977
     }
    },
-   "efecto_medio": 5.57,
+   "efecto_medio": 5.58,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "amb",
@@ -1941,7 +2193,14 @@
     "salidas_h_alt": 46.0,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 422,
+    "renta": 16132,
+    "turismos_hogar": 1.1,
+    "conductores": 525,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 59
   },
   {
@@ -1984,7 +2243,14 @@
     "salidas_h_alt": 5.5,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 418,
+    "renta": 16956,
+    "turismos_hogar": 1.06,
+    "conductores": 562,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 8
   },
   {
@@ -2017,7 +2283,7 @@
      "p": 0.664
     }
    },
-   "efecto_medio": -2.32,
+   "efecto_medio": -2.33,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2027,7 +2293,14 @@
     "salidas_h_alt": 7.5,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 433,
+    "renta": 16050,
+    "turismos_hogar": 1.13,
+    "conductores": 561,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 38
   },
   {
@@ -2070,7 +2343,14 @@
     "salidas_h_alt": 19.5,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 326,
+    "renta": 13611,
+    "turismos_hogar": 0.88,
+    "conductores": 439,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 22
   },
   {
@@ -2113,7 +2393,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 511,
+    "renta": 21040,
+    "turismos_hogar": 1.38,
+    "conductores": 635,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 52
   },
   {
@@ -2156,7 +2443,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 3.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 468,
+    "renta": 16157,
+    "turismos_hogar": 1.22,
+    "conductores": 566,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 57
   },
   {
@@ -2199,7 +2493,14 @@
     "salidas_h_alt": 7.0,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 385,
+    "renta": 18073,
+    "turismos_hogar": 1.0,
+    "conductores": 541,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 39
   },
   {
@@ -2242,7 +2543,14 @@
     "salidas_h_alt": 15.5,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 386,
+    "renta": 18712,
+    "turismos_hogar": 1.04,
+    "conductores": 563,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 33
   },
   {
@@ -2275,7 +2583,7 @@
      "p": 0.099
     }
    },
-   "efecto_medio": -11.27,
+   "efecto_medio": -11.28,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2285,7 +2593,14 @@
     "salidas_h_alt": 1.5,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 458,
+    "renta": 20576,
+    "turismos_hogar": 1.19,
+    "conductores": 624,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 10
   },
   {
@@ -2328,7 +2643,14 @@
     "salidas_h_alt": 1.5,
     "salidas_h_rodalies": 4.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 448,
+    "renta": 20206,
+    "turismos_hogar": 1.05,
+    "conductores": 573,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 23
   },
   {
@@ -2371,7 +2693,14 @@
     "salidas_h_alt": 2.5,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 514,
+    "renta": 17863,
+    "turismos_hogar": 1.34,
+    "conductores": 639,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 29
   },
   {
@@ -2414,7 +2743,14 @@
     "salidas_h_alt": 6.5,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 482,
+    "renta": 16360,
+    "turismos_hogar": 1.3,
+    "conductores": 586,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 34
   },
   {
@@ -2457,7 +2793,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 3.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 553,
+    "renta": 17202,
+    "turismos_hogar": 1.44,
+    "conductores": 642,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 1
   },
   {
@@ -2500,7 +2843,14 @@
     "salidas_h_alt": 14.0,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 533,
+    "renta": 16073,
+    "turismos_hogar": 1.44,
+    "conductores": 612,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 36
   },
   {
@@ -2543,7 +2893,14 @@
     "salidas_h_alt": 2.5,
     "salidas_h_rodalies": 2.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 470,
+    "renta": 14429,
+    "turismos_hogar": 1.22,
+    "conductores": 554,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 62
   },
   {
@@ -2587,7 +2944,14 @@
     "salidas_h_alt": 11.0,
     "salidas_h_rodalies": 8.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 455,
+    "renta": 18456,
+    "turismos_hogar": 1.18,
+    "conductores": 596,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 50
   },
   {
@@ -2630,7 +2994,14 @@
     "salidas_h_alt": 4.5,
     "salidas_h_rodalies": 5.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 384,
+    "renta": 22042,
+    "turismos_hogar": 0.92,
+    "conductores": 522,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 30
   },
   {
@@ -2673,7 +3044,14 @@
     "salidas_h_alt": 1.0,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 613,
+    "renta": 17112,
+    "turismos_hogar": 1.66,
+    "conductores": 697,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 25
   },
   {
@@ -2716,7 +3094,14 @@
     "salidas_h_alt": 12.5,
     "salidas_h_rodalies": 6.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 451,
+    "renta": 15694,
+    "turismos_hogar": 1.17,
+    "conductores": 587,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 47
   },
   {
@@ -2749,7 +3134,7 @@
      "p": 0.962
     }
    },
-   "efecto_medio": -0.82,
+   "efecto_medio": -0.83,
    "alternativa": {
     "clase": "débil",
     "mejor": "bus_interurbano",
@@ -2759,7 +3144,14 @@
     "salidas_h_alt": 0.5,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 521,
+    "renta": 14049,
+    "turismos_hogar": 1.35,
+    "conductores": 587,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 44
   },
   {
@@ -2802,7 +3194,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 1.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 565,
+    "renta": 16962,
+    "turismos_hogar": 1.58,
+    "conductores": 627,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 15
   },
   {
@@ -2845,7 +3244,14 @@
     "salidas_h_alt": 5.5,
     "salidas_h_rodalies": 2.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 448,
+    "renta": 15494,
+    "turismos_hogar": 1.26,
+    "conductores": 542,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 6
   },
   {
@@ -2888,7 +3294,14 @@
     "salidas_h_alt": null,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 587,
+    "renta": 19406,
+    "turismos_hogar": 1.7,
+    "conductores": 671,
+    "nivel_motorizacion": "alta",
+    "nivel_renta": "alta"
+   },
    "rango_vulnerabilidad": 31
   },
   {
@@ -2931,7 +3344,14 @@
     "salidas_h_alt": 32.5,
     "salidas_h_rodalies": 7.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 428,
+    "renta": 16222,
+    "turismos_hogar": 1.15,
+    "conductores": 571,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 51
   },
   {
@@ -2964,7 +3384,7 @@
      "p": 0.336
     }
    },
-   "efecto_medio": -0.73,
+   "efecto_medio": -0.72,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -2974,7 +3394,14 @@
     "salidas_h_alt": 4.0,
     "salidas_h_rodalies": 2.0
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 467,
+    "renta": 15738,
+    "turismos_hogar": 1.22,
+    "conductores": 594,
+    "nivel_motorizacion": "media",
+    "nivel_renta": "baja"
+   },
    "rango_vulnerabilidad": 46
   },
   {
@@ -3007,7 +3434,7 @@
      "p": 0.038
     }
    },
-   "efecto_medio": -14.03,
+   "efecto_medio": -14.02,
    "alternativa": {
     "clase": "fuerte",
     "mejor": "bus_interurbano",
@@ -3017,7 +3444,14 @@
     "salidas_h_alt": 8.5,
     "salidas_h_rodalies": 5.5
    },
-   "vulnerabilidad": null,
+   "vulnerabilidad": {
+    "motorizacion": 432,
+    "renta": 17084,
+    "turismos_hogar": 1.06,
+    "conductores": 573,
+    "nivel_motorizacion": "baja",
+    "nivel_renta": "media"
+   },
    "rango_vulnerabilidad": 3
   }
  ],
@@ -5207,7 +5641,165 @@
   "Datos diarios de todos los modos de transporte: no identifican el tren ni la hora.",
   "Solo cuatro días de caos válidos; en los municipios pequeños la significación individual es baja.",
   "Los municipios de control pueden notar el caos de forma indirecta: el efecto real podría ser algo mayor.",
-  "Las magnitudes de M3 no son comparables con las de M2; se comparan direcciones y diferencias dentro de M3."
+  "Las magnitudes de M3 no son comparables con las de M2; se comparan direcciones y diferencias dentro de M3.",
+  "Motorización y renta: asociación entre 62 municipios, no causalidad. Los turismos se registran en el domicilio del titular (algunas flotas de empresa) y no sabemos qué parte de cada municipio viaja en tren."
  ],
- "hay_vulnerabilidad": false
+ "hay_vulnerabilidad": true,
+ "vulnerabilidad_resumen": {
+  "fuente": "DGT (2023–2025), INE Padrón (2023–2025) e INE ADRH (2023–2024). Efecto: clustering de M2 por municipio. Notebook 06.",
+  "muestra": 62,
+  "dependientes": 35,
+  "mediana_motorizacion": 468,
+  "mediana_renta": 16689,
+  "cortes_motorizacion": [
+   461,
+   513
+  ],
+  "cortes_renta": [
+   15805,
+   17202
+  ],
+  "modelo": [
+   {
+    "variable": "tur100",
+    "etiqueta": "+100 turismos por 1.000 hab.",
+    "coef_pp": 1.43,
+    "ic_inf": 0.33,
+    "ic_sup": 2.53,
+    "p": 0.0111
+   },
+   {
+    "variable": "renta_k",
+    "etiqueta": "+1.000 € de renta por persona",
+    "coef_pp": -0.34,
+    "ic_inf": -1.02,
+    "ic_sup": 0.33,
+    "p": 0.3136
+   },
+   {
+    "variable": "dist10",
+    "etiqueta": "+10 km de distancia a Barcelona",
+    "coef_pp": -0.71,
+    "ic_inf": -1.92,
+    "ic_sup": 0.51,
+    "p": 0.2553
+   },
+   {
+    "variable": "con_alt",
+    "etiqueta": "Tener metro o FGC",
+    "coef_pp": 2.95,
+    "ic_inf": 0.79,
+    "ic_sup": 5.11,
+    "p": 0.0074
+   }
+  ],
+  "r2": 0.24,
+  "robustez": {
+   "quitar_un_municipio": [
+    1.24,
+    1.61
+   ],
+   "p_permutacion": 0.042,
+   "sin_pesos": {
+    "coef_pp": 1.36,
+    "p": 0.104
+   },
+   "control_transporte_alternativo": {
+    "coef_pp": 1.4,
+    "p": 0.008
+   },
+   "placebo_sin_rodalies": {
+    "p_motorizacion": 0.74,
+    "p_renta": 0.19
+   }
+  },
+  "por_dia": [
+   {
+    "fecha": "2024-05-13",
+    "coef_motorizacion": 2.38,
+    "p_motorizacion": 0.285,
+    "coef_renta": -1.57,
+    "p_renta": 0.004
+   },
+   {
+    "fecha": "2025-03-17",
+    "coef_motorizacion": 0.56,
+    "p_motorizacion": 0.754,
+    "coef_renta": -0.3,
+    "p_renta": 0.687
+   },
+   {
+    "fecha": "2025-03-26",
+    "coef_motorizacion": 1.2,
+    "p_motorizacion": 0.383,
+    "coef_renta": 0.69,
+    "p_renta": 0.34
+   },
+   {
+    "fecha": "2025-04-01",
+    "coef_motorizacion": 1.31,
+    "p_motorizacion": 0.325,
+    "coef_renta": 0.32,
+    "p_renta": 0.583
+   }
+  ],
+  "terciles_motorizacion": [
+   {
+    "nivel": "baja",
+    "municipios": 12,
+    "min": 369,
+    "max": 461,
+    "efecto": -7.14,
+    "ic_inf": -9.0,
+    "ic_sup": -5.28
+   },
+   {
+    "nivel": "media",
+    "municipios": 11,
+    "min": 467,
+    "max": 513,
+    "efecto": -1.98,
+    "ic_inf": -5.04,
+    "ic_sup": 1.09
+   },
+   {
+    "nivel": "alta",
+    "municipios": 12,
+    "min": 514,
+    "max": 613,
+    "efecto": -3.86,
+    "ic_inf": -7.36,
+    "ic_sup": -0.37
+   }
+  ],
+  "terciles_renta": [
+   {
+    "nivel": "baja",
+    "municipios": 12,
+    "min": 14042,
+    "max": 15805,
+    "efecto": -3.74,
+    "ic_inf": -6.32,
+    "ic_sup": -1.16
+   },
+   {
+    "nivel": "media",
+    "municipios": 11,
+    "min": 16157,
+    "max": 17202,
+    "efecto": -6.5,
+    "ic_inf": -9.01,
+    "ic_sup": -3.98
+   },
+   {
+    "nivel": "alta",
+    "municipios": 12,
+    "min": 17544,
+    "max": 23467,
+    "efecto": -5.93,
+    "ic_inf": -8.35,
+    "ic_sup": -3.5
+   }
+  ]
+ }
 }

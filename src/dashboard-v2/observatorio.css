@@ -371,3 +371,4 @@ details.det{padding:12px 16px}details.det summary{cursor:pointer;font-weight:650
 
 @media (max-width:1000px){.ficha2{grid-template-columns:1fr}.ficha-map{position:relative;top:0;height:300px}.scen2,.hist{grid-template-columns:repeat(2,minmax(0,1fr))}.case-hero{grid-template-columns:1fr}.ch-map{min-height:320px;border-left:0;border-top:1px solid var(--edge)}.tl-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.method-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:700px){.planner{height:auto;min-height:calc(100vh - 59px)}.planner-map{position:relative;height:45vh}.planner-panel{position:relative;inset:auto;width:auto;margin:-24px 10px 16px;box-shadow:0 -6px 24px rgba(0,0,0,.12)}.planner .story-legend{display:none}.fhead h1{font-size:30px}.method-grid{grid-template-columns:1fr}}
+.sub-bars{margin:8px 0 4px}

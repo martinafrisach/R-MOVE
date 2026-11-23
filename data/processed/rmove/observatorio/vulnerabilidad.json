@@ -1,0 +1,1066 @@
+{
+ "08001": {
+  "motorizacion": 569,
+  "renta": 17203,
+  "turismos_hogar": 1.54,
+  "conductores": 656,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08003": {
+  "motorizacion": 510,
+  "renta": 25577,
+  "turismos_hogar": 1.43,
+  "conductores": 653,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08005": {
+  "motorizacion": 583,
+  "renta": 22011,
+  "turismos_hogar": 1.69,
+  "conductores": 694,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08006": {
+  "motorizacion": 439,
+  "renta": 17130,
+  "turismos_hogar": 1.1,
+  "conductores": 559,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08007": {
+  "motorizacion": 497,
+  "renta": 16988,
+  "turismos_hogar": 1.29,
+  "conductores": 615,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08009": {
+  "motorizacion": 525,
+  "renta": 18426,
+  "turismos_hogar": 1.47,
+  "conductores": 651,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08015": {
+  "motorizacion": 343,
+  "renta": 14942,
+  "turismos_hogar": 0.91,
+  "conductores": 482,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08017": {
+  "motorizacion": 606,
+  "renta": 14917,
+  "turismos_hogar": 1.58,
+  "conductores": 634,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08018": {
+  "motorizacion": 616,
+  "renta": 16199,
+  "turismos_hogar": 1.48,
+  "conductores": 632,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08020": {
+  "motorizacion": 503,
+  "renta": 22405,
+  "turismos_hogar": 1.46,
+  "conductores": 661,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08023": {
+  "motorizacion": 592,
+  "renta": 17659,
+  "turismos_hogar": 1.66,
+  "conductores": 684,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08025": {
+  "motorizacion": 600,
+  "renta": 17916,
+  "turismos_hogar": 1.5,
+  "conductores": 653,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08029": {
+  "motorizacion": 600,
+  "renta": 23467,
+  "turismos_hogar": 1.68,
+  "conductores": 680,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08030": {
+  "motorizacion": 519,
+  "renta": 24453,
+  "turismos_hogar": 1.53,
+  "conductores": 682,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08032": {
+  "motorizacion": 513,
+  "renta": 19806,
+  "turismos_hogar": 1.26,
+  "conductores": 569,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08033": {
+  "motorizacion": 534,
+  "renta": 17515,
+  "turismos_hogar": 1.44,
+  "conductores": 624,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08035": {
+  "motorizacion": 369,
+  "renta": 14337,
+  "turismos_hogar": 0.92,
+  "conductores": 489,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08040": {
+  "motorizacion": 435,
+  "renta": 16194,
+  "turismos_hogar": 1.09,
+  "conductores": 575,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08041": {
+  "motorizacion": 453,
+  "renta": 13268,
+  "turismos_hogar": 1.36,
+  "conductores": 526,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08046": {
+  "motorizacion": 486,
+  "renta": 18311,
+  "turismos_hogar": 1.31,
+  "conductores": 619,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08051": {
+  "motorizacion": 521,
+  "renta": 17826,
+  "turismos_hogar": 1.41,
+  "conductores": 646,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08053": {
+  "motorizacion": 549,
+  "renta": 15226,
+  "turismos_hogar": 1.37,
+  "conductores": 582,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08054": {
+  "motorizacion": 582,
+  "renta": 17338,
+  "turismos_hogar": 1.69,
+  "conductores": 627,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08056": {
+  "motorizacion": 430,
+  "renta": 19246,
+  "turismos_hogar": 1.16,
+  "conductores": 544,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08067": {
+  "motorizacion": 559,
+  "renta": 16804,
+  "turismos_hogar": 1.4,
+  "conductores": 644,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08068": {
+  "motorizacion": 552,
+  "renta": 19031,
+  "turismos_hogar": 1.55,
+  "conductores": 653,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08072": {
+  "motorizacion": 512,
+  "renta": 18438,
+  "turismos_hogar": 1.43,
+  "conductores": 626,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08073": {
+  "motorizacion": 333,
+  "renta": 15282,
+  "turismos_hogar": 0.86,
+  "conductores": 480,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08074": {
+  "motorizacion": 482,
+  "renta": 16750,
+  "turismos_hogar": 1.16,
+  "conductores": 588,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08075": {
+  "motorizacion": 545,
+  "renta": 17067,
+  "turismos_hogar": 1.53,
+  "conductores": 594,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08076": {
+  "motorizacion": 519,
+  "renta": 16630,
+  "turismos_hogar": 1.35,
+  "conductores": 619,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08077": {
+  "motorizacion": 364,
+  "renta": 18210,
+  "turismos_hogar": 0.98,
+  "conductores": 506,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08086": {
+  "motorizacion": 534,
+  "renta": 15805,
+  "turismos_hogar": 1.49,
+  "conductores": 589,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08088": {
+  "motorizacion": 510,
+  "renta": 19016,
+  "turismos_hogar": 1.33,
+  "conductores": 624,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08089": {
+  "motorizacion": 429,
+  "renta": 17595,
+  "turismos_hogar": 1.16,
+  "conductores": 559,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08091": {
+  "motorizacion": 489,
+  "renta": 16860,
+  "turismos_hogar": 1.25,
+  "conductores": 598,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08096": {
+  "motorizacion": 461,
+  "renta": 16629,
+  "turismos_hogar": 1.2,
+  "conductores": 558,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08101": {
+  "motorizacion": 267,
+  "renta": 13548,
+  "turismos_hogar": 0.73,
+  "conductores": 397,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08102": {
+  "motorizacion": 494,
+  "renta": 16008,
+  "turismos_hogar": 1.28,
+  "conductores": 600,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08105": {
+  "motorizacion": 429,
+  "renta": 14058,
+  "turismos_hogar": 1.12,
+  "conductores": 519,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08106": {
+  "motorizacion": 533,
+  "renta": 17544,
+  "turismos_hogar": 1.41,
+  "conductores": 615,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08107": {
+  "motorizacion": 624,
+  "renta": 17435,
+  "turismos_hogar": 1.81,
+  "conductores": 710,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08108": {
+  "motorizacion": 718,
+  "renta": 17551,
+  "turismos_hogar": 2.08,
+  "conductores": 721,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08110": {
+  "motorizacion": 439,
+  "renta": 15010,
+  "turismos_hogar": 1.1,
+  "conductores": 581,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08112": {
+  "motorizacion": 498,
+  "renta": 14042,
+  "turismos_hogar": 1.4,
+  "conductores": 585,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08113": {
+  "motorizacion": 461,
+  "renta": 15366,
+  "turismos_hogar": 1.15,
+  "conductores": 554,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08114": {
+  "motorizacion": 702,
+  "renta": 15239,
+  "turismos_hogar": 1.96,
+  "conductores": 543,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08115": {
+  "motorizacion": 573,
+  "renta": 17251,
+  "turismos_hogar": 1.49,
+  "conductores": 660,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08118": {
+  "motorizacion": 459,
+  "renta": 19884,
+  "turismos_hogar": 1.17,
+  "conductores": 625,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08119": {
+  "motorizacion": 538,
+  "renta": 16046,
+  "turismos_hogar": 1.45,
+  "conductores": 600,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08120": {
+  "motorizacion": 515,
+  "renta": 27664,
+  "turismos_hogar": 1.62,
+  "conductores": 682,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08121": {
+  "motorizacion": 402,
+  "renta": 14878,
+  "turismos_hogar": 1.05,
+  "conductores": 542,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08123": {
+  "motorizacion": 440,
+  "renta": 18826,
+  "turismos_hogar": 1.14,
+  "conductores": 582,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08124": {
+  "motorizacion": 453,
+  "renta": 15552,
+  "turismos_hogar": 1.18,
+  "conductores": 564,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08125": {
+  "motorizacion": 480,
+  "renta": 15012,
+  "turismos_hogar": 1.3,
+  "conductores": 546,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08126": {
+  "motorizacion": 488,
+  "renta": 18698,
+  "turismos_hogar": 1.27,
+  "conductores": 603,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08127": {
+  "motorizacion": 525,
+  "renta": 15049,
+  "turismos_hogar": 1.26,
+  "conductores": 559,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08135": {
+  "motorizacion": 518,
+  "renta": 16415,
+  "turismos_hogar": 1.35,
+  "conductores": 607,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08136": {
+  "motorizacion": 506,
+  "renta": 15340,
+  "turismos_hogar": 1.37,
+  "conductores": 600,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08145": {
+  "motorizacion": 688,
+  "renta": 17257,
+  "turismos_hogar": 1.86,
+  "conductores": 686,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08147": {
+  "motorizacion": 456,
+  "renta": 16122,
+  "turismos_hogar": 1.23,
+  "conductores": 571,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08155": {
+  "motorizacion": 551,
+  "renta": 15029,
+  "turismos_hogar": 1.43,
+  "conductores": 659,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08156": {
+  "motorizacion": 574,
+  "renta": 18024,
+  "turismos_hogar": 1.64,
+  "conductores": 677,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08157": {
+  "motorizacion": 474,
+  "renta": 18680,
+  "turismos_hogar": 1.28,
+  "conductores": 607,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08158": {
+  "motorizacion": 526,
+  "renta": 17767,
+  "turismos_hogar": 1.37,
+  "conductores": 630,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08159": {
+  "motorizacion": 548,
+  "renta": 17384,
+  "turismos_hogar": 1.48,
+  "conductores": 648,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08161": {
+  "motorizacion": 557,
+  "renta": 14853,
+  "turismos_hogar": 1.5,
+  "conductores": 598,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08163": {
+  "motorizacion": 479,
+  "renta": 14272,
+  "turismos_hogar": 1.2,
+  "conductores": 562,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08167": {
+  "motorizacion": 574,
+  "renta": 16138,
+  "turismos_hogar": 1.61,
+  "conductores": 613,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08169": {
+  "motorizacion": 422,
+  "renta": 16132,
+  "turismos_hogar": 1.1,
+  "conductores": 525,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08172": {
+  "motorizacion": 418,
+  "renta": 16956,
+  "turismos_hogar": 1.06,
+  "conductores": 562,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08180": {
+  "motorizacion": 437,
+  "renta": 14724,
+  "turismos_hogar": 1.14,
+  "conductores": 543,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08181": {
+  "motorizacion": 570,
+  "renta": 19625,
+  "turismos_hogar": 1.54,
+  "conductores": 673,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08184": {
+  "motorizacion": 447,
+  "renta": 15153,
+  "turismos_hogar": 1.21,
+  "conductores": 545,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08187": {
+  "motorizacion": 433,
+  "renta": 16050,
+  "turismos_hogar": 1.13,
+  "conductores": 561,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08191": {
+  "motorizacion": 550,
+  "renta": 16136,
+  "turismos_hogar": 1.32,
+  "conductores": 590,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08194": {
+  "motorizacion": 326,
+  "renta": 13611,
+  "turismos_hogar": 0.88,
+  "conductores": 439,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08196": {
+  "motorizacion": 463,
+  "renta": 16067,
+  "turismos_hogar": 1.25,
+  "conductores": 573,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08197": {
+  "motorizacion": 511,
+  "renta": 21040,
+  "turismos_hogar": 1.38,
+  "conductores": 635,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08198": {
+  "motorizacion": 543,
+  "renta": 18582,
+  "turismos_hogar": 1.44,
+  "conductores": 650,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08200": {
+  "motorizacion": 404,
+  "renta": 15714,
+  "turismos_hogar": 1.05,
+  "conductores": 527,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08202": {
+  "motorizacion": 468,
+  "renta": 16157,
+  "turismos_hogar": 1.22,
+  "conductores": 566,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08204": {
+  "motorizacion": 481,
+  "renta": 17912,
+  "turismos_hogar": 1.37,
+  "conductores": 642,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08205": {
+  "motorizacion": 414,
+  "renta": 25527,
+  "turismos_hogar": 1.24,
+  "conductores": 599,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08208": {
+  "motorizacion": 694,
+  "renta": 19986,
+  "turismos_hogar": 1.88,
+  "conductores": 663,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08209": {
+  "motorizacion": 563,
+  "renta": 18814,
+  "turismos_hogar": 1.63,
+  "conductores": 664,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08210": {
+  "motorizacion": 510,
+  "renta": 16397,
+  "turismos_hogar": 1.33,
+  "conductores": 610,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08211": {
+  "motorizacion": 385,
+  "renta": 18073,
+  "turismos_hogar": 1.0,
+  "conductores": 541,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08213": {
+  "motorizacion": 584,
+  "renta": 18814,
+  "turismos_hogar": 1.58,
+  "conductores": 648,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08214": {
+  "motorizacion": 505,
+  "renta": 20013,
+  "turismos_hogar": 1.36,
+  "conductores": 647,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08217": {
+  "motorizacion": 386,
+  "renta": 18712,
+  "turismos_hogar": 1.04,
+  "conductores": 563,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08219": {
+  "motorizacion": 458,
+  "renta": 20576,
+  "turismos_hogar": 1.19,
+  "conductores": 624,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08221": {
+  "motorizacion": 402,
+  "renta": 25860,
+  "turismos_hogar": 1.07,
+  "conductores": 571,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08222": {
+  "motorizacion": 573,
+  "renta": 17373,
+  "turismos_hogar": 1.49,
+  "conductores": 650,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08230": {
+  "motorizacion": 494,
+  "renta": 21101,
+  "turismos_hogar": 1.38,
+  "conductores": 657,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08231": {
+  "motorizacion": 435,
+  "renta": 16321,
+  "turismos_hogar": 1.13,
+  "conductores": 592,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08234": {
+  "motorizacion": 575,
+  "renta": 17695,
+  "turismos_hogar": 1.55,
+  "conductores": 651,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08235": {
+  "motorizacion": 448,
+  "renta": 20206,
+  "turismos_hogar": 1.05,
+  "conductores": 573,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08238": {
+  "motorizacion": 533,
+  "renta": 22764,
+  "turismos_hogar": 1.49,
+  "conductores": 674,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08240": {
+  "motorizacion": 514,
+  "renta": 17863,
+  "turismos_hogar": 1.34,
+  "conductores": 639,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08244": {
+  "motorizacion": 486,
+  "renta": 18706,
+  "turismos_hogar": 1.41,
+  "conductores": 638,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08245": {
+  "motorizacion": 287,
+  "renta": 12851,
+  "turismos_hogar": 0.79,
+  "conductores": 417,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08248": {
+  "motorizacion": 605,
+  "renta": 17211,
+  "turismos_hogar": 1.69,
+  "conductores": 660,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08250": {
+  "motorizacion": 519,
+  "renta": 12972,
+  "turismos_hogar": 1.4,
+  "conductores": 595,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08252": {
+  "motorizacion": 482,
+  "renta": 16360,
+  "turismos_hogar": 1.3,
+  "conductores": 586,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "media"
+ },
+ "08259": {
+  "motorizacion": 553,
+  "renta": 17202,
+  "turismos_hogar": 1.44,
+  "conductores": 642,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08260": {
+  "motorizacion": 533,
+  "renta": 16073,
+  "turismos_hogar": 1.44,
+  "conductores": 612,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08262": {
+  "motorizacion": 470,
+  "renta": 14429,
+  "turismos_hogar": 1.22,
+  "conductores": 554,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08263": {
+  "motorizacion": 472,
+  "renta": 15593,
+  "turismos_hogar": 1.32,
+  "conductores": 580,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08264": {
+  "motorizacion": 540,
+  "renta": 24167,
+  "turismos_hogar": 1.49,
+  "conductores": 626,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08266": {
+  "motorizacion": 455,
+  "renta": 18456,
+  "turismos_hogar": 1.18,
+  "conductores": 596,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08267": {
+  "motorizacion": 549,
+  "renta": 16780,
+  "turismos_hogar": 1.51,
+  "conductores": 631,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08270": {
+  "motorizacion": 384,
+  "renta": 22042,
+  "turismos_hogar": 0.92,
+  "conductores": 522,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "alta"
+ },
+ "08273": {
+  "motorizacion": 613,
+  "renta": 17112,
+  "turismos_hogar": 1.66,
+  "conductores": 697,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08276": {
+  "motorizacion": 538,
+  "renta": 17992,
+  "turismos_hogar": 1.37,
+  "conductores": 611,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08279": {
+  "motorizacion": 451,
+  "renta": 15694,
+  "turismos_hogar": 1.17,
+  "conductores": 587,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08281": {
+  "motorizacion": 510,
+  "renta": 24117,
+  "turismos_hogar": 1.43,
+  "conductores": 656,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08282": {
+  "motorizacion": 480,
+  "renta": 24295,
+  "turismos_hogar": 1.35,
+  "conductores": 652,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ },
+ "08283": {
+  "motorizacion": 567,
+  "renta": 17410,
+  "turismos_hogar": 1.53,
+  "conductores": 656,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08284": {
+  "motorizacion": 521,
+  "renta": 14049,
+  "turismos_hogar": 1.35,
+  "conductores": 587,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08289": {
+  "motorizacion": 549,
+  "renta": 19209,
+  "turismos_hogar": 1.51,
+  "conductores": 656,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08291": {
+  "motorizacion": 565,
+  "renta": 16962,
+  "turismos_hogar": 1.58,
+  "conductores": 627,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08295": {
+  "motorizacion": 542,
+  "renta": 17120,
+  "turismos_hogar": 1.52,
+  "conductores": 635,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "media"
+ },
+ "08296": {
+  "motorizacion": 552,
+  "renta": 22942,
+  "turismos_hogar": 1.6,
+  "conductores": 664,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08298": {
+  "motorizacion": 448,
+  "renta": 15494,
+  "turismos_hogar": 1.26,
+  "conductores": 542,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08300": {
+  "motorizacion": 587,
+  "renta": 19406,
+  "turismos_hogar": 1.7,
+  "conductores": 671,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08301": {
+  "motorizacion": 428,
+  "renta": 16222,
+  "turismos_hogar": 1.15,
+  "conductores": 571,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08302": {
+  "motorizacion": 526,
+  "renta": 13852,
+  "turismos_hogar": 1.37,
+  "conductores": 613,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "baja"
+ },
+ "08305": {
+  "motorizacion": 467,
+  "renta": 15738,
+  "turismos_hogar": 1.22,
+  "conductores": 594,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "baja"
+ },
+ "08307": {
+  "motorizacion": 432,
+  "renta": 17084,
+  "turismos_hogar": 1.06,
+  "conductores": 573,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "media"
+ },
+ "08902": {
+  "motorizacion": 550,
+  "renta": 19078,
+  "turismos_hogar": 1.6,
+  "conductores": 665,
+  "nivel_motorizacion": "alta",
+  "nivel_renta": "alta"
+ },
+ "08904": {
+  "motorizacion": 446,
+  "renta": 13018,
+  "turismos_hogar": 1.12,
+  "conductores": 526,
+  "nivel_motorizacion": "baja",
+  "nivel_renta": "baja"
+ },
+ "08905": {
+  "motorizacion": 498,
+  "renta": 19686,
+  "turismos_hogar": 1.29,
+  "conductores": 619,
+  "nivel_motorizacion": "media",
+  "nivel_renta": "alta"
+ }
+}

@@ -6,7 +6,7 @@
   <title>R-MOVE · Observatorio de incidencias de Rodalies</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="observatorio.css?v=4">
+  <link rel="stylesheet" href="observatorio.css?v=5">
 </head>
 <body>
   <header class="topbar">
@@ -67,8 +67,13 @@
         </article>
         <article class="step" data-step="brecha" data-nombre="¿Quién lo sufre?">
           <p class="eyebrow">¿Quién lo sufre?</p>
-          <h2>Quien no tiene alternativa al tren.</h2>
+          <h2 id="r-brecha-tit">Quien no tiene alternativa al tren.</h2>
           <div class="bars" id="r-brecha"></div>
+          <div id="r-coche" hidden>
+            <p class="small sub-bars"><strong>Y, entre los dependientes, quien tiene menos coche.</strong></p>
+            <div class="bars" id="r-brecha-coche"></div>
+            <p class="muted small" id="r-coche-nota"></p>
+          </div>
           <p class="pending small" id="r-pendiente">Pendiente: la brecha por <strong>motorización y renta</strong>. Se añadirá aquí cuando esté el análisis.</p>
         </article>
         <article class="step step-end" data-step="fin" data-nombre="¿Y mañana?">
@@ -143,6 +148,6 @@
   <footer class="foot" id="foot"></footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="observatorio.js?v=4"></script>
+  <script src="observatorio.js?v=5"></script>
 </body>
 </html>

@@ -218,7 +218,18 @@
     const nom = { 'Sin alternativa directa': 'sin alternativa', 'Alternativa débil': 'débil', 'Alternativa fuerte': 'fuerte' };
     const mx = Math.max(...br.map((a) => Math.abs(a.efecto)));
     $('r-brecha').innerHTML = br.map((a) => `<div class="bar-row" data-tip="${esc(`<b>${a.grupo}</b> (${a.municipios} municipios)<br>${pct(a.efecto)} [${pct(a.ic_inf)}, ${pct(a.ic_sup)}]`)}"><span>${cap(nom[a.grupo])}</span><span class="track"><i style="width:${Math.abs(a.efecto) / mx * 100}%;background:${css(ALT_COL[nom[a.grupo]])}"></i></span><b>${pct(a.efecto)}</b></div>`).join('');
-    if (D.hay_vulnerabilidad) $('r-pendiente').textContent = 'Los datos de motorización y renta ya están cargados: consúltalos en el simulador y en Mi municipio.';
+    const VR = D.vulnerabilidad_resumen;
+    if (VR) {
+      // Brecha por motorización: dependientes por terciles de turismos por 1.000 hab. (notebook 06)
+      const tm = VR.terciles_motorizacion, mxc = Math.max(...tm.map((t) => Math.abs(t.efecto)));
+      const nomT = { baja: 'Pocos coches', media: 'Intermedio', alta: 'Muchos coches' };
+      $('r-brecha-tit').textContent = 'Quien no tiene alternativa al tren… ni coche.';
+      $('r-brecha-coche').innerHTML = tm.map((t) => `<div class="bar-row" data-tip="${esc(`<b>${nomT[t.nivel]}</b>: ${nf(t.min)}–${nf(t.max)} turismos por 1.000 hab. (${t.municipios} municipios)<br>${pct(t.efecto)} [${pct(t.ic_inf)}, ${pct(t.ic_sup)}]`)}"><span>${nomT[t.nivel]}</span><span class="track"><i style="width:${Math.abs(t.efecto) / mxc * 100}%;background:${colClase(claseDe(t.efecto))}"></i></span><b>${pct(t.efecto)}</b></div>`).join('');
+      const mot = VR.modelo.find((x) => x.variable === 'tur100');
+      $('r-coche-nota').textContent = `Efecto medio en los días de caos. A igual distancia y alternativa, cada 100 turismos más por 1.000 habitantes son ${nf(mot.coef_pp, 1)} puntos menos de caída. La renta, en conjunto, no marca diferencias.`;
+      $('r-coche').hidden = false;
+      $('r-pendiente').hidden = true;
+    }
 
     // barra de progreso
     const steps = [...document.querySelectorAll('.step')];
@@ -277,7 +288,7 @@
     if (paso === 'averia') extra = ef([FECHAS.averia]);
     if (paso === 'huelga') extra = ef([FECHAS.huelga]);
     if (paso === 'anunciada') extra = ef(FECHAS.anunciadas);
-    if (paso === 'brecha') extra = `<span class="v">${cap(m.alternativa ? m.alternativa.clase : '—')}</span><span class="muted">${m.alternativa && m.alternativa.mejor ? `${cap(ALT_NOMBRE[m.alternativa.mejor])}: ${nf(m.alternativa.t_alt)} min (tren: ${nf(m.alternativa.t_rodalies)} min)` : 'alternativa en transporte público'}</span>`;
+    if (paso === 'brecha') extra = `<span class="v">${cap(m.alternativa ? m.alternativa.clase : '—')}</span><span class="muted">${m.alternativa && m.alternativa.mejor ? `${cap(ALT_NOMBRE[m.alternativa.mejor])}: ${nf(m.alternativa.t_alt)} min (tren: ${nf(m.alternativa.t_rodalies)} min)` : 'alternativa en transporte público'}</span>${m.vulnerabilidad ? `<span class="muted">${nf(m.vulnerabilidad.motorizacion)} turismos por 1.000 hab. (motorización ${m.vulnerabilidad.nivel_motorizacion})</span>` : ''}`;
     return `<b>${esc(m.nombre)}</b><br>${linea}<br>${extra}`;
   }
 
@@ -645,7 +656,13 @@
       <div class="doors"><div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong></div><div><small>Barrios sin estación</small><strong class="${avg('sin_estacion') < 0 ? 'down' : 'up'}">${pct(avg('sin_estacion'))}</strong></div></div>
       <p class="muted small">Datos por barrio (M3), viajes de ida desde municipios dependientes. ${esc(ida.map((b) => b.caso).join(' y '))}.</p>
       <h4>Personas más expuestas</h4>
-      ${D.hay_vulnerabilidad ? '' : `<p class="small">${nf(r.filas.filter((f) => f.m.alternativa && f.m.alternativa.clase === 'sin alternativa').reduce((s, f) => s + f.m.viajes_referencia, 0))} viajes diarios salen de municipios sin alternativa directa.</p><p class="pending small">Pendiente: motorización y renta.</p>`}
+      <p class="small">${nf(r.filas.filter((f) => f.m.alternativa && f.m.alternativa.clase === 'sin alternativa').reduce((s, f) => s + f.m.viajes_referencia, 0))} viajes diarios salen de municipios sin alternativa directa.</p>
+      ${D.vulnerabilidad_resumen ? (() => {
+        const VR = D.vulnerabilidad_resumen, pocos = r.filas.filter((f) => f.m.grupo === 'dependientes' && f.m.vulnerabilidad && f.m.vulnerabilidad.nivel_motorizacion === 'baja');
+        const tb = VR.terciles_motorizacion.find((t) => t.nivel === 'baja'), ta = VR.terciles_motorizacion.find((t) => t.nivel === 'alta');
+        return `<p class="small">${nf(pocos.reduce((s, f) => s + f.m.viajes_referencia, 0))} viajes diarios salen de <b>${pocos.length} municipios dependientes con pocos coches</b> (≤ ${nf(VR.cortes_motorizacion[0])} turismos por 1.000 hab.)${pocos.length ? `: ≈ ${nf(Math.max(-pocos.reduce((s, f) => s + f.perdidos, 0), 0))} viajes menos en este escenario` : ''}.</p>
+        <p class="muted small">Con menos coches hay menos margen para cambiar de modo: en los días de caos, los dependientes con poca motorización cayeron ${pct(tb.efecto)} de media, frente a ${pct(ta.efecto)} los que tienen más coches.</p>`;
+      })() : '<p class="pending small">Pendiente: motorización y renta.</p>'}
       <h4>Todos los municipios afectados</h4>
       <div class="table-wrap" style="max-height:300px"><table class="tbl compact"><thead><tr><th>Municipio</th><th class="num">Efecto</th><th class="num">Viajes menos</th></tr></thead><tbody>${r.filas.map((f) => `<tr class="${f.c.p >= 0.05 ? 'ns' : ''}"><td><a href="#" data-mun="${f.m.codigo}">${esc(f.m.nombre)}</a></td><td class="num">${pct(f.c.efecto)}</td><td class="num">${nf(Math.max(-f.perdidos, 0))}</td></tr>`).join('')}</tbody></table></div>
       <p class="muted small">Viajes menos = viajes de un día normal × coeficiente del escenario. En gris: sin efecto claro (p ≥ 0,05). Detalle del método en el Laboratorio.</p>`;
@@ -720,7 +737,7 @@
 
           <section class="card fsec">
             <h2>Vulnerabilidad social</h2>
-            ${m.vulnerabilidad ? `<div class="doors"><div><small>Motorización</small><strong>${nf(m.vulnerabilidad.motorizacion)}</strong><span>vehículos/1.000 hab.</span></div><div><small>Renta</small><strong>${nf(m.vulnerabilidad.renta)} €</strong><span>por persona</span></div></div>` : '<p class="pending small">Pendiente: motorización y renta (datos abiertos de Idescat). Al añadirlos, el índice combinará dependencia del tren, alternativa, motorización y renta.</p>'}
+            ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta. Se añaden con el notebook 06 (datos abiertos de la DGT y el INE).</p>'}
           </section>
         </div>
       </div>`;
@@ -733,6 +750,31 @@
       mun.F.resaltar(m.codigo);
       L.marker([m.lat, m.lon], { interactive: false, icon: L.divIcon({ className: '', iconSize: [0, 0], html: `<div class="bubble sel"><b>${esc(m.nombre)}</b></div>` }) }).addTo(mun.F.annos);
     }
+  }
+
+  /* Ficha «Vulnerabilidad social»: motorización y renta del municipio y qué implica (notebook 06). */
+  function fichaSocial(m) {
+    const v = m.vulnerabilidad, VR = D.vulnerabilidad_resumen;
+    const NIV = { baja: 'de las más bajas', media: 'intermedia', alta: 'de las más altas' };
+    const nivTxt = (n) => n ? NIV[n] : '';
+    let lectura = '';
+    if (VR) {
+      const t = VR.terciles_motorizacion, tb = t.find((x) => x.nivel === 'baja'), ta = t.find((x) => x.nivel === 'alta');
+      const sinAlt = !m.alternativa || m.alternativa.clase === 'sin alternativa';
+      if (m.grupo === 'dependientes' && v.nivel_motorizacion === 'baja')
+        lectura = `<b>Depende del tren y tiene pocos coches${sinAlt ? ', sin alternativa directa' : ''}: es el perfil más expuesto.</b> Los dependientes con poca motorización cayeron ${pct(tb.efecto)} de media en los días de caos.`;
+      else if (m.grupo === 'dependientes' && v.nivel_motorizacion === 'alta')
+        lectura = `<b>Depende del tren, pero con más coches hay más margen para cambiar de modo.</b> Los dependientes con mucha motorización cayeron ${pct(ta.efecto)} de media, frente a ${pct(tb.efecto)} los que tienen pocos coches.`;
+      else if (m.grupo === 'dependientes')
+        lectura = `<b>Depende del tren, con una motorización intermedia.</b> Entre los dependientes, cuantos menos coches, más caída (${pct(tb.efecto)} con pocos, ${pct(ta.efecto)} con muchos).`;
+      else
+        lectura = `<b>${m.grupo === 'metro_fgc' ? 'Tiene metro o FGC' : 'Está cerca de Barcelona'}:</b> la alternativa de transporte pesa más que los coches o la renta.`;
+      lectura += ' La renta, en conjunto, no explica las diferencias entre municipios.';
+    }
+    return `<div class="doors">
+        <div><small>Motorización</small><strong>${nf(v.motorizacion)}</strong><span>turismos por 1.000 hab. · ${nivTxt(v.nivel_motorizacion)}</span></div>
+        <div><small>Renta</small><strong>${v.renta != null ? nf(v.renta) + ' €' : '—'}</strong><span>neta por persona · ${nivTxt(v.nivel_renta)}</span></div></div>
+      ${VR ? `<p class="small">${lectura}</p><p class="muted small">Nivel según los terciles de los ${VR.dependientes} municipios dependientes: pocos coches ≤ ${nf(VR.cortes_motorizacion[0])}, muchos > ${nf(VR.cortes_motorizacion[1])} turismos por 1.000 hab.; renta baja ≤ ${nf(VR.cortes_renta[0])} €, alta > ${nf(VR.cortes_renta[1])} €. Fuentes: DGT, INE Padrón y ADRH. Detalle en <a href="#laboratorio">Laboratorio → Qué lo explica</a>.</p>` : ''}`;
   }
 
   /* Tira de los 62 municipios ordenados por efecto medio, con el elegido destacado. */
@@ -850,9 +892,41 @@
       <div class="card"><div class="card-head"><h2>Donde hay metro o FGC, no pasa nada</h2><small>Efecto por grupo, todos los días de caos</small></div><div class="pad" id="lab-grupos"></div></div>
       <div class="card wide2"><div class="card-head"><h2>Sin alternativa al tren, la caída se repite en cada incidencia</h2><small>Efecto según la alternativa en transporte público (GTFS), municipios con Rodalies. Color intenso: efecto claro (p &lt; 0,05). Pasa el cursor para ver el intervalo.</small></div>
         <div class="pad"><table class="heat"><thead><tr><th></th>${grupos.map((g) => `<th>${g}</th>`).join('')}</tr></thead><tbody>${dias.map((d) => `<tr><th>${esc(d)}</th>${grupos.map((g) => { const x = alt.find((a) => a.dia === d && a.grupo === g); if (!x) return '<td></td>'; const k = claseDe(x.efecto), cl = x.p < 0.05; return `<td style="--bg:${cl ? colClase(k) : 'var(--surface-2)'};--fg:${cl ? tintaSobre(k) : 'var(--muted)'}" data-tip="${esc(`<b>${g}</b>, ${d}<br>${pct(x.efecto)} [${pct(x.ic_inf)}, ${pct(x.ic_sup)}]<br>${pval(x.p)} · ${x.municipios} municipios`)}">${pct(x.efecto)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></div>
+      ${factoresSociales()}
 </div>`;
     forest($('lab-dist'), D.distancia.map((g) => ({ label: g.banda + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 120 });
     forest($('lab-grupos'), D.grupos.map((g) => ({ label: g.etiqueta.replace(/ \(.*\)/, ''), efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 170 });
+    const VR = D.vulnerabilidad_resumen;
+    if (VR) {
+      const NOM = { baja: 'Baja', media: 'Media', alta: 'Alta' };
+      const filasT = (ts, u) => ts.map((t) => ({ label: `${NOM[t.nivel]} (${nf(t.min)}–${nf(t.max)}${u})`, efecto: t.efecto, ic_inf: t.ic_inf, ic_sup: t.ic_sup, p: t.ic_inf < 0 && t.ic_sup > 0 ? 1 : 0 }));
+      forest($('lab-motor'), filasT(VR.terciles_motorizacion, ''), { labelW: 150, aria: 'Efecto por terciles de motorización' });
+      forest($('lab-renta'), filasT(VR.terciles_renta, ' €'), { labelW: 170, aria: 'Efecto por terciles de renta' });
+    }
+  }
+
+  /* Tarjetas de motorización y renta (notebook 06). Vacío si aún no hay datos. */
+  function factoresSociales() {
+    const VR = D.vulnerabilidad_resumen;
+    if (!VR) return '<div class="card wide2"><div class="card-head"><h2>Motorización y renta</h2></div><p class="pending small" style="margin:0 16px 16px">Pendiente: se añaden con el notebook 06.</p></div>';
+    const tb = VR.terciles_motorizacion.find((t) => t.nivel === 'baja'), ta = VR.terciles_motorizacion.find((t) => t.nivel === 'alta');
+    const mot = VR.modelo.find((x) => x.variable === 'tur100'), R = VR.robustez;
+    const ren13 = VR.por_dia.find((d) => d.fecha === FECHAS.averia);
+    const pp = (x) => (x > 0 ? '+' : '') + nf(x, 2).replace('-', '−');
+    return `
+      <div class="card"><div class="card-head"><h2>Con menos coches, más caída: ${pct(tb.efecto)} frente a ${pct(ta.efecto)}</h2><small>Municipios dependientes por terciles de motorización (turismos por 1.000 hab.). Efecto medio en los 4 días de caos, ponderado por la fiabilidad de cada municipio.</small></div><div class="pad" id="lab-motor"></div></div>
+      <div class="card"><div class="card-head"><h2>La renta no marca diferencias</h2><small>Municipios dependientes por terciles de renta neta por persona (ADRH).</small></div><div class="pad" id="lab-renta"></div></div>
+      <div class="card wide2"><div class="card-head"><h2>A igual distancia y alternativa, +100 turismos por 1.000 hab. son ${nf(mot.coef_pp, 1)} puntos menos de caída</h2><small>Regresión ponderada entre los ${VR.muestra} municipios con Rodalies. Variable explicada: efecto medio de cada municipio en los días de caos. Positivo = menos caída. Es una asociación entre municipios, no una causa.</small></div>
+        <div class="pad"><table class="tbl compact"><thead><tr><th>Factor</th><th class="num">Puntos de caída</th><th class="num">IC 95 %</th><th class="num">p</th></tr></thead><tbody>${VR.modelo.map((x) => `<tr class="${x.p >= 0.05 ? 'ns' : ''}"><td>${esc(x.etiqueta)}</td><td class="num">${pp(x.coef_pp)}</td><td class="num">[${pp(x.ic_inf)}, ${pp(x.ic_sup)}]</td><td class="num">${pval(x.p).replace('p = ', '').replace('p < ', '< ')}</td></tr>`).join('')}</tbody></table>
+          <p class="muted small">R² = ${nf(VR.r2, 2)}. En gris: sin efecto claro (p ≥ 0,05).</p></div>
+        <ul class="checks">
+          <li>Quitando cualquier municipio, el efecto de la motorización queda entre ${pp(R.quitar_un_municipio[0])} y ${pp(R.quitar_un_municipio[1])} puntos.</li>
+          <li>Test de permutación (motorización asignada al azar): ${pval(R.p_permutacion)}.</li>
+          <li>Controlando también por la alternativa en transporte público (GTFS): ${pp(R.control_transporte_alternativo.coef_pp)} puntos (${pval(R.control_transporte_alternativo.p)}).</li>
+          <li>En los municipios sin Rodalies no aparece ninguna relación (${pval(R.placebo_sin_rodalies.p_motorizacion)}): el método no la inventa.</li></ul>
+        <ul class="checks warn">
+          <li>Evidencia moderada: sin ponderar por el ruido de cada municipio, ${pp(R.sin_pesos.coef_pp)} puntos (${pval(R.sin_pesos.p)}). Mismo signo los 4 días, pero ningún día por separado es significativo.</li>
+          ${ren13 ? `<li>Renta: solo en la avería sin aviso (${fecha(ren13.fecha)}) los municipios con más renta caen más (${pp(ren13.coef_renta)} puntos por +1.000 €, ${pval(ren13.p_renta)}). ¿Teletrabajo ante un imprevisto? Es una hipótesis, no una conclusión.</li>` : ''}</ul></div>`;
   }
 
   function pintarMetodo() {
@@ -867,7 +941,8 @@
           <li><b>Municipios:</b> ≥ 200 viajes/día a Barcelona. Dependientes: con Rodalies, sin metro ni FGC y a ≥ 20 km.</li>
           <li><b>Alternativa:</b> GTFS de bus interurbano, AMB, FGC y Rodalies (tiempo puerta a puerta y frecuencia).</li>
           <li><b>Método:</b> clustering de días (4 tipos por año según el volumen de los municipios sin Rodalies y la época del año). Comprobado con una regresión de diferencias en diferencias, que da la misma dirección y significación.</li>
-          <li><b>Simulador:</b> viajes de un día normal × coeficiente del escenario. La avería solo se ha observado en la R1.</li></ul></div>
+          <li><b>Simulador:</b> viajes de un día normal × coeficiente del escenario. La avería solo se ha observado en la R1.</li>
+          ${D.vulnerabilidad_resumen ? '<li><b>Motorización y renta:</b> turismos por 1.000 hab. (DGT y Padrón, media 2023–2025) y renta neta por persona (ADRH, media 2023–2024). Efecto de cada municipio con el mismo método, ponderado por su ruido en días normales (notebook 06).</li>' : ''}</ul></div>
         <div class="card"><div class="card-head"><h2>Limitaciones</h2></div><ul class="checks warn">${D.limitaciones.map((l) => `<li>${esc(l)}</li>`).join('')}<li>${esc(D.duracion.pendiente)}</li></ul></div>
       </div>`;
   }

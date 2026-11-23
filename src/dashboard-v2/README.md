@@ -30,6 +30,14 @@ Enlaces directos: `#relato`, `#simulador`, `#municipio/08006`, `#laboratorio`.
 - Entrada: `data/processed/rmove/resultados/dashboard_resultados.json` (notebook 04, celda B.8: resultados del clustering, incluido el efecto según la alternativa en transporte público) y `m2_conectividad_municipios.parquet` (alternativa de cada municipio, GTFS).
 - Salida: `data/processed/rmove/observatorio/observatorio.json` (el navegador solo lee este fichero, `municipios_mapa.geojson` y la red de Rodalies `railway-network.geojson` de esta carpeta).
 - M3 de las huelgas anunciadas copiado de `m3_hallazgos.md` (constante `M3_ANUNCIADAS` del script).
+- **Motorización y renta** (notebook 06, opcional): `observatorio/vulnerabilidad.json` (por municipio: turismos por 1.000 hab., renta neta por persona, turismos por hogar, conductores y nivel bajo/medio/alto según los terciles de los dependientes) y `observatorio/vulnerabilidad_resumen.json` (regresión, robustez, efecto por día y terciles). Fuentes: DGT 2023–2025, INE Padrón 2023–2025 e INE ADRH 2023–2024.
+
+## Motorización y renta: dónde aparece
+
+- **Relato**, paso «¿Quién lo sufre?»: barras de los dependientes por terciles de motorización.
+- **¿Y si…?**, «Más datos del escenario»: viajes de los dependientes con pocos coches y viajes perdidos.
+- **Mi municipio**, «Vulnerabilidad social»: motorización y renta del municipio, su nivel y la lectura.
+- **Laboratorio → Qué lo explica**: terciles de motorización y renta, regresión ponderada y comprobaciones de robustez. **Método y límites**: decisión de datos y limitación.
 
 ## Simulador: cómo calcula
 
@@ -45,8 +53,6 @@ Duración > 1 día: no observado. Se da un rango entre «solo el primer día» y
 
 ## Pendiente (se activa solo al añadir los datos)
 
-- **Motorización y renta**: crear `data/processed/rmove/observatorio/vulnerabilidad.json` con
-  `{"08006": {"motorizacion": 512, "renta": 15800}, ...}` (vehículos/1.000 hab. y €/persona) y volver a ejecutar el script.
-  El simulador, Mi municipio y el relato lo muestran automáticamente.
+- **Índice de vulnerabilidad combinado** (dependencia, alternativa, motorización y renta): el rango actual sigue siendo el efecto medio en los días de caos.
 - **Vida media de una disrupción** (Montcada 2024, Gavà 2023): ahora se muestra la evidencia cualitativa.
 - **Flujos animados** entre municipios y barrios (última prioridad de la propuesta).

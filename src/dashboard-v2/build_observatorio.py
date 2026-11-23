@@ -3,8 +3,9 @@
 Lee los ficheros que ya exporta el análisis (no recalcula ningún modelo):
   - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 04: resultados del clustering + M3)
   - data/processed/rmove/m2_conectividad_municipios.parquet     (alternativa en transporte público por municipio)
-Opcional (si existe, el observatorio lo muestra):
-  - data/processed/rmove/observatorio/vulnerabilidad.json       (motorización y renta por municipio)
+Opcional (si existen, el observatorio los muestra; los genera el notebook 06):
+  - data/processed/rmove/observatorio/vulnerabilidad.json          (motorización y renta por municipio)
+  - data/processed/rmove/observatorio/vulnerabilidad_resumen.json  (modelo, robustez y terciles)
 
 Salida: data/processed/rmove/observatorio/observatorio.json
 
@@ -136,6 +137,8 @@ def main():
     # ------------------------------------------------------------------ municipios
     vuln_path = DATA / "observatorio" / "vulnerabilidad.json"
     vulnerabilidad = json.loads(vuln_path.read_text(encoding="utf-8")) if vuln_path.exists() else {}
+    resumen_path = DATA / "observatorio" / "vulnerabilidad_resumen.json"
+    vuln_resumen = json.loads(resumen_path.read_text(encoding="utf-8")) if resumen_path.exists() else None
 
     base = {m["codigo"]: m for m in inc[FECHA_AVERIA]["municipios"]}
     municipios = []
@@ -205,8 +208,12 @@ def main():
         "alternativa": alternativa,
         "duracion": DURACION,
         "metodo": res["metodo"],
-        "limitaciones": res["limitaciones"],
+        "limitaciones": res["limitaciones"] + ([
+            "Motorización y renta: asociación entre 62 municipios, no causalidad. Los turismos se registran en el domicilio "
+            "del titular (algunas flotas de empresa) y no sabemos qué parte de cada municipio viaja en tren."
+        ] if vuln_resumen else []),
         "hay_vulnerabilidad": bool(vulnerabilidad),
+        "vulnerabilidad_resumen": vuln_resumen,
     }
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
