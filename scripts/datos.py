@@ -7,7 +7,7 @@ Uso (desde la raíz del repo):
         -> crea datos_rmove_AAAAMMDD.zip con data/processed y data/raw
            (sin los CSV brutos de Telefónica, 16 GB) para subirlo a la carpeta compartida.
     python scripts/datos.py empaquetar --con-telefonica-raw
-        -> incluye también data/raw/telefonica (solo si alguien necesita el notebook 01 o 04.1).
+        -> incluye también data/raw/telefonica (solo si alguien necesita el notebook 01 o 05).
 
 Para usar el paquete: descomprimirlo en la raíz del repo (crea/rellena la carpeta data/).
 """
@@ -27,11 +27,6 @@ RAW = DATA / "raw"
 
 # Qué necesita cada pieza del proyecto. Patrones glob relativos a la raíz del repo.
 REQUISITOS = {
-    "Dashboard clásico (src/dashboard)": [
-        "data/processed/rmove/general/dashboard_general.json",
-        "data/processed/rmove/resultados/dashboard_resultados.json",
-        "data/processed/rmove/incidencia_2025_06_05.json",
-    ],
     "Observatorio (src/dashboard-v2) - ver": [
         "data/processed/rmove/observatorio/observatorio.json",
         "data/processed/rmove/observatorio/municipios_mapa.geojson",
@@ -39,8 +34,6 @@ REQUISITOS = {
     "Observatorio - regenerar observatorio.json": [
         "data/processed/rmove/resultados/dashboard_resultados.json",
         "data/processed/rmove/m2_conectividad_municipios.parquet",
-        "data/processed/rmove/m2_robustez_conectividad.parquet",
-        "data/processed/rmove/m2_distancia_vs_alternativa.parquet",
     ],
     "Observatorio - regenerar mapa base": [
         "data/raw/limites/municipis_icgc.geojson",
@@ -58,7 +51,7 @@ REQUISITOS = {
         "data/raw/rodalies/incidencias_rodalies_2023_2025.csv",
         "data/processed/rmove/estaciones_rodalies_municipio.csv",
     ],
-    "Notebook 04.1 (barrios, M3)": [
+    "Notebook 05 (barrios, M3)": [
         "data/processed/telefonica/M2.parquet",
         "data/processed/rmove/m2_cal.parquet",
         "data/processed/rmove/m2_tipos_dia.parquet",
@@ -66,18 +59,6 @@ REQUISITOS = {
         "data/processed/rmove/m3_barrio_a_mun.parquet",
         "data/processed/rmove/m3_mun_a_barrio.parquet",
         "data/raw/rodalies/bcn_station_neighborhoods.json",
-    ],
-    "Notebook 05 (tráfico, M4)": [
-        "data/processed/telefonica/M2.parquet",
-        "data/processed/rmove/m2_cal.parquet",
-        "data/processed/rmove/m2_tipos_dia.parquet",
-        "data/raw/trafic/trafico_barcelona_*.csv",
-    ],
-    "Motor src/analysis (rmove_rebuild / rmove_review)": [
-        "data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx",
-        "data/processed/telefonica/M2.parquet",
-        "data/raw/rodalies/estaciones_renfe_actual.csv",
-        "data/raw/rodalies/renfe_cercanias_actual.zip",
     ],
 }
 
@@ -92,8 +73,6 @@ def comprobar() -> int:
         for p in faltan:
             print(f"            - {p}")
         faltan_total += bool(faltan)
-    env = RAIZ / ".env"
-    print(f"\n.env (solo para descargar GTFS de Transitland): {'OK' if env.exists() else 'no existe (copia .env.example)'}")
     if faltan_total:
         print("\nPide el paquete de datos (datos_rmove_*.zip) y descomprímelo en la raíz del repo.")
     return 0

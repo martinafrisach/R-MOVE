@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>R-MOVE · Observatorio de incidencias de Rodalies</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <!-- IBM Plex Sans: tipografía de ingeniería e infraestructura, formal y muy legible en cifras y tablas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="observatorio.css?v=5">
+  <link rel="stylesheet" href="observatorio.css?v=13">
 </head>
 <body>
   <header class="topbar">
@@ -14,11 +18,12 @@
       <span class="brandicon">R</span>
       <span><strong>Observatorio R-MOVE</strong><small>Qué pasa con la movilidad hacia Barcelona cuando falla Rodalies</small></span>
     </a>
-    <nav class="modes" aria-label="Modos del observatorio">
-      <a href="#relato" data-mode="relato"><b>1</b> El relato</a>
-      <a href="#simulador" data-mode="simulador"><b>2</b> ¿Y si…?</a>
-      <a href="#municipio" data-mode="municipio"><b>3</b> Mi municipio</a>
-      <a href="#laboratorio" data-mode="laboratorio"><b>4</b> Laboratorio</a>
+    <nav class="linea" aria-label="Secciones del observatorio" style="--i:0">
+      <span class="via" aria-hidden="true"><span class="recorrido"></span></span><span class="tren" aria-hidden="true"></span>
+      <a href="#relato" data-mode="relato"><i></i><span>El relato</span></a>
+      <a href="#simulador" data-mode="simulador"><i></i><span>¿Y si…?</span></a>
+      <a href="#municipio" data-mode="municipio"><i></i><span>Mi municipio</span></a>
+      <a href="#laboratorio" data-mode="laboratorio"><i></i><span>Laboratorio</span></a>
     </nav>
   </header>
 
@@ -148,6 +153,6 @@
   <footer class="foot" id="foot"></footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="observatorio.js?v=5"></script>
+  <script src="observatorio.js?v=13"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@ SALIDA = RAIZ / "dist" / "dashboard-pages"
 
 ASSETS = ["index.html", "observatorio.css", "observatorio.js", "favicon.svg", "railway-network.geojson"]
 DATOS_OBLIGATORIOS = ["observatorio.json", "municipios_mapa.geojson"]
-DATOS_OPCIONALES = ["vulnerabilidad.json"]
+DATOS_OPCIONALES = ["vulnerabilidad.json", "catalunya_contorno.geojson"]
 
 ENTRADA = """<!doctype html>
 <html lang="es"><head><meta charset="utf-8">

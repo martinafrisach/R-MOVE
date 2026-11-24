@@ -9,15 +9,9 @@ scikit-learn
 scipy
 statsmodels
 pyfixest
-requests
-python-dotenv
 jupyter
 ipykernel
-folium
-geopandas
 shapely
 pyproj
-streamlit
-plotly
 holidays
 openpyxl

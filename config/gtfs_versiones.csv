@@ -1,5 +1,0 @@
-red,onestop_id,sha1,fecha_version,servicio_desde,servicio_hasta,dia_referencia
-rodalies,f-cercanías~renfe,192f32bf6dca027d0d0dee031b6a5edf128c0676,2025-03-18,2025-03-17,2025-04-16,2025-03-18
-bus_interurbano,f-autobús~interurbano~de~cataluña,0fe0793ab6bf9194e8597f5a31ba0e8cddf0c514,2025-03-16,2025-01-01,2025-04-30,2025-03-18
-fgc,f-fgc~cat,9889855e1c96d3d263d264eea9863d54ce93e656,2025-03-07,2023-01-01,2025-12-31,2025-03-18
-amb,f-sp3e-authosa~mohnsl~oliverassl~rosanbussl~solerisauret~sgmt~tc,4b14ac0de25106a9c4c348f253695a80f62139c3,2025-03-16,2025-03-16,2025-03-21,2025-03-18

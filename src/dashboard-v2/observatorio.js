@@ -8,6 +8,7 @@
 
   const DATA_URL = '../../data/processed/rmove/observatorio/observatorio.json';
   const RAIL_URL = 'railway-network.geojson';
+  const CONTORNO_URL = '../../data/processed/rmove/observatorio/catalunya_contorno.geojson';
   const BCN = [41.3870, 2.1700];
   const BOUNDS = [[41.17, 1.62], [42.05, 2.82]];
   const FECHAS = { averia: '2024-05-13', huelga: '2025-03-17', anunciadas: ['2025-03-26', '2025-04-01'] };
@@ -15,7 +16,7 @@
   const ALT_NOMBRE = { bus_interurbano: 'bus interurbano', fgc: 'FGC', amb: 'bus AMB' };
   const LINEAS_SIM = ['R1', 'R2N', 'R2S', 'R3', 'R4', 'R7'];
 
-  let D = null, RAIL = null;
+  let D = null, RAIL = null, CONTORNO = null;
   const maps = {};
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -246,7 +247,14 @@
 
   function montarMapaRelato(base) {
     if (!window.L) { $('status').textContent = 'No se ha podido cargar Leaflet: el mapa necesita conexión a Internet.'; return; }
-    const map = L.map('map-relato', { zoomControl: false, scrollWheelZoom: false, dragging: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false, zoomSnap: 0.1, attributionControl: true });
+    // Zoom con los botones, doble clic, arrastrando o Ctrl + rueda. La rueda sola sigue moviendo el relato.
+    const map = L.map('map-relato', { zoomControl: true, scrollWheelZoom: false, dragging: true, doubleClickZoom: true, boxZoom: false, keyboard: false, touchZoom: true, zoomSnap: 0.1, attributionControl: true });
+    map.zoomControl.setPosition('bottomright');
+    map.getContainer().addEventListener('wheel', (e) => {
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      map.setZoomAround(map.mouseEventToContainerPoint(e), map.getZoom() + (e.deltaY < 0 ? 0.5 : -0.5));
+    }, { passive: false });
     map.attributionControl.setPrefix('').addAttribution('Límites: ICGC · Red: GTFS Renfe · Datos: Telefónica');
     map.createPane('rail'); map.getPane('rail').style.zIndex = 450; map.getPane('rail').style.pointerEvents = 'none';
     const porCodigo = new Map(D.municipios.map((m) => [m.codigo, m]));
@@ -255,7 +263,7 @@
       style: () => ({ color: css('--land-edge'), weight: 0.6, fillColor: css('--land'), fillOpacity: 1 }),
       onEachFeature: (f, layer) => {
         story.capas.set(f.properties.codigo, layer);
-        layer.bindTooltip(() => tipRelato(f.properties, porCodigo.get(f.properties.codigo)), { sticky: true, className: 'story-tip', direction: 'top', offset: [0, -8] });
+        tipFlexible(layer, () => tipRelato(f.properties, porCodigo.get(f.properties.codigo)));
         layer.on('mouseover', () => { layer.setStyle({ weight: 2, color: css('--ink') }); layer.bringToFront(); });
         layer.on('mouseout', () => layer.setStyle({ weight: f.properties.codigo === BCN_COD ? 1 : 0.6, color: css('--land-edge') }));
       },
@@ -266,6 +274,8 @@
       const linea = L.geoJSON(f, { pane: 'rail', interactive: false, style: { color: f.properties.color, weight: 3, opacity: 0.95 } }).addTo(map);
       story.rail.set(f.properties.id, { casing, linea, color: f.properties.color });
     });
+    contornoCatalunya(map);
+    paradasRodalies(map);
     story.annos = L.layerGroup().addTo(map);
     story.map = map;
     story.porCodigo = porCodigo;
@@ -390,9 +400,47 @@
     S.map.flyToBounds(bounds, { ...encuadre(), duration: 1.1 });
   }
 
+  /* Tooltip que sigue al cursor: encima por defecto y debajo cuando el cursor está cerca del borde superior
+   * del mapa (si no, la barra de navegación lo taparía). */
+  function tipFlexible(layer, contenido) {
+    layer.bindTooltip(contenido, { sticky: true, className: 'story-tip', direction: 'top', offset: [0, -8] });
+    const ajustar = (e) => {
+      const t = layer.getTooltip(), abajo = e.containerPoint.y < 170;
+      t.options.direction = abajo ? 'bottom' : 'top'; t.options.offset = abajo ? [0, 14] : [0, -8];
+    };
+    layer.on('mouseover', ajustar); layer.on('mousemove', ajustar);
+  }
+
+  /* Perímetro de Cataluña: relleno de tierra debajo de los municipios (completa el territorio fuera
+   * de la cartografía municipal) y límite resaltado por encima (halo claro + línea oscura). */
+  function contornoCatalunya(map) {
+    if (!CONTORNO) return;
+    const pane = (nombre, z) => { map.createPane(nombre); map.getPane(nombre).style.zIndex = z; map.getPane(nombre).style.pointerEvents = 'none'; return nombre; };
+    L.geoJSON(CONTORNO, { pane: pane('cat-fondo', 350), interactive: false, style: { stroke: false, fillColor: css('--land'), fillOpacity: 1 } }).addTo(map);
+    pane('cat-limite', 440);
+    L.geoJSON(CONTORNO, { pane: 'cat-limite', interactive: false, style: { color: css('--surface'), weight: 6, opacity: 0.85, fill: false, lineJoin: 'round' } }).addTo(map);
+    L.geoJSON(CONTORNO, { pane: 'cat-limite', interactive: false, style: { color: css('--cat-edge'), weight: 2.2, opacity: 1, fill: false, lineJoin: 'round' } }).addTo(map);
+  }
+
+  /* Paradas de Rodalies: punto pequeño con el borde del color de la línea. El nombre no se escribe en el
+   * mapa (lo cargaría demasiado): aparece al pasar el cursor, junto con las líneas que paran. */
+  function paradasRodalies(map) {
+    if (!RAIL) return;
+    map.createPane('paradas'); map.getPane('paradas').style.zIndex = 455;
+    const R = 3.2, RH = 6;
+    RAIL.features.filter((f) => f.geometry.type === 'Point').forEach((f) => {
+      const [lon, lat] = f.geometry.coordinates, ls = (f.properties.lines || []).filter((l) => l !== 'R2');
+      const p = L.circleMarker([lat, lon], { pane: 'paradas', radius: R, weight: 1.6, color: ls.length ? colorLinea(ls[0]) : css('--ink-2'), fillColor: css('--surface'), fillOpacity: 1, bubblingMouseEvents: false })
+        .bindTooltip(`<b>${esc(f.properties.name)}</b><br>${ls.map(chipLinea).join(' ')}`, { className: 'story-tip parada-tip', direction: 'top', offset: [0, -6] })
+        .addTo(map);
+      p.on('mouseover', () => { p.setRadius(RH); p.setStyle({ weight: 2.5 }); });
+      p.on('mouseout', () => { p.setRadius(R); p.setStyle({ weight: 1.6 }); });
+    });
+  }
+
   // ------------------------------------------------------------------ piezas comunes: mapa coroplético, iconos, buscador
   let BASE_P = null;
-  const cargarBase = () => BASE_P || (BASE_P = fetch(BASE_URL).then((r) => { if (!r.ok) throw new Error('municipios_mapa.geojson'); return r.json(); }));
+  const cargarBase = () => BASE_P || (BASE_P = fetch(BASE_URL, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error('municipios_mapa.geojson'); return r.json(); }));
   let PC = new Map();          // código → municipio del análisis
   let COMARCA = new Map();     // código → comarca (de la cartografía)
 
@@ -430,7 +478,7 @@
       style: () => ({ color: css('--land-edge'), weight: 0.6, fillColor: css('--land'), fillOpacity: 1 }),
       onEachFeature: (f, layer) => {
         const cod = f.properties.codigo; M.capas.set(cod, layer);
-        if (o.tip) layer.bindTooltip(() => o.tip(f.properties, PC.get(cod)), { sticky: true, className: 'story-tip', direction: 'top', offset: [0, -8] });
+        if (o.tip) tipFlexible(layer, () => o.tip(f.properties, PC.get(cod)));
         layer.on('mouseover', () => { if (PC.has(cod) || cod === BCN_COD) layer.setStyle({ weight: 2, color: css('--ink') }); });
         layer.on('mouseout', () => layer.setStyle(bordeDe(M, cod)));
         if (o.onClick) layer.on('click', () => { const m = PC.get(cod); if (m) o.onClick(m); });
@@ -441,6 +489,8 @@
       const linea = L.geoJSON(f, { pane: 'rail', interactive: false, style: { color: f.properties.color, weight: 2.5, opacity: 0.95 } }).addTo(map);
       M.rail.set(f.properties.id, { casing, linea, color: f.properties.color });
     });
+    contornoCatalunya(map);
+    paradasRodalies(map);
     M.annos = L.layerGroup().addTo(map);
     M.ruta = L.layerGroup().addTo(map);
     M.pintar = (fn) => M.capas.forEach((layer, cod) => {
@@ -947,28 +997,51 @@
       </div>`;
   }
 
+  // ------------------------------------------------------------------ barra superior que se esconde
+  /* En pantallas con ratón, la barra de navegación queda oculta y baja al acercar el cursor al borde superior. */
+  (function barraOculta() {
+    const bar = document.querySelector('.topbar');
+    if (!matchMedia('(hover: hover)').matches) return;
+    document.addEventListener('mousemove', (e) => {
+      if (e.clientY <= 18) bar.classList.add('visible');
+      else if (e.clientY > bar.offsetHeight + 24 && !bar.contains(document.activeElement)) bar.classList.remove('visible');
+    });
+    document.documentElement.addEventListener('mouseleave', () => bar.classList.remove('visible'));
+  })();
+
   // ------------------------------------------------------------------ navegación
   function route() {
     const [ruta, qs] = location.hash.replace('#', '').split('?');
     const [modo, arg] = (ruta || 'relato').split('/');
     const valido = ['relato', 'simulador', 'municipio', 'laboratorio'].includes(modo) ? modo : 'relato';
     document.querySelectorAll('.mode').forEach((s) => { s.hidden = s.id !== 'mode-' + valido; });
-    document.querySelectorAll('.modes a').forEach((a) => a.classList.toggle('active', a.dataset.mode === valido));
+    // Navegación en forma de línea de tren: el tren se desplaza hasta la parada de la sección activa
+    const orden = ['relato', 'simulador', 'municipio', 'laboratorio'], i = orden.indexOf(valido);
+    document.querySelectorAll('.linea a').forEach((a) => { const k = orden.indexOf(a.dataset.mode); a.classList.toggle('active', k === i); a.classList.toggle('pasada', k < i); });
+    document.querySelector('.linea').style.setProperty('--i', i);
+    const sec = $('mode-' + valido);
+    if (!document.startViewTransition && document.body.dataset.modo && document.body.dataset.modo !== valido) { sec.classList.remove('entra'); void sec.offsetWidth; sec.classList.add('entra'); }
     document.body.dataset.modo = valido;
     if (valido !== 'relato' && valido !== 'municipio') scrollTo(0, 0);
     ({ relato: initRelato, simulador: () => initSimulador(qs ? new URLSearchParams(qs) : null), municipio: () => initMunicipio(arg), laboratorio: initLaboratorio })[valido]();
   }
 
   Promise.all([
-    fetch(DATA_URL).then((r) => { if (!r.ok) throw new Error('observatorio.json'); return r.json(); }),
-    fetch(RAIL_URL).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-  ]).then(([d, rail]) => {
-    D = d; RAIL = rail;
+    fetch(DATA_URL, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error('observatorio.json'); return r.json(); }),
+    fetch(RAIL_URL, { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch(CONTORNO_URL, { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  ]).then(([d, rail, contorno]) => {
+    D = d; RAIL = rail; CONTORNO = contorno;
     PC = new Map(D.municipios.map((m) => [m.codigo, m]));
     if (!RAIL) $('status').textContent = 'No se ha encontrado la cartografía de Rodalies (railway-network.geojson): los mapas se muestran sin la red.';
     $('foot').textContent = `${D.fuente} · ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}. Observatorio R-MOVE v2 · Team 202_E.`;
     cargarBase().then((b) => { b.features.forEach((f) => COMARCA.set(f.properties.codigo, f.properties.comarca)); }).catch(() => {});
-    addEventListener('hashchange', route);
+    // Cambio de sección con fundido cruzado (View Transitions) donde el navegador lo permite
+    addEventListener('hashchange', () => {
+      const modo = location.hash.replace('#', '').split(/[/?]/)[0] || 'relato';
+      if (document.startViewTransition && modo !== document.body.dataset.modo) document.startViewTransition(route);
+      else route();
+    });
     route();
   }).catch((e) => {
     $('status').innerHTML = `No se han podido cargar los datos (${esc(e.message)}). Ejecuta <code>python src/dashboard-v2/build_observatorio.py</code> y sirve el repositorio desde la raíz con <code>python -m http.server 8000</code>.`;

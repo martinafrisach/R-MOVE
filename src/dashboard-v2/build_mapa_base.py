@@ -1,4 +1,5 @@
-"""Genera la cartografía base del relato: municipios simplificados (WGS84) alrededor de Barcelona.
+"""(Sustituido por build_contorno.py, que genera todos los municipios de Cataluña y el perímetro.)
+Genera la cartografía base del relato: municipios simplificados (WGS84) alrededor de Barcelona.
 
 Entrada: data/raw/limites/municipis_icgc.geojson (ICGC, EPSG:25831)
 Salida:  data/processed/rmove/observatorio/municipios_mapa.geojson  (~ ligero, para el navegador)

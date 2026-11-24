@@ -20,8 +20,6 @@ python -m ipykernel install --user --name rmove --display-name "R-MOVE"
 
 En Jupyter o VS Code, elegid el kernel **R-MOVE**. Recomendamos Python 3.12, la misma versión que usa GitHub.
 
-Si vais a descargar GTFS de Transitland, copiad `.env.example` como `.env` y poned vuestra propia clave. El fichero `.env` no se sube nunca.
-
 ## 2. Datos (no están en Git)
 
 Los datos pesan unos 17 GB y algunos son de acceso restringido (Telefónica y la solicitud de información pública de Rodalies), así que **no se suben a GitHub**. En el repo solo están los resultados ligeros que lee el Observatorio.
@@ -34,7 +32,7 @@ Los datos pesan unos 17 GB y algunos son de acceso restringido (Telefónica y la
    python scripts/datos.py comprobar
    ```
 
-El paquete no incluye los CSV brutos de Telefónica (`data/raw/telefonica`, 16 GB). Solo hacen falta para los notebooks 01 y 04.1; los demás usan `M2.parquet`, que sí va en el paquete. Si alguien los necesita, pedídselos a Martina.
+El paquete no incluye los CSV brutos de Telefónica (`data/raw/telefonica`, 16 GB). Solo hacen falta para los notebooks 01 y 05; los demás usan `M2.parquet`, que sí va en el paquete. Si alguien los necesita, pedídselos a Martina.
 
 Para quien tenga los datos y quiera regenerar el paquete:
 
@@ -46,11 +44,10 @@ python scripts/datos.py empaquetar          # sin los CSV brutos de Telefónica
 
 | Carpeta | Contenido |
 |---|---|
-| `notebooks/` | Análisis: 01–02 preparación y mediana, **04 v2** M2 (clustering; la regresión como comprobación), 04.2 experimentos del clustering, 05 M3 barrios |
-| `src/analysis/` | Motor Python del análisis general (con tests) |
+| `notebooks/` | Análisis: 01–02 preparación y mediana, **04 v2** M2 (clustering; la regresión como comprobación), 05 M3 barrios, 07 vulnerabilidad (motorización y renta) |
+| `src/analysis/` | Funciones de apoyo del notebook 02 (catálogo de incidencias y mediana), con test |
 | `src/dashboard-v2/` | **Observatorio**, el dashboard del proyecto (relato, ¿Y si…?, Mi municipio, Laboratorio). Se publica en GitHub Pages |
 | `data/processed/rmove/` | Exportaciones de los notebooks. En Git solo van los JSON y parquet que usa el Observatorio |
-| `docs/` | Documentación del motor y de la publicación |
 
 ## 4. Ver el Observatorio en local
 
@@ -78,11 +75,11 @@ python src/dashboard-v2/build_pages.py --check   # lo mismo que comprueba GitHub
 ```bash
 git checkout main
 git pull                               # siempre antes de empezar
-git checkout -b nombre/tarea           # ej.: laia/m4-graficos, pau/observatorio-simulador
+git checkout -b nombre/tarea           # ej.: laia/m3-graficos, pau/observatorio-simulador
 
 # ...trabajar...
 git add <ficheros>
-git commit -m "M4: gráfico de tráfico en días de huelga"
+git commit -m "M3: gráfico de barrios en días de huelga"
 git push -u origin nombre/tarea
 ```
 
@@ -100,7 +97,7 @@ git checkout nombre/tarea && git merge main
 Git no sabe mezclar dos versiones de un mismo `.ipynb`. Si dos personas lo editan a la vez, una de las dos pierde su trabajo.
 
 - **Un notebook, una persona.** Avisad en el grupo antes de tocar un notebook que no es "vuestro".
-- Para probar cosas, usad una copia vuestra (`notebooks/05_analisi_trafic_laia.ipynb`) y pasad lo que funcione al original al final.
+- Para probar cosas, usad una copia vuestra (`notebooks/05_impacto_movilidad_barrios_laia.ipynb`) y pasad lo que funcione al original al final.
 - Antes de hacer commit: *Kernel → Restart & Run All* (o *Clear All Outputs* si es muy pesado), para que el notebook guardado sea reproducible.
 - Las copias de seguridad van en `notebooks/_backup/`, que no se sube.
 

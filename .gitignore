@@ -19,6 +19,7 @@
 !/data/processed/rmove/resultados/dashboard_resultados.json
 !/data/processed/rmove/observatorio/observatorio.json
 !/data/processed/rmove/observatorio/municipios_mapa.geojson
+!/data/processed/rmove/observatorio/catalunya_contorno.geojson
 !/data/processed/rmove/observatorio/vulnerabilidad.json
 !/data/processed/rmove/m2_conectividad_municipios.parquet
 
@@ -44,10 +45,9 @@ dist/
 notebooks/_backup/
 *_tmp.ipynb
 
-# Credenciales y configuración privada (copiar .env.example a .env)
+# Credenciales y configuración privada
 .env
 .env.*
-!.env.example
 .streamlit/secrets.toml
 *.pem
 *.key

@@ -14,8 +14,8 @@ Implementa la propuesta `claude/propuesta_dashboard_v2.md` con cuatro modos:
 ```bash
 # 1) Generar el JSON del observatorio (lee los exportados de M2/M3; no recalcula modelos)
 python src/dashboard-v2/build_observatorio.py
-# 1b) Solo una vez: cartografía del relato (límites ICGC simplificados; requiere shapely y pyproj)
-python src/dashboard-v2/build_mapa_base.py
+# 1b) Solo una vez: cartografía de los mapas (municipios de la provincia de Barcelona y perímetro de Cataluña, ICGC; requiere shapely y pyproj)
+python src/dashboard-v2/build_contorno.py
 # 2) Servir el repositorio desde la raíz y abrir http://localhost:8000/src/dashboard-v2/
 python -m http.server 8000
 # 3) Validar y empaquetar para GitHub Pages (lo mismo que hace el workflow)

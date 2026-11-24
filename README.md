@@ -1,7 +1,7 @@
 # R-MOVE
 
 Análisis del impacto de las incidencias de Rodalies en la movilidad hacia Barcelona y su dashboard estático, el Observatorio.
-Los notebooks del análisis están en `notebooks/` y el dashboard del proyecto, el **Observatorio**, en `src/dashboard-v2/`. `src/analysis/` contiene el motor del análisis general anterior.
+Los notebooks del análisis están en `notebooks/` y el dashboard del proyecto, el **Observatorio**, en `src/dashboard-v2/`. `src/analysis/` contiene las funciones de apoyo que usa el notebook 02 (catálogo de incidencias y referencia de la mediana).
 
 > **¿Eres del equipo y acabas de clonar el repo?** Lee [CONTRIBUTING.md](CONTRIBUTING.md): instalación, de dónde sacar los datos (no están en Git), cómo ver el Observatorio y cómo trabajar con ramas sin pisarnos.
 >
