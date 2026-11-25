@@ -9,19 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="observatorio.css?v=13">
+  <link rel="stylesheet" href="observatorio.css?v=19">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#relato">
-      <span class="brandicon">R</span>
-      <span><strong>Observatorio R-MOVE</strong><small>Qué pasa con la movilidad hacia Barcelona cuando falla Rodalies</small></span>
+    <a class="brand" href="#relato" aria-label="Observatorio R-MOVE: volver al inicio">
+      <span class="wm" aria-hidden="true">R<span class="wm-via"></span>MOVE</span>
+      <span class="kicker"><b>Observatorio</b>de la movilidad hacia Barcelona<br>cuando falla Rodalies</span>
     </a>
+    <dl class="tablero" id="tablero" aria-label="Datos del observatorio"></dl>
     <nav class="linea" aria-label="Secciones del observatorio" style="--i:0">
       <span class="via" aria-hidden="true"><span class="recorrido"></span></span><span class="tren" aria-hidden="true"></span>
       <a href="#relato" data-mode="relato"><i></i><span>El relato</span></a>
-      <a href="#simulador" data-mode="simulador"><i></i><span>¿Y si…?</span></a>
-      <a href="#municipio" data-mode="municipio"><i></i><span>Mi municipio</span></a>
+      <a href="#planificador" data-mode="planificador"><i></i><span>Planificador</span></a>
       <a href="#laboratorio" data-mode="laboratorio"><i></i><span>Laboratorio</span></a>
     </nav>
   </header>
@@ -91,47 +91,31 @@
           <p class="eyebrow">Y ahora</p>
           <h2>Si mañana hay huelga, ¿qué le pasará a tu municipio?</h2>
           <p>Con lo aprendido en estos cuatro días se puede anticipar el impacto y saber qué hacer.</p>
-          <p class="cta"><a href="#simulador" class="btn">Probar el simulador</a> <a href="#municipio" class="btn ghost">Buscar mi municipio</a></p>
+          <p class="cta"><a href="#planificador" class="btn">Abrir el planificador</a> <a href="#planificador?vista=perfil" class="btn ghost">Buscar mi municipio</a></p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 2 · SIMULADOR: planificador tipo «Google Maps» --------------------------------- -->
-  <section id="mode-simulador" class="mode" hidden>
+  <!-- 2 · PLANIFICADOR: simulador de escenarios + ficha de cada municipio, en una sola herramienta --------------- -->
+  <section id="mode-planificador" class="mode" hidden>
     <div class="planner">
       <div id="map-sim" class="planner-map"></div>
       <aside class="planner-panel" id="sim-panel" aria-label="Planificador">
-        <div class="pp-head"><p class="eyebrow">Planificador de incidencias</p><h1>¿Y si mañana falla el tren?</h1></div>
+        <div class="pp-head"><p class="eyebrow">Herramienta de planificación</p><h1>¿Y si mañana falla el tren?</h1></div>
         <div class="pp-tabs" id="sim-tipos" role="tablist" aria-label="Tipo de incidencia"></div>
         <p class="pp-det" id="sim-tipo-det"></p>
         <div class="pp-lines" id="sim-lineas"></div>
         <div class="pp-route">
-          <div class="pp-stop"><i class="dotA">A</i><input id="sim-origen" placeholder="Tu municipio (o clic en el mapa)" autocomplete="off" aria-label="Municipio de origen"><button type="button" id="sim-limpiar" class="x" aria-label="Quitar municipio" hidden>×</button><ul class="ac" id="sim-ac" role="listbox" hidden></ul></div>
+          <div class="pp-stop"><i class="dotA">A</i><input id="sim-origen" placeholder="Toda la red · o elige un municipio" autocomplete="off" aria-label="Municipio"><button type="button" id="sim-limpiar" class="x" aria-label="Volver a toda la red" hidden>×</button><ul class="ac" id="sim-ac" role="listbox" hidden></ul></div>
           <div class="pp-stop"><i class="dotB">B</i><span>Barcelona</span></div>
         </div>
         <div class="pp-dur" id="sim-dur" role="group" aria-label="Duración"><button type="button" data-dur="1">1 día</button><button type="button" data-dur="3">3 días</button><button type="button" data-dur="5">1 semana</button></div>
         <div id="sim-result" class="pp-result"></div>
-        <details class="pp-more"><summary>Más datos del escenario</summary><div id="sim-mas"></div></details>
+        <details class="pp-more" id="sim-mas-wrap"><summary>Más datos del escenario</summary><div id="sim-mas"></div></details>
       </aside>
       <div class="story-legend" id="legend-sim"></div>
     </div>
-  </section>
-
-  <!-- 3 · MI MUNICIPIO ----------------------------------------------------- -->
-  <section id="mode-municipio" class="mode" hidden>
-    <div id="mun-landing" class="planner">
-      <div id="map-mun-landing" class="planner-map"></div>
-      <div class="planner-panel search-panel">
-        <p class="eyebrow">Mi municipio</p>
-        <h1>¿Cómo le afectan las incidencias a tu municipio?</h1>
-        <div class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg><input id="mun-buscar" placeholder="Busca tu municipio: Mataró, Vic, Sitges…" autocomplete="off" aria-label="Buscar municipio"><ul class="ac" id="mun-ac" role="listbox" hidden></ul></div>
-        <p class="muted small">O haz clic en el mapa. Los que más sufren:</p>
-        <div class="mchips" id="mun-top"></div>
-      </div>
-      <div class="story-legend" id="legend-mun"></div>
-    </div>
-    <div id="mun-ficha" class="page" hidden></div>
   </section>
 
   <!-- 4 · LABORATORIO ------------------------------------------------------ -->
@@ -159,6 +143,6 @@
   <footer class="foot" id="foot"></footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="observatorio.js?v=13"></script>
+  <script src="observatorio.js?v=21"></script>
 </body>
 </html>

@@ -2,12 +2,14 @@
 
 **Dashboard del proyecto**, publicado en GitHub Pages.
 Todas las cifras salen del **clustering** del notebook 03 (la regresión se usa como comprobación) y del notebook 04 (análisis por barrios).
-Tiene cuatro modos:
+Tiene tres modos:
 
 1. **El relato** — scrollytelling: mapa coroplético de municipios (límites ICGC, sin teselas) a pantalla completa, con tarjetas que pasan por encima, anotaciones sobre el mapa, leyenda por paso y barra de progreso. Recorrido: un día normal → avería R1 (13/05/2024) → huelga general (17/03/2025) → huelgas anunciadas (redistribución por barrios) → una sola línea (averías de una línea, sección 4.6 del notebook 03) → cuánto dura → quién lo sufre (alternativa en transporte público).
-2. **¿Y si…?** — planificador tipo «Google Maps»: mapa a pantalla completa y panel lateral. Se elige el tipo de incidencia (pestañas), la línea, la duración y el origen (buscador o clic en el mapa); el destino es Barcelona. Sin origen: impacto total y municipios más afectados. Con origen: rutas alternativas (Rodalies, bus/FGC, teletrabajo) con tiempo, estado y la recomendada, dibujadas sobre el mapa. Enlazable: `#simulador?tipo=huelga&linea=todas&mun=08307`.
-3. **Mi municipio** — portada con mapa y buscador; ficha con posición en el índice (tira de los 62 municipios), «si mañana pasa esto…» (enlaza al planificador), historial en tarjetas de color, cómo llegar a Barcelona (tiempo y frecuencia) y vulnerabilidad social.
-4. **Laboratorio** — gráficos con el titular de la conclusión: casos (los 4 días de caos y las averías de una línea: mapa del día, grupos, líneas, serie con el rango normal, tramos frente a su rango normal), validaciones (placebo y cuánto dura), qué lo explica (distancia, grupos y mapa de calor por alternativa) y método y límites.
+2. **Planificador** — une los antiguos «¿Y si…?» y «Mi municipio» en una herramienta de gestión. Mapa a pantalla completa y panel lateral: tipo de incidencia (pestañas), línea, duración y, opcionalmente, un municipio (buscador o clic en el mapa).
+   - **Sin municipio (vista de red, para quien gestiona):** viajes perdidos, municipios afectados, cuántos no tienen alternativa y orden de magnitud de autobuses para cubrirlos; lista «Dónde actuar primero» (primero los municipios sin alternativa, después por viajes perdidos) con la acción recomendada (lanzadera, reforzar la alternativa o informar); descarga del plan en CSV y enlace para compartir el escenario.
+   - **Con municipio:** pestaña «Este escenario» (impacto, acción recomendada y rutas alternativas dibujadas sobre el mapa) y pestaña «Perfil del municipio» (posición en el índice, los tres escenarios, historial de los días de caos, cómo llegar a Barcelona y vulnerabilidad social).
+   - Enlazable: `#planificador?tipo=huelga&linea=todas&mun=08307&vista=perfil`. Los enlaces antiguos `#simulador?…` y `#municipio/08006` redirigen aquí.
+3. **Laboratorio** — gráficos con el titular de la conclusión: casos (días de caos y averías de una línea: mapa del día, grupos, líneas, serie con el rango normal, tramos frente a su rango normal), validaciones (placebo y cuánto dura), qué lo explica (distancia, grupos y mapa de calor por alternativa) y método y límites.
 
 ## Uso
 
@@ -25,7 +27,7 @@ python src/dashboard-v2/build_pages.py --check
 python src/dashboard-v2/build_pages.py
 ```
 
-Enlaces directos: `#relato`, `#simulador`, `#municipio/08006`, `#laboratorio`.
+Enlaces directos: `#relato`, `#planificador`, `#planificador?mun=08006&vista=perfil`, `#laboratorio`.
 
 ## Datos
 
@@ -37,8 +39,8 @@ Enlaces directos: `#relato`, `#simulador`, `#municipio/08006`, `#laboratorio`.
 ## Motorización y renta: dónde aparece
 
 - **Relato**, paso «¿Quién lo sufre?»: barras de los dependientes por terciles de motorización.
-- **¿Y si…?**, «Más datos del escenario»: viajes de los dependientes con pocos coches y viajes perdidos.
-- **Mi municipio**, «Vulnerabilidad social»: motorización y renta del municipio, su nivel y la lectura.
+- **Planificador**, vista de red, «Más datos del escenario»: viajes de los dependientes con pocos coches y viajes perdidos.
+- **Planificador**, municipio → «Perfil del municipio» → «Vulnerabilidad social»: motorización y renta del municipio, su nivel y la lectura.
 - **Laboratorio → Qué lo explica**: terciles de motorización y renta, regresión ponderada y comprobaciones de robustez. **Método y límites**: decisión de datos y limitación.
 
 ## Simulador: cómo calcula

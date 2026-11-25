@@ -1,5 +1,5 @@
 /* Observatorio R-MOVE · dashboard v2
- * Cuatro modos: relato (scrollytelling), simulador «¿Y si…?», Mi municipio y laboratorio.
+ * Tres modos: relato (scrollytelling), planificador (escenarios «¿Y si…?» + ficha de cada municipio) y laboratorio.
  * Solo lee data/processed/rmove/observatorio/observatorio.json (generado por build_observatorio.py a partir de
  * los resultados del clustering del notebook 03) y la red de Rodalies. No recalcula modelos: consulta coeficientes ya estimados.
  */
@@ -58,15 +58,17 @@
       const y = top + i * rowH + rowH / 2, e = r.efecto ?? 0, sig = r.p == null || r.p < 0.05;
       const col = r.color || colClase(claseDe(e) === 3 ? (e < 0 ? 2 : 4) : claseDe(e));
       const x0 = Math.min(x(0), x(e)), w = Math.max(Math.abs(x(e) - x(0)), 1.5);
+      s += `<g class="row" style="--k:${i}">`;
       s += `<text class="lbl" x="${L - 10}" y="${y + 4}" text-anchor="end">${esc(r.label)}</text>`;
-      s += `<rect x="${x0}" y="${y - 7}" width="${w}" height="14" rx="4" fill="${col}" opacity="${sig ? 1 : 0.45}"/>`;
-      if (r.ic_inf != null) s += `<line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_sup)}" y1="${y}" y2="${y}"/><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_inf)}" y1="${y - 5}" y2="${y + 5}"/><line class="ci" x1="${x(r.ic_sup)}" x2="${x(r.ic_sup)}" y1="${y - 5}" y2="${y + 5}"/>`;
+      s += `<rect class="bar${e < 0 ? ' neg' : ''}" x="${x0}" y="${y - 7}" width="${w}" height="14" rx="4" fill="${col}" opacity="${sig ? 1 : 0.45}"/>`;
+      if (r.ic_inf != null) s += `<g class="fade"><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_sup)}" y1="${y}" y2="${y}"/><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_inf)}" y1="${y - 5}" y2="${y + 5}"/><line class="ci" x1="${x(r.ic_sup)}" x2="${x(r.ic_sup)}" y1="${y - 5}" y2="${y + 5}"/></g>`;
       const vx = Math.max(x(e), r.ic_sup != null ? x(r.ic_sup) : 0, x(0)) + 6;
-      s += `<text class="val" x="${vx}" y="${y + 4}">${pct(e)}${sig ? '' : ' ·ns'}</text>`;
+      s += `<text class="val fade" x="${vx}" y="${y + 4}">${pct(e)}${sig ? '' : ' ·ns'}</text>`;
       const t = r.tip || `<b>${esc(r.label)}</b><br>${pct(e)}${r.ic_inf != null ? ` [${pct(r.ic_inf)}, ${pct(r.ic_sup)}]` : ''}${r.p != null ? '<br>' + pval(r.p) : ''}`;
-      s += `<rect class="hit" x="0" y="${y - rowH / 2}" width="${W}" height="${rowH}" data-tip="${esc(t)}"/>`;
+      s += `<rect class="hit" x="0" y="${y - rowH / 2}" width="${W}" height="${rowH}" data-tip="${esc(t)}"/></g>`;
     });
     el.innerHTML = s + '</svg>' + (o.nota ? `<p class="muted" style="font-size:12px;margin:4px 0 0">${o.nota}</p>` : '');
+    animar(el);
   }
 
   /* Líneas sobre eje x categórico. series: [{name, color, values:[y|null], dash}], band: {lo:[..], hi:[..]} */
@@ -80,14 +82,16 @@
     niceTicks(lo, hi, 4).forEach((t) => { s += `<line class="${o.zero === t ? 'zero' : 'grid'}" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${nf(t)}${o.unit || ''}</text>`; });
     if (o.band) {
       const up = o.band.hi.map((v, i) => `${x(i)},${y(v)}`), dn = o.band.lo.map((v, i) => `${x(i)},${y(v)}`).reverse();
-      s += `<polygon points="${up.concat(dn).join(' ')}" fill="${css('--neutral')}" opacity=".35"/>`;
+      s += `<polygon class="fade" points="${up.concat(dn).join(' ')}" fill="${css('--neutral')}" opacity=".35"/>`;
     }
-    (o.marks || []).forEach((i) => { s += `<line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H - B}" stroke="${css('--brand')}" stroke-dasharray="3 3"/>`; });
+    (o.marks || []).forEach((i) => { s += `<line class="fade" x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H - B}" stroke="${css('--brand')}" stroke-dasharray="3 3"/>`; });
     series.forEach((se) => {
       let d = '', pen = false;
       se.values.forEach((v, i) => { if (v == null) { pen = false; return; } d += (pen ? 'L' : 'M') + x(i) + ',' + y(v); pen = true; });
-      s += `<path d="${d}" fill="none" stroke="${se.color}" stroke-width="2" ${se.dash ? 'stroke-dasharray="5 4"' : ''}/>`;
-      se.values.forEach((v, i) => { if (v != null && (o.dots || (o.marks || []).includes(i))) s += `<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${se.color}" stroke="${css('--surface')}" stroke-width="2"/>`; });
+      // Las líneas continuas se «dibujan» al entrar; las discontinuas aparecen con un fundido (conservan su trazo).
+      s += se.dash ? `<path class="fade" d="${d}" fill="none" stroke="${se.color}" stroke-width="2" stroke-dasharray="5 4"/>`
+        : `<path class="ln" pathLength="1" d="${d}" fill="none" stroke="${se.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+      se.values.forEach((v, i) => { if (v != null && (o.dots || (o.marks || []).includes(i))) s += `<circle class="pop" style="--k:${i}" cx="${x(i)}" cy="${y(v)}" r="4" fill="${se.color}" stroke="${css('--surface')}" stroke-width="2"/>`; });
     });
     const step = Math.ceil(xs.length / (o.maxLabels || 8));
     const mk = o.marks || [];
@@ -96,10 +100,14 @@
       const t = `<b>${esc(lab)}</b>` + series.map((se) => se.values[i] == null ? '' : `<br><span class="dot" style="background:${se.color}"></span>${esc(se.name)}: ${nf(se.values[i], 1)}${o.unit || ''}`).join('') +
         (o.band ? `<br>Rango normal: ${nf(o.band.lo[i], 1)} – ${nf(o.band.hi[i], 1)}${o.unit || ''}` : '');
       const w = (W - L - R) / Math.max(xs.length - 1, 1);
-      s += `<rect class="hit" x="${x(i) - w / 2}" y="${T}" width="${w}" height="${H - T - B}" data-tip="${esc(t)}"/>`;
+      // Capa de hover: línea guía vertical y puntos resaltados en el día bajo el cursor (va justo después de su zona activa).
+      const pts = series.map((se) => se.values[i] == null ? '' : `<circle cx="${x(i)}" cy="${y(se.values[i])}" r="4.5" fill="${se.color}" stroke="${css('--surface')}" stroke-width="2"/>`).join('');
+      s += `<rect class="hit" x="${x(i) - w / 2}" y="${T}" width="${w}" height="${H - T - B}" data-tip="${esc(t)}"/>` +
+        `<g class="xh"><line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H - B}"/>${pts}</g>`;
     });
     if (series.length > 1) s += series.map((se, k) => `<g transform="translate(${L + 4 + k * 150},${T + 2})"><line x1="0" x2="16" y1="0" y2="0" stroke="${se.color}" stroke-width="2" ${se.dash ? 'stroke-dasharray="5 4"' : ''}/><text class="lbl" x="22" y="4">${esc(se.name)}</text></g>`).join('');
     el.innerHTML = s + '</svg>';
+    animar(el);
   }
 
   /* Event study: puntos con intervalo */
@@ -111,12 +119,14 @@
     niceTicks(lo, hi, 4).forEach((t) => { s += `<line class="${t === 0 ? 'zero' : 'grid'}" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${nf(t)} %</text>`; });
     evento.forEach((e, i) => {
       const c = e.dia === 0 ? css('--down') : css('--ink-2');
-      if (e.ic_inf != null) s += `<line x1="${x(i)}" x2="${x(i)}" y1="${y(e.ic_inf)}" y2="${y(e.ic_sup)}" stroke="${c}" stroke-width="2" stroke-linecap="round"/>`;
-      s += `<circle cx="${x(i)}" cy="${y(e.efecto_pct)}" r="${e.dia === 0 ? 6 : 4.5}" fill="${c}" stroke="${css('--surface')}" stroke-width="2"/>`;
+      if (e.ic_inf != null) s += `<line class="fade" style="--k:${i}" x1="${x(i)}" x2="${x(i)}" y1="${y(e.ic_inf)}" y2="${y(e.ic_sup)}" stroke="${c}" stroke-width="2" stroke-linecap="round"/>`;
+      s += `<circle class="pop" style="--k:${i}" cx="${x(i)}" cy="${y(e.efecto_pct)}" r="${e.dia === 0 ? 6 : 4.5}" fill="${c}" stroke="${css('--surface')}" stroke-width="2"/>`;
       s += `<text x="${x(i)}" y="${H - 10}" text-anchor="middle" ${e.dia === 0 ? 'class="lbl"' : ''}>${e.dia === 0 ? 'Día 0' : (e.dia > 0 ? '+' : '') + e.dia}</text>`;
-      s += `<rect class="hit" x="${x(i) - 20}" y="${T}" width="40" height="${H - T - B}" data-tip="${esc(`<b>Día ${e.dia}</b><br>${pct(e.efecto_pct)}${e.ic_inf != null ? ` [${pct(e.ic_inf)}, ${pct(e.ic_sup)}]` : ''}`)}"/>`;
+      s += `<rect class="hit" x="${x(i) - 20}" y="${T}" width="40" height="${H - T - B}" data-tip="${esc(`<b>Día ${e.dia}</b><br>${pct(e.efecto_pct)}${e.ic_inf != null ? ` [${pct(e.ic_inf)}, ${pct(e.ic_sup)}]` : ''}`)}"/>` +
+        `<g class="xh"><line x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H - B}"/></g>`;
     });
     el.innerHTML = s + '</svg>';
+    animar(el);
   }
 
   function histogram(el, valores, real) {
@@ -126,12 +136,54 @@
     const mx = Math.max(...bins), x = (v) => L + (v - lo) / (hi - lo) * (W - L - R), y = (c) => T + (1 - c / mx) * (H - T - B);
     let s = `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="Placebo">`;
     niceTicks(lo, hi, 6).forEach((t) => { s += `<text x="${x(t)}" y="${H - 10}" text-anchor="middle">${nf(t)} %</text>`; });
-    bins.forEach((c, i) => { if (!c) return; const a = lo + i * bw; s += `<rect x="${x(a) + 1}" y="${y(c)}" width="${x(a + bw) - x(a) - 2}" height="${H - B - y(c)}" rx="2" fill="${css('--neutral')}" data-tip="${esc(`${nf(a, 1)} a ${nf(a + bw, 1)} %: ${c} placebos`)}"/>`; });
-    s += `<line x1="${x(real)}" x2="${x(real)}" y1="${T}" y2="${H - B}" stroke="${css('--down')}" stroke-width="2.5"/><text class="lbl" x="${x(real) + 6}" y="${T + 12}">Días de caos reales: ${pct(real)}</text>`;
+    bins.forEach((c, i) => { if (!c) return; const a = lo + i * bw; s += `<rect class="col" style="--k:${i}" x="${x(a) + 1}" y="${y(c)}" width="${x(a + bw) - x(a) - 2}" height="${H - B - y(c)}" rx="2" fill="${css('--neutral')}" data-tip="${esc(`${nf(a, 1)} a ${nf(a + bw, 1)} %: ${c} placebos`)}"/>`; });
+    s += `<g class="fade" style="--k:${nb}"><line x1="${x(real)}" x2="${x(real)}" y1="${T}" y2="${H - B}" stroke="${css('--down')}" stroke-width="2.5"/><text class="lbl" x="${x(real) + 6}" y="${T + 12}">Días de caos reales: ${pct(real)}</text></g>`;
     el.innerHTML = s + '</svg>';
+    animar(el);
   }
 
   function ancho(el) { return Math.max(el.clientWidth || 560, 300); }
+
+  /* Animación de entrada: el gráfico se «construye» (barras que crecen, líneas que se dibujan, puntos que aparecen)
+   * cuando entra en pantalla. Sin IntersectionObserver o con «reducir movimiento» se muestra directamente. */
+  const sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)');
+  const obsGraf = 'IntersectionObserver' in window
+    ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); obsGraf.unobserve(e.target); } }), { threshold: 0.2 })
+    : null;
+  function animar(el) {
+    const svg = el.querySelector('svg.viz');
+    if (!svg || !obsGraf || sinMovimiento.matches) return;
+    svg.classList.add('anim');
+    obsGraf.observe(svg);
+  }
+
+  /* Cifras grandes que «cuentan» hasta su valor al aparecer (conserva signo, decimales, miles y sufijo). */
+  const CIFRAS = '.big-stat strong,.doors strong,.pp-impact strong,.kpi strong,.ch-kpis strong,.rank strong,.htile strong,.sval,.pp-eff strong,.pp-kpis strong,.scen strong,.facts strong';
+  const NUM_RE = /([−+-]?)(\d{1,3}(?:\.\d{3})+|\d+)(,\d+)?/;
+  function contar(el) {
+    if (el.dataset.contado === el.textContent || el.childElementCount) return;
+    const txt = el.textContent, m = txt.match(NUM_RE);
+    if (!m) return;
+    const dec = m[3] ? m[3].length - 1 : 0, fin = Number(m[2].replace(/\./g, '') + (m[3] ? '.' + m[3].slice(1) : ''));
+    if (!isFinite(fin) || fin === 0) return;
+    const antes = txt.slice(0, m.index) + m[1], despues = txt.slice(m.index + m[0].length), t0 = performance.now(), dur = 650;
+    el.dataset.contado = txt;
+    const paso = (t) => {
+      if (el.dataset.contado !== txt) return; // otro render lo ha sustituido
+      const k = Math.min((t - t0) / dur, 1), v = fin * (1 - Math.pow(1 - k, 3));
+      el.textContent = k < 1 ? antes + nf(v, dec) + despues : txt;
+      if (k < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  }
+  if (obsGraf && !sinMovimiento.matches && 'MutationObserver' in window) {
+    const obsCifra = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { obsCifra.unobserve(e.target); contar(e.target); } }), { threshold: 0.6 });
+    new MutationObserver((ms) => ms.forEach((mu) => mu.addedNodes.forEach((n) => {
+      if (n.nodeType !== 1) return;
+      if (n.matches(CIFRAS)) obsCifra.observe(n);
+      n.querySelectorAll(CIFRAS).forEach((c) => obsCifra.observe(c));
+    }))).observe(document.body, { childList: true, subtree: true });
+  }
 
   function niceTicks(lo, hi, n) {
     const span = hi - lo, step0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(step0))), err = step0 / mag;
@@ -362,7 +414,7 @@
         relleno = porClase([FECHAS.averia]);
         rail = (id) => id === 'R1' ? 'cut' : 'on';
         bounds = [[41.36, 2.02], [41.75, 2.80]];
-        leyenda = leyendaClases('13/05/2024 · Avería R1').replace('</ul>', lineaLeyenda('R1 cortada', true) + '</ul>');
+        leyenda = leyendaClases('13/05/2024 · Avería R1');
         anno(41.4836, 2.1878, '<b>⚡</b>Robo de cobre<small>Montcada Bifurcació</small>', 'alert');
         { const n = D.incidencias.find((i) => i.fecha === FECHAS.averia).tramos.find((t) => /norte de Arenys/.test(t.tramo));
           anno(41.6137, 2.6547, `<b>${pct(n ? n.cambio_pct : null, 0)}</b>Maresme norte<small>sin tren al norte de Arenys</small>`); }
@@ -371,7 +423,7 @@
       case 'huelga':
         relleno = porClase([FECHAS.huelga]);
         rail = () => 'cut';
-        leyenda = leyendaClases('17/03/2025 · Huelga general').replace('</ul>', lineaLeyenda('Servicios mínimos en toda la red', true) + '</ul>');
+        leyenda = leyendaClases('17/03/2025 · Huelga general');
         anno(41.9301, 2.2549, `<b>${pct(lineaDe('R3').efecto_pct, 0)}</b>Osona · R3`);
         anno(41.6386, 2.3622, `<b>${pct(lineaDe('R2N').efecto_pct, 0)}</b>Vallès Oriental · R2 Nord`);
         anno(41.6137, 2.6547, `<b>${pct(lineaDe('R1').efecto_pct, 0)}</b>Maresme · R1`);
@@ -397,7 +449,7 @@
           const c = [lat.reduce((x, y) => x + y) / lat.length, lon.reduce((x, y) => x + y) / lon.length];
           anno(c[0], c[1], `<b>${pct(a.perdidos.efecto_pct, 0)}</b>${esc(a.linea_nombre)}<small>dependientes de la línea</small>`);
         }
-        leyenda = leyendaClases(`${fecha(a.fecha)} · ${esc(a.titulo)}`).replace('</ul>', lineaLeyenda(`${esc(a.linea_nombre)} sin servicio normal`, true) + '</ul>');
+        leyenda = leyendaClases(`${fecha(a.fecha)} · ${esc(a.titulo)}`);
         break;
       }
       case 'duracion':
@@ -423,8 +475,9 @@
     });
     S.rail.forEach((r, id) => {
       const st = rail(id);
-      r.linea.setStyle(st === 'cut' ? { color: r.color, weight: 3, opacity: 0.95, dashArray: '1 7', lineCap: 'round' } : { color: r.color, weight: 3, opacity: 0.95, dashArray: null });
-      r.casing.setStyle({ opacity: st === 'cut' ? 0 : 0.9 });
+      // Las vías se dibujan siempre continuas, también las de las líneas afectadas.
+      r.linea.setStyle({ color: r.color, weight: 3, opacity: 0.95, dashArray: null });
+      r.casing.setStyle({ opacity: 0.9 });
     });
     $('legend-relato').innerHTML = leyenda;
     S.map.flyToBounds(bounds, { ...encuadre(), duration: 1.1 });
@@ -485,6 +538,8 @@
     huelga: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM9 8h2v8H9zm4 0h2v8h-2z"/></svg>',
     calendario: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2zM5 9v11h14V9zm2 3h4v4H7z"/></svg>',
     lupa: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>',
+    descarga: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9.2l3.3-3.3 1.4 1.4L12 16l-5.7-5.7 1.4-1.4 3.3 3.3zM5 18h14v2H5z"/></svg>',
+    enlace: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.5-3.5a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0zM8.5 19.5a3.5 3.5 0 0 1-2.5-6L8.2 11.3l1.4 1.4-2.2 2.2a1.5 1.5 0 0 0 2.1 2.1l2.2-2.2 1.4 1.4-2.2 2.2a3.5 3.5 0 0 1-2.4 1zm7.3-6.8-1.4-1.4 2.2-2.2a1.5 1.5 0 0 0-2.1-2.1l-2.2 2.2-1.4-1.4 2.2-2.2a3.5 3.5 0 0 1 4.9 4.9z"/></svg>',
     aviso: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l10 18H2zm-1 7v5h2V9zm0 7v2h2v-2z"/></svg>',
   };
   const ICON_TIPO = { averia: 'rayo', huelga: 'huelga', anunciada: 'calendario' };
@@ -530,9 +585,9 @@
     });
     M.vias = (estado) => M.rail.forEach((r, lid) => {
       const st = estado(lid);
-      r.linea.setStyle(st === 'cut' ? { color: r.color, weight: 2.5, opacity: 0.95, dashArray: '1 6', lineCap: 'round' }
-        : st === 'dim' ? { color: css('--neutral'), weight: 2, opacity: 0.6, dashArray: null } : { color: r.color, weight: 2.5, opacity: 0.95, dashArray: null });
-      r.casing.setStyle({ opacity: st === 'on' ? 0.9 : 0 });
+      // Siempre continuas: una línea afectada ('cut') se dibuja igual que una que funciona.
+      r.linea.setStyle(st === 'dim' ? { color: css('--neutral'), weight: 2, opacity: 0.6, dashArray: null } : { color: r.color, weight: 2.5, opacity: 0.95, dashArray: null });
+      r.casing.setStyle({ opacity: st === 'dim' ? 0 : 0.9 });
     });
     M.resaltar = (cod) => { M.sel = cod; M.capas.forEach((layer, c) => layer.setStyle(bordeDe(M, c))); if (cod && M.capas.get(cod)) M.capas.get(cod).bringToFront(); };
     M.encuadrar = (b, pad) => { if (visible(map)) map.flyToBounds(b, { ...(pad || {}), duration: 0.8 }); else M.pendiente = [b, pad]; };
@@ -592,45 +647,75 @@
   const pin = (M, ll, letra, cls) => L.marker(ll, { pane: 'ruta', interactive: false, keyboard: false, icon: L.divIcon({ className: '', iconSize: [0, 0], html: `<div class="pinAB ${cls}">${letra}</div>` }) }).addTo(M.ruta);
   const padPanel = () => (innerWidth > 900 ? { paddingTopLeft: [Math.min(430, innerWidth * 0.45), 40], paddingBottomRight: [60, 40] } : { padding: [20, 20] });
 
-  // ------------------------------------------------------------------ 2 · SIMULADOR (planificador tipo «Google Maps»)
-  const sim = { tipo: 'huelga', linea: 'todas', dur: 1, mun: null, ruta: null, M: null, listo: false };
+  // ------------------------------------------------------------------ 2 · PLANIFICADOR (escenarios + ficha de cada municipio)
+  /* Una sola herramienta para quien tiene que gestionar una incidencia (Generalitat, ATM, Renfe, ayuntamientos,
+   * empresas) y para quien la sufre. Sin municipio: vista de red, con el impacto del escenario y dónde actuar primero.
+   * Con municipio: «Este escenario» (rutas y acción recomendada) y «Perfil» (lo que antes era «Mi municipio»). */
+  const sim = { tipo: 'huelga', linea: 'todas', dur: 1, mun: null, ruta: null, vista: 'escenario', M: null, listo: false };
+  const BUS_PLAZAS = 55;   // plazas de un autobús interurbano, solo para dar orden de magnitud
 
   async function initSimulador(params) {
+    let enfocar = false;
     if (params) {
       if (params.get('tipo')) sim.tipo = params.get('tipo');
       if (params.get('linea')) sim.linea = params.get('linea');
       if (params.get('mun') !== null) sim.mun = params.get('mun') || null;
+      if (params.get('vista')) sim.vista = params.get('vista') === 'perfil' ? 'perfil' : 'escenario';
+      enfocar = params.get('vista') === 'perfil' && !sim.mun;
       sim.ruta = null;
     }
     if (!sim.listo) {
       sim.listo = true;
       $('sim-tipos').innerHTML = D.tipos.map((t) => `<button type="button" role="tab" data-tipo="${t.id}"><span class="ic">${ICON[ICON_TIPO[t.id]]}</span>${CORTO_TIPO[t.id]}</button>`).join('');
-      $('sim-tipos').addEventListener('click', (e) => { const b = e.target.closest('[data-tipo]'); if (!b) return; sim.tipo = b.dataset.tipo; if (sim.tipo === 'averia' && sim.linea === 'todas') sim.linea = (PC.get(sim.mun) || { lineas: ['R1'] }).lineas[0]; sim.ruta = null; actualizarSim(); });
+      $('sim-tipos').addEventListener('click', (e) => { const b = e.target.closest('[data-tipo]'); if (b) cambiarTipo(b.dataset.tipo); });
       $('sim-lineas').addEventListener('click', (e) => { const b = e.target.closest('[data-linea]'); if (!b) return; sim.linea = b.dataset.linea; sim.ruta = null; actualizarSim(); });
-      $('sim-dur').addEventListener('click', (e) => { const b = e.target.closest('[data-dur]'); if (!b) return; sim.dur = +b.dataset.dur; actualizarSim(); });
+      $('sim-dur').addEventListener('click', (e) => { const b = e.target.closest('[data-dur]'); if (!b) return; sim.dur = +b.dataset.dur; actualizarSim(false); });
       autocompletar($('sim-origen'), $('sim-ac'), (m) => elegirOrigen(m.codigo));
       $('sim-limpiar').addEventListener('click', () => elegirOrigen(null));
       $('sim-result').addEventListener('click', (e) => {
-        const t = e.target.closest('[data-mun]'); if (t) return elegirOrigen(t.dataset.mun);
-        const r = e.target.closest('[data-ruta]'); if (r) { sim.ruta = r.dataset.ruta; actualizarSim(false); }
+        const t = e.target.closest('[data-mun]'); if (t) { e.preventDefault(); return elegirOrigen(t.dataset.mun); }
+        const r = e.target.closest('[data-ruta]'); if (r) { sim.ruta = r.dataset.ruta; return actualizarSim(false); }
+        const v = e.target.closest('[data-vista]'); if (v) { e.preventDefault(); sim.vista = v.dataset.vista; $('sim-panel').scrollTo({ top: 0, behavior: 'smooth' }); return actualizarSim(false); }
+        const g = e.target.closest('[data-ir-tipo]'); if (g) { sim.vista = 'escenario'; return cambiarTipo(g.dataset.irTipo); }
+        if (e.target.closest('#sim-csv')) return descargarCSV();
+        if (e.target.closest('#sim-copiar')) return copiarEnlace(e.target.closest('#sim-copiar'));
       });
       sim.M = await mapaCoropletico('map-sim', { tip: tipSim, onClick: (m) => elegirOrigen(m.codigo), pad: padPanel() });
     }
     actualizarSim();
     sim.M && setTimeout(() => sim.M.refrescar(), 60);
+    if (enfocar) setTimeout(() => $('sim-origen').focus(), 120);
+  }
+  function cambiarTipo(id) {
+    sim.tipo = id;
+    if (sim.tipo === 'averia' && sim.linea === 'todas') sim.linea = (PC.get(sim.mun) || { lineas: ['R1'] }).lineas[0];
+    sim.ruta = null; actualizarSim();
   }
   function elegirOrigen(cod) {
     sim.mun = cod; sim.ruta = null;
+    if (!cod) sim.vista = 'escenario';
     const m = PC.get(cod);
     if (m && D.tipos.find((t) => t.id === sim.tipo).requiere_linea && !m.lineas.includes(sim.linea)) sim.linea = m.lineas[0];
+    $('sim-panel').scrollTo({ top: 0 });
     actualizarSim();
   }
   function tipSim(p, m) {
     if (p.codigo === BCN_COD) return '<b>Barcelona</b><br><span class="muted">Destino</span>';
     if (!m) return `<b>${esc(p.nombre)}</b><br><span class="muted">Fuera del análisis</span>`;
     const r = simular(sim.tipo, sim.linea).filas.find((f) => f.m.codigo === m.codigo);
-    return `<b>${esc(m.nombre)}</b> ${m.lineas.map(chipLinea).join('')}<br>` + (r ? `<span class="v ${r.c.efecto < 0 ? 'down' : ''}">${pct(r.c.efecto)}</span><span class="muted">${nf(Math.max(-r.perdidos, 0))} viajes menos · clic para ver rutas</span>` : '<span class="muted">No afectado en este escenario</span>');
+    return `<b>${esc(m.nombre)}</b> ${m.lineas.map(chipLinea).join('')}<br>` + (r ? `<span class="v ${r.c.efecto < 0 ? 'down' : ''}">${pct(r.c.efecto)}</span><span class="muted">${nf(Math.max(-r.perdidos, 0))} viajes menos · clic para abrir</span>` : '<span class="muted">No afectado en este escenario</span>');
   }
+
+  /* Acción recomendada para quien gestiona la incidencia, a partir de lo que dice el análisis:
+   * la caída depende de tener o no alternativa en transporte público (Laboratorio → Qué lo explica). */
+  function accionGestion(m) {
+    const a = m.alternativa || {};
+    if (m.grupo === 'metro_fgc') return { nivel: 'baja', txt: 'Sin acción', det: 'Tiene metro o FGC: en los días de caos no cae.' };
+    if (a.clase === 'sin alternativa' || !a.mejor) return { nivel: 'alta', txt: 'Lanzadera de bus', det: 'No hay transporte público alternativo directo: sin lanzadera, solo queda el coche o no viajar.' };
+    if (a.clase === 'débil') return { nivel: 'media', txt: `Reforzar ${ALT_NOMBRE[a.mejor]}`, det: `Hay ${ALT_NOMBRE[a.mejor]} (${nf(a.t_alt)} min, ${nf(a.salidas_h_alt, 1)} salidas/h), pero más lento o con poca frecuencia para absorber a los viajeros del tren.` };
+    return { nivel: 'baja', txt: `Informar: ${ALT_NOMBRE[a.mejor]}`, det: `${cap(ALT_NOMBRE[a.mejor])} es una buena alternativa (${nf(a.t_alt)} min): basta con avisar a los viajeros.` };
+  }
+  const NIVEL = { alta: 'Prioridad alta', media: 'Prioridad media', baja: 'Prioridad baja' };
 
   function opcionesRuta(m, tipo, linea) {
     const a = m.alternativa || {};
@@ -649,9 +734,11 @@
     const tipo = D.tipos.find((t) => t.id === sim.tipo) || D.tipos[0];
     sim.tipo = tipo.id;
     if (tipo.requiere_linea && sim.linea === 'todas') sim.linea = 'R1';
-    history.replaceState(null, '', `#simulador?tipo=${sim.tipo}&linea=${sim.linea}${sim.mun ? '&mun=' + sim.mun : ''}`);
-    const r = simular(sim.tipo, sim.linea), afect = new Map(r.filas.map((f) => [f.m.codigo, f]));
     const m = PC.get(sim.mun) || null;
+    if (!m) sim.vista = 'escenario';
+    history.replaceState(null, '', `#planificador?tipo=${sim.tipo}&linea=${sim.linea}${m ? '&mun=' + m.codigo : ''}${m && sim.vista === 'perfil' ? '&vista=perfil' : ''}`);
+    const r = simular(sim.tipo, sim.linea), afect = new Map(r.filas.map((f) => [f.m.codigo, f]));
+    sim.ultimo = r;
 
     // controles
     document.querySelectorAll('#sim-tipos button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tipo === sim.tipo));
@@ -661,58 +748,44 @@
     document.querySelectorAll('#sim-dur button').forEach((b) => b.classList.toggle('on', +b.dataset.dur === sim.dur));
     $('sim-origen').value = m ? m.nombre : '';
     $('sim-limpiar').hidden = !m;
+    $('sim-mas-wrap').hidden = !!m;
 
     // avisos (compactos, con explicación al pasar el cursor)
     const av = [];
     if (tipo.id === 'averia' && !tipo.coeficientes.lineas_observadas.includes(sim.linea)) av.push(['Extrapolado', `Solo se ha observado una avería sin aviso (R1, 13/05/2024). Para la ${sim.linea} se aplica el mismo coeficiente.`]);
     if (sim.dur > 1) av.push(['Varios días: rango', `Solo se han medido primeros días. Rango entre «solo el primer día» (adaptación total) y «${sim.dur} × primer día» (sin adaptación).`]);
     const avisos = av.map(([t, d]) => `<span class="warn-chip" data-tip="${esc(d)}">${ICON.aviso}${t}</span>`).join('');
+    const rango = (v) => (sim.dur > 1 ? `${nf(v)}–${nf(v * sim.dur)}` : nf(v));
 
-    // resultado
-    const perd = Math.max(-r.perdidos, 0), perdTxt = sim.dur > 1 ? `${nf(perd)}–${nf(perd * sim.dur)}` : nf(perd);
-    let html;
-    if (!m) {
-      const top = r.filas.filter((f) => f.m.grupo === 'dependientes' && f.perdidos < 0).slice(0, 5);
-      const mx = Math.max(...top.map((f) => -f.perdidos), 1);
-      html = `<div class="pp-impact"><strong>${perdTxt}</strong><span>viajes menos a Barcelona${sim.dur > 1 ? ` en ${sim.dur} días` : ' el primer día'}</span></div>
-        <div class="pp-sub">${r.dep.length} municipios dependientes afectados · vuelve a la normalidad ${sim.dur > 1 ? 'en pocos días' : 'al día siguiente'} ${avisos}</div>
-        <h3 class="pp-h">Los más afectados</h3>
-        <ol class="pp-top">${top.map((f) => `<li><button type="button" data-mun="${f.m.codigo}"><span class="nm">${esc(f.m.nombre)} ${chipLinea(f.m.lineas_clave.split('+')[0])}</span><span class="bar"><i style="width:${-f.perdidos / mx * 100}%;background:${colClase(claseDe(f.c.efecto))}"></i></span><span class="vl">${pct(f.c.efecto, 0)}</span></button></li>`).join('') || '<li class="muted">Ningún municipio dependiente afectado.</li>'}</ol>
-        <p class="pp-hint">${ICON.lupa} Elige tu municipio arriba o haz clic en el mapa para ver cómo llegar a Barcelona.</p>`;
-    } else {
-      const f = afect.get(m.codigo), o = opcionesRuta(m, tipo, sim.linea);
-      if (!sim.ruta || !o.ops.some((x) => x.id === sim.ruta)) sim.ruta = o.rec;
-      const k = f ? claseDe(f.c.efecto) : 3;
-      html = `<div class="pp-mun"><div><b>${esc(m.nombre)}</b><span>${esc(COMARCA.get(m.codigo) || '')} · ${GRUPO[m.grupo]}</span></div>
-          ${f ? `<div class="pp-eff" style="background:${colClase(k)};color:${tintaSobre(k)}" data-tip="${esc(`${esc(f.c.fuente)}<br>${pval(f.c.p)}${f.c.observado ? '' : '<br>Extrapolado'}`)}"><strong>${pct(f.c.efecto, 0)}</strong><span>viajes</span></div>` : '<div class="pp-eff"><strong>≈ 0 %</strong><span>no afectado</span></div>'}</div>
-        <div class="pp-sub">${f && f.perdidos < 0 ? `≈ ${nf(-f.perdidos)} viajes menos de ${nf(m.viajes_referencia)} un día normal` : 'Este escenario no afecta a tus líneas'} ${avisos}</div>
-        <h3 class="pp-h">Cómo llegar a Barcelona</h3>
-        <div class="routes">${o.ops.map((x) => `<button type="button" class="route ${x.id === sim.ruta ? 'sel' : ''}" data-ruta="${x.id}">
-            <span class="ric ${x.id}">${ICON[x.icon]}</span>
-            <span class="rbody"><b>${esc(x.titulo)}</b><small>${esc(x.sub)}</small>${x.estado[1] ? `<em class="st ${x.estado[0]}">${esc(x.estado[1])}</em>` : ''}</span>
-            <span class="rtime">${x.min != null ? `<strong>${nf(x.min)}</strong> min` : ''}${x.rec ? '<i class="rec">Recomendada</i>' : ''}</span></button>`).join('')}</div>
-        <p class="pp-hint">${o.afectado ? (sim.dur > 1 ? 'La gente se adapta en pocos días: el efecto se diluye.' : 'Mañana, todo vuelve a la normalidad.') : 'Tu línea funciona: el impacto llega por la congestión del resto de la red.'} <a href="#municipio/${m.codigo}">Ver ficha de ${esc(m.nombre)} →</a></p>`;
-    }
-    $('sim-result').innerHTML = html;
-    detallesSim(tipo, r);
+    $('sim-result').innerHTML = !m ? vistaRed(r, avisos, rango) : sim.vista === 'perfil' ? vistaPerfil(m) : vistaEscenario(m, tipo, afect.get(m.codigo), avisos);
+    if (m && sim.vista === 'perfil') tira($('mun-strip'), D.municipios.filter((x) => x.efecto_medio != null).sort((x, y) => x.efecto_medio - y.efecto_medio), m);
+    if (!m) detallesSim(tipo, r);
 
     // mapa
     const M = sim.M; if (!M) return;
+    M.ruta.clearLayers();
+    if (m && sim.vista === 'perfil') {
+      // Perfil: el municipio destacado sobre el efecto medio en los días de caos; sus líneas en color, el resto en gris.
+      M.pintar((x) => x.codigo === m.codigo ? css('--brand') : colorEf(x.efecto_medio, null, true));
+      M.vias((lid) => (m.lineas.includes(lid) ? 'on' : 'dim'));
+      M.resaltar(m.codigo);
+      $('legend-sim').innerHTML = leyendaClasesHTML('Efecto medio en los días de caos', `<li><span class="sw" style="background:${css('--brand')}"></span>${esc(m.nombre)}</li>`);
+      if (reencuadrar) M.encuadrar([[m.lat - 0.25, m.lon - 0.35], [m.lat + 0.25, m.lon + 0.35]], padPanel());
+      return;
+    }
     M.pintar((x) => { const f = afect.get(x.codigo); return f ? colorEf(Math.min(f.c.efecto, 0), f.c.p, m && x.codigo !== m.codigo) : (m ? { color: css('--other'), op: 0.5 } : css('--other')); });
     M.vias((lid) => (tipo.id === 'averia' ? (lid === sim.linea ? 'cut' : 'on') : (sim.linea === 'todas' || lid === sim.linea ? 'cut' : 'on')));
     M.resaltar(m ? m.codigo : null);
     $('legend-sim').innerHTML = leyendaClasesHTML(m ? 'Impacto del escenario' : `${CORTO_TIPO[tipo.id]} · ${sim.linea === 'todas' ? 'toda la red' : sim.linea}`, `<li><span class="sw" style="background:${css('--other')}"></span>No afectado</li>`, true);
-    M.ruta.clearLayers();
     if (!m) { if (reencuadrar) M.encuadrar(BOUNDS_STORY, padPanel()); return; }
     const A = [m.lat, m.lon], B = BCN, o = opcionesRuta(m, tipo, sim.linea), bounds = L.latLngBounds([A, B]);
     const tren = o.ops.find((x) => x.id === 'tren'), alt = o.ops.find((x) => x.id === 'alt');
     const pts = tramoLinea(tren.linea, A, B);
     const selT = sim.ruta === 'tren', selA = sim.ruta === 'alt';
     if (pts && pts.length > 1) {
-      const cortado = o.afectado && tren.estado[0] === 'bad';
       L.polyline([A, pts[0]], { pane: 'ruta', color: css('--ink-2'), weight: 2, dashArray: '2 5', opacity: 0.8 }).addTo(M.ruta);
       L.polyline(pts, { pane: 'ruta', color: css('--surface'), weight: selT ? 11 : 8, opacity: 0.95 }).addTo(M.ruta);
-      L.polyline(pts, { pane: 'ruta', color: selT ? tren.linea && colorLinea(tren.linea) : css('--neutral'), weight: selT ? 7 : 5, opacity: 1, dashArray: cortado ? '2 10' : null, lineCap: 'round' }).addTo(M.ruta);
+      L.polyline(pts, { pane: 'ruta', color: selT ? tren.linea && colorLinea(tren.linea) : css('--neutral'), weight: selT ? 7 : 5, opacity: 1, dashArray: null, lineCap: 'round' }).addTo(M.ruta);
       const mid = pts[Math.floor(pts.length / 2)];
       burbuja(M, mid, `${ICON.tren}<b>${nf(tren.min)} min</b>${o.afectado ? `<em>${esc(tren.estado[1])}</em>` : ''}`, `${selT ? 'sel' : ''} ${tren.estado[0]}`);
       pts.forEach((p) => bounds.extend(p));
@@ -726,6 +799,103 @@
     }
     pin(M, A, 'A', 'a'); pin(M, B, 'B', 'b');
     if (reencuadrar) M.encuadrar(bounds.pad(0.15), padPanel());
+  }
+
+  /* Vista de red: el escenario entero, para quien tiene que organizar la respuesta. */
+  function vistaRed(r, avisos, rango) {
+    const perd = Math.max(-r.perdidos, 0);
+    const prio = r.filas.filter((f) => f.m.grupo === 'dependientes' && f.perdidos < 0).map((f) => ({ ...f, acc: accionGestion(f.m) }));
+    const orden = { alta: 0, media: 1, baja: 2 };
+    prio.sort((a, b) => orden[a.acc.nivel] - orden[b.acc.nivel] || a.perdidos - b.perdidos);
+    const top = prio.slice(0, 6), mx = Math.max(...top.map((f) => -f.perdidos), 1);
+    const sinAlt = prio.filter((f) => f.acc.nivel === 'alta'), perdSinAlt = Math.max(-sinAlt.reduce((s, f) => s + f.perdidos, 0), 0);
+    return `<div class="pp-impact"><strong>${rango(perd)}</strong><span>viajes menos a Barcelona${sim.dur > 1 ? ` en ${sim.dur} días` : ' el primer día'}</span></div>
+      <div class="pp-sub">Vuelve a la normalidad ${sim.dur > 1 ? 'en pocos días' : 'al día siguiente'} ${avisos}</div>
+      <div class="pp-kpis">
+        <div><strong>${r.dep.length}</strong><span>municipios dependientes afectados</span></div>
+        <div><strong>${sinAlt.length}</strong><span>sin transporte alternativo</span></div>
+        <div data-tip="${esc(`Viajes perdidos en los municipios sin alternativa ÷ ${BUS_PLAZAS} plazas por autobús. Solo da el orden de magnitud: no tiene en cuenta horas punta ni viajes de vuelta.`)}"><strong>≈ ${nf(Math.ceil(perdSinAlt / BUS_PLAZAS))}</strong><span>autobuses llenos para cubrirlos*</span></div>
+      </div>
+      <h3 class="pp-h">Dónde actuar primero</h3>
+      <ol class="pp-prio">${top.map((f, i) => `<li><button type="button" data-mun="${f.m.codigo}">
+          <span class="n">${i + 1}</span>
+          <span class="nm"><b>${esc(f.m.nombre)}</b> ${chipLinea(f.m.lineas_clave.split('+')[0])}<em class="acc ${f.acc.nivel}">${esc(f.acc.txt)}</em></span>
+          <span class="vl"><b>${nf(-f.perdidos)}</b><small>viajes menos</small><span class="bar"><i style="width:${-f.perdidos / mx * 100}%;background:${colClase(claseDe(f.c.efecto))}"></i></span></span></button></li>`).join('') || '<li class="muted small">Ningún municipio dependiente afectado.</li>'}</ol>
+      <p class="muted small">Primero los municipios sin alternativa; dentro de cada grupo, los que pierden más viajes. La acción sale del hallazgo principal: solo cae quien no tiene alternativa al tren.</p>
+      <div class="pp-actions">
+        <button type="button" class="btn-s" id="sim-csv">${ICON.descarga}Descargar plan (CSV)</button>
+        <button type="button" class="btn-s ghost" id="sim-copiar">${ICON.enlace}<span>Copiar enlace</span></button>
+      </div>
+      <p class="pp-hint">${ICON.lupa} Elige un municipio arriba o en el mapa para ver sus rutas y su perfil.</p>`;
+  }
+
+  /* Vista de municipio, pestaña «Este escenario»: impacto, rutas para el viajero y acción para el gestor. */
+  function vistaEscenario(m, tipo, f, avisos) {
+    const o = opcionesRuta(m, tipo, sim.linea);
+    if (!sim.ruta || !o.ops.some((x) => x.id === sim.ruta)) sim.ruta = o.rec;
+    const k = f ? claseDe(f.c.efecto) : 3, acc = accionGestion(m);
+    const perdTxt = f && f.perdidos < 0 ? (sim.dur > 1 ? `${nf(-f.perdidos)}–${nf(-f.perdidos * sim.dur)}` : nf(-f.perdidos)) : null;
+    return `${cabeceraMun(m, f, k)}
+      <div class="pp-sub">${perdTxt ? `≈ ${perdTxt} viajes menos${sim.dur > 1 ? ` en ${sim.dur} días` : ''} de ${nf(m.viajes_referencia)} un día normal` : 'Este escenario no afecta a sus líneas'} ${avisos}</div>
+      ${f && o.afectado ? `<div class="pp-accion ${acc.nivel}"><small>${NIVEL[acc.nivel]} · qué hacer</small><b>${esc(acc.txt)}</b><span>${esc(acc.det)}</span></div>` : ''}
+      <h3 class="pp-h">Cómo llegar a Barcelona</h3>
+      <div class="routes">${o.ops.map((x) => `<button type="button" class="route ${x.id === sim.ruta ? 'sel' : ''}" data-ruta="${x.id}">
+          <span class="ric ${x.id}">${ICON[x.icon]}</span>
+          <span class="rbody"><b>${esc(x.titulo)}</b><small>${esc(x.sub)}</small>${x.estado[1] ? `<em class="st ${x.estado[0]}">${esc(x.estado[1])}</em>` : ''}</span>
+          <span class="rtime">${x.min != null ? `<strong>${nf(x.min)}</strong> min` : ''}${x.rec ? '<i class="rec">Recomendada</i>' : ''}</span></button>`).join('')}</div>
+      <p class="pp-hint">${o.afectado ? (sim.dur > 1 ? 'La gente se adapta en pocos días: el efecto se diluye.' : 'Al día siguiente, todo vuelve a la normalidad.') : 'Sus líneas funcionan: el impacto llega por la congestión del resto de la red.'}</p>`;
+  }
+
+  /* Vista de municipio, pestaña «Perfil»: lo que antes era la página «Mi municipio». */
+  function vistaPerfil(m) {
+    const a = m.alternativa || {}, n = D.municipios.filter((x) => x.efecto_medio != null).length;
+    const escen = D.tipos.map((t) => { const l = t.requiere_linea ? (m.lineas.includes(sim.linea) ? sim.linea : m.lineas[0]) : 'todas', c = coefMunicipio(t, l, m); return { t, c, perd: c ? m.viajes_referencia * c.efecto / 100 : 0 }; });
+    const frase = m.rango_vulnerabilidad <= Math.round(n / 3) ? 'de los más vulnerables' : m.rango_vulnerabilidad <= Math.round(2 * n / 3) ? 'de vulnerabilidad media' : 'de los menos vulnerables';
+    const mx = Math.max(a.t_rodalies || 0, a.t_alt || 0, 1);
+    const viaje = ([ic, nom, t, s, col]) => `<div class="trip"><span class="ric">${ICON[ic]}</span><div class="tbody"><div class="tl"><b>${esc(nom)}</b><span><strong>${t != null ? nf(t) : '—'}</strong> min</span></div><div class="tbar"><i style="width:${(t || 0) / mx * 100}%;background:${col}"></i></div><div class="freq" data-tip="${esc(`${nf(s, 1)} salidas por hora`)}">${'<i></i>'.repeat(Math.min(Math.round(s || 0), 16))}<span>${s != null ? nf(s, 1) + ' salidas/h' : ''}</span></div></div></div>`;
+    return `${cabeceraMun(m, null, 3)}
+      <div class="pp-sub">${m.dist_km != null ? nf(m.dist_km, 1) + ' km de Barcelona · ' : ''}${nf(m.viajes_referencia)} viajes/día a BCN</div>
+      <section class="pp-sec"><h3 class="pp-h">Índice: ${frase} · <span class="hl">${m.rango_vulnerabilidad}.º de ${n}</span></h3>
+        <div id="mun-strip"></div><p class="muted small">Cada barra es un municipio, ordenado por la caída media en los días de caos.</p></section>
+      <section class="pp-sec"><h3 class="pp-h">Si mañana pasa esto…</h3>
+        <div class="pp-scen">${escen.map((e) => { const k = e.c ? claseDe(e.c.efecto) : 3; return `<button type="button" data-ir-tipo="${e.t.id}" data-tip="${esc(`${e.t.nombre}: ${e.c && e.perd < 0 ? `≈ ${nf(-e.perd)} viajes menos` : 'sin impacto relevante'}${e.c && e.c.observado === false ? ' · extrapolado' : ''}. Clic para ver rutas.`)}">
+            <span class="sic">${ICON[ICON_TIPO[e.t.id]]}</span><small>${CORTO_TIPO[e.t.id]}</small><span class="sval" style="background:${colClase(k)};color:${tintaSobre(k)}">${e.c ? pct(e.c.efecto, 0) : '≈ 0 %'}</span></button>`; }).join('')}</div></section>
+      <section class="pp-sec"><h3 class="pp-h">Historial: cada día de caos</h3>
+        <div class="hist pp-hist">${D.incidencias.map((i) => { const ef = m.efectos[i.fecha], k = ef ? claseDe(ef.efecto) : 3, claro = ef && ef.p < 0.05; return `<div class="htile ${claro ? '' : 'nc'}" style="--bg:${colClase(k)};--fg:${tintaSobre(k)}" data-tip="${esc(`${i.titulo}<br>${ef ? pct(ef.efecto) + ' · ' + pval(ef.p) : ''}`)}">
+          <span class="hdate">${fecha(i.fecha).slice(0, 5)}<small>${fecha(i.fecha).slice(6)}</small></span><span class="hic">${ICON[i.tipo === 'Avería' ? 'rayo' : 'huelga']}</span>
+          <strong>${ef ? pct(ef.efecto, 0) : '—'}</strong><small>${claro ? 'efecto claro' : 'no concluyente'}</small></div>`; }).join('')}</div></section>
+      <section class="pp-sec"><h3 class="pp-h">Cómo llegar a Barcelona</h3>
+        <div class="trips">${[['tren', `Rodalies ${m.lineas[0]}`, a.t_rodalies, a.salidas_h_rodalies, colorLinea(m.lineas[0])]].concat(a.mejor ? [[a.mejor === 'fgc' ? 'tren' : 'bus', cap(ALT_NOMBRE[a.mejor]), a.t_alt, a.salidas_h_alt, css('--route')]] : []).map(viaje).join('')}
+          ${a.mejor ? '' : `<div class="trip none"><span class="ric">${ICON.casa}</span><div class="tbody"><b>Sin alternativa directa en transporte público</b><small class="muted">Si el tren falla, solo queda el coche o no viajar.</small></div></div>`}</div></section>
+      <section class="pp-sec"><h3 class="pp-h">Vulnerabilidad social</h3>
+        ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta (notebook 05).</p>'}</section>`;
+  }
+
+  /* Cabecera común del municipio, con el selector de pestaña. */
+  function cabeceraMun(m, f, k) {
+    return `<div class="pp-mun"><div><b>${esc(m.nombre)}</b><span>${m.lineas.map(chipLinea).join('')} ${esc(COMARCA.get(m.codigo) || '')} · ${GRUPO[m.grupo]}</span></div>
+        ${sim.vista === 'escenario' ? (f ? `<div class="pp-eff" style="background:${colClase(k)};color:${tintaSobre(k)}" data-tip="${esc(`${esc(f.c.fuente)}<br>${pval(f.c.p)}${f.c.observado ? '' : '<br>Extrapolado'}`)}"><strong>${pct(f.c.efecto, 0)}</strong><span>viajes</span></div>` : '<div class="pp-eff"><strong>≈ 0 %</strong><span>no afectado</span></div>') : ''}</div>
+      <div class="pp-seg" role="tablist"><button type="button" role="tab" data-vista="escenario" aria-selected="${sim.vista === 'escenario'}">Este escenario</button><button type="button" role="tab" data-vista="perfil" aria-selected="${sim.vista === 'perfil'}">Perfil del municipio</button></div>`;
+  }
+
+  /* Plan descargable: todos los municipios afectados con su efecto, viajes perdidos y acción recomendada. */
+  function descargarCSV() {
+    const r = sim.ultimo, tipo = r.tipo;
+    const q = (v) => { const s = v == null ? '' : String(v); return /[;"\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+    const dec = (x, d = 1) => (x == null ? '' : Number(x).toFixed(d).replace('.', ','));
+    const cab = ['Municipio', 'Comarca', 'Grupo', 'Líneas', 'Viajes a BCN (día normal)', 'Efecto (%)', 'IC 95 % inf.', 'IC 95 % sup.', 'p', 'Viajes perdidos (1.er día)', 'Alternativa', 'Mejor alternativa', 'Minutos alternativa', 'Turismos por 1.000 hab.', 'Prioridad', 'Acción recomendada'];
+    const filas = r.filas.slice().sort((a, b) => a.perdidos - b.perdidos).map((f) => { const m = f.m, a = m.alternativa || {}, acc = accionGestion(m);
+      return [m.nombre, COMARCA.get(m.codigo) || '', GRUPO[m.grupo], m.lineas_clave, nf(m.viajes_referencia).replace(/\./g, ''), dec(f.c.efecto), dec(f.c.ic_inf), dec(f.c.ic_sup), dec(f.c.p, 3), Math.round(Math.max(-f.perdidos, 0)), a.clase || '', a.mejor ? ALT_NOMBRE[a.mejor] : '', a.t_alt ?? '', m.vulnerabilidad ? m.vulnerabilidad.motorizacion : '', NIVEL[acc.nivel], acc.txt]; });
+    const meta = `# R-MOVE · ${tipo.nombre} · ${sim.linea === 'todas' ? 'toda la red' : sim.linea}. Viajes perdidos = viajes de un día normal × efecto del escenario (clustering, notebook 03).`;
+    const csv = '﻿' + [meta, cab.map(q).join(';'), ...filas.map((x) => x.map(q).join(';'))].join('\n');
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    const aEl = Object.assign(document.createElement('a'), { href: url, download: `rmove_plan_${tipo.id}_${sim.linea}.csv` });
+    document.body.appendChild(aEl); aEl.click(); aEl.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function copiarEnlace(btn) {
+    const ok = () => { const s = btn.querySelector('span'); s.textContent = 'Enlace copiado'; setTimeout(() => { s.textContent = 'Copiar enlace'; }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(ok, () => prompt('Copia este enlace:', location.href));
+    else prompt('Copia este enlace:', location.href);
   }
 
   function detallesSim(tipo, r) {
@@ -746,90 +916,7 @@
       <h4>Todos los municipios afectados</h4>
       <div class="table-wrap" style="max-height:300px"><table class="tbl compact"><thead><tr><th>Municipio</th><th class="num">Efecto</th><th class="num">Viajes menos</th></tr></thead><tbody>${r.filas.map((f) => `<tr class="${f.c.p >= 0.05 ? 'ns' : ''}"><td><a href="#" data-mun="${f.m.codigo}">${esc(f.m.nombre)}</a></td><td class="num">${pct(f.c.efecto)}</td><td class="num">${nf(Math.max(-f.perdidos, 0))}</td></tr>`).join('')}</tbody></table></div>
       <p class="muted small">Viajes menos = viajes de un día normal × coeficiente del escenario. En gris: sin efecto claro (p ≥ 0,05). Detalle del método en el Laboratorio.</p>`;
-    $('sim-mas').querySelectorAll('[data-mun]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); elegirOrigen(a.dataset.mun); $('sim-panel').scrollTo({ top: 0, behavior: 'smooth' }); }));
-  }
-
-  // ------------------------------------------------------------------ 3 · MI MUNICIPIO
-  const mun = { listo: false, M: null, F: null };
-  async function initMunicipio(codigo) {
-    const m = PC.get(codigo);
-    $('mun-landing').hidden = !!m; $('mun-ficha').hidden = !m;
-    if (!mun.listo) {
-      mun.listo = true;
-      autocompletar($('mun-buscar'), $('mun-ac'), (x) => { location.hash = '#municipio/' + x.codigo; });
-      const top = D.municipios.filter((x) => x.rango_vulnerabilidad).sort((a, b) => a.rango_vulnerabilidad - b.rango_vulnerabilidad).slice(0, 6);
-      $('mun-top').innerHTML = top.map((x) => `<a class="mchip" href="#municipio/${x.codigo}">${chipLinea(x.lineas[0])}${esc(x.nombre)} <span>${pct(x.efecto_medio, 0)}</span></a>`).join('');
-      mun.M = await mapaCoropletico('map-mun-landing', {
-        pad: padPanel(), onClick: (x) => { location.hash = '#municipio/' + x.codigo; },
-        tip: (p, x) => p.codigo === BCN_COD ? '<b>Barcelona</b>' : x ? `<b>${esc(x.nombre)}</b> ${x.lineas.map(chipLinea).join('')}<br><span class="v ${x.efecto_medio < 0 ? 'down' : ''}">${pct(x.efecto_medio)}</span><span class="muted">efecto medio en los 4 días de caos · ${x.rango_vulnerabilidad}.º de 62</span>` : `<b>${esc(p.nombre)}</b><br><span class="muted">Fuera del análisis</span>`,
-      });
-      if (mun.M) { mun.M.pintar((x) => colorEf(x.efecto_medio, null)); $('legend-mun').innerHTML = leyendaClasesHTML('Efecto medio en los días de caos'); }
-    }
-    if (!m) { setTimeout(() => { mun.M && mun.M.refrescar(); $('mun-buscar').focus(); }, 60); return; }
-    fichaMunicipio(m);
-  }
-
-  async function fichaMunicipio(m) {
-    scrollTo(0, 0);
-    const a = m.alternativa || {}, orden = D.municipios.filter((x) => x.efecto_medio != null).sort((x, y) => x.efecto_medio - y.efecto_medio), n = orden.length;
-    const escen = D.tipos.map((t) => { const l = t.requiere_linea ? m.lineas[0] : 'todas', c = coefMunicipio(t, l, m); return { t, l, c, perd: c ? m.viajes_referencia * c.efecto / 100 : 0 }; });
-    const frase = m.rango_vulnerabilidad <= Math.round(n / 3) ? 'de los más vulnerables' : m.rango_vulnerabilidad <= Math.round(2 * n / 3) ? 'de vulnerabilidad media' : 'de los menos vulnerables';
-    $('mun-ficha').innerHTML = `
-      <div class="ficha2">
-        <div class="ficha-map card"><div id="mun-map" class="fill-map"></div></div>
-        <div class="ficha-body">
-          <a class="back" href="#municipio">← Buscar otro municipio</a>
-          <header class="fhead">
-            <p class="eyebrow">${esc(COMARCA.get(m.codigo) || '')} · ${GRUPO[m.grupo]}</p>
-            <h1>${esc(m.nombre)}</h1>
-            <div class="fmeta">${m.lineas.map(chipLinea).join('')}<span>${m.dist_km != null ? nf(m.dist_km, 1) + ' km de Barcelona' : ''}</span><span>${nf(m.viajes_referencia)} viajes/día a BCN</span></div>
-          </header>
-
-          <section class="card fsec">
-            <h2>Es ${frase}: <span class="hl">${m.rango_vulnerabilidad}.º de ${n}</span></h2>
-            <p class="muted small">Cada barra es un municipio, ordenado de más a menos caída media en los cuatro días de caos.</p>
-            <div id="mun-strip"></div>
-          </section>
-
-          <section class="card fsec">
-            <h2>Si mañana pasa esto…</h2>
-            <div class="scen2">${escen.map((e) => { const k = e.c ? claseDe(e.c.efecto) : 3; return `<a class="scen-card" href="#simulador?tipo=${e.t.id}&linea=${e.l}&mun=${m.codigo}">
-              <span class="sic">${ICON[ICON_TIPO[e.t.id]]}</span><b>${esc(e.t.nombre)}</b>
-              <span class="sval" style="background:${colClase(k)};color:${tintaSobre(k)}">${e.c ? pct(e.c.efecto, 0) : '≈ 0 %'}</span>
-              <small>${e.c && e.perd < 0 ? `≈ ${nf(-e.perd)} viajes menos` : 'Sin impacto relevante'}${e.c && e.c.observado === false ? ' · extrapolado' : ''}</small>
-              <span class="go">Ver rutas →</span></a>`; }).join('')}</div>
-          </section>
-
-          <section class="card fsec">
-            <h2>Su historial: cómo le fue cada día de caos</h2>
-            <div class="hist">${D.incidencias.map((i) => { const ef = m.efectos[i.fecha], k = ef ? claseDe(ef.efecto) : 3, claro = ef && ef.p < 0.05; return `<div class="htile ${claro ? '' : 'nc'}" style="--bg:${colClase(k)};--fg:${tintaSobre(k)}" data-tip="${esc(`${i.titulo}<br>${ef ? pct(ef.efecto) + ' · ' + pval(ef.p) : ''}`)}">
-              <span class="hdate">${fecha(i.fecha).slice(0, 5)}<small>${fecha(i.fecha).slice(6)}</small></span><span class="hic">${ICON[i.tipo === 'Avería' ? 'rayo' : 'huelga']}</span>
-              <strong>${ef ? pct(ef.efecto, 0) : '—'}</strong><small>${esc(i.tipo)} · ${claro ? 'efecto claro' : 'no concluyente'}</small></div>`; }).join('')}</div>
-          </section>
-
-          <section class="card fsec">
-            <h2>Cómo llegar a Barcelona</h2>
-            <div class="trips">${[['tren', `Rodalies ${m.lineas[0]}`, a.t_rodalies, a.salidas_h_rodalies, colorLinea(m.lineas[0])]].concat(a.mejor ? [[a.mejor === 'fgc' ? 'tren' : 'bus', cap(ALT_NOMBRE[a.mejor]), a.t_alt, a.salidas_h_alt, css('--route')]] : []).map(([ic, nom, t, s, col]) => {
-              const mx = Math.max(a.t_rodalies || 0, a.t_alt || 0, 1);
-              return `<div class="trip"><span class="ric">${ICON[ic]}</span><div class="tbody"><div class="tl"><b>${esc(nom)}</b><span><strong>${t != null ? nf(t) : '—'}</strong> min</span></div><div class="tbar"><i style="width:${(t || 0) / mx * 100}%;background:${col}"></i></div><div class="freq" data-tip="${esc(`${nf(s, 1)} salidas por hora`)}">${'<i></i>'.repeat(Math.min(Math.round(s || 0), 16))}<span>${s != null ? nf(s, 1) + ' salidas/h' : ''}</span></div></div></div>`; }).join('')}
-              ${a.mejor ? '' : `<div class="trip none"><span class="ric">${ICON.casa}</span><div class="tbody"><b>Sin alternativa directa en transporte público</b><small class="muted">Si el tren falla, solo queda el coche o no viajar.</small></div></div>`}</div>
-          </section>
-
-          <section class="card fsec">
-            <h2>Vulnerabilidad social</h2>
-            ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta. Se añaden con el notebook 05 (datos abiertos de la DGT y el INE).</p>'}
-          </section>
-        </div>
-      </div>`;
-    tira($('mun-strip'), orden, m);
-    if (mun.F) mun.F.map.remove();
-    mun.F = await mapaCoropletico('mun-map', { bounds: [[m.lat - 0.2, m.lon - 0.28], [m.lat + 0.2, m.lon + 0.28]], onClick: (x) => { location.hash = '#municipio/' + x.codigo; }, tip: (p, x) => x ? `<b>${esc(x.nombre)}</b><br><span class="muted">${pct(x.efecto_medio)} de media · clic para abrir</span>` : `<b>${esc(p.nombre)}</b>` });
-    if (mun.F) {
-      mun.F.pintar((x) => x.codigo === m.codigo ? css('--brand') : colorEf(x.efecto_medio, null, true));
-      mun.F.vias((lid) => m.lineas.includes(lid) ? 'on' : 'dim');
-      mun.F.resaltar(m.codigo);
-      L.marker([m.lat, m.lon], { interactive: false, icon: L.divIcon({ className: '', iconSize: [0, 0], html: `<div class="bubble sel"><b>${esc(m.nombre)}</b></div>` }) }).addTo(mun.F.annos);
-    }
+    $('sim-mas').querySelectorAll('[data-mun]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); elegirOrigen(a.dataset.mun); }));
   }
 
   /* Ficha «Vulnerabilidad social»: motorización y renta del municipio y qué implica (notebook 05). */
@@ -896,8 +983,10 @@
     pintarMetodo();
   }
 
-  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 03) */
-  const CASOS = () => D.incidencias.concat(D.averias || []);
+  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 03).
+   * La huelga del 26/03/2025 no se muestra en el Laboratorio (sigue en el resto del observatorio y en las medias). */
+  const OCULTOS_LAB = ['2025-03-26'];
+  const CASOS = () => D.incidencias.concat(D.averias || []).filter((i) => !OCULTOS_LAB.includes(i.fecha));
 
   async function caso(i) {
     const p = i.perdidos, lin = i.lineas_dependientes.slice().sort((a, b) => a.efecto_pct - b.efecto_pct), peor = lin[0];
@@ -969,7 +1058,7 @@
   let facListo = false;
   function pintarFactores() {
     if (facListo) return; facListo = true;
-    const alt = D.alternativa, dias = [...new Set(alt.map((a) => a.dia))], grupos = ['Sin alternativa directa', 'Alternativa débil', 'Alternativa fuerte'];
+    const alt = D.alternativa, dias = [...new Set(alt.map((a) => a.dia))].filter((d) => !OCULTOS_LAB.map(fecha).includes(d)), grupos = ['Sin alternativa directa', 'Alternativa débil', 'Alternativa fuerte'];
     const lejos = D.distancia[D.distancia.length - 1];
     $('lab-factores').innerHTML = `<div class="lab-grid">
       <div class="card"><div class="card-head"><h2>Cuanto más lejos, más cae: ${pct(lejos.efecto_pct)} a ${esc(lejos.banda)}</h2><small>Municipios con Rodalies, todos los días de caos</small></div><div class="pad" id="lab-dist"></div></div>
@@ -1032,8 +1121,8 @@
       </div>`;
   }
 
-  // ------------------------------------------------------------------ barra superior que se esconde
-  /* En pantallas con ratón, la barra de navegación queda oculta y baja al acercar el cursor al borde superior. */
+  // ------------------------------------------------------------------ cabecera que aparece y desaparece
+  /* En pantallas con ratón, la cabecera queda oculta y baja al acercar el cursor al borde superior. */
   (function barraOculta() {
     const bar = document.querySelector('.topbar');
     if (!matchMedia('(hover: hover)').matches) return;
@@ -1047,18 +1136,23 @@
   // ------------------------------------------------------------------ navegación
   function route() {
     const [ruta, qs] = location.hash.replace('#', '').split('?');
-    const [modo, arg] = (ruta || 'relato').split('/');
-    const valido = ['relato', 'simulador', 'municipio', 'laboratorio'].includes(modo) ? modo : 'relato';
+    const [modo0, arg] = (ruta || 'relato').split('/');
+    // Enlaces antiguos: «¿Y si…?» (#simulador) y «Mi municipio» (#municipio/código) ahora son el planificador.
+    let params = qs ? new URLSearchParams(qs) : null;
+    if (modo0 === 'municipio') params = new URLSearchParams(arg ? `mun=${arg}&vista=perfil` : 'vista=perfil');
+    const modo = modo0 === 'simulador' || modo0 === 'municipio' ? 'planificador' : modo0;
+    if (modo !== modo0) history.replaceState(null, '', '#planificador' + (params ? '?' + params : ''));
+    const valido = ['relato', 'planificador', 'laboratorio'].includes(modo) ? modo : 'relato';
     document.querySelectorAll('.mode').forEach((s) => { s.hidden = s.id !== 'mode-' + valido; });
     // Navegación en forma de línea de tren: el tren se desplaza hasta la parada de la sección activa
-    const orden = ['relato', 'simulador', 'municipio', 'laboratorio'], i = orden.indexOf(valido);
+    const orden = ['relato', 'planificador', 'laboratorio'], i = orden.indexOf(valido);
     document.querySelectorAll('.linea a').forEach((a) => { const k = orden.indexOf(a.dataset.mode); a.classList.toggle('active', k === i); a.classList.toggle('pasada', k < i); });
     document.querySelector('.linea').style.setProperty('--i', i);
     const sec = $('mode-' + valido);
     if (!document.startViewTransition && document.body.dataset.modo && document.body.dataset.modo !== valido) { sec.classList.remove('entra'); void sec.offsetWidth; sec.classList.add('entra'); }
     document.body.dataset.modo = valido;
-    if (valido !== 'relato' && valido !== 'municipio') scrollTo(0, 0);
-    ({ relato: initRelato, simulador: () => initSimulador(qs ? new URLSearchParams(qs) : null), municipio: () => initMunicipio(arg), laboratorio: initLaboratorio })[valido]();
+    if (valido !== 'relato') scrollTo(0, 0);
+    ({ relato: initRelato, planificador: () => initSimulador(params), laboratorio: initLaboratorio })[valido]();
   }
 
   Promise.all([
@@ -1069,11 +1163,14 @@
     D = d; RAIL = rail; CONTORNO = contorno;
     PC = new Map(D.municipios.map((m) => [m.codigo, m]));
     if (!RAIL) $('status').textContent = 'No se ha encontrado la cartografía de Rodalies (railway-network.geojson): los mapas se muestran sin la red.';
+    // Tablero de la cabecera (estilo panel de salidas): cifras del propio análisis
+    const periodo = `${D.periodo.inicio.slice(0, 4)}–${D.periodo.fin.slice(0, 4)}`;
+    $('tablero').innerHTML = [['Municipios', D.municipios.length], ['Datos', periodo]].map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
     $('foot').textContent = `${D.fuente} · ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}. Observatorio R-MOVE v2 · Team 202_E.`;
     cargarBase().then((b) => { b.features.forEach((f) => COMARCA.set(f.properties.codigo, f.properties.comarca)); }).catch(() => {});
     // Cambio de sección con fundido cruzado (View Transitions) donde el navegador lo permite
     addEventListener('hashchange', () => {
-      const modo = location.hash.replace('#', '').split(/[/?]/)[0] || 'relato';
+      const m0 = location.hash.replace('#', '').split(/[/?]/)[0] || 'relato', modo = m0 === 'simulador' || m0 === 'municipio' ? 'planificador' : m0;
       if (document.startViewTransition && modo !== document.body.dataset.modo) document.startViewTransition(route);
       else route();
     });
