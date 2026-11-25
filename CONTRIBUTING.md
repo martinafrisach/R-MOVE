@@ -32,7 +32,7 @@ Los datos pesan unos 17 GB y algunos son de acceso restringido (Telefónica y la
    python scripts/datos.py comprobar
    ```
 
-El paquete no incluye los CSV brutos de Telefónica (`data/raw/telefonica`, 16 GB). Solo hacen falta para los notebooks 01 y 04; los demás usan `M2.parquet`, que sí va en el paquete. Si alguien los necesita, pedídselos a Martina.
+El paquete no incluye los CSV brutos de Telefónica (`data/raw/telefonica`, 16 GB). Solo hacen falta para los notebooks 01 y 04; los demás usan `movilidad_municipios.parquet`, que sí va en el paquete. Si alguien los necesita, pedídselos a Martina.
 
 Para quien tenga los datos y quiera regenerar el paquete:
 
@@ -44,7 +44,7 @@ python scripts/datos.py empaquetar          # sin los CSV brutos de Telefónica
 
 | Carpeta | Contenido |
 |---|---|
-| `notebooks/` | Análisis: 01–02 preparación y mediana, **03** M2 (clustering; la regresión como comprobación), 04 M3 barrios, 05 vulnerabilidad (motorización y renta) |
+| `notebooks/` | Análisis: 01–02 preparación y mediana, **03** análisis por municipios (clustering; la regresión como comprobación), 04 análisis por barrios, 05 vulnerabilidad (motorización y renta) |
 | `src/analysis/` | Funciones de apoyo del notebook 02 (catálogo de incidencias y mediana), con test |
 | `src/dashboard-v2/` | **Observatorio**, el dashboard del proyecto (relato, ¿Y si…?, Mi municipio, Laboratorio). Se publica en GitHub Pages |
 | `data/processed/rmove/` | Exportaciones de los notebooks. En Git solo van los JSON y parquet que usa el Observatorio |
@@ -75,11 +75,11 @@ python src/dashboard-v2/build_pages.py --check   # lo mismo que comprueba GitHub
 ```bash
 git checkout main
 git pull                               # siempre antes de empezar
-git checkout -b nombre/tarea           # ej.: laia/m3-graficos, pau/observatorio-simulador
+git checkout -b nombre/tarea           # ej.: laia/barrios-graficos, pau/observatorio-simulador
 
 # ...trabajar...
 git add <ficheros>
-git commit -m "M3: gráfico de barrios en días de huelga"
+git commit -m "Barrios: gráfico de los días de huelga"
 git push -u origin nombre/tarea
 ```
 

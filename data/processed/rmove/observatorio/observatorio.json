@@ -1,6 +1,6 @@
 {
  "version_esquema": 2,
- "fuente": "R-MOVE · M2 (municipio → Barcelona, notebook 03) y M3 (municipio ↔ barrio), Telefónica Smart Steps",
+ "fuente": "R-MOVE · movilidad municipio → Barcelona (notebook 03) y municipio ↔ barrio (notebook 04), Telefónica Smart Steps",
  "periodo": {
   "inicio": "2023-01-01",
   "fin": "2025-08-31"
@@ -4790,7 +4790,7 @@
     "R4",
     "R7"
    ],
-   "lectura": "Huelga anunciada: el total no cambia y ninguna línea cae de forma clara; los viajes se redistribuyen hacia barrios sin estación (M3).",
+   "lectura": "Huelga anunciada: el total no cambia y ninguna línea cae de forma clara; los viajes se redistribuyen hacia barrios sin estación (análisis por barrios).",
    "grupos": [
     {
      "grupo": "dependientes",
@@ -6195,7 +6195,7 @@
    ]
   }
  ],
- "m3_averias": [
+ "barrios_averias": [
   {
    "fecha": "2023-05-02",
    "titulo": "Gavà (R2 Sud), día 1",
@@ -6741,7 +6741,7 @@
  "duracion": {
   "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (días +1 a +3 sin caída).",
   "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular.",
-  "incidencia_larga": "Montcada 2024, 5.º día del corte (17/05/2024): −9,8 % en M3, no significativo. La gente se adapta: el efecto se diluye en pocos días."
+  "incidencia_larga": "Montcada 2024, 5.º día del corte (17/05/2024): −9,8 % en el análisis por barrios, no significativo. La gente se adapta: el efecto se diluye en pocos días."
  },
  "metodo": {
   "comparacion": "Cada día de caos se compara con días limpios (laborables sin lluvia, festivos, verano, eventos ni incidencias), descontando lo que hacen ese mismo día los municipios sin Rodalies (control).",
@@ -6750,18 +6750,18 @@
   "tramos": "Volumen total de los municipios del tramo afectado frente a lo esperado: viajes del control ese día × proporción habitual tramo/control (días limpios del mismo año y día de la semana).",
   "perdidos": "Viajes perdidos = viajes de un día normal × efecto estimado. Es una aproximación.",
   "placebo": "200 grupos de días normales al azar tratados como si fueran días de caos.",
-  "barrios": "M3: regresión con efecto fijo día × tipo de barrio; municipios dependientes con ≥ 200 viajes/día hacia cada tipo."
+  "barrios": "Por barrios: regresión con efecto fijo día × tipo de barrio; municipios dependientes con ≥ 200 viajes/día hacia cada tipo."
  },
  "limitaciones": [
   "Datos diarios de todos los modos de transporte: no identifican el tren ni la hora.",
   "Solo cuatro días de caos válidos; en los municipios pequeños la significación individual es baja.",
   "Los municipios de control pueden notar el caos de forma indirecta: el efecto real podría ser algo mayor.",
-  "Las magnitudes de M3 no son comparables con las de M2; se comparan direcciones y diferencias dentro de M3.",
+  "Las magnitudes por barrios no son comparables con las del análisis por municipios; se comparan direcciones y diferencias entre barrios.",
   "Motorización y renta: asociación entre 62 municipios, no causalidad. Los turismos se registran en el domicilio del titular (algunas flotas de empresa) y no sabemos qué parte de cada municipio viaja en tren."
  ],
  "hay_vulnerabilidad": true,
  "vulnerabilidad_resumen": {
-  "fuente": "DGT (2023–2025), INE Padrón (2023–2025) e INE ADRH (2023–2024). Efecto: clustering de M2 por municipio. Notebook 05.",
+  "fuente": "DGT (2023–2025), INE Padrón (2023–2025) e INE ADRH (2023–2024). Efecto: clustering del notebook 03 por municipio. Notebook 05.",
   "muestra": 62,
   "dependientes": 35,
   "mediana_motorizacion": 468,

@@ -163,7 +163,7 @@ def metricas_referencia(tabla, columna):
 
 
 def cargar_relaciones(con, ruta, relaciones):
-    """Una sola agregación de M2 para las OD solicitadas; no rellena ausencias."""
+    """Una sola agregación de la movilidad entre municipios para las OD solicitadas; no rellena ausencias."""
     pares = pd.DataFrame([
         {"Relacion": nombre, "municipio_origen": origen, "municipio_destino": destino}
         for nombre, (origen, destino) in relaciones.items()

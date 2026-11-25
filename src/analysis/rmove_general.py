@@ -123,7 +123,7 @@ def ejecutar(config_path):
             "No se infieren duraciones ni se fusionan registros como episodios independientes.",
             "Solo se excluyen de controles las fechas registradas; las duraciones requieren revisión.",
             "El contexto agregado no mide exposición directa, recurrencia ni efecto dominó.",
-            "La cobertura territorial de M2 debe validarse antes de denominarla provincial.",
+            "La cobertura territorial de los datos de movilidad entre municipios debe validarse antes de denominarla provincial.",
         ],
     }
     salida = root / config["salida"]

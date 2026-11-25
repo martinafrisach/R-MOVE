@@ -166,7 +166,7 @@
       filas.push({ m, c, perdidos: v * c.efecto / 100, lo: v * c.ic_inf / 100, hi: v * c.ic_sup / 100 });
     });
     filas.sort((a, b) => a.perdidos - b.perdidos);
-    // Totales sobre los dependientes (donde el efecto está establecido), como en el análisis de M2.
+    // Totales sobre los dependientes (donde el efecto está establecido), como en el análisis por municipios.
     const dep = filas.filter((f) => f.m.grupo === 'dependientes');
     const sum = (k) => dep.reduce((s, f) => s + f[k], 0);
     return { tipo, filas, dep, perdidos: sum('perdidos'), lo: sum('lo'), hi: sum('hi'), expuestos: dep.reduce((s, f) => s + f.m.viajes_referencia, 0),
@@ -734,7 +734,7 @@
     $('sim-mas').innerHTML = `
       <h4>¿A qué barrios de Barcelona dejan de llegar?</h4>
       <div class="doors"><div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong></div><div><small>Barrios sin estación</small><strong class="${avg('sin_estacion') < 0 ? 'down' : 'up'}">${pct(avg('sin_estacion'))}</strong></div></div>
-      <p class="muted small">Datos por barrio (M3), viajes de ida desde municipios dependientes. ${esc(ida.map((b) => b.caso).join(' y '))}.</p>
+      <p class="muted small">Datos por barrio, viajes de ida desde municipios dependientes. ${esc(ida.map((b) => b.caso).join(' y '))}.</p>
       <h4>Personas más expuestas</h4>
       <p class="small">${nf(r.filas.filter((f) => f.m.alternativa && f.m.alternativa.clase === 'sin alternativa').reduce((s, f) => s + f.m.viajes_referencia, 0))} viajes diarios salen de municipios sin alternativa directa.</p>
       ${D.vulnerabilidad_resumen ? (() => {
@@ -1014,12 +1014,12 @@
   }
 
   function pintarMetodo() {
-    const titulos = { comparacion: ['Con qué se compara', 'calendario'], efecto: ['Cómo se mide el efecto', 'rayo'], comprobacion: ['Comprobación', 'lupa'], tramos: ['Tramos de la red', 'tren'], perdidos: ['Viajes perdidos', 'bus'], placebo: ['Prueba placebo', 'huelga'], barrios: ['Barrios (M3)', 'casa'] };
+    const titulos = { comparacion: ['Con qué se compara', 'calendario'], efecto: ['Cómo se mide el efecto', 'rayo'], comprobacion: ['Comprobación', 'lupa'], tramos: ['Tramos de la red', 'tren'], perdidos: ['Viajes perdidos', 'bus'], placebo: ['Prueba placebo', 'huelga'], barrios: ['Barrios', 'casa'] };
     $('lab-metodo').innerHTML = `
       <div class="method-grid">${Object.entries(D.metodo).map(([k, v]) => `<div class="card mcard"><span class="ric">${ICON[(titulos[k] || ['', 'lupa'])[1]]}</span><h3>${(titulos[k] || [k])[0]}</h3><p>${esc(v)}</p></div>`).join('')}</div>
       <div class="lab-grid">
         <div class="card"><div class="card-head"><h2>Decisiones sobre los datos</h2></div><ul class="checks">
-          <li><b>Datos:</b> Telefónica (M2 municipio → Barcelona y M3 municipio ↔ barrio), ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}.</li>
+          <li><b>Datos:</b> Telefónica (movilidad municipio → Barcelona y municipio ↔ barrio), ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}.</li>
           <li><b>Días normales:</b> laborables sin festivos, verano, eventos, lluvia ni incidencias del registro oficial de Rodalies (los cortes largos se excluyen enteros).</li>
           <li><b>Días de caos:</b> ${D.incidencias.map((i) => fecha(i.fecha)).join(', ')}. El 19/03/2025 se excluye por lluvia.</li>
           ${(D.averias || []).length ? `<li><b>Averías de una sola línea:</b> ${D.averias.map((a) => `${fecha(a.fecha)} (${esc(a.linea_nombre)})`).join(', ')}. Se miden solo en los dependientes de la línea afectada y no entran en las medias de los días de caos.</li>` : ''}

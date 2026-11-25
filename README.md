@@ -11,11 +11,11 @@ Los notebooks del análisis están en `notebooks/` y el dashboard del proyecto, 
 
 Cuatro modos: **el relato** (scrollytelling con mapa), **¿Y si…?** (simulador de incidencias por municipio), **Mi municipio** y **Laboratorio** (casos, validaciones, qué lo explica y método). Detalle en [`src/dashboard-v2/README.md`](src/dashboard-v2/README.md).
 
-Todas las cifras salen del **clustering** del notebook 03 (tipos de día por volumen del control y época del año, efecto corregido por el control, p e intervalos con placebos). La regresión de diferencias en diferencias se usa como comprobación. Los resultados por barrio (M3) salen del notebook 04.
+Todas las cifras salen del **clustering** del notebook 03 (tipos de día por volumen del control y época del año, efecto corregido por el control, p e intervalos con placebos). La regresión de diferencias en diferencias se usa como comprobación. Los resultados por barrio salen del notebook 04.
 
 ## Actualizar resultados
 
-Un solo comando ejecuta los notebooks 03 (M2), 04 (M3, barrios) y 05 (socioeco), comprueba que han regenerado sus
+Un solo comando ejecuta los notebooks 03 (municipios), 04 (barrios) y 05 (socioeconomía), comprueba que han regenerado sus
 exportaciones, genera `observatorio.json`, valida el dashboard y muestra qué cifras han cambiado:
 
 ```bash
@@ -25,7 +25,7 @@ python scripts/actualizar_dashboard.py --solo-dashboard  # sin ejecutar notebook
 ```
 
 El dashboard no tiene cifras escritas a mano: todo sale de `resultados/dashboard_resultados.json` (notebook 03),
-`resultados/m3_resultados.json` (notebook 04) y `observatorio/vulnerabilidad*.json` (notebook 05). El script no hace
+`resultados/barrios_resultados.json` (notebook 04) y `observatorio/vulnerabilidad*.json` (notebook 05). El script no hace
 commit ni push.
 
 Para construir la publicación a mano:
