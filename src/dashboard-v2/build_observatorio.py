@@ -67,7 +67,7 @@ def main():
         requerir(f in inc, f"Falta la incidencia {f} en dashboard_resultados.json")
 
     f_barrios = DATA / "resultados" / "barrios_resultados.json"
-    requerir(f_barrios.exists(), "Falta barrios_resultados.json: ejecuta el notebook 04 hasta el final (sección 8)")
+    requerir(f_barrios.exists(), "Falta barrios_resultados.json: ejecuta el notebook 04 hasta el final (anexo B.4)")
     res_barrios = json.loads(f_barrios.read_text(encoding="utf-8"))
     averias = res.get("averias", [])
 
@@ -207,6 +207,7 @@ def main():
         "incidencias": incidencias,
         "averias": [{k: a[k] for k in a if k != "municipios"} for a in averias],
         "barrios_averias": res_barrios.get("averias", []),
+        "barrios_contraste": res_barrios.get("contraste"),
         "grupos": res["grupos"],
         "distancia": res["distancia"],
         "evento": res["evento"],
@@ -215,7 +216,8 @@ def main():
         "perdidos_media": res["perdidos_media"],
         "alternativa": alternativa,
         "duracion": duracion,
-        "metodo": res["metodo"],
+        "metodo": res["metodo"] | ({"barrios": "Por barrios (notebook 04): " + res_barrios["metodo"] + "."}
+                                   if res_barrios.get("metodo") else {}),
         "limitaciones": res["limitaciones"] + ([
             "Motorización y renta: asociación entre 62 municipios, no causalidad. Los turismos se registran en el domicilio "
             "del titular (algunas flotas de empresa) y no sabemos qué parte de cada municipio viaja en tren."

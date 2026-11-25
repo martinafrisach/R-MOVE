@@ -1,95 +1,181 @@
 {
  "fuente": "R-MOVE · movilidad municipio ↔ barrio de Barcelona, notebook 04",
+ "metodo": "Clustering del notebook 03 (mismos días, grupos y control), con el control medido hacia el mismo tipo de barrio",
  "barrios": [
   {
    "caso": "Todos los días de caos",
    "sentido": "ida",
-   "con_estacion": -19.1,
-   "sin_estacion": 2.0,
+   "total": -8.9,
+   "total_p": 0.0,
+   "con_estacion": -14.6,
+   "con_estacion_p": 0.0,
+   "sin_estacion": -4.5,
+   "sin_estacion_p": 0.049,
+   "diferencia": -10.6,
    "p_diferencia": 0.0
   },
   {
    "caso": "Todos los días de caos",
    "sentido": "vuelta",
-   "con_estacion": -18.2,
-   "sin_estacion": 5.3,
+   "total": -5.8,
+   "total_p": 0.0,
+   "con_estacion": -14.2,
+   "con_estacion_p": 0.0,
+   "sin_estacion": -0.7,
+   "sin_estacion_p": 0.338,
+   "diferencia": -13.6,
    "p_diferencia": 0.0
   },
   {
-   "caso": "Huelga 17/03/2025",
-   "sentido": "ida",
-   "con_estacion": -18.5,
-   "sin_estacion": -10.0,
-   "p_diferencia": 0.224
-  },
-  {
-   "caso": "Huelga 17/03/2025",
-   "sentido": "vuelta",
-   "con_estacion": -13.9,
-   "sin_estacion": 4.7,
-   "p_diferencia": 0.017
-  },
-  {
    "caso": "Avería 13/05/2024",
    "sentido": "ida",
-   "con_estacion": -26.7,
-   "sin_estacion": 2.9,
-   "p_diferencia": 0.003
+   "total": -14.5,
+   "total_p": 0.007,
+   "con_estacion": -24.0,
+   "con_estacion_p": 0.004,
+   "sin_estacion": -8.6,
+   "sin_estacion_p": 0.051,
+   "diferencia": -16.9,
+   "p_diferencia": 0.011
   },
   {
    "caso": "Avería 13/05/2024",
    "sentido": "vuelta",
-   "con_estacion": -31.9,
-   "sin_estacion": 3.6,
-   "p_diferencia": 0.001
-  },
-  {
-   "caso": "Huelga 26/03/2025",
-   "sentido": "ida",
-   "con_estacion": -10.2,
-   "sin_estacion": 5.6,
+   "total": -12.1,
+   "total_p": 0.004,
+   "con_estacion": -21.9,
+   "con_estacion_p": 0.004,
+   "sin_estacion": -5.0,
+   "sin_estacion_p": 0.099,
+   "diferencia": -17.7,
    "p_diferencia": 0.004
   },
   {
+   "caso": "Huelga 17/03/2025",
+   "sentido": "ida",
+   "total": -12.8,
+   "total_p": 0.011,
+   "con_estacion": -14.9,
+   "con_estacion_p": 0.007,
+   "sin_estacion": -9.5,
+   "sin_estacion_p": 0.044,
+   "diferencia": -6.0,
+   "p_diferencia": 0.176
+  },
+  {
+   "caso": "Huelga 17/03/2025",
+   "sentido": "vuelta",
+   "total": -6.3,
+   "total_p": 0.029,
+   "con_estacion": -15.2,
+   "con_estacion_p": 0.004,
+   "sin_estacion": -0.8,
+   "sin_estacion_p": 0.454,
+   "diferencia": -14.6,
+   "p_diferencia": 0.007
+  },
+  {
+   "caso": "Huelga 26/03/2025",
+   "sentido": "ida",
+   "total": 1.8,
+   "total_p": 0.652,
+   "con_estacion": -3.5,
+   "con_estacion_p": 0.205,
+   "sin_estacion": 5.8,
+   "sin_estacion_p": 0.894,
+   "diferencia": -8.8,
+   "p_diferencia": 0.044
+  },
+  {
    "caso": "Huelga 26/03/2025",
    "sentido": "vuelta",
+   "total": -0.5,
+   "total_p": 0.487,
    "con_estacion": -7.4,
-   "sin_estacion": 5.0,
-   "p_diferencia": 0.096
+   "con_estacion_p": 0.044,
+   "sin_estacion": 3.4,
+   "sin_estacion_p": 0.751,
+   "diferencia": -10.5,
+   "p_diferencia": 0.018
   },
   {
    "caso": "Huelga 01/04/2025",
    "sentido": "ida",
-   "con_estacion": -20.3,
-   "sin_estacion": 10.3,
-   "p_diferencia": 0.0
+   "total": -9.4,
+   "total_p": 0.018,
+   "con_estacion": -14.7,
+   "con_estacion_p": 0.007,
+   "sin_estacion": -4.9,
+   "sin_estacion_p": 0.147,
+   "diferencia": -10.3,
+   "p_diferencia": 0.029
   },
   {
    "caso": "Huelga 01/04/2025",
    "sentido": "vuelta",
-   "con_estacion": -17.7,
-   "sin_estacion": 7.8,
-   "p_diferencia": 0.003
+   "total": -4.0,
+   "total_p": 0.132,
+   "con_estacion": -11.8,
+   "con_estacion_p": 0.004,
+   "sin_estacion": -0.2,
+   "sin_estacion_p": 0.498,
+   "diferencia": -11.6,
+   "p_diferencia": 0.015
   }
  ],
  "averias": [
   {
    "fecha": "2023-05-02",
-   "titulo": "Gavà (R2 Sud), día 1",
+   "linea": "R2S",
+   "titulo": "Avería: incendio del enclavamiento de Gavà (día 1), R2 Sud con servicio reducido",
    "municipios": 4,
-   "total": -26.0,
-   "total_p": 0.11,
-   "ida_con_estacion": -51.9,
-   "ida_sin_estacion": -12.4,
-   "vuelta_con_estacion": -69.5,
-   "vuelta_sin_estacion": -9.6
+   "total": -14.8,
+   "total_p": 0.022,
+   "ida_con_estacion": -31.1,
+   "ida_sin_estacion": -6.9,
+   "vuelta_con_estacion": -62.4,
+   "vuelta_sin_estacion": 0.4
+  },
+  {
+   "fecha": "2024-11-22",
+   "linea": "R4N",
+   "titulo": "Avería: robo de cobre en la R4 entre Sabadell y Terrassa",
+   "municipios": 4,
+   "total": -41.7,
+   "total_p": 0.004,
+   "ida_con_estacion": -73.1,
+   "ida_sin_estacion": -14.2,
+   "vuelta_con_estacion": 20.6,
+   "vuelta_sin_estacion": 49.9
   }
  ],
- "duracion_incidencia_larga": {
-  "fecha": "2024-05-17",
-  "caso": "Montcada 2024, 5.º día del corte",
-  "total": -9.8,
-  "p": 0.291,
-  "municipios": 9
- }
+ "contraste": {
+  "fecha": "2025-06-05",
+  "titulo": "Avería: tren detenido entre Pl. Catalunya y Bif. Vilanova (14:25–16:14)",
+  "ida": {
+   "caso": "Contraste",
+   "sentido": "ida",
+   "total": 1.2,
+   "total_p": 0.608,
+   "con_estacion": -2.0,
+   "con_estacion_p": 0.315,
+   "sin_estacion": 2.0,
+   "sin_estacion_p": 0.63,
+   "diferencia": -3.9,
+   "p_diferencia": 0.245
+  },
+  "vuelta": {
+   "caso": "Contraste",
+   "sentido": "vuelta",
+   "total": -6.8,
+   "total_p": 0.022,
+   "con_estacion": -7.9,
+   "con_estacion_p": 0.037,
+   "sin_estacion": -5.8,
+   "sin_estacion_p": 0.066,
+   "diferencia": -2.2,
+   "p_diferencia": 0.311
+  }
+ },
+ "duracion_incidencia_larga": null
 }

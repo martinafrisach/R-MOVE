@@ -29,7 +29,7 @@ Enlaces directos: `#relato`, `#simulador`, `#municipio/08006`, `#laboratorio`.
 
 ## Datos
 
-- Entrada: `data/processed/rmove/resultados/dashboard_resultados.json` (notebook 03, celda B.8: resultados del clustering, incluido el efecto según la alternativa en transporte público y las averías de una línea), `data/processed/rmove/resultados/barrios_resultados.json` (notebook 04, sección 8: barrios con y sin estación, ida y vuelta, y la incidencia larga de Montcada) y `conectividad_municipios.parquet` (alternativa de cada municipio, GTFS).
+- Entrada: `data/processed/rmove/resultados/dashboard_resultados.json` (notebook 03, celda B.8: resultados del clustering, incluido el efecto según la alternativa en transporte público y las averías de una línea), `data/processed/rmove/resultados/barrios_resultados.json` (notebook 04, anexo B.4: mismos días y método que el 03; efecto hacia barrios con y sin estación, ida y vuelta, averías de una línea y contraste) y `conectividad_municipios.parquet` (alternativa de cada municipio, GTFS).
 - Salida: `data/processed/rmove/observatorio/observatorio.json` (el navegador solo lee este fichero, `municipios_mapa.geojson` y la red de Rodalies `railway-network.geojson` de esta carpeta).
 - No hay cifras copiadas a mano: si cambia un notebook, `python scripts/actualizar_dashboard.py` lo propaga todo.
 - **Motorización y renta** (notebook 05, opcional): `observatorio/vulnerabilidad.json` (por municipio: turismos por 1.000 hab., renta neta por persona, turismos por hogar, conductores y nivel bajo/medio/alto según los terciles de los dependientes) y `observatorio/vulnerabilidad_resumen.json` (regresión, robustez, efecto por día y terciles). Fuentes: DGT 2023–2025, INE Padrón 2023–2025 e INE ADRH 2023–2024.

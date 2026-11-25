@@ -214,10 +214,10 @@
     const norte = av.tramos.find((t) => /norte de Arenys/.test(t.tramo));
     $('r-norte').textContent = norte ? pct(norte.cambio_pct, 0) : '−20 %';
     $('r-huelga').textContent = pct(hu.grupos.find((g) => g.grupo === 'dependientes').efecto_pct);
-    const anun = D.barrios.filter((b) => /Huelga (26|01)/.test(b.caso) && b.sentido === 'ida');
+    const anun = D.barrios.filter((b) => b.caso === 'Huelga 26/03/2025' && b.sentido === 'ida');
     const avg = (k) => anun.reduce((s, b) => s + b[k], 0) / anun.length;
-    $('r-puertas').innerHTML = `<div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong><span>Sants, Passeig de Gràcia, Clot…</span></div>` +
-      `<div><small>Barrios sin estación</small><strong class="up">${pct(avg('sin_estacion'))}</strong><span>se llega en coche o en bus</span></div>`;
+    $('r-puertas').innerHTML = `<div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong><span>Sants, Pl. Catalunya, Sant Andreu…</span></div>` +
+      `<div><small>Barrios sin estación</small><strong class="${avg('sin_estacion') < 0 ? 'down' : 'up'}">${pct(avg('sin_estacion'))}</strong><span>se llega en coche o en bus</span></div>`;
     eventStudy($('r-evento'), D.evento);
     const avs = (D.averias || []).slice().sort((a, b) => a.perdidos.efecto_pct - b.perdidos.efecto_pct);
     story.averia = avs[0] || null;
