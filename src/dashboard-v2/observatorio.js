@@ -257,7 +257,7 @@
       const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) activarPaso(e.target); }), { rootMargin: '-50% 0px -50% 0px' });
       steps.forEach((s) => io.observe(s));
       activarPaso(steps[0]);
-    }).catch(() => { $('status').innerHTML = 'Falta la cartografía del relato. Ejecuta <code>python src/dashboard-v2/build_mapa_base.py</code>.'; });
+    }).catch(() => { $('status').innerHTML = 'Falta la cartografía del relato. Ejecuta <code>python src/dashboard-v2/build_contorno.py</code>.'; });
   }
 
   function montarMapaRelato(base) {

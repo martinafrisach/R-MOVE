@@ -15,7 +15,7 @@ Todas las cifras salen del **clustering** del notebook 04 (tipos de día por vol
 
 ## Actualizar resultados
 
-Un solo comando ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 07 (socioeco), comprueba que han regenerado sus
+Un solo comando ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 06 (socioeco), comprueba que han regenerado sus
 exportaciones, genera `observatorio.json`, valida el dashboard y muestra qué cifras han cambiado:
 
 ```bash
@@ -25,7 +25,7 @@ python scripts/actualizar_dashboard.py --solo-dashboard  # sin ejecutar notebook
 ```
 
 El dashboard no tiene cifras escritas a mano: todo sale de `resultados/dashboard_resultados.json` (notebook 04),
-`resultados/m3_resultados.json` (notebook 05) y `observatorio/vulnerabilidad*.json` (notebook 07). El script no hace
+`resultados/m3_resultados.json` (notebook 05) y `observatorio/vulnerabilidad*.json` (notebook 06). El script no hace
 commit ni push.
 
 Para construir la publicación a mano:

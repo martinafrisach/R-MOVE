@@ -44,7 +44,7 @@ python scripts/datos.py empaquetar          # sin los CSV brutos de Telefónica
 
 | Carpeta | Contenido |
 |---|---|
-| `notebooks/` | Análisis: 01–02 preparación y mediana, **04 v2** M2 (clustering; la regresión como comprobación), 05 M3 barrios, 07 vulnerabilidad (motorización y renta) |
+| `notebooks/` | Análisis: 01–02 preparación y mediana, **04 v2** M2 (clustering; la regresión como comprobación), 05 M3 barrios, 06 vulnerabilidad (motorización y renta) |
 | `src/analysis/` | Funciones de apoyo del notebook 02 (catálogo de incidencias y mediana), con test |
 | `src/dashboard-v2/` | **Observatorio**, el dashboard del proyecto (relato, ¿Y si…?, Mi municipio, Laboratorio). Se publica en GitHub Pages |
 | `data/processed/rmove/` | Exportaciones de los notebooks. En Git solo van los JSON y parquet que usa el Observatorio |

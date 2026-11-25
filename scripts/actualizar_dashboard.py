@@ -1,7 +1,7 @@
 """Actualiza el Observatorio con los últimos resultados del análisis, de principio a fin.
 
 Hace, en orden:
-  1. Ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 07 (socioeco) y los guarda ya ejecutados.
+  1. Ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 06 (socioeco) y los guarda ya ejecutados.
   2. Comprueba que cada notebook ha regenerado sus ficheros exportados en esta ejecución.
   3. Genera data/processed/rmove/observatorio/observatorio.json (src/dashboard-v2/build_observatorio.py).
   4. Valida el dashboard (sintaxis del JS si hay Node y build_pages.py --check).
@@ -40,7 +40,7 @@ PASOS = [
         RM / "m2_averias_linea.parquet", RM / "m2_tipos_dia.parquet", RM / "m2_panel_V.parquet",
         RM / "resultados" / "dashboard_resultados.json"]),
     ("05", NB / "05_impacto_movilidad_barrios.ipynb", [RM / "resultados" / "m3_resultados.json"]),
-    ("07", NB / "07_socioeco.ipynb", [RM / "observatorio" / "vulnerabilidad.json",
+    ("06", NB / "06_socioeco.ipynb", [RM / "observatorio" / "vulnerabilidad.json",
                                      RM / "observatorio" / "vulnerabilidad_resumen.json"]),
 ]
 
@@ -98,9 +98,13 @@ def comando(args, que):
     print(f"✓ {que}" + (f"\n  {salida.splitlines()[-1]}" if salida else ""))
 
 
+def pc(x):
+    """Porcentaje con signo en formato español (−3,2 %)."""
+    return "—" if x is None else f"{x:+.1f} %".replace(".", ",").replace("-", "−")
+
+
 def resumen(antes):
     d = json.loads(OBS.read_text(encoding="utf-8"))
-    pc = lambda x: "—" if x is None else f"{x:+.1f} %".replace(".", ",").replace("-", "−")
     dep = next(g for g in d["grupos"] if g["grupo"] == "dependientes")
     filas = [("Días de caos · dependientes (media)", dep["efecto_pct"],
               next((g["efecto_pct"] for g in antes.get("grupos", []) if g["grupo"] == "dependientes"), None) if antes else None)]

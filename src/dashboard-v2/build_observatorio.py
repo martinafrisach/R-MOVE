@@ -49,8 +49,10 @@ def num(x, d=2):
     return round(x, d)
 
 
-def media(a, b, d=2):
-    return round((a + b) / 2, d)
+def requerir(condicion, mensaje):
+    """Validación de entradas que no se desactiva con python -O (a diferencia de assert)."""
+    if not condicion:
+        raise ValueError(mensaje)
 
 
 def coef(efecto, ic_inf, ic_sup, p, observado=True, fuente=""):
@@ -62,22 +64,22 @@ def main():
     res = json.loads((DATA / "resultados" / "dashboard_resultados.json").read_text(encoding="utf-8"))
     inc = {i["fecha"]: i for i in res["incidencias"]}
     for f in [FECHA_AVERIA, FECHA_HUELGA, *FECHAS_ANUNCIADA]:
-        assert f in inc, f"Falta la incidencia {f} en dashboard_resultados.json"
+        requerir(f in inc, f"Falta la incidencia {f} en dashboard_resultados.json")
 
     f_m3 = DATA / "resultados" / "m3_resultados.json"
-    assert f_m3.exists(), "Falta m3_resultados.json: ejecuta el notebook 05 hasta el final (sección 8)"
+    requerir(f_m3.exists(), "Falta m3_resultados.json: ejecuta el notebook 05 hasta el final (sección 8)")
     m3 = json.loads(f_m3.read_text(encoding="utf-8"))
     averias = res.get("averias", [])
 
     conect = pd.read_parquet(DATA / "m2_conectividad_municipios.parquet")
-    assert "alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 04 (B.8)"
+    requerir("alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 04 (B.8)")
 
     # ------------------------------------------------------------------ coeficientes del simulador
     def grupos_de(fecha):
         return {g["grupo"]: g for g in inc[fecha]["grupos"]}
 
     def lineas_de(fecha):
-        return {l["linea"]: l for l in inc[fecha]["lineas_dependientes"]}
+        return {x["linea"]: x for x in inc[fecha]["lineas_dependientes"]}
 
     # Avería sin aviso: corte de una línea. Observado solo en la R1 (13/05/2024).
     r1 = lineas_de(FECHA_AVERIA)["R1"]
@@ -96,34 +98,28 @@ def main():
     }
 
     # Huelga general (como el 17/03/2025): coeficiente por línea de los dependientes.
+    def coef_medio(vals, fuente):
+        """Media de efecto e IC de varios días; p conservador (el mayor)."""
+        n = len(vals)
+        return coef(sum(v["efecto_pct"] for v in vals) / n, sum(v["ic_inf"] for v in vals) / n,
+                    sum(v["ic_sup"] for v in vals) / n, max(v["p_valor"] for v in vals), True, fuente)
+
     def tabla_huelga(fechas, etiqueta):
         lin = [lineas_de(f) for f in fechas]
         grp = [grupos_de(f) for f in fechas]
-        out = {"lineas": {}, "grupos": {}}
-        for clave in lin[0]:
-            vals = [l[clave] for l in lin]
-            out["lineas"][clave] = coef(
-                sum(v["efecto_pct"] for v in vals) / len(vals),
-                sum(v["ic_inf"] for v in vals) / len(vals),
-                sum(v["ic_sup"] for v in vals) / len(vals),
-                max(v["p_valor"] for v in vals) if len(vals) > 1 else vals[0]["p_valor"],
-                True, f"Dependientes de {clave}, {etiqueta}")
-        for g in ("dependientes", "cercanos", "metro_fgc"):
-            vals = [x[g] for x in grp]
-            out["grupos"][g] = coef(
-                sum(v["efecto_pct"] for v in vals) / len(vals),
-                sum(v["ic_inf"] for v in vals) / len(vals),
-                sum(v["ic_sup"] for v in vals) / len(vals),
-                max(v["p_valor"] for v in vals) if len(vals) > 1 else vals[0]["p_valor"],
-                True, f"Grupo {g}, {etiqueta}")
-        return out
+        return {
+            "lineas": {clave: coef_medio([x[clave] for x in lin], f"Dependientes de {clave}, {etiqueta}")
+                       for clave in lin[0]},
+            "grupos": {g: coef_medio([x[g] for x in grp], f"Grupo {g}, {etiqueta}")
+                       for g in ("dependientes", "cercanos", "metro_fgc")},
+        }
 
     huelga = tabla_huelga([FECHA_HUELGA], "huelga 17/03/2025")
     anunciada = tabla_huelga(FECHAS_ANUNCIADA, "media de las huelgas 26/03 y 01/04/2025")
 
     barrios_m3 = m3["barrios"]
     for caso in ("Todos los días de caos", "Huelga 17/03/2025", "Avería 13/05/2024", "Huelga 26/03/2025", "Huelga 01/04/2025"):
-        assert any(b["caso"] == caso for b in barrios_m3), f"m3_resultados.json no trae el caso «{caso}»"
+        requerir(any(b["caso"] == caso for b in barrios_m3), f"m3_resultados.json no trae el caso «{caso}»")
     duracion = dict(DURACION)
     larga = m3.get("duracion_incidencia_larga")
     if larga:
@@ -154,7 +150,7 @@ def main():
     municipios = []
     for codigo, m in base.items():
         efectos = {}
-        for f, i in list(inc.items()) + [(a["fecha"], a) for a in averias]:
+        for f, i in [*inc.items(), *((a["fecha"], a) for a in averias)]:
             x = next((y for y in i["municipios"] if y["codigo"] == codigo), None)
             if x is not None:
                 efectos[f] = {"efecto": num(x["efecto_pct"]), "p": num(x["p_valor"], 4)}
@@ -189,7 +185,7 @@ def main():
 
     # ------------------------------------------------------------------ resto (relato y laboratorio)
     incidencias = []
-    for f, i in inc.items():
+    for i in inc.values():
         incidencias.append({k: i[k] for k in ("fecha", "titulo", "tipo", "descripcion", "tramo", "lineas", "lectura",
                                               "grupos", "perdidos", "serie", "banda_normal", "tramos",
                                               "lineas_dependientes", "evento")})

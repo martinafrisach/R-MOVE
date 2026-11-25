@@ -1,8 +1,8 @@
 # Observatorio R-MOVE (dashboard v2)
 
-**Dashboard del proyecto** (sustituye al dashboard clásico, retirado el 19/11/2026). Se publica en GitHub Pages.
+**Dashboard del proyecto**, publicado en GitHub Pages.
 Todas las cifras salen del **clustering** del notebook 04 (la regresión se usa como comprobación) y del notebook 05 (M3, barrios).
-Implementa la propuesta `claude/propuesta_dashboard_v2.md` con cuatro modos:
+Tiene cuatro modos:
 
 1. **El relato** — scrollytelling: mapa coroplético de municipios (límites ICGC, sin teselas) a pantalla completa, con tarjetas que pasan por encima, anotaciones sobre el mapa, leyenda por paso y barra de progreso. Recorrido: un día normal → avería R1 (13/05/2024) → huelga general (17/03/2025) → huelgas anunciadas (redistribución por barrios, M3) → una sola línea (averías de una línea, sección 4.6 del notebook 04) → cuánto dura → quién lo sufre (alternativa en transporte público).
 2. **¿Y si…?** — planificador tipo «Google Maps»: mapa a pantalla completa y panel lateral. Se elige el tipo de incidencia (pestañas), la línea, la duración y el origen (buscador o clic en el mapa); el destino es Barcelona. Sin origen: impacto total y municipios más afectados. Con origen: rutas alternativas (Rodalies, bus/FGC, teletrabajo) con tiempo, estado y la recomendada, dibujadas sobre el mapa. Enlazable: `#simulador?tipo=huelga&linea=todas&mun=08307`.
@@ -12,7 +12,7 @@ Implementa la propuesta `claude/propuesta_dashboard_v2.md` con cuatro modos:
 ## Uso
 
 ```bash
-# 0) Todo de una vez: ejecuta los notebooks 04, 05 y 07, genera el JSON y valida (recomendado)
+# 0) Todo de una vez: ejecuta los notebooks 04, 05 y 06, genera el JSON y valida (recomendado)
 python scripts/actualizar_dashboard.py
 # 1) Solo generar el JSON del observatorio (lee los exportados de M2/M3; no recalcula modelos)
 python src/dashboard-v2/build_observatorio.py
