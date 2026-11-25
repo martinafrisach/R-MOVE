@@ -1,7 +1,7 @@
 """Actualiza el Observatorio con los últimos resultados del análisis, de principio a fin.
 
 Hace, en orden:
-  1. Ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 06 (socioeco) y los guarda ya ejecutados.
+  1. Ejecuta los notebooks 03 (M2), 04 (M3, barrios) y 05 (socioeco) y los guarda ya ejecutados.
   2. Comprueba que cada notebook ha regenerado sus ficheros exportados en esta ejecución.
   3. Genera data/processed/rmove/observatorio/observatorio.json (src/dashboard-v2/build_observatorio.py).
   4. Valida el dashboard (sintaxis del JS si hay Node y build_pages.py --check).
@@ -11,7 +11,7 @@ No hace commit, push ni despliegue: revisa el dashboard en local y publícalo t�
 
 Uso (desde la raíz del repositorio, con el entorno del proyecto activado):
     python scripts/actualizar_dashboard.py                 # todo
-    python scripts/actualizar_dashboard.py --desde 05      # a partir del notebook 05 (el 04 ya está al día)
+    python scripts/actualizar_dashboard.py --desde 04      # a partir del notebook 04 (el 03 ya está al día)
     python scripts/actualizar_dashboard.py --solo-dashboard  # sin ejecutar notebooks: solo pasos 3–5
 Después, para verlo:  python -m http.server 8000   →   http://localhost:8000/src/dashboard-v2/
 """
@@ -35,12 +35,12 @@ OBS = RM / "observatorio" / "observatorio.json"
 
 # Notebooks en orden de dependencia y lo que debe regenerar cada uno.
 PASOS = [
-    ("04", NB / "04_impacto_movilidad_incidencias_v2.ipynb", [
+    ("03", NB / "03_impacto_movilidad_incidencias.ipynb", [
         RM / "m2_cal.parquet", RM / "m2_info_municipios.parquet", RM / "m2_caos_real.parquet",
         RM / "m2_averias_linea.parquet", RM / "m2_tipos_dia.parquet", RM / "m2_panel_V.parquet",
         RM / "resultados" / "dashboard_resultados.json"]),
-    ("05", NB / "05_impacto_movilidad_barrios.ipynb", [RM / "resultados" / "m3_resultados.json"]),
-    ("06", NB / "06_socioeco.ipynb", [RM / "observatorio" / "vulnerabilidad.json",
+    ("04", NB / "04_impacto_movilidad_barrios.ipynb", [RM / "resultados" / "m3_resultados.json"]),
+    ("05", NB / "05_socioeco.ipynb", [RM / "observatorio" / "vulnerabilidad.json",
                                      RM / "observatorio" / "vulnerabilidad_resumen.json"]),
 ]
 
@@ -162,8 +162,8 @@ def main():
     # El M3 tiene que ser al menos tan reciente como el M2 (si no, mezclaría resultados de días limpios distintos)
     m2, m3 = RM / "resultados" / "dashboard_resultados.json", RM / "resultados" / "m3_resultados.json"
     if m2.exists() and m3.exists() and m3.stat().st_mtime < m2.stat().st_mtime:
-        print("✗ m3_resultados.json es anterior a dashboard_resultados.json: ejecuta también el notebook 05 "
-              "(python scripts/actualizar_dashboard.py --desde 05).")
+        print("✗ m3_resultados.json es anterior a dashboard_resultados.json: ejecuta también el notebook 04 "
+              "(python scripts/actualizar_dashboard.py --desde 04).")
         sys.exit(1)
     comando([sys.executable, "-B", str(WEB / "build_observatorio.py")], "observatorio.json generado")
     if shutil.which("node"):

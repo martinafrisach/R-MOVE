@@ -7,7 +7,7 @@ Uso (desde la raíz del repo):
         -> crea datos_rmove_AAAAMMDD.zip con data/processed y data/raw
            (sin los CSV brutos de Telefónica, 16 GB) para subirlo a la carpeta compartida.
     python scripts/datos.py empaquetar --con-telefonica-raw
-        -> incluye también data/raw/telefonica (solo si alguien necesita el notebook 01 o 05).
+        -> incluye también data/raw/telefonica (solo si alguien necesita el notebook 01 o 04).
 
 Para usar el paquete: descomprimirlo en la raíz del repo (crea/rellena la carpeta data/).
 """
@@ -46,13 +46,13 @@ REQUISITOS = {
         "data/processed/telefonica/M2.parquet",
         "data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx",
     ],
-    "Notebook 04 v2 (impacto incidencias, M2)": [
+    "Notebook 03 (impacto incidencias, M2)": [
         "data/processed/telefonica/M2.parquet",
         "data/raw/rodalies/Incidencias graves Rodalies*.xlsx",
         "data/raw/rodalies/incidencias_rodalies_2023_2025.csv",
         "data/processed/rmove/estaciones_rodalies_municipio.csv",
     ],
-    "Notebook 05 (barrios, M3)": [
+    "Notebook 04 (barrios, M3)": [
         "data/processed/telefonica/M2.parquet",
         "data/processed/rmove/m2_cal.parquet",
         "data/processed/rmove/m2_tipos_dia.parquet",

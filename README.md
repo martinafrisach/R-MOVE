@@ -11,21 +11,21 @@ Los notebooks del análisis están en `notebooks/` y el dashboard del proyecto, 
 
 Cuatro modos: **el relato** (scrollytelling con mapa), **¿Y si…?** (simulador de incidencias por municipio), **Mi municipio** y **Laboratorio** (casos, validaciones, qué lo explica y método). Detalle en [`src/dashboard-v2/README.md`](src/dashboard-v2/README.md).
 
-Todas las cifras salen del **clustering** del notebook 04 (tipos de día por volumen del control y época del año, efecto corregido por el control, p e intervalos con placebos). La regresión de diferencias en diferencias se usa como comprobación. Los resultados por barrio (M3) salen del notebook 05.
+Todas las cifras salen del **clustering** del notebook 03 (tipos de día por volumen del control y época del año, efecto corregido por el control, p e intervalos con placebos). La regresión de diferencias en diferencias se usa como comprobación. Los resultados por barrio (M3) salen del notebook 04.
 
 ## Actualizar resultados
 
-Un solo comando ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 06 (socioeco), comprueba que han regenerado sus
+Un solo comando ejecuta los notebooks 03 (M2), 04 (M3, barrios) y 05 (socioeco), comprueba que han regenerado sus
 exportaciones, genera `observatorio.json`, valida el dashboard y muestra qué cifras han cambiado:
 
 ```bash
 python scripts/actualizar_dashboard.py                  # todo
-python scripts/actualizar_dashboard.py --desde 05       # si el 04 ya está al día
+python scripts/actualizar_dashboard.py --desde 04       # si el 03 ya está al día
 python scripts/actualizar_dashboard.py --solo-dashboard  # sin ejecutar notebooks
 ```
 
-El dashboard no tiene cifras escritas a mano: todo sale de `resultados/dashboard_resultados.json` (notebook 04),
-`resultados/m3_resultados.json` (notebook 05) y `observatorio/vulnerabilidad*.json` (notebook 06). El script no hace
+El dashboard no tiene cifras escritas a mano: todo sale de `resultados/dashboard_resultados.json` (notebook 03),
+`resultados/m3_resultados.json` (notebook 04) y `observatorio/vulnerabilidad*.json` (notebook 05). El script no hace
 commit ni push.
 
 Para construir la publicación a mano:

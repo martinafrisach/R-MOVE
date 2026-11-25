@@ -4,7 +4,7 @@ Lee los ficheros que ya exporta el análisis (no recalcula ningún modelo):
   - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 04: resultados del clustering, M2)
   - data/processed/rmove/resultados/m3_resultados.json         (notebook 05: barrios con y sin estación, M3)
   - data/processed/rmove/m2_conectividad_municipios.parquet     (alternativa en transporte público por municipio)
-Opcional (si existen, el observatorio los muestra; los genera el notebook 06):
+Opcional (si existen, el observatorio los muestra; los genera el notebook 05):
   - data/processed/rmove/observatorio/vulnerabilidad.json          (motorización y renta por municipio)
   - data/processed/rmove/observatorio/vulnerabilidad_resumen.json  (modelo, robustez y terciles)
 
@@ -29,7 +29,7 @@ FECHA_AVERIA = "2024-05-13"
 FECHA_HUELGA = "2025-03-17"
 FECHAS_ANUNCIADA = ["2025-03-26", "2025-04-01"]
 
-# Evidencia sobre la duración (vida media): M2 event study + M3 (incidencia larga, notebook 05).
+# Evidencia sobre la duración (vida media): M2 event study + M3 (incidencia larga, notebook 04).
 DURACION = {
     "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (días +1 a +3 sin caída).",
     "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular.",
@@ -67,12 +67,12 @@ def main():
         requerir(f in inc, f"Falta la incidencia {f} en dashboard_resultados.json")
 
     f_m3 = DATA / "resultados" / "m3_resultados.json"
-    requerir(f_m3.exists(), "Falta m3_resultados.json: ejecuta el notebook 05 hasta el final (sección 8)")
+    requerir(f_m3.exists(), "Falta m3_resultados.json: ejecuta el notebook 04 hasta el final (sección 8)")
     m3 = json.loads(f_m3.read_text(encoding="utf-8"))
     averias = res.get("averias", [])
 
     conect = pd.read_parquet(DATA / "m2_conectividad_municipios.parquet")
-    requerir("alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 04 (B.8)")
+    requerir("alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 03 (B.8)")
 
     # ------------------------------------------------------------------ coeficientes del simulador
     def grupos_de(fecha):
@@ -190,7 +190,7 @@ def main():
                                               "grupos", "perdidos", "serie", "banda_normal", "tramos",
                                               "lineas_dependientes", "evento")})
 
-    # Efecto según la alternativa en transporte público (clustering, notebook 04)
+    # Efecto según la alternativa en transporte público (clustering, notebook 03)
     alternativa = [{"grupo": a["grupo"], "dia": a["dia"], "municipios": a["municipios"], "efecto": num(a["efecto_pct"]),
                     "ic_inf": num(a["ic_inf"]), "ic_sup": num(a["ic_sup"]), "p": num(a["p_valor"], 4)}
                    for a in res["alternativa"]]

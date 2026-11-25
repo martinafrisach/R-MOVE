@@ -1,0 +1,157 @@
+{
+ "fuente": "DGT (2023–2025), INE Padrón (2023–2025) e INE ADRH (2023–2024). Efecto: clustering de M2 por municipio. Notebook 06.",
+ "muestra": 62,
+ "dependientes": 35,
+ "mediana_motorizacion": 468,
+ "mediana_renta": 16689,
+ "cortes_motorizacion": [
+  461,
+  513
+ ],
+ "cortes_renta": [
+  15805,
+  17202
+ ],
+ "modelo": [
+  {
+   "variable": "tur100",
+   "etiqueta": "+100 turismos por 1.000 hab.",
+   "coef_pp": 1.4,
+   "ic_inf": 0.26,
+   "ic_sup": 2.53,
+   "p": 0.0156
+  },
+  {
+   "variable": "renta_k",
+   "etiqueta": "+1.000 € de renta por persona",
+   "coef_pp": -0.34,
+   "ic_inf": -1.01,
+   "ic_sup": 0.33,
+   "p": 0.3218
+  },
+  {
+   "variable": "dist10",
+   "etiqueta": "+10 km de distancia a Barcelona",
+   "coef_pp": -0.63,
+   "ic_inf": -1.88,
+   "ic_sup": 0.63,
+   "p": 0.3274
+  },
+  {
+   "variable": "con_alt",
+   "etiqueta": "Tener metro o FGC",
+   "coef_pp": 3.0,
+   "ic_inf": 0.81,
+   "ic_sup": 5.18,
+   "p": 0.0072
+  }
+ ],
+ "r2": 0.23,
+ "robustez": {
+  "quitar_un_municipio": [
+   1.2,
+   1.6
+  ],
+  "p_permutacion": 0.048,
+  "sin_pesos": {
+   "coef_pp": 1.35,
+   "p": 0.109
+  },
+  "control_transporte_alternativo": {
+   "coef_pp": 1.38,
+   "p": 0.011
+  },
+  "placebo_sin_rodalies": {
+   "p_motorizacion": 0.69,
+   "p_renta": 0.21
+  }
+ },
+ "por_dia": [
+  {
+   "fecha": "2024-05-13",
+   "coef_motorizacion": 2.33,
+   "p_motorizacion": 0.295,
+   "coef_renta": -1.5,
+   "p_renta": 0.007
+  },
+  {
+   "fecha": "2025-03-17",
+   "coef_motorizacion": 0.56,
+   "p_motorizacion": 0.754,
+   "coef_renta": -0.3,
+   "p_renta": 0.687
+  },
+  {
+   "fecha": "2025-03-26",
+   "coef_motorizacion": 1.2,
+   "p_motorizacion": 0.383,
+   "coef_renta": 0.69,
+   "p_renta": 0.34
+  },
+  {
+   "fecha": "2025-04-01",
+   "coef_motorizacion": 1.31,
+   "p_motorizacion": 0.325,
+   "coef_renta": 0.32,
+   "p_renta": 0.583
+  }
+ ],
+ "terciles_motorizacion": [
+  {
+   "nivel": "baja",
+   "municipios": 12,
+   "min": 369,
+   "max": 461,
+   "efecto": -7.13,
+   "ic_inf": -9.01,
+   "ic_sup": -5.25
+  },
+  {
+   "nivel": "media",
+   "municipios": 11,
+   "min": 467,
+   "max": 513,
+   "efecto": -1.93,
+   "ic_inf": -5.0,
+   "ic_sup": 1.14
+  },
+  {
+   "nivel": "alta",
+   "municipios": 12,
+   "min": 514,
+   "max": 613,
+   "efecto": -3.87,
+   "ic_inf": -7.33,
+   "ic_sup": -0.4
+  }
+ ],
+ "terciles_renta": [
+  {
+   "nivel": "baja",
+   "municipios": 12,
+   "min": 14042,
+   "max": 15805,
+   "efecto": -3.55,
+   "ic_inf": -6.16,
+   "ic_sup": -0.94
+  },
+  {
+   "nivel": "media",
+   "municipios": 11,
+   "min": 16157,
+   "max": 17202,
+   "efecto": -6.61,
+   "ic_inf": -9.15,
+   "ic_sup": -4.07
+  },
+  {
+   "nivel": "alta",
+   "municipios": 12,
+   "min": 17544,
+   "max": 23467,
+   "efecto": -5.85,
+   "ic_inf": -8.27,
+   "ic_sup": -3.43
+  }
+ ]
+}

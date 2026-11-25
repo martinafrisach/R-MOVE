@@ -1,7 +1,7 @@
 /* Observatorio R-MOVE · dashboard v2
  * Cuatro modos: relato (scrollytelling), simulador «¿Y si…?», Mi municipio y laboratorio.
  * Solo lee data/processed/rmove/observatorio/observatorio.json (generado por build_observatorio.py a partir de
- * los resultados del clustering del notebook 04) y la red de Rodalies. No recalcula modelos: consulta coeficientes ya estimados.
+ * los resultados del clustering del notebook 03) y la red de Rodalies. No recalcula modelos: consulta coeficientes ya estimados.
  */
 (function () {
   'use strict';
@@ -236,7 +236,7 @@
     $('r-brecha').innerHTML = br.map((a) => `<div class="bar-row" data-tip="${esc(`<b>${a.grupo}</b> (${a.municipios} municipios)<br>${pct(a.efecto)} [${pct(a.ic_inf)}, ${pct(a.ic_sup)}]`)}"><span>${cap(nom[a.grupo])}</span><span class="track"><i style="width:${Math.abs(a.efecto) / mx * 100}%;background:${css(ALT_COL[nom[a.grupo]])}"></i></span><b>${pct(a.efecto)}</b></div>`).join('');
     const VR = D.vulnerabilidad_resumen;
     if (VR) {
-      // Brecha por motorización: dependientes por terciles de turismos por 1.000 hab. (notebook 06)
+      // Brecha por motorización: dependientes por terciles de turismos por 1.000 hab. (notebook 05)
       const tm = VR.terciles_motorizacion, mxc = Math.max(...tm.map((t) => Math.abs(t.efecto)));
       const nomT = { baja: 'Pocos coches', media: 'Intermedio', alta: 'Muchos coches' };
       $('r-brecha-tit').textContent = 'Quien no tiene alternativa al tren… ni coche.';
@@ -817,7 +817,7 @@
 
           <section class="card fsec">
             <h2>Vulnerabilidad social</h2>
-            ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta. Se añaden con el notebook 06 (datos abiertos de la DGT y el INE).</p>'}
+            ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta. Se añaden con el notebook 05 (datos abiertos de la DGT y el INE).</p>'}
           </section>
         </div>
       </div>`;
@@ -832,7 +832,7 @@
     }
   }
 
-  /* Ficha «Vulnerabilidad social»: motorización y renta del municipio y qué implica (notebook 06). */
+  /* Ficha «Vulnerabilidad social»: motorización y renta del municipio y qué implica (notebook 05). */
   function fichaSocial(m) {
     const v = m.vulnerabilidad, VR = D.vulnerabilidad_resumen;
     const NIV = { baja: 'de las más bajas', media: 'intermedia', alta: 'de las más altas' };
@@ -896,7 +896,7 @@
     pintarMetodo();
   }
 
-  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 04) */
+  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 03) */
   const CASOS = () => D.incidencias.concat(D.averias || []);
 
   async function caso(i) {
@@ -989,10 +989,10 @@
     }
   }
 
-  /* Tarjetas de motorización y renta (notebook 06). Vacío si aún no hay datos. */
+  /* Tarjetas de motorización y renta (notebook 05). Vacío si aún no hay datos. */
   function factoresSociales() {
     const VR = D.vulnerabilidad_resumen;
-    if (!VR) return '<div class="card wide2"><div class="card-head"><h2>Motorización y renta</h2></div><p class="pending small" style="margin:0 16px 16px">Pendiente: se añaden con el notebook 06.</p></div>';
+    if (!VR) return '<div class="card wide2"><div class="card-head"><h2>Motorización y renta</h2></div><p class="pending small" style="margin:0 16px 16px">Pendiente: se añaden con el notebook 05.</p></div>';
     const tb = VR.terciles_motorizacion.find((t) => t.nivel === 'baja'), ta = VR.terciles_motorizacion.find((t) => t.nivel === 'alta');
     const mot = VR.modelo.find((x) => x.variable === 'tur100'), R = VR.robustez;
     const ren13 = VR.por_dia.find((d) => d.fecha === FECHAS.averia);
@@ -1027,7 +1027,7 @@
           <li><b>Alternativa:</b> GTFS de bus interurbano, AMB, FGC y Rodalies (tiempo puerta a puerta y frecuencia).</li>
           <li><b>Método:</b> clustering de días (4 tipos por año según el volumen de los municipios sin Rodalies y la época del año). Comprobado con una regresión de diferencias en diferencias, que da la misma dirección y significación.</li>
           <li><b>Simulador:</b> viajes de un día normal × coeficiente del escenario. La avería solo se ha observado en la R1.</li>
-          ${D.vulnerabilidad_resumen ? '<li><b>Motorización y renta:</b> turismos por 1.000 hab. (DGT y Padrón, media 2023–2025) y renta neta por persona (ADRH, media 2023–2024). Efecto de cada municipio con el mismo método, ponderado por su ruido en días normales (notebook 06).</li>' : ''}</ul></div>
+          ${D.vulnerabilidad_resumen ? '<li><b>Motorización y renta:</b> turismos por 1.000 hab. (DGT y Padrón, media 2023–2025) y renta neta por persona (ADRH, media 2023–2024). Efecto de cada municipio con el mismo método, ponderado por su ruido en días normales (notebook 05).</li>' : ''}</ul></div>
         <div class="card"><div class="card-head"><h2>Limitaciones</h2></div><ul class="checks warn">${D.limitaciones.map((l) => `<li>${esc(l)}</li>`).join('')}<li>${esc(D.duracion.pendiente)}</li></ul></div>
       </div>`;
   }

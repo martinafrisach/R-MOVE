@@ -1,6 +1,6 @@
 {
  "version_esquema": 2,
- "fuente": "R-MOVE · M2 (municipio → Barcelona, notebook 04) y M3 (municipio ↔ barrio), Telefónica Smart Steps",
+ "fuente": "R-MOVE · M2 (municipio → Barcelona, notebook 03) y M3 (municipio ↔ barrio), Telefónica Smart Steps",
  "periodo": {
   "inicio": "2023-01-01",
   "fin": "2025-08-31"
@@ -6761,7 +6761,7 @@
  ],
  "hay_vulnerabilidad": true,
  "vulnerabilidad_resumen": {
-  "fuente": "DGT (2023–2025), INE Padrón (2023–2025) e INE ADRH (2023–2024). Efecto: clustering de M2 por municipio. Notebook 06.",
+  "fuente": "DGT (2023–2025), INE Padrón (2023–2025) e INE ADRH (2023–2024). Efecto: clustering de M2 por municipio. Notebook 05.",
   "muestra": 62,
   "dependientes": 35,
   "mediana_motorizacion": 468,

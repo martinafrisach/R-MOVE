@@ -22,6 +22,7 @@
 !/data/processed/rmove/observatorio/municipios_mapa.geojson
 !/data/processed/rmove/observatorio/catalunya_contorno.geojson
 !/data/processed/rmove/observatorio/vulnerabilidad.json
+!/data/processed/rmove/observatorio/vulnerabilidad_resumen.json
 !/data/processed/rmove/m2_conectividad_municipios.parquet
 
 # Entornos virtuales
