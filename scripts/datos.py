@@ -7,7 +7,7 @@ Uso (desde la raíz del repo):
         -> crea datos_rmove_AAAAMMDD.zip con data/processed y data/raw
            (sin los CSV brutos de Telefónica, 16 GB) para subirlo a la carpeta compartida.
     python scripts/datos.py empaquetar --con-telefonica-raw
-        -> incluye también data/raw/telefonica (solo si alguien necesita el notebook 01 o 05).
+        -> incluye también data/raw/telefonica (solo si alguien necesita el notebook 01 o 04).
 
 Para usar el paquete: descomprimirlo en la raíz del repo (crea/rellena la carpeta data/).
 """
@@ -33,32 +33,32 @@ REQUISITOS = {
     ],
     "Observatorio - regenerar observatorio.json": [
         "data/processed/rmove/resultados/dashboard_resultados.json",
-        "data/processed/rmove/resultados/m3_resultados.json",
-        "data/processed/rmove/m2_conectividad_municipios.parquet",
+        "data/processed/rmove/resultados/barrios_resultados.json",
+        "data/processed/rmove/conectividad_municipios.parquet",
     ],
     "Observatorio - regenerar mapa base": [
         "data/raw/limites/municipis_icgc.geojson",
     ],
-    "Notebook 01 (preparación Telefónica)": [
+    "Notebook 01 (calidad y preparación de datos)": [
         "data/raw/telefonica/*/movilidad_municipios_*_origen.csv",
     ],
     "Notebook 02 (mediana)": [
-        "data/processed/telefonica/M2.parquet",
+        "data/processed/telefonica/movilidad_municipios.parquet",
         "data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx",
     ],
-    "Notebook 04 v2 (impacto incidencias, M2)": [
-        "data/processed/telefonica/M2.parquet",
+    "Notebook 03 (impacto por municipios)": [
+        "data/processed/telefonica/movilidad_municipios.parquet",
         "data/raw/rodalies/Incidencias graves Rodalies*.xlsx",
         "data/raw/rodalies/incidencias_rodalies_2023_2025.csv",
         "data/processed/rmove/estaciones_rodalies_municipio.csv",
     ],
-    "Notebook 05 (barrios, M3)": [
-        "data/processed/telefonica/M2.parquet",
-        "data/processed/rmove/m2_cal.parquet",
-        "data/processed/rmove/m2_tipos_dia.parquet",
-        "data/processed/rmove/m2_info_municipios.parquet",
-        "data/processed/rmove/m3_barrio_a_mun.parquet",
-        "data/processed/rmove/m3_mun_a_barrio.parquet",
+    "Notebook 04 (impacto por barrios)": [
+        "data/processed/telefonica/movilidad_municipios.parquet",
+        "data/processed/rmove/municipios_calendario.parquet",
+        "data/processed/rmove/municipios_tipos_dia.parquet",
+        "data/processed/rmove/municipios_info.parquet",
+        "data/processed/rmove/movilidad_barrio_a_municipio.parquet",
+        "data/processed/rmove/movilidad_municipio_a_barrio.parquet",
         "data/raw/rodalies/bcn_station_neighborhoods.json",
     ],
 }

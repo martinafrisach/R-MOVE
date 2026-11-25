@@ -1,10 +1,10 @@
 """Genera el JSON del observatorio R-MOVE (dashboard v2).
 
 Lee los ficheros que ya exporta el análisis (no recalcula ningún modelo):
-  - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 04: resultados del clustering, M2)
-  - data/processed/rmove/resultados/m3_resultados.json         (notebook 05: barrios con y sin estación, M3)
-  - data/processed/rmove/m2_conectividad_municipios.parquet     (alternativa en transporte público por municipio)
-Opcional (si existen, el observatorio los muestra; los genera el notebook 06):
+  - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 03: resultados del clustering por municipios)
+  - data/processed/rmove/resultados/barrios_resultados.json         (notebook 04: barrios con y sin estación)
+  - data/processed/rmove/conectividad_municipios.parquet     (alternativa en transporte público por municipio)
+Opcional (si existen, el observatorio los muestra; los genera el notebook 05):
   - data/processed/rmove/observatorio/vulnerabilidad.json          (motorización y renta por municipio)
   - data/processed/rmove/observatorio/vulnerabilidad_resumen.json  (modelo, robustez y terciles)
 
@@ -29,7 +29,7 @@ FECHA_AVERIA = "2024-05-13"
 FECHA_HUELGA = "2025-03-17"
 FECHAS_ANUNCIADA = ["2025-03-26", "2025-04-01"]
 
-# Evidencia sobre la duración (vida media): M2 event study + M3 (incidencia larga, notebook 05).
+# Evidencia sobre la duración (vida media): event study por municipios (notebook 03) e incidencia larga por barrios (notebook 04).
 DURACION = {
     "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (días +1 a +3 sin caída).",
     "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular.",
@@ -49,8 +49,10 @@ def num(x, d=2):
     return round(x, d)
 
 
-def media(a, b, d=2):
-    return round((a + b) / 2, d)
+def requerir(condicion, mensaje):
+    """Validación de entradas que no se desactiva con python -O (a diferencia de assert)."""
+    if not condicion:
+        raise ValueError(mensaje)
 
 
 def coef(efecto, ic_inf, ic_sup, p, observado=True, fuente=""):
@@ -62,22 +64,22 @@ def main():
     res = json.loads((DATA / "resultados" / "dashboard_resultados.json").read_text(encoding="utf-8"))
     inc = {i["fecha"]: i for i in res["incidencias"]}
     for f in [FECHA_AVERIA, FECHA_HUELGA, *FECHAS_ANUNCIADA]:
-        assert f in inc, f"Falta la incidencia {f} en dashboard_resultados.json"
+        requerir(f in inc, f"Falta la incidencia {f} en dashboard_resultados.json")
 
-    f_m3 = DATA / "resultados" / "m3_resultados.json"
-    assert f_m3.exists(), "Falta m3_resultados.json: ejecuta el notebook 05 hasta el final (sección 8)"
-    m3 = json.loads(f_m3.read_text(encoding="utf-8"))
+    f_barrios = DATA / "resultados" / "barrios_resultados.json"
+    requerir(f_barrios.exists(), "Falta barrios_resultados.json: ejecuta el notebook 04 hasta el final (anexo B.4)")
+    res_barrios = json.loads(f_barrios.read_text(encoding="utf-8"))
     averias = res.get("averias", [])
 
-    conect = pd.read_parquet(DATA / "m2_conectividad_municipios.parquet")
-    assert "alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 04 (B.8)"
+    conect = pd.read_parquet(DATA / "conectividad_municipios.parquet")
+    requerir("alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 03 (B.8)")
 
     # ------------------------------------------------------------------ coeficientes del simulador
     def grupos_de(fecha):
         return {g["grupo"]: g for g in inc[fecha]["grupos"]}
 
     def lineas_de(fecha):
-        return {l["linea"]: l for l in inc[fecha]["lineas_dependientes"]}
+        return {x["linea"]: x for x in inc[fecha]["lineas_dependientes"]}
 
     # Avería sin aviso: corte de una línea. Observado solo en la R1 (13/05/2024).
     r1 = lineas_de(FECHA_AVERIA)["R1"]
@@ -96,52 +98,46 @@ def main():
     }
 
     # Huelga general (como el 17/03/2025): coeficiente por línea de los dependientes.
+    def coef_medio(vals, fuente):
+        """Media de efecto e IC de varios días; p conservador (el mayor)."""
+        n = len(vals)
+        return coef(sum(v["efecto_pct"] for v in vals) / n, sum(v["ic_inf"] for v in vals) / n,
+                    sum(v["ic_sup"] for v in vals) / n, max(v["p_valor"] for v in vals), True, fuente)
+
     def tabla_huelga(fechas, etiqueta):
         lin = [lineas_de(f) for f in fechas]
         grp = [grupos_de(f) for f in fechas]
-        out = {"lineas": {}, "grupos": {}}
-        for clave in lin[0]:
-            vals = [l[clave] for l in lin]
-            out["lineas"][clave] = coef(
-                sum(v["efecto_pct"] for v in vals) / len(vals),
-                sum(v["ic_inf"] for v in vals) / len(vals),
-                sum(v["ic_sup"] for v in vals) / len(vals),
-                max(v["p_valor"] for v in vals) if len(vals) > 1 else vals[0]["p_valor"],
-                True, f"Dependientes de {clave}, {etiqueta}")
-        for g in ("dependientes", "cercanos", "metro_fgc"):
-            vals = [x[g] for x in grp]
-            out["grupos"][g] = coef(
-                sum(v["efecto_pct"] for v in vals) / len(vals),
-                sum(v["ic_inf"] for v in vals) / len(vals),
-                sum(v["ic_sup"] for v in vals) / len(vals),
-                max(v["p_valor"] for v in vals) if len(vals) > 1 else vals[0]["p_valor"],
-                True, f"Grupo {g}, {etiqueta}")
-        return out
+        return {
+            "lineas": {clave: coef_medio([x[clave] for x in lin], f"Dependientes de {clave}, {etiqueta}")
+                       for clave in lin[0]},
+            "grupos": {g: coef_medio([x[g] for x in grp], f"Grupo {g}, {etiqueta}")
+                       for g in ("dependientes", "cercanos", "metro_fgc")},
+        }
 
     huelga = tabla_huelga([FECHA_HUELGA], "huelga 17/03/2025")
     anunciada = tabla_huelga(FECHAS_ANUNCIADA, "media de las huelgas 26/03 y 01/04/2025")
 
-    barrios_m3 = m3["barrios"]
+    casos_barrios = res_barrios["barrios"]
     for caso in ("Todos los días de caos", "Huelga 17/03/2025", "Avería 13/05/2024", "Huelga 26/03/2025", "Huelga 01/04/2025"):
-        assert any(b["caso"] == caso for b in barrios_m3), f"m3_resultados.json no trae el caso «{caso}»"
+        requerir(any(b["caso"] == caso for b in casos_barrios), f"barrios_resultados.json no trae el caso «{caso}»")
     duracion = dict(DURACION)
-    larga = m3.get("duracion_incidencia_larga")
+    larga = res_barrios.get("duracion_incidencia_larga")
     if larga:
         y, mth, dd = larga["fecha"].split("-")
-        duracion["incidencia_larga"] = (f"{larga['caso']} ({dd}/{mth}/{y}): {fmt_pct(larga['total'])} en M3, "
+        duracion["incidencia_larga"] = (f"{larga['caso']} ({dd}/{mth}/{y}): {fmt_pct(larga['total'])} en el análisis por barrios, "
                                         + ("no significativo" if larga["p"] >= 0.05 else "significativo")
                                         + ". La gente se adapta: el efecto se diluye en pocos días.")
 
     tipos = [
         {"id": "averia", "nombre": "Avería sin aviso", "detalle": "Corte de una línea todo el día, sin tiempo para organizarse (como la R1 el 13/05/2024).",
          "requiere_linea": True, "coeficientes": averia, "referencia": [FECHA_AVERIA],
-         "barrios": [b for b in barrios_m3 if b["caso"].startswith("Avería")]},
+         "barrios": [b for b in casos_barrios if b["caso"].startswith("Avería")]},
         {"id": "huelga", "nombre": "Huelga general", "detalle": "Toda la red con servicios mínimos y gran afectación (como el 17/03/2025).",
          "requiere_linea": False, "coeficientes": huelga, "referencia": [FECHA_HUELGA],
-         "barrios": [b for b in barrios_m3 if b["caso"] == "Huelga 17/03/2025"]},
+         "barrios": [b for b in casos_barrios if b["caso"] == "Huelga 17/03/2025"]},
         {"id": "anunciada", "nombre": "Huelga anunciada", "detalle": "Huelga conocida con antelación: la gente se adapta (media del 26/03 y el 01/04/2025).",
          "requiere_linea": False, "coeficientes": anunciada, "referencia": FECHAS_ANUNCIADA,
-         "barrios": [b for b in barrios_m3 if b["caso"] in ("Huelga 26/03/2025", "Huelga 01/04/2025")]},
+         "barrios": [b for b in casos_barrios if b["caso"] in ("Huelga 26/03/2025", "Huelga 01/04/2025")]},
     ]
 
     # ------------------------------------------------------------------ municipios
@@ -154,7 +150,7 @@ def main():
     municipios = []
     for codigo, m in base.items():
         efectos = {}
-        for f, i in list(inc.items()) + [(a["fecha"], a) for a in averias]:
+        for f, i in [*inc.items(), *((a["fecha"], a) for a in averias)]:
             x = next((y for y in i["municipios"] if y["codigo"] == codigo), None)
             if x is not None:
                 efectos[f] = {"efecto": num(x["efecto_pct"]), "p": num(x["p_valor"], 4)}
@@ -189,12 +185,12 @@ def main():
 
     # ------------------------------------------------------------------ resto (relato y laboratorio)
     incidencias = []
-    for f, i in inc.items():
+    for i in inc.values():
         incidencias.append({k: i[k] for k in ("fecha", "titulo", "tipo", "descripcion", "tramo", "lineas", "lectura",
                                               "grupos", "perdidos", "serie", "banda_normal", "tramos",
                                               "lineas_dependientes", "evento")})
 
-    # Efecto según la alternativa en transporte público (clustering, notebook 04)
+    # Efecto según la alternativa en transporte público (clustering, notebook 03)
     alternativa = [{"grupo": a["grupo"], "dia": a["dia"], "municipios": a["municipios"], "efecto": num(a["efecto_pct"]),
                     "ic_inf": num(a["ic_inf"]), "ic_sup": num(a["ic_sup"]), "p": num(a["p_valor"], 4)}
                    for a in res["alternativa"]]
@@ -210,16 +206,18 @@ def main():
         "municipios": municipios,
         "incidencias": incidencias,
         "averias": [{k: a[k] for k in a if k != "municipios"} for a in averias],
-        "m3_averias": m3.get("averias", []),
+        "barrios_averias": res_barrios.get("averias", []),
+        "barrios_contraste": res_barrios.get("contraste"),
         "grupos": res["grupos"],
         "distancia": res["distancia"],
         "evento": res["evento"],
         "placebo": res["placebo"],
-        "barrios": barrios_m3,
+        "barrios": casos_barrios,
         "perdidos_media": res["perdidos_media"],
         "alternativa": alternativa,
         "duracion": duracion,
-        "metodo": res["metodo"],
+        "metodo": res["metodo"] | ({"barrios": "Por barrios (notebook 04): " + res_barrios["metodo"] + "."}
+                                   if res_barrios.get("metodo") else {}),
         "limitaciones": res["limitaciones"] + ([
             "Motorización y renta: asociación entre 62 municipios, no causalidad. Los turismos se registran en el domicilio "
             "del titular (algunas flotas de empresa) y no sabemos qué parte de cada municipio viaja en tren."

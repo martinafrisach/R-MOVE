@@ -1,7 +1,7 @@
 {
   "incidencias": "data/raw/rodalies/RMOVE_Incidencias_Barcelona_Jul2024_Ago2025_v07.xlsx",
   "hoja": "Incidencias Barcelona",
-  "movilidad": "data/processed/telefonica/M2.parquet",
+  "movilidad": "data/processed/telefonica/movilidad_municipios.parquet",
   "inicio_catalogo": "2023-01-01",
   "fin_catalogo": "2025-08-31",
   "estaciones_referencia": "data/raw/rodalies/estaciones_renfe_actual.csv",

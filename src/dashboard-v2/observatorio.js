@@ -1,7 +1,7 @@
 /* Observatorio R-MOVE · dashboard v2
  * Cuatro modos: relato (scrollytelling), simulador «¿Y si…?», Mi municipio y laboratorio.
  * Solo lee data/processed/rmove/observatorio/observatorio.json (generado por build_observatorio.py a partir de
- * los resultados del clustering del notebook 04) y la red de Rodalies. No recalcula modelos: consulta coeficientes ya estimados.
+ * los resultados del clustering del notebook 03) y la red de Rodalies. No recalcula modelos: consulta coeficientes ya estimados.
  */
 (function () {
   'use strict';
@@ -166,7 +166,7 @@
       filas.push({ m, c, perdidos: v * c.efecto / 100, lo: v * c.ic_inf / 100, hi: v * c.ic_sup / 100 });
     });
     filas.sort((a, b) => a.perdidos - b.perdidos);
-    // Totales sobre los dependientes (donde el efecto está establecido), como en el análisis de M2.
+    // Totales sobre los dependientes (donde el efecto está establecido), como en el análisis por municipios.
     const dep = filas.filter((f) => f.m.grupo === 'dependientes');
     const sum = (k) => dep.reduce((s, f) => s + f[k], 0);
     return { tipo, filas, dep, perdidos: sum('perdidos'), lo: sum('lo'), hi: sum('hi'), expuestos: dep.reduce((s, f) => s + f.m.viajes_referencia, 0),
@@ -214,10 +214,10 @@
     const norte = av.tramos.find((t) => /norte de Arenys/.test(t.tramo));
     $('r-norte').textContent = norte ? pct(norte.cambio_pct, 0) : '−20 %';
     $('r-huelga').textContent = pct(hu.grupos.find((g) => g.grupo === 'dependientes').efecto_pct);
-    const anun = D.barrios.filter((b) => /Huelga (26|01)/.test(b.caso) && b.sentido === 'ida');
+    const anun = D.barrios.filter((b) => b.caso === 'Huelga 26/03/2025' && b.sentido === 'ida');
     const avg = (k) => anun.reduce((s, b) => s + b[k], 0) / anun.length;
-    $('r-puertas').innerHTML = `<div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong><span>Sants, Passeig de Gràcia, Clot…</span></div>` +
-      `<div><small>Barrios sin estación</small><strong class="up">${pct(avg('sin_estacion'))}</strong><span>se llega en coche o en bus</span></div>`;
+    $('r-puertas').innerHTML = `<div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong><span>Sants, Pl. Catalunya, Sant Andreu…</span></div>` +
+      `<div><small>Barrios sin estación</small><strong class="${avg('sin_estacion') < 0 ? 'down' : 'up'}">${pct(avg('sin_estacion'))}</strong><span>se llega en coche o en bus</span></div>`;
     eventStudy($('r-evento'), D.evento);
     const avs = (D.averias || []).slice().sort((a, b) => a.perdidos.efecto_pct - b.perdidos.efecto_pct);
     story.averia = avs[0] || null;
@@ -236,7 +236,7 @@
     $('r-brecha').innerHTML = br.map((a) => `<div class="bar-row" data-tip="${esc(`<b>${a.grupo}</b> (${a.municipios} municipios)<br>${pct(a.efecto)} [${pct(a.ic_inf)}, ${pct(a.ic_sup)}]`)}"><span>${cap(nom[a.grupo])}</span><span class="track"><i style="width:${Math.abs(a.efecto) / mx * 100}%;background:${css(ALT_COL[nom[a.grupo]])}"></i></span><b>${pct(a.efecto)}</b></div>`).join('');
     const VR = D.vulnerabilidad_resumen;
     if (VR) {
-      // Brecha por motorización: dependientes por terciles de turismos por 1.000 hab. (notebook 06)
+      // Brecha por motorización: dependientes por terciles de turismos por 1.000 hab. (notebook 05)
       const tm = VR.terciles_motorizacion, mxc = Math.max(...tm.map((t) => Math.abs(t.efecto)));
       const nomT = { baja: 'Pocos coches', media: 'Intermedio', alta: 'Muchos coches' };
       $('r-brecha-tit').textContent = 'Quien no tiene alternativa al tren… ni coche.';
@@ -257,7 +257,7 @@
       const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) activarPaso(e.target); }), { rootMargin: '-50% 0px -50% 0px' });
       steps.forEach((s) => io.observe(s));
       activarPaso(steps[0]);
-    }).catch(() => { $('status').innerHTML = 'Falta la cartografía del relato. Ejecuta <code>python src/dashboard-v2/build_mapa_base.py</code>.'; });
+    }).catch(() => { $('status').innerHTML = 'Falta la cartografía del relato. Ejecuta <code>python src/dashboard-v2/build_contorno.py</code>.'; });
   }
 
   function montarMapaRelato(base) {
@@ -734,7 +734,7 @@
     $('sim-mas').innerHTML = `
       <h4>¿A qué barrios de Barcelona dejan de llegar?</h4>
       <div class="doors"><div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong></div><div><small>Barrios sin estación</small><strong class="${avg('sin_estacion') < 0 ? 'down' : 'up'}">${pct(avg('sin_estacion'))}</strong></div></div>
-      <p class="muted small">Datos por barrio (M3), viajes de ida desde municipios dependientes. ${esc(ida.map((b) => b.caso).join(' y '))}.</p>
+      <p class="muted small">Datos por barrio, viajes de ida desde municipios dependientes. ${esc(ida.map((b) => b.caso).join(' y '))}.</p>
       <h4>Personas más expuestas</h4>
       <p class="small">${nf(r.filas.filter((f) => f.m.alternativa && f.m.alternativa.clase === 'sin alternativa').reduce((s, f) => s + f.m.viajes_referencia, 0))} viajes diarios salen de municipios sin alternativa directa.</p>
       ${D.vulnerabilidad_resumen ? (() => {
@@ -817,7 +817,7 @@
 
           <section class="card fsec">
             <h2>Vulnerabilidad social</h2>
-            ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta. Se añaden con el notebook 06 (datos abiertos de la DGT y el INE).</p>'}
+            ${m.vulnerabilidad ? fichaSocial(m) : '<p class="pending small">Pendiente: motorización y renta. Se añaden con el notebook 05 (datos abiertos de la DGT y el INE).</p>'}
           </section>
         </div>
       </div>`;
@@ -832,7 +832,7 @@
     }
   }
 
-  /* Ficha «Vulnerabilidad social»: motorización y renta del municipio y qué implica (notebook 06). */
+  /* Ficha «Vulnerabilidad social»: motorización y renta del municipio y qué implica (notebook 05). */
   function fichaSocial(m) {
     const v = m.vulnerabilidad, VR = D.vulnerabilidad_resumen;
     const NIV = { baja: 'de las más bajas', media: 'intermedia', alta: 'de las más altas' };
@@ -896,7 +896,7 @@
     pintarMetodo();
   }
 
-  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 04) */
+  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 03) */
   const CASOS = () => D.incidencias.concat(D.averias || []);
 
   async function caso(i) {
@@ -989,10 +989,10 @@
     }
   }
 
-  /* Tarjetas de motorización y renta (notebook 06). Vacío si aún no hay datos. */
+  /* Tarjetas de motorización y renta (notebook 05). Vacío si aún no hay datos. */
   function factoresSociales() {
     const VR = D.vulnerabilidad_resumen;
-    if (!VR) return '<div class="card wide2"><div class="card-head"><h2>Motorización y renta</h2></div><p class="pending small" style="margin:0 16px 16px">Pendiente: se añaden con el notebook 06.</p></div>';
+    if (!VR) return '<div class="card wide2"><div class="card-head"><h2>Motorización y renta</h2></div><p class="pending small" style="margin:0 16px 16px">Pendiente: se añaden con el notebook 05.</p></div>';
     const tb = VR.terciles_motorizacion.find((t) => t.nivel === 'baja'), ta = VR.terciles_motorizacion.find((t) => t.nivel === 'alta');
     const mot = VR.modelo.find((x) => x.variable === 'tur100'), R = VR.robustez;
     const ren13 = VR.por_dia.find((d) => d.fecha === FECHAS.averia);
@@ -1014,12 +1014,12 @@
   }
 
   function pintarMetodo() {
-    const titulos = { comparacion: ['Con qué se compara', 'calendario'], efecto: ['Cómo se mide el efecto', 'rayo'], comprobacion: ['Comprobación', 'lupa'], tramos: ['Tramos de la red', 'tren'], perdidos: ['Viajes perdidos', 'bus'], placebo: ['Prueba placebo', 'huelga'], barrios: ['Barrios (M3)', 'casa'] };
+    const titulos = { comparacion: ['Con qué se compara', 'calendario'], efecto: ['Cómo se mide el efecto', 'rayo'], comprobacion: ['Comprobación', 'lupa'], tramos: ['Tramos de la red', 'tren'], perdidos: ['Viajes perdidos', 'bus'], placebo: ['Prueba placebo', 'huelga'], barrios: ['Barrios', 'casa'] };
     $('lab-metodo').innerHTML = `
       <div class="method-grid">${Object.entries(D.metodo).map(([k, v]) => `<div class="card mcard"><span class="ric">${ICON[(titulos[k] || ['', 'lupa'])[1]]}</span><h3>${(titulos[k] || [k])[0]}</h3><p>${esc(v)}</p></div>`).join('')}</div>
       <div class="lab-grid">
         <div class="card"><div class="card-head"><h2>Decisiones sobre los datos</h2></div><ul class="checks">
-          <li><b>Datos:</b> Telefónica (M2 municipio → Barcelona y M3 municipio ↔ barrio), ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}.</li>
+          <li><b>Datos:</b> Telefónica (movilidad municipio → Barcelona y municipio ↔ barrio), ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}.</li>
           <li><b>Días normales:</b> laborables sin festivos, verano, eventos, lluvia ni incidencias del registro oficial de Rodalies (los cortes largos se excluyen enteros).</li>
           <li><b>Días de caos:</b> ${D.incidencias.map((i) => fecha(i.fecha)).join(', ')}. El 19/03/2025 se excluye por lluvia.</li>
           ${(D.averias || []).length ? `<li><b>Averías de una sola línea:</b> ${D.averias.map((a) => `${fecha(a.fecha)} (${esc(a.linea_nombre)})`).join(', ')}. Se miden solo en los dependientes de la línea afectada y no entran en las medias de los días de caos.</li>` : ''}
@@ -1027,7 +1027,7 @@
           <li><b>Alternativa:</b> GTFS de bus interurbano, AMB, FGC y Rodalies (tiempo puerta a puerta y frecuencia).</li>
           <li><b>Método:</b> clustering de días (4 tipos por año según el volumen de los municipios sin Rodalies y la época del año). Comprobado con una regresión de diferencias en diferencias, que da la misma dirección y significación.</li>
           <li><b>Simulador:</b> viajes de un día normal × coeficiente del escenario. La avería solo se ha observado en la R1.</li>
-          ${D.vulnerabilidad_resumen ? '<li><b>Motorización y renta:</b> turismos por 1.000 hab. (DGT y Padrón, media 2023–2025) y renta neta por persona (ADRH, media 2023–2024). Efecto de cada municipio con el mismo método, ponderado por su ruido en días normales (notebook 06).</li>' : ''}</ul></div>
+          ${D.vulnerabilidad_resumen ? '<li><b>Motorización y renta:</b> turismos por 1.000 hab. (DGT y Padrón, media 2023–2025) y renta neta por persona (ADRH, media 2023–2024). Efecto de cada municipio con el mismo método, ponderado por su ruido en días normales (notebook 05).</li>' : ''}</ul></div>
         <div class="card"><div class="card-head"><h2>Limitaciones</h2></div><ul class="checks warn">${D.limitaciones.map((l) => `<li>${esc(l)}</li>`).join('')}<li>${esc(D.duracion.pendiente)}</li></ul></div>
       </div>`;
   }

@@ -1,6 +1,6 @@
 # src/analysis · funciones de apoyo del notebook 02
 
-Módulos que importa `notebooks/02_movilidad_telefonica_analisi_estadistico_mediana.ipynb`:
+Módulos que importa `notebooks/02_exploracion_y_referencia_mediana.ipynb`:
 
 | Módulo | Qué aporta |
 |---|---|

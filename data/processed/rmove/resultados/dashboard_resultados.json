@@ -1,6 +1,6 @@
 {
  "version_esquema": 2,
- "fuente": "R-MOVE · M2 (municipio → Barcelona, notebook 04) y M3 (municipio ↔ barrio), Telefónica Smart Steps",
+ "fuente": "R-MOVE · movilidad municipio → Barcelona (notebook 03) y municipio ↔ barrio (notebook 04), Telefónica Smart Steps",
  "periodo": {
   "inicio": "2023-01-01",
   "fin": "2025-08-31"
@@ -39,7 +39,7 @@
   {
    "pregunta": "¿Quién deja de viajar?",
    "titulo": "Solo quien no tiene alternativa",
-   "texto": "Los municipios dependientes hacen un 6,2 % menos de viajes a Barcelona. Los que tienen metro o FGC no cambian y los cercanos solo caen un poco."
+   "texto": "Los municipios dependientes hacen un 6,2 % menos de viajes a Barcelona. Los que tienen metro o FGC no cambian y los cercanos solo caen un poco (sobre todo hacia los barrios con estación)."
   },
   {
    "pregunta": "¿Importa la distancia?",
@@ -2390,7 +2390,7 @@
     "R4",
     "R7"
    ],
-   "lectura": "Huelga anunciada: el total no cambia y ninguna línea cae de forma clara; los viajes se redistribuyen hacia barrios sin estación (M3).",
+   "lectura": "Huelga anunciada: el total no cambia y ninguna línea cae de forma clara; los viajes se redistribuyen hacia barrios sin estación (análisis por barrios).",
    "grupos": [
     {
      "grupo": "dependientes",
@@ -6378,12 +6378,12 @@
   "tramos": "Volumen total de los municipios del tramo afectado frente a lo esperado: viajes del control ese día × proporción habitual tramo/control (días limpios del mismo año y día de la semana).",
   "perdidos": "Viajes perdidos = viajes de un día normal × efecto estimado. Es una aproximación.",
   "placebo": "200 grupos de días normales al azar tratados como si fueran días de caos.",
-  "barrios": "M3: regresión con efecto fijo día × tipo de barrio; municipios dependientes con ≥ 200 viajes/día hacia cada tipo."
+  "barrios": "Por barrios: regresión con efecto fijo día × tipo de barrio; municipios dependientes con ≥ 200 viajes/día hacia cada tipo."
  },
  "limitaciones": [
   "Datos diarios de todos los modos de transporte: no identifican el tren ni la hora.",
   "Solo cuatro días de caos válidos; en los municipios pequeños la significación individual es baja.",
   "Los municipios de control pueden notar el caos de forma indirecta: el efecto real podría ser algo mayor.",
-  "Las magnitudes de M3 no son comparables con las de M2; se comparan direcciones y diferencias dentro de M3."
+  "Las magnitudes por barrios no son comparables con las del análisis por municipios; se comparan direcciones y diferencias entre barrios."
  ]
 }
