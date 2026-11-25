@@ -17,36 +17,36 @@
    "variable": "tur100",
    "etiqueta": "+100 turismos por 1.000 hab.",
    "coef_pp": 1.4,
-   "ic_inf": 0.26,
-   "ic_sup": 2.53,
-   "p": 0.0156
+   "ic_inf": 0.36,
+   "ic_sup": 2.43,
+   "p": 0.0082
   },
   {
    "variable": "renta_k",
    "etiqueta": "+1.000 € de renta por persona",
-   "coef_pp": -0.34,
-   "ic_inf": -1.01,
-   "ic_sup": 0.33,
-   "p": 0.3218
+   "coef_pp": -0.38,
+   "ic_inf": -1.0,
+   "ic_sup": 0.24,
+   "p": 0.2333
   },
   {
    "variable": "dist10",
    "etiqueta": "+10 km de distancia a Barcelona",
-   "coef_pp": -0.63,
-   "ic_inf": -1.88,
-   "ic_sup": 0.63,
-   "p": 0.3274
+   "coef_pp": -0.89,
+   "ic_inf": -1.97,
+   "ic_sup": 0.19,
+   "p": 0.1047
   },
   {
    "variable": "con_alt",
    "etiqueta": "Tener metro o FGC",
-   "coef_pp": 3.0,
-   "ic_inf": 0.81,
-   "ic_sup": 5.18,
-   "p": 0.0072
+   "coef_pp": 3.11,
+   "ic_inf": 0.82,
+   "ic_sup": 5.41,
+   "p": 0.0077
   }
  ],
- "r2": 0.23,
+ "r2": 0.22,
  "robustez": {
   "quitar_un_municipio": [
    1.2,
