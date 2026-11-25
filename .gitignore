@@ -17,6 +17,7 @@
 
 # Excepciones: resultados que lee el Observatorio (src/dashboard-v2)
 !/data/processed/rmove/resultados/dashboard_resultados.json
+!/data/processed/rmove/resultados/m3_resultados.json
 !/data/processed/rmove/observatorio/observatorio.json
 !/data/processed/rmove/observatorio/municipios_mapa.geojson
 !/data/processed/rmove/observatorio/catalunya_contorno.geojson

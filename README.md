@@ -15,14 +15,20 @@ Todas las cifras salen del **clustering** del notebook 04 (tipos de día por vol
 
 ## Actualizar resultados
 
-1. Ejecutar el notebook 04 entero. La celda B.8 exporta `data/processed/rmove/resultados/dashboard_resultados.json`.
-2. Regenerar el Observatorio:
+Un solo comando ejecuta los notebooks 04 (M2), 05 (M3, barrios) y 07 (socioeco), comprueba que han regenerado sus
+exportaciones, genera `observatorio.json`, valida el dashboard y muestra qué cifras han cambiado:
 
-   ```bash
-   python src/dashboard-v2/build_observatorio.py
-   ```
+```bash
+python scripts/actualizar_dashboard.py                  # todo
+python scripts/actualizar_dashboard.py --desde 05       # si el 04 ya está al día
+python scripts/actualizar_dashboard.py --solo-dashboard  # sin ejecutar notebooks
+```
 
-3. Validar y construir la publicación:
+El dashboard no tiene cifras escritas a mano: todo sale de `resultados/dashboard_resultados.json` (notebook 04),
+`resultados/m3_resultados.json` (notebook 05) y `observatorio/vulnerabilidad*.json` (notebook 07). El script no hace
+commit ni push.
+
+Para construir la publicación a mano:
 
    ```bash
    node --check src/dashboard-v2/observatorio.js

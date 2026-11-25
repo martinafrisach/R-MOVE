@@ -1,7 +1,8 @@
 """Genera el JSON del observatorio R-MOVE (dashboard v2).
 
 Lee los ficheros que ya exporta el análisis (no recalcula ningún modelo):
-  - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 04: resultados del clustering + M3)
+  - data/processed/rmove/resultados/dashboard_resultados.json  (notebook 04: resultados del clustering, M2)
+  - data/processed/rmove/resultados/m3_resultados.json         (notebook 05: barrios con y sin estación, M3)
   - data/processed/rmove/m2_conectividad_municipios.parquet     (alternativa en transporte público por municipio)
 Opcional (si existen, el observatorio los muestra; los genera el notebook 06):
   - data/processed/rmove/observatorio/vulnerabilidad.json          (motorización y renta por municipio)
@@ -10,6 +11,7 @@ Opcional (si existen, el observatorio los muestra; los genera el notebook 06):
 Salida: data/processed/rmove/observatorio/observatorio.json
 
 Uso, desde la raíz del repositorio:  python src/dashboard-v2/build_observatorio.py
+Para ejecutar antes los notebooks y comprobarlo todo:  python scripts/actualizar_dashboard.py
 """
 from __future__ import annotations
 
@@ -27,21 +29,15 @@ FECHA_AVERIA = "2024-05-13"
 FECHA_HUELGA = "2025-03-17"
 FECHAS_ANUNCIADA = ["2025-03-26", "2025-04-01"]
 
-# M3 de las huelgas anunciadas (no están en dashboard_resultados.json).
-# Copiado de claude/m3_hallazgos.md, «Replicación con otras incidencias: huelgas».
-M3_ANUNCIADAS = [
-    {"caso": "Huelga 26/03/2025", "sentido": "ida", "con_estacion": -10.1, "sin_estacion": 5.6, "p_diferencia": 0.004},
-    {"caso": "Huelga 26/03/2025", "sentido": "vuelta", "con_estacion": -7.4, "sin_estacion": 4.9, "p_diferencia": 0.095},
-    {"caso": "Huelga 01/04/2025", "sentido": "ida", "con_estacion": -20.4, "sin_estacion": 10.1, "p_diferencia": 0.0009},
-    {"caso": "Huelga 01/04/2025", "sentido": "vuelta", "con_estacion": -17.9, "sin_estacion": 7.5, "p_diferencia": 0.002},
-]
-
-# Evidencia sobre la duración (vida media): M2 event study + M3 (Montcada día 5).
+# Evidencia sobre la duración (vida media): M2 event study + M3 (incidencia larga, notebook 05).
 DURACION = {
     "dia_siguiente": "En los cuatro días de caos, al día siguiente los viajes vuelven a la normalidad (días +1 a +3 sin caída).",
-    "incidencia_larga": "Montcada 2024, 5.º día del corte (17/05/2024): −9,9 % en M3, no significativo. La gente se adapta: el efecto se diluye en pocos días.",
     "pendiente": "La curva de vida media día a día (Montcada 2024, Gavà 2023) está pendiente de calcular.",
 }
+
+
+def fmt_pct(x):
+    return f"{x:+.1f}".replace(".", ",").replace("-", "−") + " %"
 
 
 def num(x, d=2):
@@ -67,6 +63,11 @@ def main():
     inc = {i["fecha"]: i for i in res["incidencias"]}
     for f in [FECHA_AVERIA, FECHA_HUELGA, *FECHAS_ANUNCIADA]:
         assert f in inc, f"Falta la incidencia {f} en dashboard_resultados.json"
+
+    f_m3 = DATA / "resultados" / "m3_resultados.json"
+    assert f_m3.exists(), "Falta m3_resultados.json: ejecuta el notebook 05 hasta el final (sección 8)"
+    m3 = json.loads(f_m3.read_text(encoding="utf-8"))
+    averias = res.get("averias", [])
 
     conect = pd.read_parquet(DATA / "m2_conectividad_municipios.parquet")
     assert "alternativa" in res, "dashboard_resultados.json no trae 'alternativa': vuelve a ejecutar el notebook 04 (B.8)"
@@ -120,7 +121,16 @@ def main():
     huelga = tabla_huelga([FECHA_HUELGA], "huelga 17/03/2025")
     anunciada = tabla_huelga(FECHAS_ANUNCIADA, "media de las huelgas 26/03 y 01/04/2025")
 
-    barrios_m3 = res["barrios"] + M3_ANUNCIADAS
+    barrios_m3 = m3["barrios"]
+    for caso in ("Todos los días de caos", "Huelga 17/03/2025", "Avería 13/05/2024", "Huelga 26/03/2025", "Huelga 01/04/2025"):
+        assert any(b["caso"] == caso for b in barrios_m3), f"m3_resultados.json no trae el caso «{caso}»"
+    duracion = dict(DURACION)
+    larga = m3.get("duracion_incidencia_larga")
+    if larga:
+        y, mth, dd = larga["fecha"].split("-")
+        duracion["incidencia_larga"] = (f"{larga['caso']} ({dd}/{mth}/{y}): {fmt_pct(larga['total'])} en M3, "
+                                        + ("no significativo" if larga["p"] >= 0.05 else "significativo")
+                                        + ". La gente se adapta: el efecto se diluye en pocos días.")
 
     tipos = [
         {"id": "averia", "nombre": "Avería sin aviso", "detalle": "Corte de una línea todo el día, sin tiempo para organizarse (como la R1 el 13/05/2024).",
@@ -144,7 +154,7 @@ def main():
     municipios = []
     for codigo, m in base.items():
         efectos = {}
-        for f, i in inc.items():
+        for f, i in list(inc.items()) + [(a["fecha"], a) for a in averias]:
             x = next((y for y in i["municipios"] if y["codigo"] == codigo), None)
             if x is not None:
                 efectos[f] = {"efecto": num(x["efecto_pct"]), "p": num(x["p_valor"], 4)}
@@ -160,7 +170,7 @@ def main():
                 "salidas_h_alt": num(c["salidas_h_alt"], 1),
                 "salidas_h_rodalies": num(c["salidas_h_rodalies"], 1),
             }
-        vals = [e["efecto"] for e in efectos.values() if e["efecto"] is not None]
+        vals = [e["efecto"] for f, e in efectos.items() if f in inc and e["efecto"] is not None]   # solo días de caos
         municipios.append({
             "codigo": codigo, "nombre": m["nombre"], "grupo": m["grupo"],
             "lineas": m["lineas"].split("+"), "lineas_clave": m["lineas"],
@@ -199,6 +209,8 @@ def main():
         "tipos": tipos,
         "municipios": municipios,
         "incidencias": incidencias,
+        "averias": [{k: a[k] for k in a if k != "municipios"} for a in averias],
+        "m3_averias": m3.get("averias", []),
         "grupos": res["grupos"],
         "distancia": res["distancia"],
         "evento": res["evento"],
@@ -206,7 +218,7 @@ def main():
         "barrios": barrios_m3,
         "perdidos_media": res["perdidos_media"],
         "alternativa": alternativa,
-        "duracion": DURACION,
+        "duracion": duracion,
         "metodo": res["metodo"],
         "limitaciones": res["limitaciones"] + ([
             "Motorización y renta: asociación entre 62 municipios, no causalidad. Los turismos se registran en el domicilio "
@@ -217,7 +229,8 @@ def main():
     }
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"OK · {SALIDA.relative_to(RAIZ)} · {len(municipios)} municipios · {len(tipos)} escenarios")
+    print(f"OK · {SALIDA.relative_to(RAIZ)} · {len(municipios)} municipios · {len(tipos)} escenarios · "
+          f"{len(incidencias)} días de caos · {len(averias)} averías de una línea")
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@
  },
  "respuesta": {
   "titulo": "Sí, pero solo donde el tren no tiene alternativa",
-  "texto": "En los días de caos, los municipios que dependen de Rodalies hacen un 6,2 % menos de viajes a Barcelona (≈ 4.401 viajes menos al día). Donde hay metro o FGC no cambia, y los municipios cercanos solo lo notan un poco."
+  "texto": "En los días de caos, los municipios que dependen de Rodalies hacen un 6,2 % menos de viajes a Barcelona (≈ 4.364 viajes menos al día). Donde hay metro o FGC no cambia, y los municipios cercanos solo lo notan un poco."
  },
  "kpis": [
   {
@@ -29,7 +29,7 @@
    "etiqueta": "Viajes a Barcelona el día del caos (dependientes)"
   },
   {
-   "valor": -4400.0,
+   "valor": -4360.0,
    "decimales": 0,
    "unidad": "",
    "etiqueta": "Viajes perdidos por día de caos"
@@ -44,7 +44,7 @@
   {
    "pregunta": "¿Importa la distancia?",
    "titulo": "Cuanto más lejos, más impacto",
-   "texto": "+0,1 % a menos de 15 km y −7,4 % a más de 30 km de Barcelona."
+   "texto": "+0,2 % a menos de 15 km y −7,3 % a más de 30 km de Barcelona."
   },
   {
    "pregunta": "¿Qué línea es más vulnerable?",
@@ -76,33 +76,33 @@
     {
      "grupo": "dependientes",
      "municipios": 35,
-     "efecto_pct": -10.5,
-     "ic_inf": -15.0,
-     "ic_sup": -4.7,
-     "p_valor": 0.004
+     "efecto_pct": -10.3,
+     "ic_inf": -14.7,
+     "ic_sup": -4.6,
+     "p_valor": 0.007
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
      "efecto_pct": -0.4,
-     "ic_inf": -6.4,
+     "ic_inf": -6.1,
      "ic_sup": 3.7,
-     "p_valor": 0.439
+     "p_valor": 0.44
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
      "efecto_pct": 4.2,
-     "ic_inf": -0.3,
-     "ic_sup": 7.6,
-     "p_valor": 0.966
+     "ic_inf": 0.1,
+     "ic_sup": 7.5,
+     "p_valor": 0.974
     }
    ],
    "perdidos": {
-    "viajes_dia_normal": 73455.0,
-    "viajes_perdidos": 7713.0,
-    "efecto_pct": -10.5,
-    "p_valor": 0.004
+    "viajes_dia_normal": 73449.0,
+    "viajes_perdidos": 7565.0,
+    "efecto_pct": -10.3,
+    "p_valor": 0.007
    },
    "serie": [
     {
@@ -263,12 +263,12 @@
      "linea": "R1",
      "afectada": true,
      "municipios": 6,
-     "viajes_esperados": 5772.0,
-     "viajes_perdidos": 1163.0,
-     "cambio_pct": -20.16,
-     "normal_inf": -9.99,
-     "normal_sup": 9.13,
-     "p_valor": 0.0114,
+     "viajes_esperados": 5757.0,
+     "viajes_perdidos": 1148.0,
+     "cambio_pct": -19.94,
+     "normal_inf": -10.22,
+     "normal_sup": 9.34,
+     "p_valor": 0.0102,
      "lista": "Canet de Mar, Sant Pol de Mar, Calella, Pineda de Mar, Malgrat de Mar, Tordera"
     },
     {
@@ -276,12 +276,12 @@
      "linea": "R1",
      "afectada": true,
      "municipios": 11,
-     "viajes_esperados": 122320.0,
-     "viajes_perdidos": -4110.0,
-     "cambio_pct": 3.36,
-     "normal_inf": -3.52,
-     "normal_sup": 4.41,
-     "p_valor": 0.9205,
+     "viajes_esperados": 122195.0,
+     "viajes_perdidos": -4235.0,
+     "cambio_pct": 3.47,
+     "normal_inf": -3.41,
+     "normal_sup": 4.31,
+     "p_valor": 0.9184,
      "lista": "Sant Adrià de Besòs, Badalona, Montgat, Masnou, El, Premià de Mar, Vilassar de Mar, Cabrera de Mar, Mataró, Sant Andreu de Llavaneres, Caldes d'Estrac, Arenys de Mar"
     },
     {
@@ -289,12 +289,12 @@
      "linea": "R3",
      "afectada": true,
      "municipios": 11,
-     "viajes_esperados": 50594.0,
-     "viajes_perdidos": 2058.0,
-     "cambio_pct": -4.07,
-     "normal_inf": -5.35,
-     "normal_sup": 3.89,
-     "p_valor": 0.1136,
+     "viajes_esperados": 50449.0,
+     "viajes_perdidos": 1913.0,
+     "cambio_pct": -3.79,
+     "normal_inf": -5.92,
+     "normal_sup": 3.84,
+     "p_valor": 0.1429,
      "lista": "Montcada i Reixac, Santa Perpètua de Mogoda, Mollet del Vallès, Parets del Vallès, Granollers, Franqueses del Vallès, Les, Garriga, La, Centelles, Balenyà, Vic, Manlleu"
     },
     {
@@ -302,12 +302,12 @@
      "linea": "R4 Nord",
      "afectada": true,
      "municipios": 10,
-     "viajes_esperados": 76973.0,
-     "viajes_perdidos": -879.0,
-     "cambio_pct": 1.14,
-     "normal_inf": -3.31,
-     "normal_sup": 7.27,
-     "p_valor": 0.6591,
+     "viajes_esperados": 77134.0,
+     "viajes_perdidos": -718.0,
+     "cambio_pct": 0.93,
+     "normal_inf": -2.96,
+     "normal_sup": 6.49,
+     "p_valor": 0.6531,
      "lista": "Montcada i Reixac, Cerdanyola del Vallès, Barberà del Vallès, Sabadell, Terrassa, Viladecavalls, Vacarisses, Castellbell i el Vilar, Sant Vicenç de Castellet, Manresa"
     },
     {
@@ -315,12 +315,12 @@
      "linea": "R4 Sud",
      "afectada": true,
      "municipios": 12,
-     "viajes_esperados": 182686.0,
-     "viajes_perdidos": -7184.0,
-     "cambio_pct": 3.93,
-     "normal_inf": -2.72,
-     "normal_sup": 4.54,
-     "p_valor": 0.9545,
+     "viajes_esperados": 183052.0,
+     "viajes_perdidos": -6818.0,
+     "cambio_pct": 3.72,
+     "normal_inf": -2.85,
+     "normal_sup": 4.15,
+     "p_valor": 0.9592,
      "lista": "Hospitalet de Llobregat, L', Cornellà de Llobregat, Sant Joan Despí, Sant Feliu de Llobregat, Molins de Rei, Papiol, El, Castellbisbal, Martorell, Gelida, Sant Sadurní d'Anoia, Subirats, Vilafranca del Penedès"
     },
     {
@@ -328,12 +328,12 @@
      "linea": "R7",
      "afectada": true,
      "municipios": 2,
-     "viajes_esperados": 31464.0,
-     "viajes_perdidos": -1315.0,
-     "cambio_pct": 4.18,
-     "normal_inf": -9.48,
-     "normal_sup": 13.68,
-     "p_valor": 0.7159,
+     "viajes_esperados": 31732.0,
+     "viajes_perdidos": -1047.0,
+     "cambio_pct": 3.3,
+     "normal_inf": -10.1,
+     "normal_sup": 13.02,
+     "p_valor": 0.7143,
      "lista": "Montcada i Reixac, Cerdanyola del Vallès"
     },
     {
@@ -341,12 +341,12 @@
      "linea": "R2 Nord",
      "afectada": true,
      "municipios": 10,
-     "viajes_esperados": 42948.0,
-     "viajes_perdidos": -96.0,
-     "cambio_pct": 0.22,
-     "normal_inf": -4.83,
-     "normal_sup": 9.34,
-     "p_valor": 0.5341,
+     "viajes_esperados": 43179.0,
+     "viajes_perdidos": 135.0,
+     "cambio_pct": -0.31,
+     "normal_inf": -5.03,
+     "normal_sup": 9.25,
+     "p_valor": 0.449,
      "lista": "Montcada i Reixac, Llagosta, La, Mollet del Vallès, Montmeló, Granollers, Franqueses del Vallès, Les, Cardedeu, Llinars del Vallès, Santa Maria de Palautordera, Sant Celoni"
     },
     {
@@ -354,12 +354,12 @@
      "linea": "R2 Sud",
      "afectada": false,
      "municipios": 8,
-     "viajes_esperados": 197507.0,
-     "viajes_perdidos": -6365.0,
-     "cambio_pct": 3.22,
-     "normal_inf": -3.06,
-     "normal_sup": 7.35,
-     "p_valor": 0.8295,
+     "viajes_esperados": 197977.0,
+     "viajes_perdidos": -5895.0,
+     "cambio_pct": 2.98,
+     "normal_inf": -3.64,
+     "normal_sup": 7.27,
+     "p_valor": 0.8265,
      "lista": "Hospitalet de Llobregat, L', Prat de Llobregat, El, Viladecans, Gavà, Castelldefels, Sitges, Vilanova i la Geltrú, Cubelles"
     }
    ],
@@ -367,56 +367,56 @@
     {
      "linea": "R1",
      "municipios": 12,
-     "efecto_pct": -13.8,
-     "ic_inf": -18.2,
-     "ic_sup": -5.8,
-     "p_valor": 0.008,
-     "viajes_perdidos": 3335.0
+     "efecto_pct": -13.5,
+     "ic_inf": -18.7,
+     "ic_sup": -5.3,
+     "p_valor": 0.011,
+     "viajes_perdidos": 3259.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
      "efecto_pct": 5.9,
-     "ic_inf": -3.4,
-     "ic_sup": 20.7,
-     "p_valor": 0.893,
-     "viajes_perdidos": -286.0
+     "ic_inf": -3.1,
+     "ic_sup": 20.3,
+     "p_valor": 0.875,
+     "viajes_perdidos": -287.0
     },
     {
      "linea": "R2N+R3",
      "municipios": 2,
-     "efecto_pct": -5.2,
-     "ic_inf": -12.1,
-     "ic_sup": 3.1,
-     "p_valor": 0.122,
-     "viajes_perdidos": 462.0
+     "efecto_pct": -5.3,
+     "ic_inf": -12.2,
+     "ic_sup": 3.2,
+     "p_valor": 0.121,
+     "viajes_perdidos": 473.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
-     "efecto_pct": -9.3,
-     "ic_inf": -17.3,
-     "ic_sup": 2.2,
-     "p_valor": 0.05,
-     "viajes_perdidos": 2159.0
+     "efecto_pct": -8.6,
+     "ic_inf": -16.6,
+     "ic_sup": 2.8,
+     "p_valor": 0.055,
+     "viajes_perdidos": 1986.0
     },
     {
      "linea": "R3",
      "municipios": 5,
-     "efecto_pct": -28.5,
-     "ic_inf": -50.3,
-     "ic_sup": -5.2,
-     "p_valor": 0.027,
-     "viajes_perdidos": 1946.0
+     "efecto_pct": -28.2,
+     "ic_inf": -50.0,
+     "ic_sup": -5.5,
+     "p_valor": 0.026,
+     "viajes_perdidos": 1922.0
     },
     {
      "linea": "R4",
      "municipios": 8,
-     "efecto_pct": -5.8,
-     "ic_inf": -20.5,
-     "ic_sup": 7.3,
-     "p_valor": 0.172,
-     "viajes_perdidos": 332.0
+     "efecto_pct": -5.2,
+     "ic_inf": -19.5,
+     "ic_sup": 8.1,
+     "p_valor": 0.183,
+     "viajes_perdidos": 296.0
     }
    ],
    "municipios": [
@@ -428,9 +428,9 @@
      "dist_km": 38.1,
      "lat": 41.5777,
      "lon": 2.54934,
-     "viajes_referencia": 1608.0,
+     "viajes_referencia": 1600.0,
      "efecto_pct": -27.1,
-     "p_valor": 0.008
+     "p_valor": 0.007
     },
     {
      "codigo": "08015",
@@ -440,9 +440,9 @@
      "dist_km": 9.3,
      "lat": 41.44588,
      "lon": 2.24892,
-     "viajes_referencia": 66871.0,
-     "efecto_pct": 5.8,
-     "p_valor": 0.046
+     "viajes_referencia": 66839.0,
+     "efecto_pct": 5.4,
+     "p_valor": 0.066
     },
     {
      "codigo": "08017",
@@ -452,9 +452,9 @@
      "dist_km": 49.4,
      "lat": 41.82843,
      "lon": 2.24038,
-     "viajes_referencia": 207.0,
-     "efecto_pct": -9.3,
-     "p_valor": 0.588
+     "viajes_referencia": 206.0,
+     "efecto_pct": -9.9,
+     "p_valor": 0.535
     },
     {
      "codigo": "08029",
@@ -464,9 +464,9 @@
      "dist_km": 23.5,
      "lat": 41.50677,
      "lon": 2.40162,
-     "viajes_referencia": 1095.0,
-     "efecto_pct": -12.9,
-     "p_valor": 0.092
+     "viajes_referencia": 1096.0,
+     "efecto_pct": -12.4,
+     "p_valor": 0.132
     },
     {
      "codigo": "08032",
@@ -476,9 +476,9 @@
      "dist_km": 36.0,
      "lat": 41.56861,
      "lon": 2.52598,
-     "viajes_referencia": 337.0,
-     "efecto_pct": -15.0,
-     "p_valor": 0.305
+     "viajes_referencia": 338.0,
+     "efecto_pct": -16.8,
+     "p_valor": 0.271
     },
     {
      "codigo": "08035",
@@ -488,8 +488,8 @@
      "dist_km": 48.5,
      "lat": 41.61469,
      "lon": 2.666,
-     "viajes_referencia": 1000.0,
-     "efecto_pct": -20.4,
+     "viajes_referencia": 1003.0,
+     "efecto_pct": -20.2,
      "p_valor": 0.015
     },
     {
@@ -500,9 +500,9 @@
      "dist_km": 40.9,
      "lat": 41.58667,
      "lon": 2.58129,
-     "viajes_referencia": 1158.0,
-     "efecto_pct": -35.9,
-     "p_valor": 0.008
+     "viajes_referencia": 1156.0,
+     "efecto_pct": -35.6,
+     "p_valor": 0.007
     },
     {
      "codigo": "08046",
@@ -513,8 +513,8 @@
      "lat": 41.6367,
      "lon": 2.35626,
      "viajes_referencia": 1837.0,
-     "efecto_pct": 8.0,
-     "p_valor": 0.282
+     "efecto_pct": 8.5,
+     "p_valor": 0.264
     },
     {
      "codigo": "08053",
@@ -524,9 +524,9 @@
      "dist_km": 36.6,
      "lat": 41.62868,
      "lon": 1.86882,
-     "viajes_referencia": 467.0,
-     "efecto_pct": -3.2,
-     "p_valor": 0.794
+     "viajes_referencia": 468.0,
+     "efecto_pct": -3.1,
+     "p_valor": 0.791
     },
     {
      "codigo": "08054",
@@ -536,9 +536,9 @@
      "dist_km": 19.3,
      "lat": 41.47342,
      "lon": 1.96757,
-     "viajes_referencia": 3768.0,
-     "efecto_pct": -0.9,
-     "p_valor": 0.901
+     "viajes_referencia": 3746.0,
+     "efecto_pct": -2.3,
+     "p_valor": 0.784
     },
     {
      "codigo": "08056",
@@ -548,9 +548,9 @@
      "dist_km": 21.0,
      "lat": 41.27301,
      "lon": 1.96814,
-     "viajes_referencia": 12682.0,
-     "efecto_pct": -7.7,
-     "p_valor": 0.122
+     "viajes_referencia": 12660.0,
+     "efecto_pct": -7.6,
+     "p_valor": 0.132
     },
     {
      "codigo": "08067",
@@ -560,9 +560,9 @@
      "dist_km": 46.0,
      "lat": 41.79939,
      "lon": 2.22264,
-     "viajes_referencia": 555.0,
-     "efecto_pct": -1.5,
-     "p_valor": 0.885
+     "viajes_referencia": 553.0,
+     "efecto_pct": -1.0,
+     "p_valor": 0.96
     },
     {
      "codigo": "08073",
@@ -572,9 +572,9 @@
      "dist_km": 8.8,
      "lat": 41.35752,
      "lon": 2.07055,
-     "viajes_referencia": 31753.0,
-     "efecto_pct": 4.1,
-     "p_valor": 0.321
+     "viajes_referencia": 31734.0,
+     "efecto_pct": 4.5,
+     "p_valor": 0.278
     },
     {
      "codigo": "08074",
@@ -585,8 +585,8 @@
      "lat": 41.20432,
      "lon": 1.67598,
      "viajes_referencia": 741.0,
-     "efecto_pct": -0.5,
-     "p_valor": 0.992
+     "efecto_pct": -1.1,
+     "p_valor": 0.945
     },
     {
      "codigo": "08086",
@@ -596,9 +596,9 @@
      "dist_km": 28.3,
      "lat": 41.62352,
      "lon": 2.2948,
-     "viajes_referencia": 1782.0,
-     "efecto_pct": -14.0,
-     "p_valor": 0.061
+     "viajes_referencia": 1780.0,
+     "efecto_pct": -13.7,
+     "p_valor": 0.073
     },
     {
      "codigo": "08088",
@@ -608,9 +608,9 @@
      "dist_km": 34.5,
      "lat": 41.68463,
      "lon": 2.2888,
-     "viajes_referencia": 1915.0,
-     "efecto_pct": -6.0,
-     "p_valor": 0.412
+     "viajes_referencia": 1908.0,
+     "efecto_pct": -5.8,
+     "p_valor": 0.396
     },
     {
      "codigo": "08089",
@@ -620,9 +620,9 @@
      "dist_km": 16.2,
      "lat": 41.30347,
      "lon": 2.01053,
-     "viajes_referencia": 9137.0,
-     "efecto_pct": -5.6,
-     "p_valor": 0.168
+     "viajes_referencia": 9127.0,
+     "efecto_pct": -5.4,
+     "p_valor": 0.176
     },
     {
      "codigo": "08091",
@@ -632,9 +632,9 @@
      "dist_km": 26.2,
      "lat": 41.44854,
      "lon": 1.86553,
-     "viajes_referencia": 699.0,
-     "efecto_pct": 10.8,
-     "p_valor": 0.405
+     "viajes_referencia": 708.0,
+     "efecto_pct": 11.8,
+     "p_valor": 0.315
     },
     {
      "codigo": "08096",
@@ -644,9 +644,9 @@
      "dist_km": 26.1,
      "lat": 41.6056,
      "lon": 2.28407,
-     "viajes_referencia": 7379.0,
+     "viajes_referencia": 7380.0,
      "efecto_pct": -2.4,
-     "p_valor": 0.58
+     "p_valor": 0.579
     },
     {
      "codigo": "08101",
@@ -656,9 +656,9 @@
      "dist_km": 5.9,
      "lat": 41.35956,
      "lon": 2.1081,
-     "viajes_referencia": 116821.0,
+     "viajes_referencia": 116856.0,
      "efecto_pct": 4.6,
-     "p_valor": 0.244
+     "p_valor": 0.212
     },
     {
      "codigo": "08105",
@@ -668,9 +668,9 @@
      "dist_km": 13.9,
      "lat": 41.51046,
      "lon": 2.19973,
-     "viajes_referencia": 2391.0,
-     "efecto_pct": -4.3,
-     "p_valor": 0.511
+     "viajes_referencia": 2405.0,
+     "efecto_pct": -4.1,
+     "p_valor": 0.535
     },
     {
      "codigo": "08106",
@@ -680,9 +680,9 @@
      "dist_km": 34.1,
      "lat": 41.63804,
      "lon": 2.40446,
-     "viajes_referencia": 1257.0,
-     "efecto_pct": 2.1,
-     "p_valor": 0.847
+     "viajes_referencia": 1258.0,
+     "efecto_pct": 2.3,
+     "p_valor": 0.799
     },
     {
      "codigo": "08110",
@@ -692,9 +692,9 @@
      "dist_km": 55.4,
      "lat": 41.6416,
      "lon": 2.74128,
-     "viajes_referencia": 619.0,
-     "efecto_pct": -23.9,
-     "p_valor": 0.031
+     "viajes_referencia": 618.0,
+     "efecto_pct": -24.1,
+     "p_valor": 0.022
     },
     {
      "codigo": "08112",
@@ -704,9 +704,9 @@
      "dist_km": 68.6,
      "lat": 41.99986,
      "lon": 2.2693,
-     "viajes_referencia": 291.0,
-     "efecto_pct": -10.8,
-     "p_valor": 0.603
+     "viajes_referencia": 290.0,
+     "efecto_pct": -14.8,
+     "p_valor": 0.454
     },
     {
      "codigo": "08113",
@@ -716,9 +716,9 @@
      "dist_km": 46.7,
      "lat": 41.72039,
      "lon": 1.82649,
-     "viajes_referencia": 2400.0,
-     "efecto_pct": 6.4,
-     "p_valor": 0.382
+     "viajes_referencia": 2384.0,
+     "efecto_pct": 7.9,
+     "p_valor": 0.264
     },
     {
      "codigo": "08114",
@@ -728,9 +728,9 @@
      "dist_km": 22.7,
      "lat": 41.47929,
      "lon": 1.92533,
-     "viajes_referencia": 4368.0,
+     "viajes_referencia": 4330.0,
      "efecto_pct": -6.0,
-     "p_valor": 0.328
+     "p_valor": 0.337
     },
     {
      "codigo": "08118",
@@ -740,9 +740,9 @@
      "dist_km": 15.8,
      "lat": 41.47803,
      "lon": 2.31495,
-     "viajes_referencia": 4034.0,
-     "efecto_pct": -27.8,
-     "p_valor": 0.008
+     "viajes_referencia": 4064.0,
+     "efecto_pct": -28.5,
+     "p_valor": 0.007
     },
     {
      "codigo": "08121",
@@ -752,9 +752,9 @@
      "dist_km": 28.2,
      "lat": 41.53339,
      "lon": 2.44553,
-     "viajes_referencia": 11010.0,
-     "efecto_pct": -5.5,
-     "p_valor": 0.229
+     "viajes_referencia": 10981.0,
+     "efecto_pct": -5.1,
+     "p_valor": 0.264
     },
     {
      "codigo": "08123",
@@ -764,9 +764,9 @@
      "dist_km": 12.6,
      "lat": 41.4099,
      "lon": 2.02077,
-     "viajes_referencia": 5497.0,
+     "viajes_referencia": 5500.0,
      "efecto_pct": 1.9,
-     "p_valor": 0.756
+     "p_valor": 0.733
     },
     {
      "codigo": "08124",
@@ -776,9 +776,9 @@
      "dist_km": 16.8,
      "lat": 41.53511,
      "lon": 2.21192,
-     "viajes_referencia": 7759.0,
-     "efecto_pct": -2.0,
-     "p_valor": 0.496
+     "viajes_referencia": 7757.0,
+     "efecto_pct": -1.9,
+     "p_valor": 0.505
     },
     {
      "codigo": "08125",
@@ -788,9 +788,9 @@
      "dist_km": 10.7,
      "lat": 41.48319,
      "lon": 2.18048,
-     "viajes_referencia": 18478.0,
-     "efecto_pct": 5.7,
-     "p_valor": 0.557
+     "viajes_referencia": 18520.0,
+     "efecto_pct": 5.2,
+     "p_valor": 0.571
     },
     {
      "codigo": "08126",
@@ -800,9 +800,9 @@
      "dist_km": 12.7,
      "lat": 41.4659,
      "lon": 2.27943,
-     "viajes_referencia": 4092.0,
-     "efecto_pct": -14.1,
-     "p_valor": 0.031
+     "viajes_referencia": 4090.0,
+     "efecto_pct": -13.9,
+     "p_valor": 0.029
     },
     {
      "codigo": "08135",
@@ -812,9 +812,9 @@
      "dist_km": 19.1,
      "lat": 41.54965,
      "lon": 2.24544,
-     "viajes_referencia": 1067.0,
-     "efecto_pct": -3.0,
-     "p_valor": 0.725
+     "viajes_referencia": 1064.0,
+     "efecto_pct": -2.8,
+     "p_valor": 0.755
     },
     {
      "codigo": "08158",
@@ -824,9 +824,9 @@
      "dist_km": 14.8,
      "lat": 41.43537,
      "lon": 2.00258,
-     "viajes_referencia": 1021.0,
-     "efecto_pct": 48.2,
-     "p_valor": 0.069
+     "viajes_referencia": 1020.0,
+     "efecto_pct": 48.7,
+     "p_valor": 0.066
     },
     {
      "codigo": "08159",
@@ -836,9 +836,9 @@
      "dist_km": 19.4,
      "lat": 41.55627,
      "lon": 2.226,
-     "viajes_referencia": 3539.0,
-     "efecto_pct": -8.4,
-     "p_valor": 0.168
+     "viajes_referencia": 3538.0,
+     "efecto_pct": -8.3,
+     "p_valor": 0.161
     },
     {
      "codigo": "08163",
@@ -848,9 +848,9 @@
      "dist_km": 50.9,
      "lat": 41.62244,
      "lon": 2.69355,
-     "viajes_referencia": 1348.0,
+     "viajes_referencia": 1352.0,
      "efecto_pct": -14.1,
-     "p_valor": 0.069
+     "p_valor": 0.081
     },
     {
      "codigo": "08169",
@@ -860,9 +860,9 @@
      "dist_km": 10.6,
      "lat": 41.31756,
      "lon": 2.08137,
-     "viajes_referencia": 37027.0,
-     "efecto_pct": 13.4,
-     "p_valor": 0.153
+     "viajes_referencia": 37168.0,
+     "efecto_pct": 13.3,
+     "p_valor": 0.154
     },
     {
      "codigo": "08172",
@@ -872,9 +872,9 @@
      "dist_km": 19.1,
      "lat": 41.48775,
      "lon": 2.35486,
-     "viajes_referencia": 4229.0,
-     "efecto_pct": -2.9,
-     "p_valor": 0.634
+     "viajes_referencia": 4258.0,
+     "efecto_pct": -3.4,
+     "p_valor": 0.593
     },
     {
      "codigo": "08187",
@@ -884,9 +884,9 @@
      "dist_km": 18.4,
      "lat": 41.5457,
      "lon": 2.10574,
-     "viajes_referencia": 20364.0,
-     "efecto_pct": -6.2,
-     "p_valor": 0.046
+     "viajes_referencia": 20356.0,
+     "efecto_pct": -5.8,
+     "p_valor": 0.059
     },
     {
      "codigo": "08194",
@@ -896,9 +896,9 @@
      "dist_km": 6.6,
      "lat": 41.42443,
      "lon": 2.23048,
-     "viajes_referencia": 27946.0,
-     "efecto_pct": 14.3,
-     "p_valor": 0.084
+     "viajes_referencia": 27747.0,
+     "efecto_pct": 15.4,
+     "p_valor": 0.066
     },
     {
      "codigo": "08197",
@@ -908,9 +908,9 @@
      "dist_km": 33.2,
      "lat": 41.55555,
      "lon": 2.49826,
-     "viajes_referencia": 1321.0,
-     "efecto_pct": -13.2,
-     "p_valor": 0.076
+     "viajes_referencia": 1325.0,
+     "efecto_pct": -11.7,
+     "p_valor": 0.125
     },
     {
      "codigo": "08202",
@@ -920,9 +920,9 @@
      "dist_km": 42.7,
      "lat": 41.68579,
      "lon": 2.49073,
-     "viajes_referencia": 1550.0,
-     "efecto_pct": 13.0,
-     "p_valor": 0.16
+     "viajes_referencia": 1554.0,
+     "efecto_pct": 13.5,
+     "p_valor": 0.168
     },
     {
      "codigo": "08211",
@@ -932,9 +932,9 @@
      "dist_km": 10.1,
      "lat": 41.383,
      "lon": 2.04792,
-     "viajes_referencia": 10480.0,
+     "viajes_referencia": 10477.0,
      "efecto_pct": -2.6,
-     "p_valor": 0.45
+     "p_valor": 0.462
     },
     {
      "codigo": "08217",
@@ -944,9 +944,9 @@
      "dist_km": 9.3,
      "lat": 41.36858,
      "lon": 2.06021,
-     "viajes_referencia": 12126.0,
-     "efecto_pct": 2.7,
-     "p_valor": 0.656
+     "viajes_referencia": 12164.0,
+     "efecto_pct": 2.5,
+     "p_valor": 0.703
     },
     {
      "codigo": "08219",
@@ -957,8 +957,8 @@
      "lat": 41.50063,
      "lon": 2.38986,
      "viajes_referencia": 3630.0,
-     "efecto_pct": -23.2,
-     "p_valor": 0.008
+     "efecto_pct": -23.0,
+     "p_valor": 0.007
     },
     {
      "codigo": "08235",
@@ -968,9 +968,9 @@
      "dist_km": 44.8,
      "lat": 41.60175,
      "lon": 2.6246,
-     "viajes_referencia": 561.0,
-     "efecto_pct": -26.6,
-     "p_valor": 0.031
+     "viajes_referencia": 560.0,
+     "efecto_pct": -25.1,
+     "p_valor": 0.029
     },
     {
      "codigo": "08240",
@@ -980,9 +980,9 @@
      "dist_km": 31.4,
      "lat": 41.42052,
      "lon": 1.79469,
-     "viajes_referencia": 910.0,
-     "efecto_pct": -4.4,
-     "p_valor": 0.695
+     "viajes_referencia": 917.0,
+     "efecto_pct": -4.7,
+     "p_valor": 0.703
     },
     {
      "codigo": "08252",
@@ -992,9 +992,9 @@
      "dist_km": 14.6,
      "lat": 41.51366,
      "lon": 2.11845,
-     "viajes_referencia": 6466.0,
-     "efecto_pct": 3.3,
-     "p_valor": 0.458
+     "viajes_referencia": 6443.0,
+     "efecto_pct": 3.7,
+     "p_valor": 0.374
     },
     {
      "codigo": "08259",
@@ -1004,9 +1004,9 @@
      "dist_km": 39.6,
      "lat": 41.67195,
      "lon": 2.45421,
-     "viajes_referencia": 513.0,
-     "efecto_pct": -30.4,
-     "p_valor": 0.061
+     "viajes_referencia": 508.0,
+     "efecto_pct": -30.3,
+     "p_valor": 0.059
     },
     {
      "codigo": "08260",
@@ -1016,9 +1016,9 @@
      "dist_km": 15.5,
      "lat": 41.52622,
      "lon": 2.18629,
-     "viajes_referencia": 6541.0,
+     "viajes_referencia": 6520.0,
      "efecto_pct": -2.1,
-     "p_valor": 0.656
+     "p_valor": 0.645
     },
     {
      "codigo": "08262",
@@ -1029,8 +1029,8 @@
      "lat": 41.66883,
      "lon": 1.86264,
      "viajes_referencia": 297.0,
-     "efecto_pct": -17.4,
-     "p_valor": 0.168
+     "efecto_pct": -16.9,
+     "p_valor": 0.183
     },
     {
      "codigo": "08266",
@@ -1041,8 +1041,8 @@
      "lat": 41.49478,
      "lon": 2.13145,
      "viajes_referencia": 14765.0,
-     "efecto_pct": 5.8,
-     "p_valor": 0.137
+     "efecto_pct": 5.9,
+     "p_valor": 0.147
     },
     {
      "codigo": "08270",
@@ -1052,9 +1052,9 @@
      "dist_km": 30.4,
      "lat": 41.24686,
      "lon": 1.8561,
-     "viajes_referencia": 5959.0,
-     "efecto_pct": -6.3,
-     "p_valor": 0.328
+     "viajes_referencia": 5953.0,
+     "efecto_pct": -5.6,
+     "p_valor": 0.337
     },
     {
      "codigo": "08273",
@@ -1065,8 +1065,8 @@
      "lat": 41.39573,
      "lon": 1.76817,
      "viajes_referencia": 371.0,
-     "efecto_pct": -4.4,
-     "p_valor": 0.702
+     "efecto_pct": -3.2,
+     "p_valor": 0.777
     },
     {
      "codigo": "08279",
@@ -1076,9 +1076,9 @@
      "dist_km": 23.4,
      "lat": 41.56866,
      "lon": 2.027,
-     "viajes_referencia": 16755.0,
-     "efecto_pct": -0.3,
-     "p_valor": 0.878
+     "viajes_referencia": 16749.0,
+     "efecto_pct": -0.4,
+     "p_valor": 0.886
     },
     {
      "codigo": "08284",
@@ -1088,9 +1088,9 @@
      "dist_km": 58.0,
      "lat": 41.70717,
      "lon": 2.71957,
-     "viajes_referencia": 989.0,
-     "efecto_pct": -1.0,
-     "p_valor": 0.893
+     "viajes_referencia": 984.0,
+     "efecto_pct": -0.2,
+     "p_valor": 0.974
     },
     {
      "codigo": "08291",
@@ -1100,9 +1100,9 @@
      "dist_km": 31.8,
      "lat": 41.59442,
      "lon": 1.90528,
-     "viajes_referencia": 421.0,
-     "efecto_pct": -25.7,
-     "p_valor": 0.038
+     "viajes_referencia": 420.0,
+     "efecto_pct": -24.9,
+     "p_valor": 0.044
     },
     {
      "codigo": "08298",
@@ -1112,9 +1112,9 @@
      "dist_km": 60.8,
      "lat": 41.9311,
      "lon": 2.24886,
-     "viajes_referencia": 1968.0,
-     "efecto_pct": -44.1,
-     "p_valor": 0.061
+     "viajes_referencia": 1970.0,
+     "efecto_pct": -43.9,
+     "p_valor": 0.059
     },
     {
      "codigo": "08300",
@@ -1124,9 +1124,9 @@
      "dist_km": 26.1,
      "lat": 41.56633,
      "lon": 1.96578,
-     "viajes_referencia": 605.0,
-     "efecto_pct": -11.4,
-     "p_valor": 0.237
+     "viajes_referencia": 600.0,
+     "efecto_pct": -10.9,
+     "p_valor": 0.249
     },
     {
      "codigo": "08301",
@@ -1136,9 +1136,9 @@
      "dist_km": 14.6,
      "lat": 41.30951,
      "lon": 2.02742,
-     "viajes_referencia": 14643.0,
+     "viajes_referencia": 14626.0,
      "efecto_pct": 8.7,
-     "p_valor": 0.084
+     "p_valor": 0.073
     },
     {
      "codigo": "08305",
@@ -1148,9 +1148,9 @@
      "dist_km": 39.1,
      "lat": 41.34481,
      "lon": 1.7032,
-     "viajes_referencia": 1819.0,
+     "viajes_referencia": 1822.0,
      "efecto_pct": -2.4,
-     "p_valor": 0.71
+     "p_valor": 0.674
     },
     {
      "codigo": "08307",
@@ -1160,65 +1160,65 @@
      "dist_km": 41.0,
      "lat": 41.22032,
      "lon": 1.73077,
-     "viajes_referencia": 4145.0,
-     "efecto_pct": -18.2,
-     "p_valor": 0.038
+     "viajes_referencia": 4134.0,
+     "efecto_pct": -17.6,
+     "p_valor": 0.037
     }
    ],
    "evento": [
     {
      "dia": -5,
-     "efecto_pct": -3.02,
-     "ic_inf": -7.85,
-     "ic_sup": 3.31
+     "efecto_pct": -2.98,
+     "ic_inf": -7.71,
+     "ic_sup": 3.23
     },
     {
      "dia": -4,
-     "efecto_pct": -1.86,
-     "ic_inf": -6.75,
-     "ic_sup": 4.54
+     "efecto_pct": -1.81,
+     "ic_inf": -6.61,
+     "ic_sup": 4.47
     },
     {
      "dia": -3,
      "efecto_pct": -5.92,
-     "ic_inf": -10.61,
-     "ic_sup": 0.21
+     "ic_inf": -10.52,
+     "ic_sup": 0.09
     },
     {
      "dia": -2,
      "efecto_pct": -3.85,
-     "ic_inf": -8.64,
-     "ic_sup": 2.43
+     "ic_inf": -8.54,
+     "ic_sup": 2.31
     },
     {
      "dia": -1,
      "efecto_pct": -2.15,
-     "ic_inf": -7.03,
-     "ic_sup": 4.23
+     "ic_inf": -6.93,
+     "ic_sup": 4.11
     },
     {
      "dia": 0,
-     "efecto_pct": -10.5,
-     "ic_inf": -14.96,
-     "ic_sup": -4.66
+     "efecto_pct": -10.33,
+     "ic_inf": -14.7,
+     "ic_sup": -4.59
     },
     {
      "dia": 1,
-     "efecto_pct": 3.1,
-     "ic_inf": -2.04,
-     "ic_sup": 9.83
+     "efecto_pct": 3.15,
+     "ic_inf": -1.88,
+     "ic_sup": 9.75
     },
     {
      "dia": 2,
      "efecto_pct": 1.83,
-     "ic_inf": -3.25,
-     "ic_sup": 8.47
+     "ic_inf": -3.14,
+     "ic_sup": 8.35
     },
     {
      "dia": 3,
      "efecto_pct": 3.77,
-     "ic_inf": -1.4,
-     "ic_sup": 10.54
+     "ic_inf": -1.29,
+     "ic_sup": 10.41
     }
    ],
    "caso_od": false
@@ -1243,25 +1243,25 @@
      "grupo": "dependientes",
      "municipios": 35,
      "efecto_pct": -8.9,
-     "ic_inf": -13.4,
-     "ic_sup": -2.9,
+     "ic_inf": -13.3,
+     "ic_sup": -3.0,
      "p_valor": 0.011
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
      "efecto_pct": -0.1,
-     "ic_inf": -6.1,
+     "ic_inf": -5.8,
      "ic_sup": 4.0,
-     "p_valor": 0.473
+     "p_valor": 0.484
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
      "efecto_pct": -0.1,
-     "ic_inf": -4.4,
-     "ic_sup": 3.2,
-     "p_valor": 0.492
+     "ic_inf": -4.0,
+     "ic_sup": 3.1,
+     "p_valor": 0.476
     }
    ],
    "perdidos": {
@@ -1521,18 +1521,18 @@
      "linea": "R1",
      "municipios": 12,
      "efecto_pct": -7.7,
-     "ic_inf": -12.5,
-     "ic_sup": 0.8,
-     "p_valor": 0.038,
+     "ic_inf": -13.2,
+     "ic_sup": 1.1,
+     "p_valor": 0.04,
      "viajes_perdidos": 1853.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
      "efecto_pct": -11.2,
-     "ic_inf": -19.0,
-     "ic_sup": 1.2,
-     "p_valor": 0.046,
+     "ic_inf": -18.7,
+     "ic_sup": 0.9,
+     "p_valor": 0.044,
      "viajes_perdidos": 591.0
     },
     {
@@ -1540,35 +1540,35 @@
      "municipios": 2,
      "efecto_pct": -11.4,
      "ic_inf": -17.8,
-     "ic_sup": -3.7,
-     "p_valor": 0.008,
+     "ic_sup": -3.5,
+     "p_valor": 0.007,
      "viajes_perdidos": 1066.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
      "efecto_pct": -8.9,
-     "ic_inf": -16.9,
-     "ic_sup": 2.6,
-     "p_valor": 0.05,
+     "ic_inf": -16.8,
+     "ic_sup": 2.5,
+     "p_valor": 0.055,
      "viajes_perdidos": 1952.0
     },
     {
      "linea": "R3",
      "municipios": 5,
      "efecto_pct": -15.4,
-     "ic_inf": -41.2,
-     "ic_sup": 12.2,
-     "p_valor": 0.053,
+     "ic_inf": -41.0,
+     "ic_sup": 11.5,
+     "p_valor": 0.051,
      "viajes_perdidos": 791.0
     },
     {
      "linea": "R4",
      "municipios": 8,
      "efecto_pct": -3.4,
-     "ic_inf": -18.4,
+     "ic_inf": -18.1,
      "ic_sup": 10.1,
-     "p_valor": 0.286,
+     "p_valor": 0.289,
      "viajes_perdidos": 188.0
     }
    ],
@@ -1581,9 +1581,9 @@
      "dist_km": 38.1,
      "lat": 41.5777,
      "lon": 2.54934,
-     "viajes_referencia": 1608.0,
+     "viajes_referencia": 1600.0,
      "efecto_pct": -5.4,
-     "p_valor": 0.382
+     "p_valor": 0.403
     },
     {
      "codigo": "08015",
@@ -1593,9 +1593,9 @@
      "dist_km": 9.3,
      "lat": 41.44588,
      "lon": 2.24892,
-     "viajes_referencia": 66871.0,
+     "viajes_referencia": 66839.0,
      "efecto_pct": -1.2,
-     "p_valor": 0.611
+     "p_valor": 0.615
     },
     {
      "codigo": "08017",
@@ -1605,9 +1605,9 @@
      "dist_km": 49.4,
      "lat": 41.82843,
      "lon": 2.24038,
-     "viajes_referencia": 207.0,
+     "viajes_referencia": 206.0,
      "efecto_pct": -31.6,
-     "p_valor": 0.092
+     "p_valor": 0.088
     },
     {
      "codigo": "08029",
@@ -1617,9 +1617,9 @@
      "dist_km": 23.5,
      "lat": 41.50677,
      "lon": 2.40162,
-     "viajes_referencia": 1095.0,
+     "viajes_referencia": 1096.0,
      "efecto_pct": 4.7,
-     "p_valor": 0.649
+     "p_valor": 0.645
     },
     {
      "codigo": "08032",
@@ -1629,9 +1629,9 @@
      "dist_km": 36.0,
      "lat": 41.56861,
      "lon": 2.52598,
-     "viajes_referencia": 337.0,
+     "viajes_referencia": 338.0,
      "efecto_pct": -8.9,
-     "p_valor": 0.55
+     "p_valor": 0.542
     },
     {
      "codigo": "08035",
@@ -1641,7 +1641,7 @@
      "dist_km": 48.5,
      "lat": 41.61469,
      "lon": 2.666,
-     "viajes_referencia": 1000.0,
+     "viajes_referencia": 1003.0,
      "efecto_pct": -19.9,
      "p_valor": 0.015
     },
@@ -1653,9 +1653,9 @@
      "dist_km": 40.9,
      "lat": 41.58667,
      "lon": 2.58129,
-     "viajes_referencia": 1158.0,
+     "viajes_referencia": 1156.0,
      "efecto_pct": -10.2,
-     "p_valor": 0.176
+     "p_valor": 0.19
     },
     {
      "codigo": "08046",
@@ -1667,7 +1667,7 @@
      "lon": 2.35626,
      "viajes_referencia": 1837.0,
      "efecto_pct": -15.3,
-     "p_valor": 0.092
+     "p_valor": 0.081
     },
     {
      "codigo": "08053",
@@ -1677,9 +1677,9 @@
      "dist_km": 36.6,
      "lat": 41.62868,
      "lon": 1.86882,
-     "viajes_referencia": 467.0,
+     "viajes_referencia": 468.0,
      "efecto_pct": 1.5,
-     "p_valor": 0.924
+     "p_valor": 0.901
     },
     {
      "codigo": "08054",
@@ -1689,9 +1689,9 @@
      "dist_km": 19.3,
      "lat": 41.47342,
      "lon": 1.96757,
-     "viajes_referencia": 3768.0,
+     "viajes_referencia": 3746.0,
      "efecto_pct": -14.4,
-     "p_valor": 0.061
+     "p_valor": 0.066
     },
     {
      "codigo": "08056",
@@ -1701,9 +1701,9 @@
      "dist_km": 21.0,
      "lat": 41.27301,
      "lon": 1.96814,
-     "viajes_referencia": 12682.0,
+     "viajes_referencia": 12660.0,
      "efecto_pct": -8.0,
-     "p_valor": 0.122
+     "p_valor": 0.132
     },
     {
      "codigo": "08067",
@@ -1713,9 +1713,9 @@
      "dist_km": 46.0,
      "lat": 41.79939,
      "lon": 2.22264,
-     "viajes_referencia": 555.0,
+     "viajes_referencia": 553.0,
      "efecto_pct": 2.2,
-     "p_valor": 0.893
+     "p_valor": 0.886
     },
     {
      "codigo": "08073",
@@ -1725,9 +1725,9 @@
      "dist_km": 8.8,
      "lat": 41.35752,
      "lon": 2.07055,
-     "viajes_referencia": 31753.0,
+     "viajes_referencia": 31734.0,
      "efecto_pct": 2.9,
-     "p_valor": 0.466
+     "p_valor": 0.462
     },
     {
      "codigo": "08074",
@@ -1739,7 +1739,7 @@
      "lon": 1.67598,
      "viajes_referencia": 741.0,
      "efecto_pct": -20.9,
-     "p_valor": 0.053
+     "p_valor": 0.059
     },
     {
      "codigo": "08086",
@@ -1749,9 +1749,9 @@
      "dist_km": 28.3,
      "lat": 41.62352,
      "lon": 2.2948,
-     "viajes_referencia": 1782.0,
+     "viajes_referencia": 1780.0,
      "efecto_pct": -15.4,
-     "p_valor": 0.038
+     "p_valor": 0.037
     },
     {
      "codigo": "08088",
@@ -1761,9 +1761,9 @@
      "dist_km": 34.5,
      "lat": 41.68463,
      "lon": 2.2888,
-     "viajes_referencia": 1915.0,
+     "viajes_referencia": 1908.0,
      "efecto_pct": -28.0,
-     "p_valor": 0.008
+     "p_valor": 0.007
     },
     {
      "codigo": "08089",
@@ -1773,9 +1773,9 @@
      "dist_km": 16.2,
      "lat": 41.30347,
      "lon": 2.01053,
-     "viajes_referencia": 9137.0,
+     "viajes_referencia": 9127.0,
      "efecto_pct": -5.3,
-     "p_valor": 0.168
+     "p_valor": 0.183
     },
     {
      "codigo": "08091",
@@ -1785,9 +1785,9 @@
      "dist_km": 26.2,
      "lat": 41.44854,
      "lon": 1.86553,
-     "viajes_referencia": 699.0,
+     "viajes_referencia": 708.0,
      "efecto_pct": 4.7,
-     "p_valor": 0.763
+     "p_valor": 0.74
     },
     {
      "codigo": "08096",
@@ -1797,9 +1797,9 @@
      "dist_km": 26.1,
      "lat": 41.6056,
      "lon": 2.28407,
-     "viajes_referencia": 7379.0,
+     "viajes_referencia": 7380.0,
      "efecto_pct": -11.0,
-     "p_valor": 0.015
+     "p_valor": 0.022
     },
     {
      "codigo": "08101",
@@ -1809,9 +1809,9 @@
      "dist_km": 5.9,
      "lat": 41.35956,
      "lon": 2.1081,
-     "viajes_referencia": 116821.0,
+     "viajes_referencia": 116856.0,
      "efecto_pct": -1.0,
-     "p_valor": 0.557
+     "p_valor": 0.579
     },
     {
      "codigo": "08105",
@@ -1821,9 +1821,9 @@
      "dist_km": 13.9,
      "lat": 41.51046,
      "lon": 2.19973,
-     "viajes_referencia": 2391.0,
+     "viajes_referencia": 2405.0,
      "efecto_pct": -11.2,
-     "p_valor": 0.092
+     "p_valor": 0.095
     },
     {
      "codigo": "08106",
@@ -1833,9 +1833,9 @@
      "dist_km": 34.1,
      "lat": 41.63804,
      "lon": 2.40446,
-     "viajes_referencia": 1257.0,
+     "viajes_referencia": 1258.0,
      "efecto_pct": -12.0,
-     "p_valor": 0.206
+     "p_valor": 0.205
     },
     {
      "codigo": "08110",
@@ -1845,7 +1845,7 @@
      "dist_km": 55.4,
      "lat": 41.6416,
      "lon": 2.74128,
-     "viajes_referencia": 619.0,
+     "viajes_referencia": 618.0,
      "efecto_pct": -10.6,
      "p_valor": 0.359
     },
@@ -1857,9 +1857,9 @@
      "dist_km": 68.6,
      "lat": 41.99986,
      "lon": 2.2693,
-     "viajes_referencia": 291.0,
+     "viajes_referencia": 290.0,
      "efecto_pct": -15.4,
-     "p_valor": 0.443
+     "p_valor": 0.44
     },
     {
      "codigo": "08113",
@@ -1869,9 +1869,9 @@
      "dist_km": 46.7,
      "lat": 41.72039,
      "lon": 1.82649,
-     "viajes_referencia": 2400.0,
+     "viajes_referencia": 2384.0,
      "efecto_pct": -1.5,
-     "p_valor": 0.824
+     "p_valor": 0.821
     },
     {
      "codigo": "08114",
@@ -1881,9 +1881,9 @@
      "dist_km": 22.7,
      "lat": 41.47929,
      "lon": 1.92533,
-     "viajes_referencia": 4368.0,
+     "viajes_referencia": 4330.0,
      "efecto_pct": 9.2,
-     "p_valor": 0.191
+     "p_valor": 0.19
     },
     {
      "codigo": "08118",
@@ -1893,9 +1893,9 @@
      "dist_km": 15.8,
      "lat": 41.47803,
      "lon": 2.31495,
-     "viajes_referencia": 4034.0,
+     "viajes_referencia": 4064.0,
      "efecto_pct": -2.7,
-     "p_valor": 0.573
+     "p_valor": 0.586
     },
     {
      "codigo": "08121",
@@ -1905,9 +1905,9 @@
      "dist_km": 28.2,
      "lat": 41.53339,
      "lon": 2.44553,
-     "viajes_referencia": 11010.0,
+     "viajes_referencia": 10981.0,
      "efecto_pct": -5.7,
-     "p_valor": 0.214
+     "p_valor": 0.205
     },
     {
      "codigo": "08123",
@@ -1917,9 +1917,9 @@
      "dist_km": 12.6,
      "lat": 41.4099,
      "lon": 2.02077,
-     "viajes_referencia": 5497.0,
+     "viajes_referencia": 5500.0,
      "efecto_pct": -6.0,
-     "p_valor": 0.176
+     "p_valor": 0.19
     },
     {
      "codigo": "08124",
@@ -1929,9 +1929,9 @@
      "dist_km": 16.8,
      "lat": 41.53511,
      "lon": 2.21192,
-     "viajes_referencia": 7759.0,
+     "viajes_referencia": 7757.0,
      "efecto_pct": -11.9,
-     "p_valor": 0.008
+     "p_valor": 0.007
     },
     {
      "codigo": "08125",
@@ -1941,9 +1941,9 @@
      "dist_km": 10.7,
      "lat": 41.48319,
      "lon": 2.18048,
-     "viajes_referencia": 18478.0,
+     "viajes_referencia": 18520.0,
      "efecto_pct": 25.2,
-     "p_valor": 0.061
+     "p_valor": 0.059
     },
     {
      "codigo": "08126",
@@ -1953,9 +1953,9 @@
      "dist_km": 12.7,
      "lat": 41.4659,
      "lon": 2.27943,
-     "viajes_referencia": 4092.0,
+     "viajes_referencia": 4090.0,
      "efecto_pct": -10.0,
-     "p_valor": 0.084
+     "p_valor": 0.095
     },
     {
      "codigo": "08135",
@@ -1965,9 +1965,9 @@
      "dist_km": 19.1,
      "lat": 41.54965,
      "lon": 2.24544,
-     "viajes_referencia": 1067.0,
+     "viajes_referencia": 1064.0,
      "efecto_pct": -14.3,
-     "p_valor": 0.115
+     "p_valor": 0.125
     },
     {
      "codigo": "08158",
@@ -1977,9 +1977,9 @@
      "dist_km": 14.8,
      "lat": 41.43537,
      "lon": 2.00258,
-     "viajes_referencia": 1021.0,
+     "viajes_referencia": 1020.0,
      "efecto_pct": -5.0,
-     "p_valor": 0.702
+     "p_valor": 0.689
     },
     {
      "codigo": "08159",
@@ -1989,9 +1989,9 @@
      "dist_km": 19.4,
      "lat": 41.55627,
      "lon": 2.226,
-     "viajes_referencia": 3539.0,
+     "viajes_referencia": 3538.0,
      "efecto_pct": -14.7,
-     "p_valor": 0.023
+     "p_valor": 0.022
     },
     {
      "codigo": "08163",
@@ -2001,9 +2001,9 @@
      "dist_km": 50.9,
      "lat": 41.62244,
      "lon": 2.69355,
-     "viajes_referencia": 1348.0,
+     "viajes_referencia": 1352.0,
      "efecto_pct": -11.3,
-     "p_valor": 0.168
+     "p_valor": 0.176
     },
     {
      "codigo": "08169",
@@ -2013,9 +2013,9 @@
      "dist_km": 10.6,
      "lat": 41.31756,
      "lon": 2.08137,
-     "viajes_referencia": 37027.0,
+     "viajes_referencia": 37168.0,
      "efecto_pct": 14.5,
-     "p_valor": 0.13
+     "p_valor": 0.095
     },
     {
      "codigo": "08172",
@@ -2025,9 +2025,9 @@
      "dist_km": 19.1,
      "lat": 41.48775,
      "lon": 2.35486,
-     "viajes_referencia": 4229.0,
+     "viajes_referencia": 4258.0,
      "efecto_pct": -19.7,
-     "p_valor": 0.099
+     "p_valor": 0.103
     },
     {
      "codigo": "08187",
@@ -2037,9 +2037,9 @@
      "dist_km": 18.4,
      "lat": 41.5457,
      "lon": 2.10574,
-     "viajes_referencia": 20364.0,
+     "viajes_referencia": 20356.0,
      "efecto_pct": -4.2,
-     "p_valor": 0.122
+     "p_valor": 0.147
     },
     {
      "codigo": "08194",
@@ -2049,7 +2049,7 @@
      "dist_km": 6.6,
      "lat": 41.42443,
      "lon": 2.23048,
-     "viajes_referencia": 27946.0,
+     "viajes_referencia": 27747.0,
      "efecto_pct": -7.9,
      "p_valor": 0.168
     },
@@ -2061,9 +2061,9 @@
      "dist_km": 33.2,
      "lat": 41.55555,
      "lon": 2.49826,
-     "viajes_referencia": 1321.0,
+     "viajes_referencia": 1325.0,
      "efecto_pct": -12.9,
-     "p_valor": 0.076
+     "p_valor": 0.088
     },
     {
      "codigo": "08202",
@@ -2073,9 +2073,9 @@
      "dist_km": 42.7,
      "lat": 41.68579,
      "lon": 2.49073,
-     "viajes_referencia": 1550.0,
+     "viajes_referencia": 1554.0,
      "efecto_pct": -1.2,
-     "p_valor": 0.847
+     "p_valor": 0.857
     },
     {
      "codigo": "08211",
@@ -2085,9 +2085,9 @@
      "dist_km": 10.1,
      "lat": 41.383,
      "lon": 2.04792,
-     "viajes_referencia": 10480.0,
+     "viajes_referencia": 10477.0,
      "efecto_pct": -2.8,
-     "p_valor": 0.397
+     "p_valor": 0.432
     },
     {
      "codigo": "08217",
@@ -2097,9 +2097,9 @@
      "dist_km": 9.3,
      "lat": 41.36858,
      "lon": 2.06021,
-     "viajes_referencia": 12126.0,
+     "viajes_referencia": 12164.0,
      "efecto_pct": -9.8,
-     "p_valor": 0.221
+     "p_valor": 0.212
     },
     {
      "codigo": "08219",
@@ -2111,7 +2111,7 @@
      "lon": 2.38986,
      "viajes_referencia": 3630.0,
      "efecto_pct": -8.4,
-     "p_valor": 0.168
+     "p_valor": 0.161
     },
     {
      "codigo": "08235",
@@ -2121,9 +2121,9 @@
      "dist_km": 44.8,
      "lat": 41.60175,
      "lon": 2.6246,
-     "viajes_referencia": 561.0,
+     "viajes_referencia": 560.0,
      "efecto_pct": -2.8,
-     "p_valor": 0.84
+     "p_valor": 0.857
     },
     {
      "codigo": "08240",
@@ -2133,9 +2133,9 @@
      "dist_km": 31.4,
      "lat": 41.42052,
      "lon": 1.79469,
-     "viajes_referencia": 910.0,
+     "viajes_referencia": 917.0,
      "efecto_pct": -9.0,
-     "p_valor": 0.412
+     "p_valor": 0.44
     },
     {
      "codigo": "08252",
@@ -2145,9 +2145,9 @@
      "dist_km": 14.6,
      "lat": 41.51366,
      "lon": 2.11845,
-     "viajes_referencia": 6466.0,
+     "viajes_referencia": 6443.0,
      "efecto_pct": -2.1,
-     "p_valor": 0.603
+     "p_valor": 0.601
     },
     {
      "codigo": "08259",
@@ -2157,9 +2157,9 @@
      "dist_km": 39.6,
      "lat": 41.67195,
      "lon": 2.45421,
-     "viajes_referencia": 513.0,
+     "viajes_referencia": 508.0,
      "efecto_pct": -17.0,
-     "p_valor": 0.282
+     "p_valor": 0.278
     },
     {
      "codigo": "08260",
@@ -2169,7 +2169,7 @@
      "dist_km": 15.5,
      "lat": 41.52622,
      "lon": 2.18629,
-     "viajes_referencia": 6541.0,
+     "viajes_referencia": 6520.0,
      "efecto_pct": -5.5,
      "p_valor": 0.168
     },
@@ -2183,7 +2183,7 @@
      "lon": 1.86264,
      "viajes_referencia": 297.0,
      "efecto_pct": 15.5,
-     "p_valor": 0.336
+     "p_valor": 0.315
     },
     {
      "codigo": "08266",
@@ -2195,7 +2195,7 @@
      "lon": 2.13145,
      "viajes_referencia": 14765.0,
      "efecto_pct": -0.2,
-     "p_valor": 0.885
+     "p_valor": 0.894
     },
     {
      "codigo": "08270",
@@ -2205,7 +2205,7 @@
      "dist_km": 30.4,
      "lat": 41.24686,
      "lon": 1.8561,
-     "viajes_referencia": 5959.0,
+     "viajes_referencia": 5953.0,
      "efecto_pct": -2.0,
      "p_valor": 0.725
     },
@@ -2219,7 +2219,7 @@
      "lon": 1.76817,
      "viajes_referencia": 371.0,
      "efecto_pct": -17.7,
-     "p_valor": 0.229
+     "p_valor": 0.242
     },
     {
      "codigo": "08279",
@@ -2229,9 +2229,9 @@
      "dist_km": 23.4,
      "lat": 41.56866,
      "lon": 2.027,
-     "viajes_referencia": 16755.0,
+     "viajes_referencia": 16749.0,
      "efecto_pct": -3.0,
-     "p_valor": 0.305
+     "p_valor": 0.322
     },
     {
      "codigo": "08284",
@@ -2241,9 +2241,9 @@
      "dist_km": 58.0,
      "lat": 41.70717,
      "lon": 2.71957,
-     "viajes_referencia": 989.0,
+     "viajes_referencia": 984.0,
      "efecto_pct": 0.2,
-     "p_valor": 0.985
+     "p_valor": 1.0
     },
     {
      "codigo": "08291",
@@ -2253,9 +2253,9 @@
      "dist_km": 31.8,
      "lat": 41.59442,
      "lon": 1.90528,
-     "viajes_referencia": 421.0,
+     "viajes_referencia": 420.0,
      "efecto_pct": -8.1,
-     "p_valor": 0.542
+     "p_valor": 0.535
     },
     {
      "codigo": "08298",
@@ -2265,9 +2265,9 @@
      "dist_km": 60.8,
      "lat": 41.9311,
      "lon": 2.24886,
-     "viajes_referencia": 1968.0,
+     "viajes_referencia": 1970.0,
      "efecto_pct": -9.4,
-     "p_valor": 0.389
+     "p_valor": 0.388
     },
     {
      "codigo": "08300",
@@ -2277,9 +2277,9 @@
      "dist_km": 26.1,
      "lat": 41.56633,
      "lon": 1.96578,
-     "viajes_referencia": 605.0,
+     "viajes_referencia": 600.0,
      "efecto_pct": -4.0,
-     "p_valor": 0.656
+     "p_valor": 0.696
     },
     {
      "codigo": "08301",
@@ -2289,9 +2289,9 @@
      "dist_km": 14.6,
      "lat": 41.30951,
      "lon": 2.02742,
-     "viajes_referencia": 14643.0,
+     "viajes_referencia": 14626.0,
      "efecto_pct": 2.9,
-     "p_valor": 0.565
+     "p_valor": 0.557
     },
     {
      "codigo": "08305",
@@ -2301,9 +2301,9 @@
      "dist_km": 39.1,
      "lat": 41.34481,
      "lon": 1.7032,
-     "viajes_referencia": 1819.0,
+     "viajes_referencia": 1822.0,
      "efecto_pct": 3.7,
-     "p_valor": 0.786
+     "p_valor": 0.806
     },
     {
      "codigo": "08307",
@@ -2313,65 +2313,65 @@
      "dist_km": 41.0,
      "lat": 41.22032,
      "lon": 1.73077,
-     "viajes_referencia": 4145.0,
+     "viajes_referencia": 4134.0,
      "efecto_pct": -14.0,
-     "p_valor": 0.084
+     "p_valor": 0.073
     }
    ],
    "evento": [
     {
      "dia": -5,
      "efecto_pct": 0.06,
-     "ic_inf": -4.93,
-     "ic_sup": 6.58
+     "ic_inf": -4.83,
+     "ic_sup": 6.46
     },
     {
      "dia": -4,
      "efecto_pct": 2.08,
-     "ic_inf": -3.01,
-     "ic_sup": 8.73
+     "ic_inf": -2.9,
+     "ic_sup": 8.61
     },
     {
      "dia": -3,
      "efecto_pct": 2.83,
-     "ic_inf": -2.3,
-     "ic_sup": 9.53
+     "ic_inf": -2.19,
+     "ic_sup": 9.41
     },
     {
      "dia": -2,
      "efecto_pct": -0.44,
-     "ic_inf": -5.4,
-     "ic_sup": 6.06
+     "ic_inf": -5.3,
+     "ic_sup": 5.93
     },
     {
      "dia": -1,
      "efecto_pct": -1.15,
-     "ic_inf": -6.08,
-     "ic_sup": 5.29
+     "ic_inf": -5.98,
+     "ic_sup": 5.17
     },
     {
      "dia": 0,
      "efecto_pct": -8.86,
-     "ic_inf": -13.41,
-     "ic_sup": -2.92
+     "ic_inf": -13.31,
+     "ic_sup": -3.03
     },
     {
      "dia": 1,
      "efecto_pct": -3.48,
-     "ic_inf": -8.3,
-     "ic_sup": 2.81
+     "ic_inf": -8.2,
+     "ic_sup": 2.69
     },
     {
      "dia": 2,
      "efecto_pct": 6.8,
-     "ic_inf": 1.47,
-     "ic_sup": 13.76
+     "ic_inf": 1.59,
+     "ic_sup": 13.63
     },
     {
      "dia": 3,
      "efecto_pct": 2.56,
-     "ic_inf": -2.56,
-     "ic_sup": 9.25
+     "ic_inf": -2.45,
+     "ic_sup": 9.12
     }
    ],
    "caso_od": true
@@ -2396,32 +2396,32 @@
      "grupo": "dependientes",
      "municipios": 35,
      "efecto_pct": 1.8,
-     "ic_inf": -3.3,
-     "ic_sup": 8.5,
-     "p_valor": 0.702
+     "ic_inf": -3.2,
+     "ic_sup": 8.3,
+     "p_valor": 0.711
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
      "efecto_pct": -4.0,
-     "ic_inf": -9.8,
+     "ic_inf": -9.5,
      "ic_sup": -0.1,
-     "p_valor": 0.031
+     "p_valor": 0.029
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
      "efecto_pct": -4.3,
-     "ic_inf": -8.4,
-     "ic_sup": -1.1,
-     "p_valor": 0.008
+     "ic_inf": -8.0,
+     "ic_sup": -1.3,
+     "p_valor": 0.007
     }
    ],
    "perdidos": {
     "viajes_dia_normal": 71160.0,
     "viajes_perdidos": -1281.0,
     "efecto_pct": 1.8,
-    "p_valor": 0.702
+    "p_valor": 0.711
    },
    "serie": [
     {
@@ -2674,18 +2674,18 @@
      "linea": "R1",
      "municipios": 12,
      "efecto_pct": 5.5,
-     "ic_inf": 0.1,
-     "ic_sup": 15.3,
-     "p_valor": 0.977,
+     "ic_inf": -0.7,
+     "ic_sup": 15.6,
+     "p_valor": 0.971,
      "viajes_perdidos": -1324.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
      "efecto_pct": 4.4,
-     "ic_inf": -4.7,
-     "ic_sup": 19.0,
-     "p_valor": 0.809,
+     "ic_inf": -4.4,
+     "ic_sup": 18.7,
+     "p_valor": 0.806,
      "viajes_perdidos": -232.0
     },
     {
@@ -2693,35 +2693,35 @@
      "municipios": 2,
      "efecto_pct": 4.3,
      "ic_inf": -3.3,
-     "ic_sup": 13.3,
-     "p_valor": 0.836,
+     "ic_sup": 13.6,
+     "p_valor": 0.842,
      "viajes_perdidos": -402.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
      "efecto_pct": -4.1,
-     "ic_inf": -12.6,
-     "ic_sup": 8.0,
-     "p_valor": 0.179,
+     "ic_inf": -12.4,
+     "ic_sup": 7.9,
+     "p_valor": 0.165,
      "viajes_perdidos": 899.0
     },
     {
      "linea": "R3",
      "municipios": 5,
      "efecto_pct": -1.0,
-     "ic_inf": -31.2,
-     "ic_sup": 31.3,
-     "p_valor": 0.45,
+     "ic_inf": -31.0,
+     "ic_sup": 30.4,
+     "p_valor": 0.443,
      "viajes_perdidos": 51.0
     },
     {
      "linea": "R4",
      "municipios": 8,
      "efecto_pct": 2.6,
-     "ic_inf": -13.4,
+     "ic_inf": -13.0,
      "ic_sup": 16.9,
-     "p_valor": 0.618,
+     "p_valor": 0.612,
      "viajes_perdidos": -144.0
     }
    ],
@@ -2734,9 +2734,9 @@
      "dist_km": 38.1,
      "lat": 41.5777,
      "lon": 2.54934,
-     "viajes_referencia": 1608.0,
+     "viajes_referencia": 1600.0,
      "efecto_pct": 12.2,
-     "p_valor": 0.115
+     "p_valor": 0.125
     },
     {
      "codigo": "08015",
@@ -2746,9 +2746,9 @@
      "dist_km": 9.3,
      "lat": 41.44588,
      "lon": 2.24892,
-     "viajes_referencia": 66871.0,
+     "viajes_referencia": 66839.0,
      "efecto_pct": -3.6,
-     "p_valor": 0.092
+     "p_valor": 0.103
     },
     {
      "codigo": "08017",
@@ -2758,9 +2758,9 @@
      "dist_km": 49.4,
      "lat": 41.82843,
      "lon": 2.24038,
-     "viajes_referencia": 207.0,
+     "viajes_referencia": 206.0,
      "efecto_pct": 6.4,
-     "p_valor": 0.756
+     "p_valor": 0.769
     },
     {
      "codigo": "08029",
@@ -2770,9 +2770,9 @@
      "dist_km": 23.5,
      "lat": 41.50677,
      "lon": 2.40162,
-     "viajes_referencia": 1095.0,
+     "viajes_referencia": 1096.0,
      "efecto_pct": 17.5,
-     "p_valor": 0.122
+     "p_valor": 0.11
     },
     {
      "codigo": "08032",
@@ -2782,9 +2782,9 @@
      "dist_km": 36.0,
      "lat": 41.56861,
      "lon": 2.52598,
-     "viajes_referencia": 337.0,
+     "viajes_referencia": 338.0,
      "efecto_pct": -1.1,
-     "p_valor": 0.939
+     "p_valor": 0.93
     },
     {
      "codigo": "08035",
@@ -2794,9 +2794,9 @@
      "dist_km": 48.5,
      "lat": 41.61469,
      "lon": 2.666,
-     "viajes_referencia": 1000.0,
+     "viajes_referencia": 1003.0,
      "efecto_pct": 9.6,
-     "p_valor": 0.183
+     "p_valor": 0.212
     },
     {
      "codigo": "08040",
@@ -2806,9 +2806,9 @@
      "dist_km": 40.9,
      "lat": 41.58667,
      "lon": 2.58129,
-     "viajes_referencia": 1158.0,
+     "viajes_referencia": 1156.0,
      "efecto_pct": 4.1,
-     "p_valor": 0.519
+     "p_valor": 0.535
     },
     {
      "codigo": "08046",
@@ -2820,7 +2820,7 @@
      "lon": 2.35626,
      "viajes_referencia": 1837.0,
      "efecto_pct": 11.0,
-     "p_valor": 0.153
+     "p_valor": 0.147
     },
     {
      "codigo": "08053",
@@ -2830,9 +2830,9 @@
      "dist_km": 36.6,
      "lat": 41.62868,
      "lon": 1.86882,
-     "viajes_referencia": 467.0,
+     "viajes_referencia": 468.0,
      "efecto_pct": -2.0,
-     "p_valor": 0.893
+     "p_valor": 0.864
     },
     {
      "codigo": "08054",
@@ -2842,9 +2842,9 @@
      "dist_km": 19.3,
      "lat": 41.47342,
      "lon": 1.96757,
-     "viajes_referencia": 3768.0,
+     "viajes_referencia": 3746.0,
      "efecto_pct": -10.6,
-     "p_valor": 0.214
+     "p_valor": 0.205
     },
     {
      "codigo": "08056",
@@ -2854,9 +2854,9 @@
      "dist_km": 21.0,
      "lat": 41.27301,
      "lon": 1.96814,
-     "viajes_referencia": 12682.0,
+     "viajes_referencia": 12660.0,
      "efecto_pct": -4.1,
-     "p_valor": 0.397
+     "p_valor": 0.396
     },
     {
      "codigo": "08067",
@@ -2866,9 +2866,9 @@
      "dist_km": 46.0,
      "lat": 41.79939,
      "lon": 2.22264,
-     "viajes_referencia": 555.0,
+     "viajes_referencia": 553.0,
      "efecto_pct": -0.3,
-     "p_valor": 0.969
+     "p_valor": 0.989
     },
     {
      "codigo": "08073",
@@ -2878,9 +2878,9 @@
      "dist_km": 8.8,
      "lat": 41.35752,
      "lon": 2.07055,
-     "viajes_referencia": 31753.0,
+     "viajes_referencia": 31734.0,
      "efecto_pct": -6.6,
-     "p_valor": 0.084
+     "p_valor": 0.066
     },
     {
      "codigo": "08074",
@@ -2892,7 +2892,7 @@
      "lon": 1.67598,
      "viajes_referencia": 741.0,
      "efecto_pct": -23.2,
-     "p_valor": 0.046
+     "p_valor": 0.051
     },
     {
      "codigo": "08086",
@@ -2902,9 +2902,9 @@
      "dist_km": 28.3,
      "lat": 41.62352,
      "lon": 2.2948,
-     "viajes_referencia": 1782.0,
+     "viajes_referencia": 1780.0,
      "efecto_pct": 16.5,
-     "p_valor": 0.061
+     "p_valor": 0.051
     },
     {
      "codigo": "08088",
@@ -2914,9 +2914,9 @@
      "dist_km": 34.5,
      "lat": 41.68463,
      "lon": 2.2888,
-     "viajes_referencia": 1915.0,
+     "viajes_referencia": 1908.0,
      "efecto_pct": -9.1,
-     "p_valor": 0.198
+     "p_valor": 0.183
     },
     {
      "codigo": "08089",
@@ -2926,9 +2926,9 @@
      "dist_km": 16.2,
      "lat": 41.30347,
      "lon": 2.01053,
-     "viajes_referencia": 9137.0,
+     "viajes_referencia": 9127.0,
      "efecto_pct": -1.7,
-     "p_valor": 0.55
+     "p_valor": 0.542
     },
     {
      "codigo": "08091",
@@ -2938,9 +2938,9 @@
      "dist_km": 26.2,
      "lat": 41.44854,
      "lon": 1.86553,
-     "viajes_referencia": 699.0,
+     "viajes_referencia": 708.0,
      "efecto_pct": 10.7,
-     "p_valor": 0.405
+     "p_valor": 0.388
     },
     {
      "codigo": "08096",
@@ -2950,9 +2950,9 @@
      "dist_km": 26.1,
      "lat": 41.6056,
      "lon": 2.28407,
-     "viajes_referencia": 7379.0,
+     "viajes_referencia": 7380.0,
      "efecto_pct": 0.4,
-     "p_valor": 1.0
+     "p_valor": 0.982
     },
     {
      "codigo": "08101",
@@ -2962,9 +2962,9 @@
      "dist_km": 5.9,
      "lat": 41.35956,
      "lon": 2.1081,
-     "viajes_referencia": 116821.0,
+     "viajes_referencia": 116856.0,
      "efecto_pct": -2.4,
-     "p_valor": 0.176
+     "p_valor": 0.198
     },
     {
      "codigo": "08105",
@@ -2974,9 +2974,9 @@
      "dist_km": 13.9,
      "lat": 41.51046,
      "lon": 2.19973,
-     "viajes_referencia": 2391.0,
+     "viajes_referencia": 2405.0,
      "efecto_pct": -13.8,
-     "p_valor": 0.038
+     "p_valor": 0.037
     },
     {
      "codigo": "08106",
@@ -2986,9 +2986,9 @@
      "dist_km": 34.1,
      "lat": 41.63804,
      "lon": 2.40446,
-     "viajes_referencia": 1257.0,
+     "viajes_referencia": 1258.0,
      "efecto_pct": -4.6,
-     "p_valor": 0.664
+     "p_valor": 0.652
     },
     {
      "codigo": "08110",
@@ -2998,9 +2998,9 @@
      "dist_km": 55.4,
      "lat": 41.6416,
      "lon": 2.74128,
-     "viajes_referencia": 619.0,
+     "viajes_referencia": 618.0,
      "efecto_pct": -2.3,
-     "p_valor": 0.855
+     "p_valor": 0.842
     },
     {
      "codigo": "08112",
@@ -3010,9 +3010,9 @@
      "dist_km": 68.6,
      "lat": 41.99986,
      "lon": 2.2693,
-     "viajes_referencia": 291.0,
+     "viajes_referencia": 290.0,
      "efecto_pct": -4.1,
-     "p_valor": 0.84
+     "p_valor": 0.806
     },
     {
      "codigo": "08113",
@@ -3022,9 +3022,9 @@
      "dist_km": 46.7,
      "lat": 41.72039,
      "lon": 1.82649,
-     "viajes_referencia": 2400.0,
+     "viajes_referencia": 2384.0,
      "efecto_pct": 0.3,
-     "p_valor": 0.992
+     "p_valor": 0.989
     },
     {
      "codigo": "08114",
@@ -3034,9 +3034,9 @@
      "dist_km": 22.7,
      "lat": 41.47929,
      "lon": 1.92533,
-     "viajes_referencia": 4368.0,
+     "viajes_referencia": 4330.0,
      "efecto_pct": 8.1,
-     "p_valor": 0.237
+     "p_valor": 0.249
     },
     {
      "codigo": "08118",
@@ -3046,9 +3046,9 @@
      "dist_km": 15.8,
      "lat": 41.47803,
      "lon": 2.31495,
-     "viajes_referencia": 4034.0,
+     "viajes_referencia": 4064.0,
      "efecto_pct": 0.8,
-     "p_valor": 0.863
+     "p_valor": 0.828
     },
     {
      "codigo": "08121",
@@ -3058,9 +3058,9 @@
      "dist_km": 28.2,
      "lat": 41.53339,
      "lon": 2.44553,
-     "viajes_referencia": 11010.0,
+     "viajes_referencia": 10981.0,
      "efecto_pct": 7.0,
-     "p_valor": 0.076
+     "p_valor": 0.073
     },
     {
      "codigo": "08123",
@@ -3070,9 +3070,9 @@
      "dist_km": 12.6,
      "lat": 41.4099,
      "lon": 2.02077,
-     "viajes_referencia": 5497.0,
+     "viajes_referencia": 5500.0,
      "efecto_pct": -1.8,
-     "p_valor": 0.695
+     "p_valor": 0.696
     },
     {
      "codigo": "08124",
@@ -3082,9 +3082,9 @@
      "dist_km": 16.8,
      "lat": 41.53511,
      "lon": 2.21192,
-     "viajes_referencia": 7759.0,
+     "viajes_referencia": 7757.0,
      "efecto_pct": -0.8,
-     "p_valor": 0.725
+     "p_valor": 0.718
     },
     {
      "codigo": "08125",
@@ -3094,9 +3094,9 @@
      "dist_km": 10.7,
      "lat": 41.48319,
      "lon": 2.18048,
-     "viajes_referencia": 18478.0,
+     "viajes_referencia": 18520.0,
      "efecto_pct": -7.8,
-     "p_valor": 0.183
+     "p_valor": 0.19
     },
     {
      "codigo": "08126",
@@ -3106,9 +3106,9 @@
      "dist_km": 12.7,
      "lat": 41.4659,
      "lon": 2.27943,
-     "viajes_referencia": 4092.0,
+     "viajes_referencia": 4090.0,
      "efecto_pct": -3.3,
-     "p_valor": 0.489
+     "p_valor": 0.527
     },
     {
      "codigo": "08135",
@@ -3118,9 +3118,9 @@
      "dist_km": 19.1,
      "lat": 41.54965,
      "lon": 2.24544,
-     "viajes_referencia": 1067.0,
+     "viajes_referencia": 1064.0,
      "efecto_pct": -6.9,
-     "p_valor": 0.504
+     "p_valor": 0.505
     },
     {
      "codigo": "08158",
@@ -3130,9 +3130,9 @@
      "dist_km": 14.8,
      "lat": 41.43537,
      "lon": 2.00258,
-     "viajes_referencia": 1021.0,
+     "viajes_referencia": 1020.0,
      "efecto_pct": -9.8,
-     "p_valor": 0.481
+     "p_valor": 0.454
     },
     {
      "codigo": "08159",
@@ -3142,9 +3142,9 @@
      "dist_km": 19.4,
      "lat": 41.55627,
      "lon": 2.226,
-     "viajes_referencia": 3539.0,
+     "viajes_referencia": 3538.0,
      "efecto_pct": -4.6,
-     "p_valor": 0.435
+     "p_valor": 0.44
     },
     {
      "codigo": "08163",
@@ -3154,9 +3154,9 @@
      "dist_km": 50.9,
      "lat": 41.62244,
      "lon": 2.69355,
-     "viajes_referencia": 1348.0,
+     "viajes_referencia": 1352.0,
      "efecto_pct": 7.1,
-     "p_valor": 0.336
+     "p_valor": 0.344
     },
     {
      "codigo": "08169",
@@ -3166,9 +3166,9 @@
      "dist_km": 10.6,
      "lat": 41.31756,
      "lon": 2.08137,
-     "viajes_referencia": 37027.0,
+     "viajes_referencia": 37168.0,
      "efecto_pct": -5.5,
-     "p_valor": 0.511
+     "p_valor": 0.513
     },
     {
      "codigo": "08172",
@@ -3178,9 +3178,9 @@
      "dist_km": 19.1,
      "lat": 41.48775,
      "lon": 2.35486,
-     "viajes_referencia": 4229.0,
+     "viajes_referencia": 4258.0,
      "efecto_pct": -16.7,
-     "p_valor": 0.13
+     "p_valor": 0.132
     },
     {
      "codigo": "08187",
@@ -3190,9 +3190,9 @@
      "dist_km": 18.4,
      "lat": 41.5457,
      "lon": 2.10574,
-     "viajes_referencia": 20364.0,
+     "viajes_referencia": 20356.0,
      "efecto_pct": -0.2,
-     "p_valor": 0.962
+     "p_valor": 0.982
     },
     {
      "codigo": "08194",
@@ -3202,9 +3202,9 @@
      "dist_km": 6.6,
      "lat": 41.42443,
      "lon": 2.23048,
-     "viajes_referencia": 27946.0,
+     "viajes_referencia": 27747.0,
      "efecto_pct": -20.9,
-     "p_valor": 0.008
+     "p_valor": 0.007
     },
     {
      "codigo": "08197",
@@ -3214,9 +3214,9 @@
      "dist_km": 33.2,
      "lat": 41.55555,
      "lon": 2.49826,
-     "viajes_referencia": 1321.0,
+     "viajes_referencia": 1325.0,
      "efecto_pct": 23.3,
-     "p_valor": 0.053
+     "p_valor": 0.051
     },
     {
      "codigo": "08202",
@@ -3226,9 +3226,9 @@
      "dist_km": 42.7,
      "lat": 41.68579,
      "lon": 2.49073,
-     "viajes_referencia": 1550.0,
+     "viajes_referencia": 1554.0,
      "efecto_pct": 11.9,
-     "p_valor": 0.168
+     "p_valor": 0.19
     },
     {
      "codigo": "08211",
@@ -3238,9 +3238,9 @@
      "dist_km": 10.1,
      "lat": 41.383,
      "lon": 2.04792,
-     "viajes_referencia": 10480.0,
+     "viajes_referencia": 10477.0,
      "efecto_pct": 0.8,
-     "p_valor": 0.748
+     "p_valor": 0.762
     },
     {
      "codigo": "08217",
@@ -3250,9 +3250,9 @@
      "dist_km": 9.3,
      "lat": 41.36858,
      "lon": 2.06021,
-     "viajes_referencia": 12126.0,
+     "viajes_referencia": 12164.0,
      "efecto_pct": -2.0,
-     "p_valor": 0.779
+     "p_valor": 0.799
     },
     {
      "codigo": "08219",
@@ -3264,7 +3264,7 @@
      "lon": 2.38986,
      "viajes_referencia": 3630.0,
      "efecto_pct": -1.8,
-     "p_valor": 0.687
+     "p_valor": 0.689
     },
     {
      "codigo": "08235",
@@ -3274,9 +3274,9 @@
      "dist_km": 44.8,
      "lat": 41.60175,
      "lon": 2.6246,
-     "viajes_referencia": 561.0,
+     "viajes_referencia": 560.0,
      "efecto_pct": -3.0,
-     "p_valor": 0.824
+     "p_valor": 0.835
     },
     {
      "codigo": "08240",
@@ -3286,9 +3286,9 @@
      "dist_km": 31.4,
      "lat": 41.42052,
      "lon": 1.79469,
-     "viajes_referencia": 910.0,
+     "viajes_referencia": 917.0,
      "efecto_pct": 3.5,
-     "p_valor": 0.756
+     "p_valor": 0.806
     },
     {
      "codigo": "08252",
@@ -3298,9 +3298,9 @@
      "dist_km": 14.6,
      "lat": 41.51366,
      "lon": 2.11845,
-     "viajes_referencia": 6466.0,
+     "viajes_referencia": 6443.0,
      "efecto_pct": -7.1,
-     "p_valor": 0.107
+     "p_valor": 0.11
     },
     {
      "codigo": "08259",
@@ -3310,9 +3310,9 @@
      "dist_km": 39.6,
      "lat": 41.67195,
      "lon": 2.45421,
-     "viajes_referencia": 513.0,
+     "viajes_referencia": 508.0,
      "efecto_pct": -8.6,
-     "p_valor": 0.534
+     "p_valor": 0.542
     },
     {
      "codigo": "08260",
@@ -3322,9 +3322,9 @@
      "dist_km": 15.5,
      "lat": 41.52622,
      "lon": 2.18629,
-     "viajes_referencia": 6541.0,
+     "viajes_referencia": 6520.0,
      "efecto_pct": -2.6,
-     "p_valor": 0.557
+     "p_valor": 0.549
     },
     {
      "codigo": "08262",
@@ -3336,7 +3336,7 @@
      "lon": 1.86264,
      "viajes_referencia": 297.0,
      "efecto_pct": 38.8,
-     "p_valor": 0.069
+     "p_valor": 0.073
     },
     {
      "codigo": "08266",
@@ -3348,7 +3348,7 @@
      "lon": 2.13145,
      "viajes_referencia": 14765.0,
      "efecto_pct": -1.0,
-     "p_valor": 0.756
+     "p_valor": 0.777
     },
     {
      "codigo": "08270",
@@ -3358,9 +3358,9 @@
      "dist_km": 30.4,
      "lat": 41.24686,
      "lon": 1.8561,
-     "viajes_referencia": 5959.0,
+     "viajes_referencia": 5953.0,
      "efecto_pct": 3.7,
-     "p_valor": 0.702
+     "p_valor": 0.696
     },
     {
      "codigo": "08273",
@@ -3372,7 +3372,7 @@
      "lon": 1.76817,
      "viajes_referencia": 371.0,
      "efecto_pct": 8.8,
-     "p_valor": 0.573
+     "p_valor": 0.564
     },
     {
      "codigo": "08279",
@@ -3382,9 +3382,9 @@
      "dist_km": 23.4,
      "lat": 41.56866,
      "lon": 2.027,
-     "viajes_referencia": 16755.0,
+     "viajes_referencia": 16749.0,
      "efecto_pct": 0.4,
-     "p_valor": 0.985
+     "p_valor": 0.982
     },
     {
      "codigo": "08284",
@@ -3394,9 +3394,9 @@
      "dist_km": 58.0,
      "lat": 41.70717,
      "lon": 2.71957,
-     "viajes_referencia": 989.0,
+     "viajes_referencia": 984.0,
      "efecto_pct": -2.2,
-     "p_valor": 0.809
+     "p_valor": 0.791
     },
     {
      "codigo": "08291",
@@ -3406,9 +3406,9 @@
      "dist_km": 31.8,
      "lat": 41.59442,
      "lon": 1.90528,
-     "viajes_referencia": 421.0,
+     "viajes_referencia": 420.0,
      "efecto_pct": -3.1,
-     "p_valor": 0.832
+     "p_valor": 0.857
     },
     {
      "codigo": "08298",
@@ -3418,9 +3418,9 @@
      "dist_km": 60.8,
      "lat": 41.9311,
      "lon": 2.24886,
-     "viajes_referencia": 1968.0,
+     "viajes_referencia": 1970.0,
      "efecto_pct": 1.8,
-     "p_valor": 0.916
+     "p_valor": 0.879
     },
     {
      "codigo": "08300",
@@ -3430,9 +3430,9 @@
      "dist_km": 26.1,
      "lat": 41.56633,
      "lon": 1.96578,
-     "viajes_referencia": 605.0,
+     "viajes_referencia": 600.0,
      "efecto_pct": -2.7,
-     "p_valor": 0.84
+     "p_valor": 0.828
     },
     {
      "codigo": "08301",
@@ -3442,9 +3442,9 @@
      "dist_km": 14.6,
      "lat": 41.30951,
      "lon": 2.02742,
-     "viajes_referencia": 14643.0,
+     "viajes_referencia": 14626.0,
      "efecto_pct": 0.1,
-     "p_valor": 0.947
+     "p_valor": 0.952
     },
     {
      "codigo": "08305",
@@ -3454,9 +3454,9 @@
      "dist_km": 39.1,
      "lat": 41.34481,
      "lon": 1.7032,
-     "viajes_referencia": 1819.0,
+     "viajes_referencia": 1822.0,
      "efecto_pct": 4.3,
-     "p_valor": 0.733
+     "p_valor": 0.703
     },
     {
      "codigo": "08307",
@@ -3466,65 +3466,65 @@
      "dist_km": 41.0,
      "lat": 41.22032,
      "lon": 1.73077,
-     "viajes_referencia": 4145.0,
+     "viajes_referencia": 4134.0,
      "efecto_pct": -6.5,
-     "p_valor": 0.29
+     "p_valor": 0.278
     }
    ],
    "evento": [
     {
      "dia": -5,
      "efecto_pct": 2.08,
-     "ic_inf": -3.01,
-     "ic_sup": 8.73
+     "ic_inf": -2.9,
+     "ic_sup": 8.61
     },
     {
      "dia": -4,
      "efecto_pct": 2.83,
-     "ic_inf": -2.3,
-     "ic_sup": 9.53
+     "ic_inf": -2.19,
+     "ic_sup": 9.41
     },
     {
      "dia": -3,
      "efecto_pct": -0.44,
-     "ic_inf": -5.4,
-     "ic_sup": 6.06
+     "ic_inf": -5.3,
+     "ic_sup": 5.93
     },
     {
      "dia": -2,
      "efecto_pct": -1.15,
-     "ic_inf": -6.08,
-     "ic_sup": 5.29
+     "ic_inf": -5.98,
+     "ic_sup": 5.17
     },
     {
      "dia": -1,
      "efecto_pct": -3.48,
-     "ic_inf": -8.3,
-     "ic_sup": 2.81
+     "ic_inf": -8.2,
+     "ic_sup": 2.69
     },
     {
      "dia": 0,
      "efecto_pct": 1.82,
-     "ic_inf": -3.26,
-     "ic_sup": 8.46
+     "ic_inf": -3.15,
+     "ic_sup": 8.33
     },
     {
      "dia": 1,
      "efecto_pct": 6.8,
-     "ic_inf": 1.47,
-     "ic_sup": 13.76
+     "ic_inf": 1.59,
+     "ic_sup": 13.63
     },
     {
      "dia": 2,
      "efecto_pct": 2.56,
-     "ic_inf": -2.56,
-     "ic_sup": 9.25
+     "ic_inf": -2.45,
+     "ic_sup": 9.12
     },
     {
      "dia": 3,
      "efecto_pct": 6.38,
-     "ic_inf": 1.08,
-     "ic_sup": 13.32
+     "ic_inf": 1.19,
+     "ic_sup": 13.19
     }
    ],
    "caso_od": false
@@ -3549,32 +3549,32 @@
      "grupo": "dependientes",
      "municipios": 35,
      "efecto_pct": -6.8,
-     "ic_inf": -11.4,
-     "ic_sup": -0.7,
-     "p_valor": 0.023
+     "ic_inf": -11.3,
+     "ic_sup": -0.8,
+     "p_valor": 0.022
     },
     {
      "grupo": "cercanos",
      "municipios": 16,
      "efecto_pct": -4.4,
-     "ic_inf": -10.2,
+     "ic_inf": -9.9,
      "ic_sup": -0.5,
-     "p_valor": 0.019
+     "p_valor": 0.015
     },
     {
      "grupo": "metro_fgc",
      "municipios": 11,
      "efecto_pct": -3.8,
-     "ic_inf": -7.9,
-     "ic_sup": -0.6,
-     "p_valor": 0.011
+     "ic_inf": -7.6,
+     "ic_sup": -0.8,
+     "p_valor": 0.007
     }
    ],
    "perdidos": {
     "viajes_dia_normal": 71160.0,
     "viajes_perdidos": 4839.0,
     "efecto_pct": -6.8,
-    "p_valor": 0.023
+    "p_valor": 0.022
    },
    "serie": [
     {
@@ -3827,18 +3827,18 @@
      "linea": "R1",
      "municipios": 12,
      "efecto_pct": -4.7,
-     "ic_inf": -9.6,
-     "ic_sup": 4.1,
-     "p_valor": 0.099,
+     "ic_inf": -10.3,
+     "ic_sup": 4.4,
+     "p_valor": 0.103,
      "viajes_perdidos": 1131.0
     },
     {
      "linea": "R2N",
      "municipios": 4,
      "efecto_pct": -0.9,
-     "ic_inf": -9.6,
-     "ic_sup": 12.9,
-     "p_valor": 0.42,
+     "ic_inf": -9.3,
+     "ic_sup": 12.6,
+     "p_valor": 0.425,
      "viajes_perdidos": 47.0
     },
     {
@@ -3846,35 +3846,35 @@
      "municipios": 2,
      "efecto_pct": -1.0,
      "ic_inf": -8.2,
-     "ic_sup": 7.7,
-     "p_valor": 0.401,
+     "ic_sup": 7.9,
+     "p_valor": 0.396,
      "viajes_perdidos": 94.0
     },
     {
      "linea": "R2S",
      "municipios": 4,
      "efecto_pct": -14.8,
-     "ic_inf": -22.4,
-     "ic_sup": -4.1,
-     "p_valor": 0.019,
+     "ic_inf": -22.2,
+     "ic_sup": -4.2,
+     "p_valor": 0.018,
      "viajes_perdidos": 3245.0
     },
     {
      "linea": "R3",
      "municipios": 5,
      "efecto_pct": -1.6,
-     "ic_inf": -31.6,
-     "ic_sup": 30.4,
-     "p_valor": 0.412,
+     "ic_inf": -31.4,
+     "ic_sup": 29.6,
+     "p_valor": 0.407,
      "viajes_perdidos": 82.0
     },
     {
      "linea": "R4",
      "municipios": 8,
      "efecto_pct": -6.9,
-     "ic_inf": -21.3,
+     "ic_inf": -21.0,
      "ic_sup": 6.2,
-     "p_valor": 0.149,
+     "p_valor": 0.136,
      "viajes_perdidos": 382.0
     }
    ],
@@ -3887,9 +3887,9 @@
      "dist_km": 38.1,
      "lat": 41.5777,
      "lon": 2.54934,
-     "viajes_referencia": 1608.0,
+     "viajes_referencia": 1600.0,
      "efecto_pct": -3.8,
-     "p_valor": 0.519
+     "p_valor": 0.527
     },
     {
      "codigo": "08015",
@@ -3899,9 +3899,9 @@
      "dist_km": 9.3,
      "lat": 41.44588,
      "lon": 2.24892,
-     "viajes_referencia": 66871.0,
+     "viajes_referencia": 66839.0,
      "efecto_pct": -4.8,
-     "p_valor": 0.031
+     "p_valor": 0.029
     },
     {
      "codigo": "08017",
@@ -3911,9 +3911,9 @@
      "dist_km": 49.4,
      "lat": 41.82843,
      "lon": 2.24038,
-     "viajes_referencia": 207.0,
+     "viajes_referencia": 206.0,
      "efecto_pct": -23.2,
-     "p_valor": 0.221
+     "p_valor": 0.205
     },
     {
      "codigo": "08029",
@@ -3923,9 +3923,9 @@
      "dist_km": 23.5,
      "lat": 41.50677,
      "lon": 2.40162,
-     "viajes_referencia": 1095.0,
+     "viajes_referencia": 1096.0,
      "efecto_pct": 0.7,
-     "p_valor": 0.947
+     "p_valor": 0.945
     },
     {
      "codigo": "08032",
@@ -3935,7 +3935,7 @@
      "dist_km": 36.0,
      "lat": 41.56861,
      "lon": 2.52598,
-     "viajes_referencia": 337.0,
+     "viajes_referencia": 338.0,
      "efecto_pct": -13.4,
      "p_valor": 0.366
     },
@@ -3947,9 +3947,9 @@
      "dist_km": 48.5,
      "lat": 41.61469,
      "lon": 2.666,
-     "viajes_referencia": 1000.0,
+     "viajes_referencia": 1003.0,
      "efecto_pct": -10.9,
-     "p_valor": 0.237
+     "p_valor": 0.256
     },
     {
      "codigo": "08040",
@@ -3959,9 +3959,9 @@
      "dist_km": 40.9,
      "lat": 41.58667,
      "lon": 2.58129,
-     "viajes_referencia": 1158.0,
+     "viajes_referencia": 1156.0,
      "efecto_pct": -13.1,
-     "p_valor": 0.084
+     "p_valor": 0.088
     },
     {
      "codigo": "08046",
@@ -3973,7 +3973,7 @@
      "lon": 2.35626,
      "viajes_referencia": 1837.0,
      "efecto_pct": 10.5,
-     "p_valor": 0.16
+     "p_valor": 0.161
     },
     {
      "codigo": "08053",
@@ -3983,9 +3983,9 @@
      "dist_km": 36.6,
      "lat": 41.62868,
      "lon": 1.86882,
-     "viajes_referencia": 467.0,
+     "viajes_referencia": 468.0,
      "efecto_pct": -8.1,
-     "p_valor": 0.481
+     "p_valor": 0.476
     },
     {
      "codigo": "08054",
@@ -3995,9 +3995,9 @@
      "dist_km": 19.3,
      "lat": 41.47342,
      "lon": 1.96757,
-     "viajes_referencia": 3768.0,
+     "viajes_referencia": 3746.0,
      "efecto_pct": -14.3,
-     "p_valor": 0.069
+     "p_valor": 0.066
     },
     {
      "codigo": "08056",
@@ -4007,9 +4007,9 @@
      "dist_km": 21.0,
      "lat": 41.27301,
      "lon": 1.96814,
-     "viajes_referencia": 12682.0,
+     "viajes_referencia": 12660.0,
      "efecto_pct": -13.6,
-     "p_valor": 0.053
+     "p_valor": 0.051
     },
     {
      "codigo": "08067",
@@ -4019,9 +4019,9 @@
      "dist_km": 46.0,
      "lat": 41.79939,
      "lon": 2.22264,
-     "viajes_referencia": 555.0,
+     "viajes_referencia": 553.0,
      "efecto_pct": -3.5,
-     "p_valor": 0.763
+     "p_valor": 0.769
     },
     {
      "codigo": "08073",
@@ -4031,9 +4031,9 @@
      "dist_km": 8.8,
      "lat": 41.35752,
      "lon": 2.07055,
-     "viajes_referencia": 31753.0,
+     "viajes_referencia": 31734.0,
      "efecto_pct": -1.1,
-     "p_valor": 0.779
+     "p_valor": 0.777
     },
     {
      "codigo": "08074",
@@ -4045,7 +4045,7 @@
      "lon": 1.67598,
      "viajes_referencia": 741.0,
      "efecto_pct": -9.8,
-     "p_valor": 0.298
+     "p_valor": 0.293
     },
     {
      "codigo": "08086",
@@ -4055,9 +4055,9 @@
      "dist_km": 28.3,
      "lat": 41.62352,
      "lon": 2.2948,
-     "viajes_referencia": 1782.0,
+     "viajes_referencia": 1780.0,
      "efecto_pct": 3.5,
-     "p_valor": 0.702
+     "p_valor": 0.689
     },
     {
      "codigo": "08088",
@@ -4067,9 +4067,9 @@
      "dist_km": 34.5,
      "lat": 41.68463,
      "lon": 2.2888,
-     "viajes_referencia": 1915.0,
+     "viajes_referencia": 1908.0,
      "efecto_pct": -8.6,
-     "p_valor": 0.237
+     "p_valor": 0.212
     },
     {
      "codigo": "08089",
@@ -4079,9 +4079,9 @@
      "dist_km": 16.2,
      "lat": 41.30347,
      "lon": 2.01053,
-     "viajes_referencia": 9137.0,
+     "viajes_referencia": 9127.0,
      "efecto_pct": -6.1,
-     "p_valor": 0.153
+     "p_valor": 0.154
     },
     {
      "codigo": "08091",
@@ -4091,9 +4091,9 @@
      "dist_km": 26.2,
      "lat": 41.44854,
      "lon": 1.86553,
-     "viajes_referencia": 699.0,
+     "viajes_referencia": 708.0,
      "efecto_pct": 4.9,
-     "p_valor": 0.748
+     "p_valor": 0.725
     },
     {
      "codigo": "08096",
@@ -4103,9 +4103,9 @@
      "dist_km": 26.1,
      "lat": 41.6056,
      "lon": 2.28407,
-     "viajes_referencia": 7379.0,
+     "viajes_referencia": 7380.0,
      "efecto_pct": -2.8,
-     "p_valor": 0.542
+     "p_valor": 0.549
     },
     {
      "codigo": "08101",
@@ -4115,7 +4115,7 @@
      "dist_km": 5.9,
      "lat": 41.35956,
      "lon": 2.1081,
-     "viajes_referencia": 116821.0,
+     "viajes_referencia": 116856.0,
      "efecto_pct": -5.1,
      "p_valor": 0.015
     },
@@ -4127,9 +4127,9 @@
      "dist_km": 13.9,
      "lat": 41.51046,
      "lon": 2.19973,
-     "viajes_referencia": 2391.0,
+     "viajes_referencia": 2405.0,
      "efecto_pct": -17.1,
-     "p_valor": 0.008
+     "p_valor": 0.007
     },
     {
      "codigo": "08106",
@@ -4139,9 +4139,9 @@
      "dist_km": 34.1,
      "lat": 41.63804,
      "lon": 2.40446,
-     "viajes_referencia": 1257.0,
+     "viajes_referencia": 1258.0,
      "efecto_pct": -3.6,
-     "p_valor": 0.733
+     "p_valor": 0.711
     },
     {
      "codigo": "08110",
@@ -4151,9 +4151,9 @@
      "dist_km": 55.4,
      "lat": 41.6416,
      "lon": 2.74128,
-     "viajes_referencia": 619.0,
+     "viajes_referencia": 618.0,
      "efecto_pct": -7.7,
-     "p_valor": 0.473
+     "p_valor": 0.462
     },
     {
      "codigo": "08112",
@@ -4163,7 +4163,7 @@
      "dist_km": 68.6,
      "lat": 41.99986,
      "lon": 2.2693,
-     "viajes_referencia": 291.0,
+     "viajes_referencia": 290.0,
      "efecto_pct": 29.7,
      "p_valor": 0.183
     },
@@ -4175,9 +4175,9 @@
      "dist_km": 46.7,
      "lat": 41.72039,
      "lon": 1.82649,
-     "viajes_referencia": 2400.0,
+     "viajes_referencia": 2384.0,
      "efecto_pct": 4.9,
-     "p_valor": 0.496
+     "p_valor": 0.476
     },
     {
      "codigo": "08114",
@@ -4187,9 +4187,9 @@
      "dist_km": 22.7,
      "lat": 41.47929,
      "lon": 1.92533,
-     "viajes_referencia": 4368.0,
+     "viajes_referencia": 4330.0,
      "efecto_pct": 0.2,
-     "p_valor": 0.992
+     "p_valor": 0.967
     },
     {
      "codigo": "08118",
@@ -4199,9 +4199,9 @@
      "dist_km": 15.8,
      "lat": 41.47803,
      "lon": 2.31495,
-     "viajes_referencia": 4034.0,
+     "viajes_referencia": 4064.0,
      "efecto_pct": -6.0,
-     "p_valor": 0.344
+     "p_valor": 0.352
     },
     {
      "codigo": "08121",
@@ -4211,9 +4211,9 @@
      "dist_km": 28.2,
      "lat": 41.53339,
      "lon": 2.44553,
-     "viajes_referencia": 11010.0,
+     "viajes_referencia": 10981.0,
      "efecto_pct": -0.7,
-     "p_valor": 0.878
+     "p_valor": 0.835
     },
     {
      "codigo": "08123",
@@ -4223,9 +4223,9 @@
      "dist_km": 12.6,
      "lat": 41.4099,
      "lon": 2.02077,
-     "viajes_referencia": 5497.0,
+     "viajes_referencia": 5500.0,
      "efecto_pct": 0.0,
-     "p_valor": 0.962
+     "p_valor": 0.974
     },
     {
      "codigo": "08124",
@@ -4235,9 +4235,9 @@
      "dist_km": 16.8,
      "lat": 41.53511,
      "lon": 2.21192,
-     "viajes_referencia": 7759.0,
+     "viajes_referencia": 7757.0,
      "efecto_pct": -3.3,
-     "p_valor": 0.351
+     "p_valor": 0.366
     },
     {
      "codigo": "08125",
@@ -4247,9 +4247,9 @@
      "dist_km": 10.7,
      "lat": 41.48319,
      "lon": 2.18048,
-     "viajes_referencia": 18478.0,
+     "viajes_referencia": 18520.0,
      "efecto_pct": -1.9,
-     "p_valor": 0.794
+     "p_valor": 0.799
     },
     {
      "codigo": "08126",
@@ -4259,9 +4259,9 @@
      "dist_km": 12.7,
      "lat": 41.4659,
      "lon": 2.27943,
-     "viajes_referencia": 4092.0,
+     "viajes_referencia": 4090.0,
      "efecto_pct": -6.7,
-     "p_valor": 0.221
+     "p_valor": 0.234
     },
     {
      "codigo": "08135",
@@ -4271,9 +4271,9 @@
      "dist_km": 19.1,
      "lat": 41.54965,
      "lon": 2.24544,
-     "viajes_referencia": 1067.0,
+     "viajes_referencia": 1064.0,
      "efecto_pct": -10.4,
-     "p_valor": 0.244
+     "p_valor": 0.256
     },
     {
      "codigo": "08158",
@@ -4283,9 +4283,9 @@
      "dist_km": 14.8,
      "lat": 41.43537,
      "lon": 2.00258,
-     "viajes_referencia": 1021.0,
+     "viajes_referencia": 1020.0,
      "efecto_pct": 2.6,
-     "p_valor": 0.878
+     "p_valor": 0.872
     },
     {
      "codigo": "08159",
@@ -4295,9 +4295,9 @@
      "dist_km": 19.4,
      "lat": 41.55627,
      "lon": 2.226,
-     "viajes_referencia": 3539.0,
+     "viajes_referencia": 3538.0,
      "efecto_pct": -2.1,
-     "p_valor": 0.779
+     "p_valor": 0.747
     },
     {
      "codigo": "08163",
@@ -4307,9 +4307,9 @@
      "dist_km": 50.9,
      "lat": 41.62244,
      "lon": 2.69355,
-     "viajes_referencia": 1348.0,
+     "viajes_referencia": 1352.0,
      "efecto_pct": -14.5,
-     "p_valor": 0.061
+     "p_valor": 0.066
     },
     {
      "codigo": "08169",
@@ -4319,9 +4319,9 @@
      "dist_km": 10.6,
      "lat": 41.31756,
      "lon": 2.08137,
-     "viajes_referencia": 37027.0,
+     "viajes_referencia": 37168.0,
      "efecto_pct": -0.1,
-     "p_valor": 0.977
+     "p_valor": 0.967
     },
     {
      "codigo": "08172",
@@ -4331,9 +4331,9 @@
      "dist_km": 19.1,
      "lat": 41.48775,
      "lon": 2.35486,
-     "viajes_referencia": 4229.0,
+     "viajes_referencia": 4258.0,
      "efecto_pct": -8.0,
-     "p_valor": 0.298
+     "p_valor": 0.293
     },
     {
      "codigo": "08187",
@@ -4343,9 +4343,9 @@
      "dist_km": 18.4,
      "lat": 41.5457,
      "lon": 2.10574,
-     "viajes_referencia": 20364.0,
+     "viajes_referencia": 20356.0,
      "efecto_pct": 1.3,
-     "p_valor": 0.664
+     "p_valor": 0.674
     },
     {
      "codigo": "08194",
@@ -4355,9 +4355,9 @@
      "dist_km": 6.6,
      "lat": 41.42443,
      "lon": 2.23048,
-     "viajes_referencia": 27946.0,
+     "viajes_referencia": 27747.0,
      "efecto_pct": -12.9,
-     "p_valor": 0.053
+     "p_valor": 0.051
     },
     {
      "codigo": "08197",
@@ -4367,9 +4367,9 @@
      "dist_km": 33.2,
      "lat": 41.55555,
      "lon": 2.49826,
-     "viajes_referencia": 1321.0,
+     "viajes_referencia": 1325.0,
      "efecto_pct": 9.2,
-     "p_valor": 0.267
+     "p_valor": 0.286
     },
     {
      "codigo": "08202",
@@ -4379,9 +4379,9 @@
      "dist_km": 42.7,
      "lat": 41.68579,
      "lon": 2.49073,
-     "viajes_referencia": 1550.0,
+     "viajes_referencia": 1554.0,
      "efecto_pct": -5.9,
-     "p_valor": 0.397
+     "p_valor": 0.396
     },
     {
      "codigo": "08211",
@@ -4391,9 +4391,9 @@
      "dist_km": 10.1,
      "lat": 41.383,
      "lon": 2.04792,
-     "viajes_referencia": 10480.0,
+     "viajes_referencia": 10477.0,
      "efecto_pct": -3.4,
-     "p_valor": 0.29
+     "p_valor": 0.337
     },
     {
      "codigo": "08217",
@@ -4403,9 +4403,9 @@
      "dist_km": 9.3,
      "lat": 41.36858,
      "lon": 2.06021,
-     "viajes_referencia": 12126.0,
+     "viajes_referencia": 12164.0,
      "efecto_pct": -4.5,
-     "p_valor": 0.542
+     "p_valor": 0.564
     },
     {
      "codigo": "08219",
@@ -4417,7 +4417,7 @@
      "lon": 2.38986,
      "viajes_referencia": 3630.0,
      "efecto_pct": -11.7,
-     "p_valor": 0.099
+     "p_valor": 0.095
     },
     {
      "codigo": "08235",
@@ -4427,9 +4427,9 @@
      "dist_km": 44.8,
      "lat": 41.60175,
      "lon": 2.6246,
-     "viajes_referencia": 561.0,
+     "viajes_referencia": 560.0,
      "efecto_pct": 6.8,
-     "p_valor": 0.626
+     "p_valor": 0.608
     },
     {
      "codigo": "08240",
@@ -4439,9 +4439,9 @@
      "dist_km": 31.4,
      "lat": 41.42052,
      "lon": 1.79469,
-     "viajes_referencia": 910.0,
+     "viajes_referencia": 917.0,
      "efecto_pct": -7.9,
-     "p_valor": 0.481
+     "p_valor": 0.505
     },
     {
      "codigo": "08252",
@@ -4451,9 +4451,9 @@
      "dist_km": 14.6,
      "lat": 41.51366,
      "lon": 2.11845,
-     "viajes_referencia": 6466.0,
+     "viajes_referencia": 6443.0,
      "efecto_pct": -7.1,
-     "p_valor": 0.107
+     "p_valor": 0.11
     },
     {
      "codigo": "08259",
@@ -4463,9 +4463,9 @@
      "dist_km": 39.6,
      "lat": 41.67195,
      "lon": 2.45421,
-     "viajes_referencia": 513.0,
+     "viajes_referencia": 508.0,
      "efecto_pct": -8.5,
-     "p_valor": 0.534
+     "p_valor": 0.549
     },
     {
      "codigo": "08260",
@@ -4475,9 +4475,9 @@
      "dist_km": 15.5,
      "lat": 41.52622,
      "lon": 2.18629,
-     "viajes_referencia": 6541.0,
+     "viajes_referencia": 6520.0,
      "efecto_pct": -0.6,
-     "p_valor": 0.84
+     "p_valor": 0.806
     },
     {
      "codigo": "08262",
@@ -4489,7 +4489,7 @@
      "lon": 1.86264,
      "viajes_referencia": 297.0,
      "efecto_pct": 7.1,
-     "p_valor": 0.656
+     "p_valor": 0.608
     },
     {
      "codigo": "08266",
@@ -4501,7 +4501,7 @@
      "lon": 2.13145,
      "viajes_referencia": 14765.0,
      "efecto_pct": -2.0,
-     "p_valor": 0.588
+     "p_valor": 0.586
     },
     {
      "codigo": "08270",
@@ -4511,9 +4511,9 @@
      "dist_km": 30.4,
      "lat": 41.24686,
      "lon": 1.8561,
-     "viajes_referencia": 5959.0,
+     "viajes_referencia": 5953.0,
      "efecto_pct": -13.0,
-     "p_valor": 0.053
+     "p_valor": 0.044
     },
     {
      "codigo": "08273",
@@ -4535,9 +4535,9 @@
      "dist_km": 23.4,
      "lat": 41.56866,
      "lon": 2.027,
-     "viajes_referencia": 16755.0,
+     "viajes_referencia": 16749.0,
      "efecto_pct": 1.9,
-     "p_valor": 0.656
+     "p_valor": 0.623
     },
     {
      "codigo": "08284",
@@ -4547,9 +4547,9 @@
      "dist_km": 58.0,
      "lat": 41.70717,
      "lon": 2.71957,
-     "viajes_referencia": 989.0,
+     "viajes_referencia": 984.0,
      "efecto_pct": -0.3,
-     "p_valor": 0.962
+     "p_valor": 0.96
     },
     {
      "codigo": "08291",
@@ -4559,9 +4559,9 @@
      "dist_km": 31.8,
      "lat": 41.59442,
      "lon": 1.90528,
-     "viajes_referencia": 421.0,
+     "viajes_referencia": 420.0,
      "efecto_pct": -1.0,
-     "p_valor": 0.954
+     "p_valor": 0.96
     },
     {
      "codigo": "08298",
@@ -4571,9 +4571,9 @@
      "dist_km": 60.8,
      "lat": 41.9311,
      "lon": 2.24886,
-     "viajes_referencia": 1968.0,
+     "viajes_referencia": 1970.0,
      "efecto_pct": -1.0,
-     "p_valor": 0.901
+     "p_valor": 0.879
     },
     {
      "codigo": "08300",
@@ -4583,9 +4583,9 @@
      "dist_km": 26.1,
      "lat": 41.56633,
      "lon": 1.96578,
-     "viajes_referencia": 605.0,
+     "viajes_referencia": 600.0,
      "efecto_pct": 1.7,
-     "p_valor": 0.901
+     "p_valor": 0.864
     },
     {
      "codigo": "08301",
@@ -4595,7 +4595,7 @@
      "dist_km": 14.6,
      "lat": 41.30951,
      "lon": 2.02742,
-     "viajes_referencia": 14643.0,
+     "viajes_referencia": 14626.0,
      "efecto_pct": -6.2,
      "p_valor": 0.183
     },
@@ -4607,9 +4607,9 @@
      "dist_km": 39.1,
      "lat": 41.34481,
      "lon": 1.7032,
-     "viajes_referencia": 1819.0,
+     "viajes_referencia": 1822.0,
      "efecto_pct": -8.5,
-     "p_valor": 0.336
+     "p_valor": 0.352
     },
     {
      "codigo": "08307",
@@ -4619,68 +4619,1298 @@
      "dist_km": 41.0,
      "lat": 41.22032,
      "lon": 1.73077,
-     "viajes_referencia": 4145.0,
+     "viajes_referencia": 4134.0,
      "efecto_pct": -17.4,
-     "p_valor": 0.038
+     "p_valor": 0.037
     }
    ],
    "evento": [
     {
      "dia": -5,
      "efecto_pct": -0.44,
-     "ic_inf": -5.4,
-     "ic_sup": 6.06
+     "ic_inf": -5.3,
+     "ic_sup": 5.93
     },
     {
      "dia": -4,
      "efecto_pct": -1.15,
-     "ic_inf": -6.08,
-     "ic_sup": 5.29
+     "ic_inf": -5.98,
+     "ic_sup": 5.17
     },
     {
      "dia": -3,
      "efecto_pct": -3.48,
-     "ic_inf": -8.3,
-     "ic_sup": 2.81
+     "ic_inf": -8.2,
+     "ic_sup": 2.69
     },
     {
      "dia": -2,
      "efecto_pct": 6.8,
-     "ic_inf": 1.47,
-     "ic_sup": 13.76
+     "ic_inf": 1.59,
+     "ic_sup": 13.63
     },
     {
      "dia": -1,
      "efecto_pct": 2.56,
-     "ic_inf": -2.56,
-     "ic_sup": 9.25
+     "ic_inf": -2.45,
+     "ic_sup": 9.12
     },
     {
      "dia": 0,
      "efecto_pct": -6.8,
-     "ic_inf": -11.45,
-     "ic_sup": -0.72
+     "ic_inf": -11.35,
+     "ic_sup": -0.84
     },
     {
      "dia": 1,
      "efecto_pct": 6.38,
-     "ic_inf": 1.08,
-     "ic_sup": 13.32
+     "ic_inf": 1.19,
+     "ic_sup": 13.19
     },
     {
      "dia": 2,
      "efecto_pct": 3.05,
-     "ic_inf": -2.08,
-     "ic_sup": 9.77
+     "ic_inf": -1.98,
+     "ic_sup": 9.65
     },
     {
      "dia": 3,
      "efecto_pct": 0.72,
-     "ic_inf": -4.31,
-     "ic_sup": 7.28
+     "ic_inf": -4.2,
+     "ic_sup": 7.16
     }
    ],
    "caso_od": false
+  }
+ ],
+ "averias": [
+  {
+   "fecha": "2023-05-02",
+   "titulo": "Incendio en el enclavamiento de Gavà",
+   "descripcion": "Incendio en un cuarto de señales de Gavà la noche del 01/05 (festivo). El 02/05, primer día laborable, la R2 Sud circula con servicio muy reducido; el corte dura hasta el 19/05.",
+   "tramo": "R2 Sud con servicio reducido entre El Prat y Castelldefels",
+   "lectura": "Solo cae la línea cortada: el Garraf (R2 Sud). Los dependientes de las demás líneas no cambian, y la caída se mantiene durante las dos semanas de servicio reducido.",
+   "tipo": "Avería de una línea",
+   "linea_clave": "R2S",
+   "linea_nombre": "R2 Sud",
+   "lineas": [
+    "R2 Sud"
+   ],
+   "grupos": [
+    {
+     "grupo": "linea_afectada",
+     "etiqueta": "Dependientes de la R2 Sud",
+     "municipios": 4,
+     "efecto_pct": -11.6,
+     "ic_inf": -19.3,
+     "ic_sup": -0.6,
+     "p_valor": 0.026
+    },
+    {
+     "grupo": "resto",
+     "etiqueta": "Dependientes de las demás líneas",
+     "municipios": 31,
+     "efecto_pct": -0.8,
+     "ic_inf": -6.3,
+     "ic_sup": 7.6,
+     "p_valor": 0.399
+    },
+    {
+     "grupo": "cercanos",
+     "etiqueta": "Cercanos sin metro/FGC",
+     "municipios": 16,
+     "efecto_pct": 0.0,
+     "ic_inf": -5.7,
+     "ic_sup": 4.1,
+     "p_valor": 0.487
+    },
+    {
+     "grupo": "metro_fgc",
+     "etiqueta": "Con metro/FGC",
+     "municipios": 11,
+     "efecto_pct": -1.6,
+     "ic_inf": -5.4,
+     "ic_sup": 1.5,
+     "p_valor": 0.154
+    }
+   ],
+   "perdidos": {
+    "viajes_dia_normal": 25065.0,
+    "viajes_perdidos": 2908.0,
+    "efecto_pct": -11.6,
+    "p_valor": 0.026,
+    "ic_inf": -19.3,
+    "ic_sup": -0.6,
+    "municipios": 4
+   },
+   "resto": {
+    "efecto_pct": -0.8,
+    "p_valor": 0.399,
+    "municipios": 31
+   },
+   "serie": [
+    {
+     "fecha": "2023-04-17",
+     "dependientes": 91.23,
+     "control": 96.24,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-18",
+     "dependientes": 100.8,
+     "control": 100.64,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-19",
+     "dependientes": 100.73,
+     "control": 102.72,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-20",
+     "dependientes": 105.05,
+     "control": 103.91,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-21",
+     "dependientes": 99.27,
+     "control": 98.24,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-24",
+     "dependientes": 89.91,
+     "control": 94.35,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-25",
+     "dependientes": 95.39,
+     "control": 99.36,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-26",
+     "dependientes": 96.69,
+     "control": 103.67,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-27",
+     "dependientes": 102.14,
+     "control": 108.19,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-04-28",
+     "dependientes": 101.1,
+     "control": 97.87,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-02",
+     "dependientes": 87.79,
+     "control": 100.73,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2023-05-03",
+     "dependientes": 86.84,
+     "control": 102.21,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-04",
+     "dependientes": 93.09,
+     "control": 104.06,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-05",
+     "dependientes": 90.73,
+     "control": 100.75,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-08",
+     "dependientes": 91.68,
+     "control": 95.46,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-09",
+     "dependientes": 94.49,
+     "control": 98.56,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-10",
+     "dependientes": 92.93,
+     "control": 101.26,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-11",
+     "dependientes": 98.56,
+     "control": 100.7,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-12",
+     "dependientes": 87.32,
+     "control": 96.26,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-15",
+     "dependientes": 89.43,
+     "control": 96.1,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2023-05-16",
+     "dependientes": 95.73,
+     "control": 99.43,
+     "limpio": false,
+     "caos": false
+    }
+   ],
+   "banda_normal": {
+    "inf": 90.51,
+    "sup": 103.74
+   },
+   "tramos": [
+    {
+     "tramo": "R2 Sud · servicio reducido (Gavà)",
+     "linea": "R2S",
+     "afectada": true,
+     "municipios": 8,
+     "viajes_esperados": 207149.0,
+     "viajes_perdidos": 285.0,
+     "cambio_pct": -0.14,
+     "normal_inf": -3.98,
+     "normal_sup": 4.22,
+     "p_valor": 0.4583,
+     "lista": "Hospitalet de Llobregat, L', Prat de Llobregat, El, Viladecans, Gavà, Castelldefels, Sitges, Vilanova i la Geltrú, Cubelles"
+    },
+    {
+     "tramo": "R2 Nord · funcionaba (referencia)",
+     "linea": "R2N",
+     "afectada": false,
+     "municipios": 10,
+     "viajes_esperados": 45770.0,
+     "viajes_perdidos": 983.0,
+     "cambio_pct": -2.15,
+     "normal_inf": -5.46,
+     "normal_sup": 9.98,
+     "p_valor": 0.3,
+     "lista": "Montcada i Reixac, Llagosta, La, Mollet del Vallès, Montmeló, Granollers, Franqueses del Vallès, Les, Cardedeu, Llinars del Vallès, Santa Maria de Palautordera, Sant Celoni"
+    }
+   ],
+   "lineas_dependientes": [
+    {
+     "linea": "R1",
+     "municipios": 12,
+     "efecto_pct": 1.1,
+     "ic_inf": -4.9,
+     "ic_sup": 10.8,
+     "p_valor": 0.641,
+     "viajes_perdidos": -281.0
+    },
+    {
+     "linea": "R2N",
+     "municipios": 4,
+     "efecto_pct": -6.3,
+     "ic_inf": -14.2,
+     "ic_sup": 6.5,
+     "p_valor": 0.125,
+     "viajes_perdidos": 322.0
+    },
+    {
+     "linea": "R2N+R3",
+     "municipios": 2,
+     "efecto_pct": -10.1,
+     "ic_inf": -16.6,
+     "ic_sup": -2.1,
+     "p_valor": 0.011,
+     "viajes_perdidos": 925.0
+    },
+    {
+     "linea": "R2S",
+     "municipios": 4,
+     "efecto_pct": -11.6,
+     "ic_inf": -19.3,
+     "ic_sup": -0.6,
+     "p_valor": 0.026,
+     "viajes_perdidos": 2908.0
+    },
+    {
+     "linea": "R3",
+     "municipios": 5,
+     "efecto_pct": 12.9,
+     "ic_inf": -21.3,
+     "ic_sup": 48.7,
+     "p_valor": 0.912,
+     "viajes_perdidos": -648.0
+    },
+    {
+     "linea": "R4",
+     "municipios": 8,
+     "efecto_pct": -5.9,
+     "ic_inf": -20.2,
+     "ic_sup": 7.2,
+     "p_valor": 0.165,
+     "viajes_perdidos": 347.0
+    }
+   ],
+   "municipios": [
+    {
+     "codigo": "08006",
+     "efecto_pct": 30.7,
+     "p_valor": 0.007
+    },
+    {
+     "codigo": "08015",
+     "efecto_pct": -5.7,
+     "p_valor": 0.022
+    },
+    {
+     "codigo": "08017",
+     "efecto_pct": 5.6,
+     "p_valor": 0.791
+    },
+    {
+     "codigo": "08029",
+     "efecto_pct": -0.7,
+     "p_valor": 0.894
+    },
+    {
+     "codigo": "08032",
+     "efecto_pct": -4.4,
+     "p_valor": 0.799
+    },
+    {
+     "codigo": "08035",
+     "efecto_pct": 11.0,
+     "p_valor": 0.147
+    },
+    {
+     "codigo": "08040",
+     "efecto_pct": 4.2,
+     "p_valor": 0.527
+    },
+    {
+     "codigo": "08046",
+     "efecto_pct": -8.9,
+     "p_valor": 0.205
+    },
+    {
+     "codigo": "08053",
+     "efecto_pct": 2.0,
+     "p_valor": 0.879
+    },
+    {
+     "codigo": "08054",
+     "efecto_pct": -11.7,
+     "p_valor": 0.147
+    },
+    {
+     "codigo": "08056",
+     "efecto_pct": -0.9,
+     "p_valor": 0.821
+    },
+    {
+     "codigo": "08067",
+     "efecto_pct": 36.7,
+     "p_valor": 0.059
+    },
+    {
+     "codigo": "08073",
+     "efecto_pct": -5.2,
+     "p_valor": 0.154
+    },
+    {
+     "codigo": "08074",
+     "efecto_pct": -33.3,
+     "p_valor": 0.015
+    },
+    {
+     "codigo": "08086",
+     "efecto_pct": -10.7,
+     "p_valor": 0.154
+    },
+    {
+     "codigo": "08088",
+     "efecto_pct": 11.5,
+     "p_valor": 0.183
+    },
+    {
+     "codigo": "08089",
+     "efecto_pct": 21.8,
+     "p_valor": 0.007
+    },
+    {
+     "codigo": "08091",
+     "efecto_pct": -10.2,
+     "p_valor": 0.381
+    },
+    {
+     "codigo": "08096",
+     "efecto_pct": -10.1,
+     "p_valor": 0.044
+    },
+    {
+     "codigo": "08101",
+     "efecto_pct": 0.1,
+     "p_valor": 0.938
+    },
+    {
+     "codigo": "08105",
+     "efecto_pct": 1.4,
+     "p_valor": 0.842
+    },
+    {
+     "codigo": "08106",
+     "efecto_pct": -11.2,
+     "p_valor": 0.249
+    },
+    {
+     "codigo": "08110",
+     "efecto_pct": 31.0,
+     "p_valor": 0.015
+    },
+    {
+     "codigo": "08112",
+     "efecto_pct": 21.1,
+     "p_valor": 0.344
+    },
+    {
+     "codigo": "08113",
+     "efecto_pct": -9.4,
+     "p_valor": 0.19
+    },
+    {
+     "codigo": "08114",
+     "efecto_pct": -10.8,
+     "p_valor": 0.081
+    },
+    {
+     "codigo": "08118",
+     "efecto_pct": -13.4,
+     "p_valor": 0.161
+    },
+    {
+     "codigo": "08121",
+     "efecto_pct": -4.0,
+     "p_valor": 0.366
+    },
+    {
+     "codigo": "08123",
+     "efecto_pct": -10.0,
+     "p_valor": 0.044
+    },
+    {
+     "codigo": "08124",
+     "efecto_pct": -7.4,
+     "p_valor": 0.044
+    },
+    {
+     "codigo": "08125",
+     "efecto_pct": 13.0,
+     "p_valor": 0.286
+    },
+    {
+     "codigo": "08126",
+     "efecto_pct": -0.5,
+     "p_valor": 0.938
+    },
+    {
+     "codigo": "08135",
+     "efecto_pct": 2.4,
+     "p_valor": 0.879
+    },
+    {
+     "codigo": "08158",
+     "efecto_pct": -8.7,
+     "p_valor": 0.52
+    },
+    {
+     "codigo": "08159",
+     "efecto_pct": -1.4,
+     "p_valor": 0.85
+    },
+    {
+     "codigo": "08163",
+     "efecto_pct": 13.1,
+     "p_valor": 0.11
+    },
+    {
+     "codigo": "08169",
+     "efecto_pct": 2.0,
+     "p_valor": 0.842
+    },
+    {
+     "codigo": "08172",
+     "efecto_pct": 9.0,
+     "p_valor": 0.242
+    },
+    {
+     "codigo": "08187",
+     "efecto_pct": -4.8,
+     "p_valor": 0.088
+    },
+    {
+     "codigo": "08194",
+     "efecto_pct": -0.9,
+     "p_valor": 0.85
+    },
+    {
+     "codigo": "08197",
+     "efecto_pct": 15.3,
+     "p_valor": 0.103
+    },
+    {
+     "codigo": "08202",
+     "efecto_pct": 2.0,
+     "p_valor": 0.769
+    },
+    {
+     "codigo": "08211",
+     "efecto_pct": -0.2,
+     "p_valor": 0.93
+    },
+    {
+     "codigo": "08217",
+     "efecto_pct": 9.2,
+     "p_valor": 0.256
+    },
+    {
+     "codigo": "08219",
+     "efecto_pct": -16.2,
+     "p_valor": 0.037
+    },
+    {
+     "codigo": "08235",
+     "efecto_pct": 10.2,
+     "p_valor": 0.469
+    },
+    {
+     "codigo": "08240",
+     "efecto_pct": -11.2,
+     "p_valor": 0.322
+    },
+    {
+     "codigo": "08252",
+     "efecto_pct": -7.5,
+     "p_valor": 0.095
+    },
+    {
+     "codigo": "08259",
+     "efecto_pct": -7.7,
+     "p_valor": 0.571
+    },
+    {
+     "codigo": "08260",
+     "efecto_pct": -7.5,
+     "p_valor": 0.073
+    },
+    {
+     "codigo": "08262",
+     "efecto_pct": 5.5,
+     "p_valor": 0.681
+    },
+    {
+     "codigo": "08266",
+     "efecto_pct": -2.1,
+     "p_valor": 0.557
+    },
+    {
+     "codigo": "08270",
+     "efecto_pct": -12.1,
+     "p_valor": 0.073
+    },
+    {
+     "codigo": "08273",
+     "efecto_pct": 6.9,
+     "p_valor": 0.645
+    },
+    {
+     "codigo": "08279",
+     "efecto_pct": -3.6,
+     "p_valor": 0.242
+    },
+    {
+     "codigo": "08284",
+     "efecto_pct": 13.4,
+     "p_valor": 0.198
+    },
+    {
+     "codigo": "08291",
+     "efecto_pct": -21.7,
+     "p_valor": 0.059
+    },
+    {
+     "codigo": "08298",
+     "efecto_pct": 3.9,
+     "p_valor": 0.784
+    },
+    {
+     "codigo": "08300",
+     "efecto_pct": -8.3,
+     "p_valor": 0.366
+    },
+    {
+     "codigo": "08301",
+     "efecto_pct": -4.6,
+     "p_valor": 0.344
+    },
+    {
+     "codigo": "08305",
+     "efecto_pct": -4.2,
+     "p_valor": 0.571
+    },
+    {
+     "codigo": "08307",
+     "efecto_pct": -35.4,
+     "p_valor": 0.007
+    }
+   ]
+  },
+  {
+   "fecha": "2024-11-22",
+   "titulo": "Robo de cobre en la R4 Nord",
+   "descripcion": "Robo de cable de cobre entre Sabadell y Terrassa, con retrasos desde el inicio del servicio. Por la tarde hubo además un corte de la R4 entre Cornellà y Molins de Rei.",
+   "tramo": "R4 Nord (Sabadell–Terrassa); por la tarde, también la R4 Sud",
+   "lectura": "Caen los dependientes de la R4 Nord y no los de las demás líneas. Es el caso más débil: solo son 4 municipios pequeños y el margen de error es amplio.",
+   "tipo": "Avería de una línea",
+   "linea_clave": "R4N",
+   "linea_nombre": "R4 Nord",
+   "lineas": [
+    "R4"
+   ],
+   "grupos": [
+    {
+     "grupo": "linea_afectada",
+     "etiqueta": "Dependientes de la R4 Nord",
+     "municipios": 4,
+     "efecto_pct": -10.3,
+     "ic_inf": -24.1,
+     "ic_sup": 1.2,
+     "p_valor": 0.044
+    },
+    {
+     "grupo": "resto",
+     "etiqueta": "Dependientes de las demás líneas",
+     "municipios": 31,
+     "efecto_pct": -2.7,
+     "ic_inf": -7.5,
+     "ic_sup": 3.6,
+     "p_valor": 0.161
+    },
+    {
+     "grupo": "cercanos",
+     "etiqueta": "Cercanos sin metro/FGC",
+     "municipios": 16,
+     "efecto_pct": -3.0,
+     "ic_inf": -8.5,
+     "ic_sup": 1.0,
+     "p_valor": 0.095
+    },
+    {
+     "grupo": "metro_fgc",
+     "etiqueta": "Con metro/FGC",
+     "municipios": 11,
+     "efecto_pct": -0.4,
+     "ic_inf": -4.3,
+     "ic_sup": 2.7,
+     "p_valor": 0.381
+    }
+   ],
+   "perdidos": {
+    "viajes_dia_normal": 1560.0,
+    "viajes_perdidos": 161.0,
+    "efecto_pct": -10.3,
+    "p_valor": 0.044,
+    "ic_inf": -24.1,
+    "ic_sup": 1.2,
+    "municipios": 4
+   },
+   "resto": {
+    "efecto_pct": -2.7,
+    "p_valor": 0.161,
+    "municipios": 31
+   },
+   "serie": [
+    {
+     "fecha": "2024-11-08",
+     "dependientes": 107.85,
+     "control": 98.92,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-11",
+     "dependientes": 103.36,
+     "control": 97.82,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-12",
+     "dependientes": 98.81,
+     "control": 100.42,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-13",
+     "dependientes": 79.33,
+     "control": 95.74,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-14",
+     "dependientes": 100.16,
+     "control": 103.96,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-15",
+     "dependientes": 98.37,
+     "control": 98.25,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-18",
+     "dependientes": 106.89,
+     "control": 95.85,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-19",
+     "dependientes": 99.84,
+     "control": 101.59,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-20",
+     "dependientes": 97.15,
+     "control": 102.49,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-21",
+     "dependientes": 99.97,
+     "control": 102.11,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-22",
+     "dependientes": 87.92,
+     "control": 100.45,
+     "limpio": false,
+     "caos": true
+    },
+    {
+     "fecha": "2024-11-25",
+     "dependientes": 111.31,
+     "control": 97.53,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-26",
+     "dependientes": 97.85,
+     "control": 101.08,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-27",
+     "dependientes": 99.13,
+     "control": 102.77,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-28",
+     "dependientes": 109.58,
+     "control": 105.83,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-11-29",
+     "dependientes": 93.75,
+     "control": 102.2,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-12-02",
+     "dependientes": 101.95,
+     "control": 98.19,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-12-03",
+     "dependientes": 95.87,
+     "control": 101.71,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-12-04",
+     "dependientes": 99.07,
+     "control": 104.37,
+     "limpio": false,
+     "caos": false
+    },
+    {
+     "fecha": "2024-12-05",
+     "dependientes": 100.29,
+     "control": 98.87,
+     "limpio": true,
+     "caos": false
+    },
+    {
+     "fecha": "2024-12-09",
+     "dependientes": 95.67,
+     "control": 95.12,
+     "limpio": true,
+     "caos": false
+    }
+   ],
+   "banda_normal": {
+    "inf": 95.19,
+    "sup": 110.01
+   },
+   "tramos": [
+    {
+     "tramo": "R4 Nord · robo de cobre Sabadell–Terrassa",
+     "linea": "R4 Nord",
+     "afectada": true,
+     "municipios": 10,
+     "viajes_esperados": 83044.0,
+     "viajes_perdidos": 3408.0,
+     "cambio_pct": -4.1,
+     "normal_inf": -2.96,
+     "normal_sup": 6.49,
+     "p_valor": 0.0204,
+     "lista": "Montcada i Reixac, Cerdanyola del Vallès, Barberà del Vallès, Sabadell, Terrassa, Viladecavalls, Vacarisses, Castellbell i el Vilar, Sant Vicenç de Castellet, Manresa"
+    },
+    {
+     "tramo": "R4 Sud · funcionaba (referencia)",
+     "linea": "R4 Sud",
+     "afectada": false,
+     "municipios": 12,
+     "viajes_esperados": 191420.0,
+     "viajes_perdidos": 5674.0,
+     "cambio_pct": -2.96,
+     "normal_inf": -2.85,
+     "normal_sup": 4.15,
+     "p_valor": 0.0204,
+     "lista": "Hospitalet de Llobregat, L', Cornellà de Llobregat, Sant Joan Despí, Sant Feliu de Llobregat, Molins de Rei, Papiol, El, Castellbisbal, Martorell, Gelida, Sant Sadurní d'Anoia, Subirats, Vilafranca del Penedès"
+    }
+   ],
+   "lineas_dependientes": [
+    {
+     "linea": "R1",
+     "municipios": 12,
+     "efecto_pct": -4.1,
+     "ic_inf": -9.9,
+     "ic_sup": 5.0,
+     "p_valor": 0.114,
+     "viajes_perdidos": 997.0
+    },
+    {
+     "linea": "R2N",
+     "municipios": 4,
+     "efecto_pct": -1.2,
+     "ic_inf": -9.6,
+     "ic_sup": 12.2,
+     "p_valor": 0.392,
+     "viajes_perdidos": 64.0
+    },
+    {
+     "linea": "R2N+R3",
+     "municipios": 2,
+     "efecto_pct": -2.0,
+     "ic_inf": -9.1,
+     "ic_sup": 6.8,
+     "p_valor": 0.319,
+     "viajes_perdidos": 194.0
+    },
+    {
+     "linea": "R2S",
+     "municipios": 4,
+     "efecto_pct": -3.3,
+     "ic_inf": -11.7,
+     "ic_sup": 8.8,
+     "p_valor": 0.216,
+     "viajes_perdidos": 778.0
+    },
+    {
+     "linea": "R3",
+     "municipios": 5,
+     "efecto_pct": 3.3,
+     "ic_inf": -28.0,
+     "ic_sup": 36.1,
+     "p_valor": 0.674,
+     "viajes_perdidos": -163.0
+    },
+    {
+     "linea": "R4",
+     "municipios": 8,
+     "efecto_pct": -9.8,
+     "ic_inf": -23.5,
+     "ic_sup": 2.8,
+     "p_valor": 0.062,
+     "viajes_perdidos": 578.0
+    }
+   ],
+   "municipios": [
+    {
+     "codigo": "08006",
+     "efecto_pct": 4.1,
+     "p_valor": 0.659
+    },
+    {
+     "codigo": "08015",
+     "efecto_pct": 2.7,
+     "p_valor": 0.352
+    },
+    {
+     "codigo": "08017",
+     "efecto_pct": 10.6,
+     "p_valor": 0.579
+    },
+    {
+     "codigo": "08029",
+     "efecto_pct": -13.3,
+     "p_valor": 0.11
+    },
+    {
+     "codigo": "08032",
+     "efecto_pct": -13.0,
+     "p_valor": 0.374
+    },
+    {
+     "codigo": "08035",
+     "efecto_pct": -7.7,
+     "p_valor": 0.418
+    },
+    {
+     "codigo": "08040",
+     "efecto_pct": -2.0,
+     "p_valor": 0.784
+    },
+    {
+     "codigo": "08046",
+     "efecto_pct": -4.6,
+     "p_valor": 0.513
+    },
+    {
+     "codigo": "08053",
+     "efecto_pct": 1.9,
+     "p_valor": 0.879
+    },
+    {
+     "codigo": "08054",
+     "efecto_pct": -11.9,
+     "p_valor": 0.132
+    },
+    {
+     "codigo": "08056",
+     "efecto_pct": -2.9,
+     "p_valor": 0.52
+    },
+    {
+     "codigo": "08067",
+     "efecto_pct": -6.7,
+     "p_valor": 0.564
+    },
+    {
+     "codigo": "08073",
+     "efecto_pct": -4.0,
+     "p_valor": 0.242
+    },
+    {
+     "codigo": "08074",
+     "efecto_pct": -0.3,
+     "p_valor": 0.974
+    },
+    {
+     "codigo": "08086",
+     "efecto_pct": -0.2,
+     "p_valor": 0.93
+    },
+    {
+     "codigo": "08088",
+     "efecto_pct": 1.3,
+     "p_valor": 0.901
+    },
+    {
+     "codigo": "08089",
+     "efecto_pct": 1.7,
+     "p_valor": 0.689
+    },
+    {
+     "codigo": "08091",
+     "efecto_pct": -4.6,
+     "p_valor": 0.733
+    },
+    {
+     "codigo": "08096",
+     "efecto_pct": -2.5,
+     "p_valor": 0.579
+    },
+    {
+     "codigo": "08101",
+     "efecto_pct": -1.7,
+     "p_valor": 0.388
+    },
+    {
+     "codigo": "08105",
+     "efecto_pct": 0.7,
+     "p_valor": 0.923
+    },
+    {
+     "codigo": "08106",
+     "efecto_pct": -12.7,
+     "p_valor": 0.183
+    },
+    {
+     "codigo": "08110",
+     "efecto_pct": 6.2,
+     "p_valor": 0.542
+    },
+    {
+     "codigo": "08112",
+     "efecto_pct": 6.1,
+     "p_valor": 0.733
+    },
+    {
+     "codigo": "08113",
+     "efecto_pct": -3.2,
+     "p_valor": 0.601
+    },
+    {
+     "codigo": "08114",
+     "efecto_pct": -13.4,
+     "p_valor": 0.044
+    },
+    {
+     "codigo": "08118",
+     "efecto_pct": -1.7,
+     "p_valor": 0.777
+    },
+    {
+     "codigo": "08121",
+     "efecto_pct": -2.8,
+     "p_valor": 0.52
+    },
+    {
+     "codigo": "08123",
+     "efecto_pct": -4.8,
+     "p_valor": 0.315
+    },
+    {
+     "codigo": "08124",
+     "efecto_pct": 3.2,
+     "p_valor": 0.52
+    },
+    {
+     "codigo": "08125",
+     "efecto_pct": -18.6,
+     "p_valor": 0.022
+    },
+    {
+     "codigo": "08126",
+     "efecto_pct": 0.9,
+     "p_valor": 0.864
+    },
+    {
+     "codigo": "08135",
+     "efecto_pct": 3.7,
+     "p_valor": 0.755
+    },
+    {
+     "codigo": "08158",
+     "efecto_pct": -21.6,
+     "p_valor": 0.095
+    },
+    {
+     "codigo": "08159",
+     "efecto_pct": 3.5,
+     "p_valor": 0.527
+    },
+    {
+     "codigo": "08163",
+     "efecto_pct": -8.3,
+     "p_valor": 0.344
+    },
+    {
+     "codigo": "08169",
+     "efecto_pct": 4.3,
+     "p_valor": 0.63
+    },
+    {
+     "codigo": "08172",
+     "efecto_pct": -0.9,
+     "p_valor": 0.864
+    },
+    {
+     "codigo": "08187",
+     "efecto_pct": 0.9,
+     "p_valor": 0.725
+    },
+    {
+     "codigo": "08194",
+     "efecto_pct": -0.3,
+     "p_valor": 0.93
+    },
+    {
+     "codigo": "08197",
+     "efecto_pct": -10.4,
+     "p_valor": 0.147
+    },
+    {
+     "codigo": "08202",
+     "efecto_pct": 9.2,
+     "p_valor": 0.3
+    },
+    {
+     "codigo": "08211",
+     "efecto_pct": -6.4,
+     "p_valor": 0.051
+    },
+    {
+     "codigo": "08217",
+     "efecto_pct": -6.6,
+     "p_valor": 0.359
+    },
+    {
+     "codigo": "08219",
+     "efecto_pct": -7.9,
+     "p_valor": 0.176
+    },
+    {
+     "codigo": "08235",
+     "efecto_pct": -1.9,
+     "p_valor": 0.901
+    },
+    {
+     "codigo": "08240",
+     "efecto_pct": -9.2,
+     "p_valor": 0.425
+    },
+    {
+     "codigo": "08252",
+     "efecto_pct": 7.8,
+     "p_valor": 0.125
+    },
+    {
+     "codigo": "08259",
+     "efecto_pct": 5.2,
+     "p_valor": 0.681
+    },
+    {
+     "codigo": "08260",
+     "efecto_pct": 4.9,
+     "p_valor": 0.315
+    },
+    {
+     "codigo": "08262",
+     "efecto_pct": -10.1,
+     "p_valor": 0.425
+    },
+    {
+     "codigo": "08266",
+     "efecto_pct": 2.6,
+     "p_valor": 0.498
+    },
+    {
+     "codigo": "08270",
+     "efecto_pct": 1.3,
+     "p_valor": 0.908
+    },
+    {
+     "codigo": "08273",
+     "efecto_pct": 5.8,
+     "p_valor": 0.733
+    },
+    {
+     "codigo": "08279",
+     "efecto_pct": -4.1,
+     "p_valor": 0.154
+    },
+    {
+     "codigo": "08284",
+     "efecto_pct": -10.5,
+     "p_valor": 0.242
+    },
+    {
+     "codigo": "08291",
+     "efecto_pct": -10.0,
+     "p_valor": 0.447
+    },
+    {
+     "codigo": "08298",
+     "efecto_pct": 10.9,
+     "p_valor": 0.33
+    },
+    {
+     "codigo": "08300",
+     "efecto_pct": -21.7,
+     "p_valor": 0.037
+    },
+    {
+     "codigo": "08301",
+     "efecto_pct": 1.7,
+     "p_valor": 0.733
+    },
+    {
+     "codigo": "08305",
+     "efecto_pct": -20.1,
+     "p_valor": 0.066
+    },
+    {
+     "codigo": "08307",
+     "efecto_pct": -8.2,
+     "p_valor": 0.198
+    }
+   ]
   }
  ],
  "grupos": [
@@ -4689,7 +5919,7 @@
    "etiqueta": "Dependientes (≥20 km, sin metro/FGC)",
    "municipios": 35,
    "efecto_pct": -6.2,
-   "ic_inf": -8.9,
+   "ic_inf": -8.8,
    "ic_sup": -3.3,
    "p_valor": 0.0
   },
@@ -4697,43 +5927,43 @@
    "grupo": "cercanos",
    "etiqueta": "Cercanos sin metro/FGC (<20 km)",
    "municipios": 16,
-   "efecto_pct": -2.3,
+   "efecto_pct": -2.2,
    "ic_inf": -4.8,
    "ic_sup": -0.1,
-   "p_valor": 0.021
+   "p_valor": 0.018
   },
   {
    "grupo": "metro_fgc",
    "etiqueta": "Con metro/FGC",
    "municipios": 11,
    "efecto_pct": -1.0,
-   "ic_inf": -3.3,
-   "ic_sup": 0.5,
-   "p_valor": 0.083
+   "ic_inf": -3.2,
+   "ic_sup": 0.4,
+   "p_valor": 0.071
   }
  ],
  "distancia": [
   {
    "banda": "< 15 km",
    "municipios": 8,
-   "efecto_pct": 0.1,
-   "ic_inf": -3.5,
-   "ic_sup": 3.1,
-   "p_valor": 0.491
+   "efecto_pct": 0.2,
+   "ic_inf": -3.4,
+   "ic_sup": 3.2,
+   "p_valor": 0.507
   },
   {
    "banda": "15–30 km",
    "municipios": 16,
-   "efecto_pct": -5.5,
-   "ic_inf": -7.7,
-   "ic_sup": -3.2,
+   "efecto_pct": -5.4,
+   "ic_inf": -7.6,
+   "ic_sup": -3.1,
    "p_valor": 0.0
   },
   {
    "banda": "> 30 km",
    "municipios": 27,
-   "efecto_pct": -7.4,
-   "ic_inf": -11.6,
+   "efecto_pct": -7.3,
+   "ic_inf": -11.3,
    "ic_sup": -3.9,
    "p_valor": 0.0
   }
@@ -4743,8 +5973,8 @@
    "grupo": "Sin alternativa directa",
    "dia": "Todos los días de caos",
    "municipios": 16,
-   "efecto_pct": -6.8,
-   "ic_inf": -10.7,
+   "efecto_pct": -6.7,
+   "ic_inf": -10.4,
    "ic_sup": -2.9,
    "p_valor": 0.0
   },
@@ -4754,7 +5984,7 @@
    "municipios": 21,
    "efecto_pct": -5.1,
    "ic_inf": -7.3,
-   "ic_sup": -2.9,
+   "ic_sup": -3.0,
    "p_valor": 0.0
   },
   {
@@ -4764,15 +5994,15 @@
    "efecto_pct": -1.3,
    "ic_inf": -3.1,
    "ic_sup": 0.1,
-   "p_valor": 0.034
+   "p_valor": 0.039
   },
   {
    "grupo": "Sin alternativa directa",
    "dia": "13/05/2024",
    "municipios": 16,
-   "efecto_pct": -12.8,
-   "ic_inf": -19.5,
-   "ic_sup": -5.3,
+   "efecto_pct": -12.4,
+   "ic_inf": -19.3,
+   "ic_sup": -5.1,
    "p_valor": 0.004
   },
   {
@@ -4780,26 +6010,26 @@
    "dia": "13/05/2024",
    "municipios": 21,
    "efecto_pct": -4.8,
-   "ic_inf": -9.0,
-   "ic_sup": -0.2,
-   "p_valor": 0.027
+   "ic_inf": -9.1,
+   "ic_sup": -0.5,
+   "p_valor": 0.022
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "13/05/2024",
    "municipios": 25,
-   "efecto_pct": 2.4,
+   "efecto_pct": 2.6,
    "ic_inf": -0.7,
    "ic_sup": 5.5,
-   "p_valor": 0.916
+   "p_valor": 0.93
   },
   {
    "grupo": "Sin alternativa directa",
    "dia": "17/03/2025",
    "municipios": 16,
    "efecto_pct": -13.0,
-   "ic_inf": -19.7,
-   "ic_sup": -5.5,
+   "ic_inf": -19.8,
+   "ic_sup": -5.7,
    "p_valor": 0.004
   },
   {
@@ -4807,8 +6037,8 @@
    "dia": "17/03/2025",
    "municipios": 21,
    "efecto_pct": -7.8,
-   "ic_inf": -11.8,
-   "ic_sup": -3.3,
+   "ic_inf": -11.9,
+   "ic_sup": -3.6,
    "p_valor": 0.004
   },
   {
@@ -4817,44 +6047,44 @@
    "municipios": 25,
    "efecto_pct": 0.1,
    "ic_inf": -3.0,
-   "ic_sup": 3.1,
-   "p_valor": 0.58
+   "ic_sup": 3.0,
+   "p_valor": 0.582
   },
   {
    "grupo": "Sin alternativa directa",
    "dia": "26/03/2025",
    "municipios": 16,
    "efecto_pct": 3.6,
-   "ic_inf": -4.3,
-   "ic_sup": 12.6,
-   "p_valor": 0.798
+   "ic_inf": -4.5,
+   "ic_sup": 12.3,
+   "p_valor": 0.817
   },
   {
    "grupo": "Alternativa débil",
    "dia": "26/03/2025",
    "municipios": 21,
    "efecto_pct": -1.2,
-   "ic_inf": -5.5,
-   "ic_sup": 3.6,
-   "p_valor": 0.305
+   "ic_inf": -5.6,
+   "ic_sup": 3.3,
+   "p_valor": 0.289
   },
   {
    "grupo": "Alternativa fuerte",
    "dia": "26/03/2025",
    "municipios": 25,
    "efecto_pct": -3.8,
-   "ic_inf": -6.8,
+   "ic_inf": -6.9,
    "ic_sup": -1.0,
-   "p_valor": 0.008
+   "p_valor": 0.007
   },
   {
    "grupo": "Sin alternativa directa",
    "dia": "01/04/2025",
    "municipios": 16,
    "efecto_pct": -4.1,
-   "ic_inf": -11.5,
-   "ic_sup": 4.2,
-   "p_valor": 0.156
+   "ic_inf": -11.6,
+   "ic_sup": 4.0,
+   "p_valor": 0.154
   },
   {
    "grupo": "Alternativa débil",
@@ -4862,7 +6092,7 @@
    "municipios": 21,
    "efecto_pct": -6.5,
    "ic_inf": -10.6,
-   "ic_sup": -1.9,
+   "ic_sup": -2.3,
    "p_valor": 0.004
   },
   {
@@ -4870,320 +6100,276 @@
    "dia": "01/04/2025",
    "municipios": 25,
    "efecto_pct": -3.9,
-   "ic_inf": -6.9,
+   "ic_inf": -7.0,
    "ic_sup": -1.1,
-   "p_valor": 0.008
+   "p_valor": 0.007
   }
  ],
  "evento": [
   {
    "dia": -5,
-   "efecto_pct": -0.07,
-   "ic_inf": -3.37,
-   "ic_sup": 3.53
+   "efecto_pct": -0.06,
+   "ic_inf": -3.27,
+   "ic_sup": 3.55
   },
   {
    "dia": -4,
-   "efecto_pct": -0.95,
-   "ic_inf": -3.82,
-   "ic_sup": 2.11
+   "efecto_pct": -0.94,
+   "ic_inf": -3.69,
+   "ic_sup": 2.14
   },
   {
    "dia": -3,
    "efecto_pct": -1.48,
-   "ic_inf": -4.72,
-   "ic_sup": 2.13
+   "ic_inf": -4.62,
+   "ic_sup": 2.0
   },
   {
    "dia": -2,
    "efecto_pct": 0.74,
-   "ic_inf": -2.57,
-   "ic_sup": 4.31
+   "ic_inf": -2.48,
+   "ic_sup": 4.35
   },
   {
    "dia": -1,
    "efecto_pct": -1.08,
-   "ic_inf": -3.9,
-   "ic_sup": 1.96
+   "ic_inf": -3.84,
+   "ic_sup": 1.98
   },
   {
    "dia": 0,
-   "efecto_pct": -6.2,
-   "ic_inf": -8.9,
-   "ic_sup": -3.33
+   "efecto_pct": -6.16,
+   "ic_inf": -8.79,
+   "ic_sup": -3.27
   },
   {
    "dia": 1,
-   "efecto_pct": 3.12,
-   "ic_inf": 0.14,
-   "ic_sup": 6.34
+   "efecto_pct": 3.13,
+   "ic_inf": 0.26,
+   "ic_sup": 6.26
   },
   {
    "dia": 2,
    "efecto_pct": 2.48,
-   "ic_inf": -0.92,
+   "ic_inf": -0.85,
    "ic_sup": 6.18
   },
   {
    "dia": 3,
    "efecto_pct": 3.73,
-   "ic_inf": 0.35,
-   "ic_sup": 7.59
+   "ic_inf": 0.44,
+   "ic_sup": 7.51
   }
  ],
  "placebo": {
-  "real_pct": -6.2,
-  "p_valor": 0.0001,
+  "real_pct": -6.16,
+  "p_valor": 0.0002,
   "valores_pct": [
-   -0.69,
-   0.01,
-   -0.82,
-   -1.44,
-   0.26,
-   1.89,
-   1.78,
-   -1.54,
-   -0.02,
-   0.77,
-   0.06,
-   1.65,
-   1.75,
-   0.9,
-   0.91,
-   0.79,
-   0.52,
-   -0.9,
-   0.49,
-   -0.92,
-   0.11,
-   -1.82,
-   1.71,
-   -0.32,
-   1.41,
-   2.05,
-   -0.73,
-   -0.15,
-   -0.72,
-   1.09,
-   -0.62,
-   -2.05,
-   1.23,
-   -0.62,
-   0.02,
-   -2.84,
-   -0.55,
-   -0.39,
-   2.04,
-   1.29,
-   -1.78,
-   2.56,
-   -0.78,
-   -2.71,
-   2.84,
-   -4.63,
-   -0.08,
-   1.41,
-   -1.83,
-   1.6,
-   2.74,
-   -3.54,
-   0.71,
-   -1.04,
-   -0.22,
-   -0.96,
-   0.17,
-   -0.83,
-   -0.3,
-   -1.38,
-   0.31,
-   -0.35,
-   2.49,
-   -0.82,
-   0.17,
-   -2.2,
-   0.16,
    -1.32,
-   0.82,
-   -0.53,
-   -0.04,
-   0.51,
-   -1.63,
-   1.15,
-   0.11,
-   2.53,
-   -1.06,
-   1.9,
-   2.4,
-   -3.36,
-   2.36,
-   0.18,
-   2.54,
-   1.14,
-   -1.01,
-   0.81,
-   -3.16,
-   2.07,
-   0.48,
-   -3.19,
-   0.06,
-   0.75,
-   1.14,
-   2.46,
-   3.88,
-   -1.77,
-   -0.81,
-   -0.15,
-   1.2,
-   0.8,
-   1.46,
-   -0.05,
-   0.94,
-   -2.9,
-   -0.34,
-   0.87,
-   0.66,
-   0.18,
-   1.12,
-   1.33,
-   -0.39,
-   -2.33,
-   0.2,
-   0.92,
-   2.4,
-   2.29,
-   1.31,
-   -1.18,
-   -1.68,
-   0.56,
-   -1.5,
-   -0.11,
-   1.32,
-   0.55,
-   0.25,
-   0.42,
-   2.14,
-   1.66,
-   -1.29,
-   1.16,
-   0.4,
-   -2.38,
-   -0.25,
-   0.56,
-   -3.38,
-   -2.54,
-   2.32,
-   1.16,
-   0.17,
-   -0.3,
-   -0.83,
-   1.79,
-   1.9,
-   -0.19,
-   -1.49,
-   0.57,
-   2.03,
-   0.96,
-   -0.01,
-   -0.99,
-   -1.82,
-   0.86,
-   -0.5,
-   -3.09,
-   -0.29,
-   -0.88,
-   1.96,
-   0.32,
-   1.57,
-   0.2,
-   1.52,
-   -1.59,
-   1.43,
-   0.46,
-   0.21,
-   0.62,
-   0.41,
-   -0.79,
-   1.89,
-   -0.22,
-   2.08,
-   -2.1,
-   -1.47,
    -0.84,
-   -0.87,
-   -3.3,
-   1.08,
-   0.17,
-   1.31,
-   -0.07,
-   -2.97,
-   2.3,
-   -2.8,
-   -0.55,
-   -0.52,
-   -0.49,
+   -0.5,
+   -1.55,
+   0.71,
+   0.54,
+   -1.71,
+   -1.44,
+   -0.05,
+   0.61,
+   0.35,
+   0.1,
+   -1.25,
+   -1.35,
+   0.71,
+   2.7,
+   -0.27,
+   0.43,
+   0.45,
+   -1.29,
+   1.11,
+   -1.15,
+   -2.32,
+   1.66,
+   0.42,
+   2.02,
+   -1.07,
    -1.01,
-   0.5,
-   -2.14,
-   1.07,
-   -0.04,
-   2.39,
+   0.14,
+   -0.63,
+   0.53,
+   0.04,
+   3.07,
+   -0.94,
+   1.04,
+   -2.75,
+   1.34,
+   0.95,
+   1.63,
+   -0.11,
+   -0.7,
    -0.62,
-   2.08,
-   2.3,
-   0.58,
-   2.13,
-   1.45,
+   0.93,
+   0.91,
+   0.51,
+   -3.48,
+   -0.69,
+   1.35,
+   -1.34,
+   0.4,
+   -1.29,
+   -1.66,
+   0.24,
+   -1.11,
+   0.75,
+   1.49,
+   -1.07,
+   -0.69,
+   1.09,
+   -0.75,
+   -0.25,
+   2.69,
+   1.2,
+   0.18,
+   -2.12,
+   -2.33,
+   -1.36,
+   -1.25,
+   0.82,
+   1.6,
+   -1.18,
+   -0.83,
+   0.55,
+   -0.91,
+   0.9,
+   3.05,
+   0.48,
+   0.05,
+   0.66,
+   -1.27,
+   1.14,
+   0.7,
+   2.53,
+   1.01,
+   -0.48,
+   -0.83,
+   2.98,
    -0.72,
-   0.74
+   2.27,
+   -0.15,
+   -0.11,
+   0.85,
+   -0.41,
+   -1.36,
+   0.76,
+   -3.74,
+   -1.82,
+   0.9,
+   1.84,
+   0.98,
+   0.77,
+   -0.42,
+   -0.95,
+   -1.54,
+   -2.3,
+   2.45,
+   -1.86,
+   -1.84,
+   0.49,
+   0.38,
+   1.52,
+   -2.56,
+   -1.26,
+   -0.78,
+   1.7,
+   2.05,
+   -2.89,
+   -0.1,
+   1.27,
+   -0.01,
+   1.85,
+   -0.28,
+   -0.85,
+   -0.04,
+   1.51,
+   0.25,
+   0.93,
+   0.11,
+   -1.43,
+   1.21,
+   0.94,
+   0.72,
+   1.96,
+   0.06,
+   2.08,
+   -3.51,
+   0.54,
+   1.07,
+   2.86,
+   -0.75,
+   -0.33,
+   -1.19,
+   0.01,
+   -0.49,
+   -0.07,
+   -0.38,
+   0.93,
+   0.46,
+   -1.74,
+   0.89,
+   -0.78,
+   -0.57,
+   -1.19,
+   2.38,
+   1.85,
+   -2.82,
+   -2.1,
+   0.18,
+   0.62,
+   0.84,
+   -0.42,
+   0.09,
+   -2.0,
+   2.14,
+   -0.54,
+   1.59,
+   -0.56,
+   -1.43,
+   -1.03,
+   0.43,
+   3.28,
+   -1.48,
+   -0.79,
+   -3.58,
+   -2.36,
+   -0.36,
+   -1.21,
+   1.63,
+   0.41,
+   0.18,
+   1.04,
+   1.1,
+   -0.28,
+   -1.37,
+   0.4,
+   -2.02,
+   0.55,
+   -2.01,
+   0.2,
+   0.38,
+   -1.99,
+   2.43,
+   -0.18,
+   0.34,
+   0.83,
+   0.78,
+   -2.7,
+   -0.37,
+   -0.61,
+   -0.97
   ]
  },
- "barrios": [
-  {
-   "caso": "Todos los días de caos",
-   "sentido": "ida",
-   "con_estacion": -19.0,
-   "sin_estacion": 1.8,
-   "p_diferencia": 0.0009
-  },
-  {
-   "caso": "Todos los días de caos",
-   "sentido": "vuelta",
-   "con_estacion": -18.3,
-   "sin_estacion": 4.9,
-   "p_diferencia": 0.0009
-  },
-  {
-   "caso": "Huelga 17/03/2025",
-   "sentido": "ida",
-   "con_estacion": -18.4,
-   "sin_estacion": -10.1,
-   "p_diferencia": 0.235
-  },
-  {
-   "caso": "Huelga 17/03/2025",
-   "sentido": "vuelta",
-   "con_estacion": -14.1,
-   "sin_estacion": 4.1,
-   "p_diferencia": 0.018
-  },
-  {
-   "caso": "Avería 13/05/2024",
-   "sentido": "ida",
-   "con_estacion": -26.6,
-   "sin_estacion": 2.8,
-   "p_diferencia": 0.003
-  },
-  {
-   "caso": "Avería 13/05/2024",
-   "sentido": "vuelta",
-   "con_estacion": -32.0,
-   "sin_estacion": 3.1,
-   "p_diferencia": 0.001
-  }
- ],
  "perdidos_media": {
-  "viajes_perdidos": 4401.0,
-  "viajes_dia_normal": 71734.0
+  "viajes_perdidos": 4364.0,
+  "viajes_dia_normal": 71732.0
  },
  "metodo": {
   "comparacion": "Cada día de caos se compara con días limpios (laborables sin lluvia, festivos, verano, eventos ni incidencias), descontando lo que hacen ese mismo día los municipios sin Rodalies (control).",

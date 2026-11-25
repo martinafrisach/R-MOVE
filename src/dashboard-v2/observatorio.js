@@ -26,6 +26,10 @@
   const pct = (x, d = 1) => { if (x == null) return '—'; const r = Number(x.toFixed(d)); return r === 0 ? '≈ 0 %' : (r > 0 ? '+' : '') + nf(r, d) + ' %'; };
   const pval = (p) => p == null ? '' : p < 0.001 ? 'p < 0,001' : 'p = ' + nf(p, 3);
   const fecha = (f) => { const [y, m, d] = f.split('-'); return `${d}/${m}/${y}`; };
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const fechaLarga = (f) => { const [y, m, d] = f.split('-'); return `${+d} de ${MESES[+m - 1]} de ${y}`; };
+  /* Líneas de la red (ids del geojson) afectadas por una avería de una línea */
+  const VIAS_LINEA = { R2S: ['R2S'], R2N: ['R2N'], R4N: ['R4'], R4S: ['R4'], R1: ['R1'], R3: ['R3'] };
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
   // ------------------------------------------------------------------ tooltip (delegado: cualquier elemento con data-tip)
@@ -215,6 +219,17 @@
     $('r-puertas').innerHTML = `<div><small>Barrios con estación</small><strong class="down">${pct(avg('con_estacion'))}</strong><span>Sants, Passeig de Gràcia, Clot…</span></div>` +
       `<div><small>Barrios sin estación</small><strong class="up">${pct(avg('sin_estacion'))}</strong><span>se llega en coche o en bus</span></div>`;
     eventStudy($('r-evento'), D.evento);
+    const avs = (D.averias || []).slice().sort((a, b) => a.perdidos.efecto_pct - b.perdidos.efecto_pct);
+    story.averia = avs[0] || null;
+    if (!story.averia) $('r-paso-linea').remove();
+    else {
+      const a = story.averia, otras = avs.slice(1).filter((x) => x.perdidos.p_valor < 0.05);
+      $('r-linea-ey').textContent = `${fechaLarga(a.fecha)} · ${a.titulo}`;
+      $('r-linea').textContent = pct(a.perdidos.efecto_pct);
+      $('r-linea-txt').textContent = `viajes a Barcelona desde los municipios que dependen de la ${a.linea_nombre}`;
+      $('r-linea-p').innerHTML = `Los que dependen de otras líneas no cambian (<strong>${pct(a.resto.efecto_pct)}</strong>).` +
+        otras.map((x) => ` Con la avería del ${fecha(x.fecha)} (${esc(x.titulo.charAt(0).toLowerCase() + x.titulo.slice(1))}) pasó lo mismo en la ${esc(x.linea_nombre)}: <strong>${pct(x.perdidos.efecto_pct)}</strong>.`).join('');
+    }
     const br = D.alternativa.filter((a) => a.dia === 'Todos los días de caos');
     const nom = { 'Sin alternativa directa': 'sin alternativa', 'Alternativa débil': 'débil', 'Alternativa fuerte': 'fuerte' };
     const mx = Math.max(...br.map((a) => Math.abs(a.efecto)));
@@ -298,6 +313,7 @@
     if (paso === 'averia') extra = ef([FECHAS.averia]);
     if (paso === 'huelga') extra = ef([FECHAS.huelga]);
     if (paso === 'anunciada') extra = ef(FECHAS.anunciadas);
+    if (paso === 'linea' && story.averia) extra = ef([story.averia.fecha]);
     if (paso === 'brecha') extra = `<span class="v">${cap(m.alternativa ? m.alternativa.clase : '—')}</span><span class="muted">${m.alternativa && m.alternativa.mejor ? `${cap(ALT_NOMBRE[m.alternativa.mejor])}: ${nf(m.alternativa.t_alt)} min (tren: ${nf(m.alternativa.t_rodalies)} min)` : 'alternativa en transporte público'}</span>${m.vulnerabilidad ? `<span class="muted">${nf(m.vulnerabilidad.motorizacion)} turismos por 1.000 hab. (motorización ${m.vulnerabilidad.nivel_motorizacion})</span>` : ''}`;
     return `<b>${esc(m.nombre)}</b><br>${linea}<br>${extra}`;
   }
@@ -368,6 +384,20 @@
         const r2s = D.incidencias.find((i) => i.fecha === '2025-04-01').lineas_dependientes.find((l) => l.linea === 'R2S');
         anno(41.2372, 1.8059, `<b>${pct(r2s.efecto_pct, 0)}</b>Garraf · R2 Sud<small>el que más cae el 1 de abril</small>`);
         anno(41.387, 2.170, 'Barcelona<small style="color:inherit;opacity:.8">los viajes llegan a otros barrios</small>', 'place');
+        break;
+      }
+      case 'linea': {
+        const a = story.averia, vias = VIAS_LINEA[a.linea_clave] || [];
+        relleno = porClase([a.fecha]);
+        rail = (id) => (vias.includes(id) ? 'cut' : 'on');
+        const afect = D.municipios.filter((m) => m.grupo === 'dependientes' && m.efectos[a.fecha] && vias.some((v) => m.lineas.includes(v)));
+        if (afect.length) {
+          const lat = afect.map((m) => m.lat), lon = afect.map((m) => m.lon);
+          bounds = [[Math.min(...lat, 41.387) - 0.12, Math.min(...lon, 2.17) - 0.2], [Math.max(...lat, 41.387) + 0.12, Math.max(...lon, 2.17) + 0.2]];
+          const c = [lat.reduce((x, y) => x + y) / lat.length, lon.reduce((x, y) => x + y) / lon.length];
+          anno(c[0], c[1], `<b>${pct(a.perdidos.efecto_pct, 0)}</b>${esc(a.linea_nombre)}<small>dependientes de la línea</small>`);
+        }
+        leyenda = leyendaClases(`${fecha(a.fecha)} · ${esc(a.titulo)}`).replace('</ul>', lineaLeyenda(`${esc(a.linea_nombre)} sin servicio normal`, true) + '</ul>');
         break;
       }
       case 'duracion':
@@ -855,41 +885,45 @@
     });
     // Casos: línea de tiempo
     $('lab-casos').innerHTML = `<div class="timeline">
-        <div class="tl-cards">${D.incidencias.map((i, k) => `<button class="tl-card ${k ? '' : 'active'}" data-i="${k}"><span class="tic">${ICON[i.tipo === 'Avería' ? 'rayo' : 'huelga']}</span><small>${fecha(i.fecha)} · ${esc(i.tipo)}</small><b>${esc(i.titulo)}</b><span class="${i.perdidos.efecto_pct < 0 ? 'down' : ''}">${pct(i.perdidos.efecto_pct)} en dependientes</span></button>`).join('')}</div></div>
+        <div class="tl-cards">${CASOS().map((i, k) => `<button class="tl-card ${k ? '' : 'active'}" data-i="${k}"><span class="tic">${ICON[/^Aver/.test(i.tipo) ? 'rayo' : 'huelga']}</span><small>${fecha(i.fecha)} · ${esc(i.tipo)}</small><b>${esc(i.titulo)}</b><span class="${i.perdidos.efecto_pct < 0 ? 'down' : ''}">${pct(i.perdidos.efecto_pct)} en ${i.linea_nombre ? 'la ' + esc(i.linea_nombre) : 'dependientes'}</span></button>`).join('')}</div></div>
       <div id="lab-caso" class="lab"></div>`;
     $('lab-casos').querySelector('.timeline').addEventListener('click', (e) => {
       const b = e.target.closest('[data-i]'); if (!b) return;
       $('lab-casos').querySelectorAll('[data-i]').forEach((x) => x.classList.toggle('active', x.dataset.i === b.dataset.i));
-      caso(D.incidencias[+b.dataset.i]);
+      caso(CASOS()[+b.dataset.i]);
     });
-    caso(D.incidencias[0]);
+    caso(CASOS()[0]);
     pintarMetodo();
   }
 
+  /* Casos del Laboratorio: días de caos y, al final, averías de una sola línea (sección 4.6 del notebook 04) */
+  const CASOS = () => D.incidencias.concat(D.averias || []);
+
   async function caso(i) {
     const p = i.perdidos, lin = i.lineas_dependientes.slice().sort((a, b) => a.efecto_pct - b.efecto_pct), peor = lin[0];
-    const dep = i.grupos.find((g) => g.grupo === 'dependientes');
+    const esAveria = !!i.linea_clave, dep = i.grupos.find((g) => g.grupo === (esAveria ? 'linea_afectada' : 'dependientes'));
+    const quien = esAveria ? `dependientes de la ${esc(i.linea_nombre)}` : 'dependientes';
     $('lab-caso').innerHTML = `
       <div class="case-hero card">
         <div class="ch-text">
           <p class="eyebrow">${fecha(i.fecha)} · ${esc(i.tipo)}</p><h2>${esc(i.titulo)}</h2>
           <p>${esc(i.lectura)}</p>
-          <div class="ch-kpis"><div><strong class="down">${pct(p.efecto_pct)}</strong><span>viajes de los dependientes</span></div><div><strong>${nf(p.viajes_perdidos)}</strong><span>viajes menos ese día</span></div><div><strong>${pval(p.p_valor).replace('p ', 'p ')}</strong><span>${p.p_valor < 0.05 ? 'efecto claro' : 'no concluyente'}</span></div></div>
+          <div class="ch-kpis"><div><strong class="down">${pct(p.efecto_pct)}</strong><span>viajes de los ${quien}</span></div><div><strong>${nf(p.viajes_perdidos)}</strong><span>viajes menos ese día</span></div><div><strong>${pval(p.p_valor).replace('p ', 'p ')}</strong><span>${p.p_valor < 0.05 ? 'efecto claro' : 'no concluyente'}</span></div></div>
           <details class="small"><summary>Qué pasó exactamente</summary><p>${esc(i.descripcion)}</p><p><b>Servicio:</b> ${esc(i.tramo)}</p></details>
         </div>
         <div class="ch-map"><div id="lab-map" class="fill-map"></div><div class="story-legend mini" id="legend-lab"></div></div>
       </div>
       <div class="lab-grid">
-        <div class="card"><div class="card-head"><h2>${dep && dep.p_valor < 0.05 ? 'Solo caen los que dependen del tren' : 'Ningún grupo cae de forma clara'}</h2><small>Efecto por grupo de municipios e intervalo del 95 %</small></div><div class="pad" id="c-grupos"></div></div>
+        <div class="card"><div class="card-head"><h2>${dep && dep.p_valor < 0.05 ? (esAveria ? `Solo cae la ${esc(i.linea_nombre)}, no las demás líneas` : 'Solo caen los que dependen del tren') : 'Ningún grupo cae de forma clara'}</h2><small>Efecto por grupo de municipios e intervalo del 95 %</small></div><div class="pad" id="c-grupos"></div></div>
         <div class="card"><div class="card-head"><h2>${peor.p_valor < 0.05 ? `La ${esc(peor.linea)} es la que más cae` : 'Ninguna línea destaca con claridad'}</h2><small>Municipios dependientes, por línea</small></div><div class="pad" id="c-lineas"></div></div>
         <div class="card"><div class="card-head"><h2>El día del caos se sale del rango normal</h2><small>Índice de viajes (día normal = 100). Banda gris: lo habitual.</small></div><div class="pad" id="c-serie"></div></div>
         <div class="card"><div class="card-head"><h2>Por tramos de la red</h2><small>Punto: cambio ese día. Barra gris: lo que varía un día normal. Fuera de la barra = anómalo.</small></div><div class="pad" id="c-tramos"></div></div>
       </div>`;
-    forest($('c-grupos'), i.grupos.map((g) => ({ label: GRUPO[g.grupo] + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 190 });
+    forest($('c-grupos'), i.grupos.map((g) => ({ label: (g.etiqueta || GRUPO[g.grupo]) + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: esAveria ? 250 : 190 });
     forest($('c-lineas'), i.lineas_dependientes.map((l) => ({ label: `${l.linea} (${l.municipios})`, efecto: l.efecto_pct, ic_inf: l.ic_inf, ic_sup: l.ic_sup, p: l.p_valor })), { labelW: 110 });
     const xs = i.serie.map((s) => fecha(s.fecha).slice(0, 5));
     lines($('c-serie'), xs, [
-      { name: 'Dependientes', color: css('--down'), values: i.serie.map((s) => s.dependientes) },
+      { name: esAveria ? `Dependientes ${i.linea_nombre}` : 'Dependientes', color: css('--down'), values: i.serie.map((s) => s.dependientes) },
       { name: 'Control (sin Rodalies)', color: css('--ink-2'), dash: true, values: i.serie.map((s) => s.control) },
     ], { band: { lo: i.serie.map(() => i.banda_normal.inf), hi: i.serie.map(() => i.banda_normal.sup) }, marks: i.serie.map((s, k) => (s.caos ? k : -1)).filter((k) => k >= 0), maxLabels: 7 });
     rangos($('c-tramos'), i.tramos);
@@ -986,8 +1020,9 @@
       <div class="lab-grid">
         <div class="card"><div class="card-head"><h2>Decisiones sobre los datos</h2></div><ul class="checks">
           <li><b>Datos:</b> Telefónica (M2 municipio → Barcelona y M3 municipio ↔ barrio), ${fecha(D.periodo.inicio)} – ${fecha(D.periodo.fin)}.</li>
-          <li><b>Días normales:</b> laborables sin festivos, verano, eventos, lluvia ni incidencias del registro oficial de Rodalies.</li>
+          <li><b>Días normales:</b> laborables sin festivos, verano, eventos, lluvia ni incidencias del registro oficial de Rodalies (los cortes largos se excluyen enteros).</li>
           <li><b>Días de caos:</b> ${D.incidencias.map((i) => fecha(i.fecha)).join(', ')}. El 19/03/2025 se excluye por lluvia.</li>
+          ${(D.averias || []).length ? `<li><b>Averías de una sola línea:</b> ${D.averias.map((a) => `${fecha(a.fecha)} (${esc(a.linea_nombre)})`).join(', ')}. Se miden solo en los dependientes de la línea afectada y no entran en las medias de los días de caos.</li>` : ''}
           <li><b>Municipios:</b> ≥ 200 viajes/día a Barcelona. Dependientes: con Rodalies, sin metro ni FGC y a ≥ 20 km.</li>
           <li><b>Alternativa:</b> GTFS de bus interurbano, AMB, FGC y Rodalies (tiempo puerta a puerta y frecuencia).</li>
           <li><b>Método:</b> clustering de días (4 tipos por año según el volumen de los municipios sin Rodalies y la época del año). Comprobado con una regresión de diferencias en diferencias, que da la misma dirección y significación.</li>

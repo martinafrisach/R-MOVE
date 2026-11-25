@@ -33,6 +33,7 @@ REQUISITOS = {
     ],
     "Observatorio - regenerar observatorio.json": [
         "data/processed/rmove/resultados/dashboard_resultados.json",
+        "data/processed/rmove/resultados/m3_resultados.json",
         "data/processed/rmove/m2_conectividad_municipios.parquet",
     ],
     "Observatorio - regenerar mapa base": [
