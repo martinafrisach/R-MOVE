@@ -39,7 +39,7 @@ REQUISITOS = {
     "Observatorio - regenerar mapa base": [
         "data/raw/limites/municipis_icgc.geojson",
     ],
-    "Notebook 01 (preparación Telefónica)": [
+    "Notebook 01 (calidad y preparación de datos)": [
         "data/raw/telefonica/*/movilidad_municipios_*_origen.csv",
     ],
     "Notebook 02 (mediana)": [

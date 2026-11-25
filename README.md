@@ -15,7 +15,7 @@ Todas las cifras salen del **clustering** del notebook 03 (tipos de día por vol
 
 ## Actualizar resultados
 
-Un solo comando ejecuta los notebooks 03 (municipios), 04 (barrios) y 05 (socioeconomía), comprueba que han regenerado sus
+Un solo comando ejecuta los notebooks 03 (municipios), 04 (barrios) y 05 (vulnerabilidad), comprueba que han regenerado sus
 exportaciones, genera `observatorio.json`, valida el dashboard y muestra qué cifras han cambiado:
 
 ```bash

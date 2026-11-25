@@ -1,7 +1,7 @@
 """Actualiza el Observatorio con los últimos resultados del análisis, de principio a fin.
 
 Hace, en orden:
-  1. Ejecuta los notebooks 03 (municipios), 04 (barrios) y 05 (socioeconomía) y los guarda ya ejecutados.
+  1. Ejecuta los notebooks 03 (municipios), 04 (barrios) y 05 (vulnerabilidad) y los guarda ya ejecutados.
   2. Comprueba que cada notebook ha regenerado sus ficheros exportados en esta ejecución.
   3. Genera data/processed/rmove/observatorio/observatorio.json (src/dashboard-v2/build_observatorio.py).
   4. Valida el dashboard (sintaxis del JS si hay Node y build_pages.py --check).
@@ -35,12 +35,12 @@ OBS = RM / "observatorio" / "observatorio.json"
 
 # Notebooks en orden de dependencia y lo que debe regenerar cada uno.
 PASOS = [
-    ("03", NB / "03_impacto_movilidad_incidencias.ipynb", [
+    ("03", NB / "03_impacto_municipios.ipynb", [
         RM / "municipios_calendario.parquet", RM / "municipios_info.parquet", RM / "municipios_dias_caos.parquet",
         RM / "municipios_averias_linea.parquet", RM / "municipios_tipos_dia.parquet", RM / "municipios_panel_viajes.parquet",
         RM / "resultados" / "dashboard_resultados.json"]),
-    ("04", NB / "04_impacto_movilidad_barrios.ipynb", [RM / "resultados" / "barrios_resultados.json"]),
-    ("05", NB / "05_socioeco.ipynb", [RM / "observatorio" / "vulnerabilidad.json",
+    ("04", NB / "04_impacto_barrios.ipynb", [RM / "resultados" / "barrios_resultados.json"]),
+    ("05", NB / "05_vulnerabilidad_motorizacion_renta.ipynb", [RM / "observatorio" / "vulnerabilidad.json",
                                      RM / "observatorio" / "vulnerabilidad_resumen.json"]),
 ]
 
