@@ -7,15 +7,17 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="observatorio.css?v=19">
+  <link rel="stylesheet" href="observatorio.css?v=59">
+  <!-- Tema elegido a mano (claro/oscuro): se aplica antes de pintar para que no parpadee -->
+  <script>try { var t = localStorage.getItem('rmove-tema'); if (t === 'claro' || t === 'oscuro') document.documentElement.dataset.tema = t; } catch (e) {}</script>
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#relato" aria-label="Observatorio R-MOVE: volver al inicio">
       <span class="wm" aria-hidden="true">R<span class="wm-via"></span>MOVE</span>
-      <span class="kicker"><b>Observatorio</b>de la movilidad hacia Barcelona<br>cuando falla Rodalies</span>
+      <span class="kicker"><b>Observatorio de movilidad</b>hacia Barcelona cuando falla Rodalies</span>
     </a>
     <dl class="tablero" id="tablero" aria-label="Datos del observatorio"></dl>
     <nav class="linea" aria-label="Secciones del observatorio" style="--i:0">
@@ -24,6 +26,10 @@
       <a href="#planificador" data-mode="planificador"><i></i><span>Planificador</span></a>
       <a href="#laboratorio" data-mode="laboratorio"><i></i><span>Laboratorio</span></a>
     </nav>
+    <button type="button" class="tema" id="tema" aria-label="Cambiar a tema oscuro" title="Cambiar a tema oscuro">
+      <svg class="luna" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg>
+    </button>
   </header>
 
   <p id="status" role="status"></p>
@@ -34,51 +40,50 @@
       <div class="story-stage" aria-hidden="false">
         <div id="map-relato" class="story-map"></div>
         <div class="story-legend" id="legend-relato"></div>
-        <ol class="story-progress" id="story-progress" aria-label="Pasos del relato"></ol>
       </div>
       <div class="story-steps">
         <article class="step step-hero" data-step="normal" data-nombre="Un día normal">
-          <p class="eyebrow">Observatorio R-MOVE · Rodalies y movilidad</p>
-          <h1>¿Qué pasa cuando el tren falla?</h1>
-          <p class="lead">Cada laborable llegan a Barcelona <strong id="r-viajes">—</strong> viajes desde <strong>35 municipios que dependen de Rodalies</strong>: tienen estación, no tienen metro ni FGC y están a más de 20 km.</p>
-          <p class="muted small">En naranja, esos municipios. Datos de telefonía móvil (Telefónica), 2023–2025.</p>
-          <p class="scroll-cue"><span></span>Desliza para empezar</p>
+          <p class="eyebrow">Rodalies y movilidad</p>
+          <h1>¿Qué pasa cuando<br>el <b>tren falla?</b></h1>
+          <p class="hero-num"><strong id="r-viajes">—</strong><span>viajes cada laborable hacia Barcelona</span></p>
+          <p class="hero-dot"><i aria-hidden="true"></i><span>Desde <strong>35 municipios que dependen de Rodalies</strong>: tienen estación, no tienen metro ni FGC y están a más de 20 km.</span></p>
+          <p class="muted small hero-src">Datos de telefonía móvil (Telefónica), 2023–2025.</p>
+          <button type="button" class="scroll-cue" id="r-empezar"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>Descubrir más</button>
         </article>
         <article class="step" data-step="averia" data-nombre="Avería sin aviso">
           <p class="eyebrow">13 de mayo de 2024 · Avería sin aviso</p>
-          <h2>Un robo de cobre en Montcada corta la R1 y el Maresme se apaga.</h2>
+          <h2>Un robo de cobre en Montcada corta la R1 y <b>el Maresme se apaga.</b></h2>
           <div class="big-stat"><strong class="down" id="r-r1">—</strong><span>viajes a Barcelona desde los municipios de la R1</span></div>
           <p>Al norte de Arenys, donde no había tren, la caída llega al <strong id="r-norte">—</strong>. Los municipios con metro, FGC o buen bus ni lo notan.</p>
         </article>
         <article class="step" data-step="huelga" data-nombre="Huelga general">
           <p class="eyebrow">17 de marzo de 2025 · Huelga general</p>
-          <h2>Cuando para toda la red, sufren los corredores más alejados.</h2>
+          <h2>Cuando para toda la red, <b>sufren los corredores más alejados.</b></h2>
           <div class="big-stat"><strong class="down" id="r-huelga">—</strong><span>viajes desde los municipios dependientes</span></div>
           <p>Osona (R3), el Vallès Oriental (R2 Nord) y Granollers son los que más caen. Cuanto más lejos de Barcelona, más impacto.</p>
         </article>
         <article class="step" data-step="anunciada" data-nombre="Huelga anunciada">
           <p class="eyebrow">26 de marzo de 2025 · Huelga anunciada</p>
-          <h2>Con aviso, parte de la gente no deja de ir a Barcelona: cambia de puerta.</h2>
+          <h2>Con aviso, parte de la gente no deja de ir a Barcelona: <b>cambia de puerta.</b></h2>
           <p>Ese día el total no cambia. Pero mirando a qué barrio llegan los viajes:</p>
           <div class="doors" id="r-puertas"></div>
-          <p class="muted small">Se llega por otros caminos a otros barrios. En la huelga del 1 de abril, en cambio, sí se perdieron viajes, sobre todo en el Garraf (R2 Sud).</p>
+          <p class="muted small">Se llega por otros caminos a otros barrios.</p>
         </article>
         <article class="step" data-step="linea" data-nombre="Una sola línea" id="r-paso-linea">
           <p class="eyebrow" id="r-linea-ey">Avería de una sola línea</p>
-          <h2>No hace falta que pare toda la red: basta con dejar una línea sin servicio.</h2>
+          <h2>No hace falta que pare toda la red: <b>basta con dejar una línea sin servicio.</b></h2>
           <div class="big-stat"><strong class="down" id="r-linea">—</strong><span id="r-linea-txt">viajes a Barcelona desde los municipios de la línea</span></div>
           <p id="r-linea-p"></p>
-          <p class="muted small">Una avería de dos horas por la tarde no se nota en los viajes del día: lo que cuenta es quedarse sin tren para ir.</p>
         </article>
         <article class="step" data-step="duracion" data-nombre="¿Cuánto dura?">
           <p class="eyebrow">¿Cuánto dura?</p>
-          <h2>Un día. Al siguiente, todo vuelve a la normalidad.</h2>
+          <h2><b>Un día.</b> Al siguiente, todo vuelve a la normalidad.</h2>
           <div class="mini-chart" id="r-evento"></div>
           <p class="muted small">Efecto en los municipios dependientes cada día alrededor del caos (media de los cuatro días e intervalo del 95 %).</p>
         </article>
         <article class="step" data-step="brecha" data-nombre="¿Quién lo sufre?">
           <p class="eyebrow">¿Quién lo sufre?</p>
-          <h2 id="r-brecha-tit">Quien no tiene alternativa al tren.</h2>
+          <h2 id="r-brecha-tit"><b>Quien no tiene alternativa</b> al tren.</h2>
           <div class="bars" id="r-brecha"></div>
           <div id="r-coche" hidden>
             <p class="small sub-bars"><strong>Y, entre los dependientes, quien tiene menos coche.</strong></p>
@@ -89,7 +94,7 @@
         </article>
         <article class="step step-end" data-step="fin" data-nombre="¿Y mañana?">
           <p class="eyebrow">Y ahora</p>
-          <h2>Si mañana hay huelga, ¿qué le pasará a tu municipio?</h2>
+          <h2>Si mañana hay huelga, <b>¿qué le pasará a tu municipio?</b></h2>
           <p>Con lo aprendido en estos cuatro días se puede anticipar el impacto y saber qué hacer.</p>
           <p class="cta"><a href="#planificador" class="btn">Abrir el planificador</a> <a href="#planificador?vista=perfil" class="btn ghost">Buscar mi municipio</a></p>
         </article>
@@ -143,6 +148,6 @@
   <footer class="foot" id="foot"></footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="observatorio.js?v=21"></script>
+  <script src="observatorio.js?v=59"></script>
 </body>
 </html>
