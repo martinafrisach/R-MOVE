@@ -1062,3 +1062,14 @@ html::-webkit-scrollbar{display:none}
 #lab-nav button.active::before{color:var(--brand)}
 #lab-nav button.active::after{transform:none}
 @media (max-width:900px){#lab-nav{gap:4px 22px;margin:8px 0 -25px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;width:100%}#lab-nav button{white-space:nowrap;font-size:14px}}
+
+/* Relato · portada: en pantallas bajas (p. ej. portátiles con zoom del 125 %) el bloque no cabía y el título quedaba
+   debajo de la cabecera. Se reserva el alto de la cabecera y los tamaños se ajustan también al alto de la ventana. */
+@media (min-width:901px){
+  .step.step-hero{padding:calc(var(--hdr) + 28px) 0 32px;box-sizing:border-box}
+  .step-hero .eyebrow{margin-bottom:min(30px,3.2vh)}
+  .step-hero h1{font-size:clamp(34px,min(4.6vw,8.4vh),66px);margin-bottom:min(34px,3.6vh)}
+  .hero-num{margin-bottom:min(30px,3.2vh)!important}
+  .hero-num strong{font-size:clamp(46px,min(6vw,10.5vh),88px)}
+  .hero-num span{font-size:clamp(16px,2.4vh,21px)}
+}
