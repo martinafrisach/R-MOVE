@@ -841,3 +841,224 @@ b,strong{font-weight:700}
 /* Sin barra de scroll lateral en la página (se sigue desplazando con la rueda, el teclado o el dedo). */
 html{scrollbar-width:none}
 html::-webkit-scrollbar{display:none}
+
+/* ==================================================================================== Laboratorio · análisis en bloques
+   Casos, Validaciones y Qué lo explica, con estilo editorial: sin tarjetas detrás de los gráficos. Cada análisis es una
+   franja con titular, una cifra clave y una frase a la izquierda, y el gráfico directamente sobre la página a la derecha. */
+.lintro{padding:64px 0 28px}
+.lintro h2{font-size:clamp(26px,2.6vw,36px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0;max-width:22ch}
+.lintro p{margin:12px 0 0;max-width:60ch;font-size:16px;line-height:1.6;color:var(--muted)}
+.lsecs{display:grid}
+.lsec{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:24px 72px;align-items:center;min-height:calc(100vh - 60px);padding:48px 0;scroll-margin-top:calc(var(--hdr) + 12px)}
+.lsec{position:relative}
+.lsec:last-child{padding-bottom:32px}
+.lsec-txt{position:relative}
+.lsec-k{display:flex;align-items:baseline;gap:10px;margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lsec-k span{color:var(--brand);font-variant-numeric:tabular-nums}
+.lsec h2{font-size:clamp(24px,2.3vw,34px);font-weight:500;line-height:1.2;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.lsec-dato{margin:28px 0 0;display:grid;gap:4px}
+.lsec-dato strong{font-size:clamp(40px,4vw,60px);font-weight:500;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.lsec-dato strong.down{color:var(--down)}
+.lsec-dato span{font-size:13.5px;line-height:1.4;color:var(--muted);max-width:34ch}
+.lsec-p{margin:20px 0 0;max-width:42ch;font-size:16px;line-height:1.6;color:var(--ink-2)}
+.lsec-fig{margin:0;min-width:0}
+.lsec-fig figcaption{margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lsec-read{margin:14px 0 0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.lsec-fig table.heat{margin:0}
+.lsec-tab{margin:0;background:transparent}
+.lsec-tab th{background:var(--bg)}
+.lsec-pie{grid-column:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:8px}
+.lsec-pie h3{margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lsec-pie .checks,.lsec-pie .checks.warn{padding:0;margin:0;background:none;color:inherit;font-size:inherit}
+#lab-caso .lintro{padding-top:48px}
+@media (max-width:1000px){
+  .lsec{grid-template-columns:1fr;gap:28px;padding:48px 0;min-height:0}
+  .lsec-txt{position:static}
+  .lsec-pie{grid-column:1;grid-template-columns:1fr;gap:20px}
+  .lintro{padding-top:40px}
+  .lnav{gap:0 20px;overflow-x:auto;scrollbar-width:none}
+  .lnav button{white-space:nowrap}
+}
+
+/* Navegación de pasos: se queda fija arriba mientras se lee, marca el paso activo y lleva una línea de progreso */
+.lnav{position:sticky;top:var(--hdr);z-index:450;display:flex;gap:4px 32px;padding:18px 0 0;
+  background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  border-bottom:1px solid var(--edge);transition:top var(--motion-200) var(--ease-out)}
+.lnav::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--brand);transform:scaleX(var(--p,0));transform-origin:left;transition:transform 120ms linear}
+.lnav button{position:relative;display:flex;align-items:baseline;gap:8px;padding:0 0 14px;font:inherit;font-size:13.5px;font-weight:500;color:var(--muted);background:none;border:0;cursor:pointer;transition:color var(--motion-200) var(--ease-out)}
+.lnav button span{font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--muted);transition:color var(--motion-200) var(--ease-out)}
+.lnav button:hover,.lnav button.on{color:var(--ink)}
+.lnav button.on span{color:var(--brand)}
+
+/* Casos: una sola línea de tiempo, en orden cronológico. Un raíl con un punto por caso; el activo se enciende. */
+.timeline{padding:8px 0 4px;min-width:0}
+.lab{grid-template-columns:minmax(0,1fr)}
+.timeline .tl-cards{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-columns:none;gap:0;position:relative;border-top:1px solid var(--edge)}
+.timeline .tl-card{position:relative;gap:4px;padding:26px 24px 8px 0;background:none;border:0;border-radius:0;box-shadow:none;transform:none}
+.timeline .tl-card::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--neutral);transition:background-color var(--motion-300) var(--ease-out),box-shadow var(--motion-300) var(--ease-out),transform var(--motion-300) var(--ease-out)}
+.timeline .tl-card::after{content:"";position:absolute;top:-1px;left:0;right:24px;height:1px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform 600ms var(--ease-out)}
+.timeline .tl-card small{font-size:12px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.timeline .tl-card b{font-size:15px;font-weight:500;color:var(--ink-2);transition:color var(--motion-200) var(--ease-out)}
+.timeline .tl-card span{font-size:13px;font-weight:500;opacity:.55;transition:opacity var(--motion-200) var(--ease-out)}
+.timeline .tl-card:hover{transform:none;box-shadow:none;background:none}
+.timeline .tl-card:hover b{color:var(--ink)}
+.timeline .tl-card:hover::before{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.timeline .tl-card.active{background:none;box-shadow:none}
+.timeline .tl-card.active::before{background:var(--brand);box-shadow:0 0 0 5px color-mix(in srgb,var(--brand) 18%,transparent);transform:scale(1.15)}
+.timeline .tl-card.active::after{transform:none}
+.timeline .tl-card.active b{color:var(--ink)}
+.timeline .tl-card.active span{opacity:1}
+@media (max-width:1000px){.timeline .tl-cards{grid-auto-columns:minmax(190px,1fr);overflow-x:auto;scrollbar-width:none;padding-top:5px;border-top:0;background:linear-gradient(var(--edge),var(--edge)) 0 5px/100% 1px no-repeat}.timeline .tl-card::before{top:0}.timeline .tl-card::after{top:4px}}
+
+/* Zoom al hacer scroll: cada pieza crece mientras se acerca al centro de la pantalla, se queda quieta mientras se
+   lee y se aleja (se encoge y se apaga) al irse por arriba. Va ligado al scroll (animation-timeline: view()); donde
+   no existe, una entrada sencilla por tiempo (.rv) hace de respaldo. Sin desenfoque. */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .lintro>*,.lsec-txt,.lsec-fig,.lsec-pie{animation:lab-zoom linear both;animation-timeline:view();transform-origin:50% 50%;will-change:transform,opacity}
+    .lsec-fig{animation-name:lab-zoom-fig}
+  }
+}
+@keyframes lab-zoom{
+  entry 0%{opacity:0;transform:translateY(48px) scale(.9)}
+  cover 38%{opacity:1;transform:none}
+  cover 70%{opacity:1;transform:none}
+  exit 100%{opacity:0;transform:translateY(-24px) scale(.92)}
+}
+@keyframes lab-zoom-fig{
+  entry 0%{opacity:0;transform:translateY(64px) scale(.84)}
+  cover 42%{opacity:1;transform:none}
+  cover 68%{opacity:1;transform:none}
+  exit 100%{opacity:0;transform:translateY(-32px) scale(.88)}
+}
+/* Respaldo por tiempo (navegadores sin animaciones ligadas al scroll) */
+.rv{opacity:0;transform:translateY(32px) scale(.94);transition:opacity 800ms var(--ease-out),transform 1000ms var(--ease-out);transition-delay:calc((var(--d,0) + var(--d0,0)) * 80ms)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* Tablas del Laboratorio con más aire, para que llenen el espacio del gráfico */
+.lsec-fig table.heat{border-spacing:6px}
+.lsec-fig table.heat td{padding:26px 8px;font-size:15px}
+.lsec-fig table.heat th{font-size:13px}
+.lsec-tab{font-size:15px}
+.lsec-tab td,.lsec-tab th{padding:16px 12px}
+
+/* ==================================================================================== Laboratorio · portada del caso
+   El caso se abre como una portada: el mapa ocupa todo el ancho de la ventana (sin recuadro), el texto va encima a la
+   izquierda sobre un degradado del fondo, y abajo una flecha lleva al análisis. El mapa se arrastra y se acerca
+   (botones, doble clic, pinza o Ctrl + rueda); las paradas solo aparecen al acercarse, para no saturar. */
+.case-cover{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:min(calc(100vh - 40px),920px);min-height:600px;overflow:hidden;background:var(--sea)}
+.cover-map{position:absolute;inset:0}
+.cover-map .leaflet-control-attribution{background:transparent;color:var(--muted);font-size:11.5px}
+.cover-map .leaflet-top .leaflet-control-zoom{margin-top:28px}
+.cover-fade{position:absolute;inset:0 auto 0 0;width:min(62vw,980px);pointer-events:none;z-index:500;
+  background:linear-gradient(90deg,var(--bg) 0%,var(--bg) 38%,color-mix(in srgb,var(--bg) 70%,transparent) 62%,transparent 100%)}
+.case-cover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none;z-index:500;background:linear-gradient(0deg,var(--bg),transparent)}
+.case-cover::before{content:"";position:absolute;left:0;right:0;top:0;height:60px;pointer-events:none;z-index:500;background:linear-gradient(180deg,var(--bg),transparent)}
+.cover-in{position:absolute;inset:0;z-index:600;max-width:1480px;margin:0 auto;padding:0 20px;display:flex;align-items:center;pointer-events:none}
+.cover-txt{pointer-events:auto;max-width:520px}
+.cover-k{display:flex;align-items:baseline;gap:14px;margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cover-k span{color:var(--brand);font-variant-numeric:tabular-nums}
+.cover-txt h2{font-size:clamp(34px,3.8vw,56px);font-weight:400;line-height:1.05;letter-spacing:-.03em;margin:0;text-wrap:balance}
+.cover-lead{margin:20px 0 0;font-size:17px;line-height:1.6;color:var(--ink-2);max-width:46ch}
+.cover-kpis{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0;margin:36px 0 0}
+.cover-kpis div{padding:0 28px;border-left:1px solid var(--edge)}
+.cover-kpis div:first-child{padding-left:0;border-left:0}
+.cover-kpis dt{order:2;font-size:12.5px;line-height:1.35;color:var(--muted);max-width:16ch;margin-top:6px}
+.cover-kpis div{display:flex;flex-direction:column}
+.cover-kpis dd{order:1;margin:0;font-size:clamp(28px,2.6vw,38px);font-weight:400;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.cover-kpis dd.down{color:var(--down)}
+.cover-det{margin-top:28px;font-size:14px;color:var(--ink-2)}
+.cover-det summary{cursor:pointer;font-weight:500;color:var(--ink);list-style:none;display:inline-flex;align-items:center;gap:8px}
+.cover-det summary::-webkit-details-marker{display:none}
+.cover-det summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid var(--edge);border-radius:50%;font-size:14px;line-height:1;transition:transform var(--motion-200) var(--ease-out)}
+.cover-det[open] summary::before{transform:rotate(45deg)}
+.cover-det p{max-width:52ch;margin:10px 0 0;line-height:1.6}
+.cover-leg{z-index:600;right:max(28px,calc((100vw - 1480px) / 2 + 20px));bottom:72px}
+.cover-hint{position:absolute;z-index:600;left:50%;bottom:28px;transform:translateX(-50%);margin:0;font-size:12px;color:var(--muted);white-space:nowrap;pointer-events:none}
+.cover-hint kbd{font:inherit;font-size:11px;padding:1px 5px;border:1px solid var(--edge);border-radius:4px}
+.cover-cue{position:absolute;z-index:600;left:max(20px,calc((100vw - 1480px) / 2 + 20px));bottom:28px;display:flex;align-items:center;gap:10px;padding:0;font:inherit;font-size:13px;font-weight:500;color:var(--ink);background:none;border:0;cursor:pointer}
+.cover-cue svg{width:34px;height:34px;padding:8px;border:1px solid var(--edge);border-radius:50%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--motion-300) var(--ease-out),border-color var(--motion-200)}
+.cover-cue:hover svg{transform:translateY(3px);border-color:var(--brand)}
+@media (prefers-reduced-motion:no-preference){.cover-cue svg{animation:cue-bote 2.4s var(--ease-out) infinite}@keyframes cue-bote{0%,60%,100%{transform:none}30%{transform:translateY(4px)}}}
+@media (max-width:900px){
+  .case-cover{height:auto;min-height:0;display:flex;flex-direction:column;overflow:visible;background:none}
+  .cover-in{position:relative;order:-1;padding:24px 16px 20px}
+  .cover-map{position:relative;height:62vh}
+  .cover-fade,.case-cover::after,.case-cover::before,.cover-hint{display:none}
+  .cover-kpis div{padding:0 16px}
+  .case-cover .cover-leg{position:relative;inset:auto;margin:14px 16px 0;max-width:none}
+  .cover-cue{position:relative;left:auto;bottom:auto;margin:16px}
+}
+
+/* Línea de casos: el caso abierto destaca claramente; los demás quedan en segundo plano */
+.timeline .tl-card{opacity:.5;transition:opacity var(--motion-200) var(--ease-out)}
+.timeline .tl-card:hover{opacity:.85}
+.timeline .tl-card.active{opacity:1}
+.timeline .tl-card::after{height:3px;top:-2px;right:0}
+.timeline .tl-card.active b{font-size:17px;font-weight:600}
+.timeline .tl-card.active small{color:var(--brand)}
+.timeline .tl-card.active::before{transform:scale(1.35)}
+
+/* ==================================================================================== Laboratorio · portadas de las demás pestañas
+   Validaciones, Qué lo explica y Método abren igual que el caso: portada a todo el ancho y, al bajar, el análisis.
+   Sin mapa, la pieza visual (enjambre de placebos o fórmula) ocupa la mitad derecha. */
+.lab-cover.sin-mapa{background:none;height:min(calc(100vh - 40px),860px);min-height:560px}
+.lab-cover.sin-mapa::before,.lab-cover.sin-mapa::after{display:none}
+.cover-vis{position:absolute;z-index:550;top:0;bottom:0;left:max(48vw,calc(50vw - 740px + 640px));right:max(20px,calc(50vw - 740px + 20px));display:flex;flex-direction:column;justify-content:center}
+.cover-vis svg.enj .grid{stroke:var(--edge)}
+.cover-eq{display:grid;gap:18px}
+.cover-eq-k{margin:0;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cover-eq .eq.big{margin:0;font-size:clamp(20px,1.8vw,28px);padding:28px 32px;border:0;background:none;width:auto}
+.cover-eq-l{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;color:var(--muted)}
+.cover-eq-l b{color:var(--ink);font-weight:500}
+.cover-eq-l li:last-child{color:var(--down);font-weight:500}
+@media (max-width:900px){
+  .lab-cover.sin-mapa{height:auto;min-height:0}
+  .cover-vis{position:relative;inset:auto;padding:0 16px;order:0}
+  .cover-eq .eq.big{padding:16px 0;overflow-x:auto}
+}
+
+/* Método: mismo lenguaje que el resto del laboratorio, sin tarjetas. Secciones abiertas y amplias, con el índice fijo. */
+#lab-metodo .metodo{padding-top:56px}
+#lab-metodo .msec{background:none;border:0;box-shadow:none;border-radius:0;padding:56px 0 64px;overflow:visible;min-width:0}
+#lab-metodo .msec:first-child{padding-top:0}
+#lab-metodo .msec h2{display:flex;align-items:baseline;gap:16px;font-size:clamp(24px,2.2vw,32px);font-weight:400;letter-spacing:-.02em;line-height:1.2;margin:0 0 22px;padding:0;border:0}
+#lab-metodo .msec h2 .mn{font-size:13px;font-weight:600;color:var(--brand);letter-spacing:.06em}
+#lab-metodo .mbody{gap:0;max-width:900px}
+#lab-metodo .msec p{font-size:16px;line-height:1.7}
+#lab-metodo .mres{background:none;border:0;border-left:2px solid var(--down);border-radius:0;padding:4px 0 4px 20px;font-size:15px}
+#lab-metodo .mwhy{margin-top:26px}
+#lab-metodo .mkpis{border:0;border-radius:0;margin-top:30px}
+#lab-metodo .mkpis div{padding:0 24px}
+#lab-metodo .mkpis div:first-child{padding-left:0}
+#lab-metodo .mkpis strong{font-size:clamp(26px,2.4vw,34px);font-weight:400;letter-spacing:-.03em}
+#lab-metodo .eq{background:var(--surface-2);border-color:transparent}
+#lab-metodo .mtoc{top:calc(var(--hdr) + 32px)}
+@media (max-width:900px){#lab-metodo .mkpis div{padding:12px 0}#lab-metodo .metodo{padding-top:24px}}
+/* Entrada suave de cada sección del método (solo al entrar: es texto para leer, no se aleja al salir) */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    #lab-metodo .msec>*{animation:lab-sube linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+    .cover-txt,.cover-vis{animation:lab-portada linear both;animation-timeline:view();animation-range:exit 20% exit 100%}
+  }
+}
+@keyframes lab-sube{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes lab-portada{to{opacity:0;transform:translateY(-40px) scale(.94)}}
+@media (max-width:900px){
+  #lab-metodo .metodo{grid-template-columns:minmax(0,1fr)}
+  #lab-metodo .mbody{min-width:0}
+  .cover-kpis{display:flex;flex-wrap:wrap;row-gap:18px}
+  .cover-kpis dd{font-size:28px}
+}
+
+/* Pestañas del Laboratorio: sin caja. Texto numerado sobre el filete de la cabecera; la activa se subraya en naranja. */
+#lab-nav{display:flex;gap:4px 36px;padding:0;margin:0 0 -25px;background:none;border:0;border-radius:0;counter-reset:lab}
+#lab-nav button{position:relative;display:flex;align-items:baseline;gap:8px;padding:0 0 22px;font:inherit;font-size:15px;font-weight:500;color:var(--muted);background:none;border:0;border-radius:0;box-shadow:none;cursor:pointer;counter-increment:lab;transition:color var(--motion-200) var(--ease-out)}
+#lab-nav button::before{content:counter(lab,decimal-leading-zero);font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--muted);transition:color var(--motion-200) var(--ease-out)}
+#lab-nav button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform var(--motion-300) var(--ease-out)}
+#lab-nav button:hover{color:var(--ink)}
+#lab-nav button.active{color:var(--ink);background:none;box-shadow:none}
+#lab-nav button.active::before{color:var(--brand)}
+#lab-nav button.active::after{transform:none}
+@media (max-width:900px){#lab-nav{gap:4px 22px;margin:8px 0 -25px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;width:100%}#lab-nav button{white-space:nowrap;font-size:14px}}

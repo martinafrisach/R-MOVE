@@ -47,7 +47,7 @@
   // ------------------------------------------------------------------ gráficos SVG
   /* Barras horizontales desde 0 con intervalo opcional. rows: {label, efecto, ic_inf, ic_sup, p, tip, color} */
   function forest(el, rows, o = {}) {
-    const W = ancho(el), L = o.labelW ?? 170, R = 64, rowH = 30, top = 8, H = top + rows.length * rowH + 24;
+    const W = ancho(el), L = o.labelW ?? 170, R = 64, rowH = o.rowH ?? 30, bh = o.barH ?? 14, top = 8, H = top + rows.length * rowH + 24;
     const vals = rows.flatMap((r) => [r.efecto, r.ic_inf, r.ic_sup]).filter((v) => v != null);
     const lo = Math.min(o.min ?? -10, ...vals), hi = Math.max(o.max ?? 5, ...vals);
     const x = (v) => L + (v - lo) / (hi - lo) * (W - L - R);
@@ -60,8 +60,8 @@
       const x0 = Math.min(x(0), x(e)), w = Math.max(Math.abs(x(e) - x(0)), 1.5);
       s += `<g class="row" style="--k:${i}">`;
       s += `<text class="lbl" x="${L - 10}" y="${y + 4}" text-anchor="end">${esc(r.label)}</text>`;
-      s += `<rect class="bar${e < 0 ? ' neg' : ''}" x="${x0}" y="${y - 7}" width="${w}" height="14" rx="4" fill="${col}" opacity="${sig ? 1 : 0.45}"/>`;
-      if (r.ic_inf != null) s += `<g class="fade"><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_sup)}" y1="${y}" y2="${y}"/><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_inf)}" y1="${y - 5}" y2="${y + 5}"/><line class="ci" x1="${x(r.ic_sup)}" x2="${x(r.ic_sup)}" y1="${y - 5}" y2="${y + 5}"/></g>`;
+      s += `<rect class="bar${e < 0 ? ' neg' : ''}" x="${x0}" y="${y - bh / 2}" width="${w}" height="${bh}" rx="${Math.min(6, bh / 3)}" fill="${col}" opacity="${sig ? 1 : 0.45}"/>`;
+      if (r.ic_inf != null) s += `<g class="fade"><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_sup)}" y1="${y}" y2="${y}"/><line class="ci" x1="${x(r.ic_inf)}" x2="${x(r.ic_inf)}" y1="${y - bh / 2.8}" y2="${y + bh / 2.8}"/><line class="ci" x1="${x(r.ic_sup)}" x2="${x(r.ic_sup)}" y1="${y - bh / 2.8}" y2="${y + bh / 2.8}"/></g>`;
       const vx = Math.max(x(e), r.ic_sup != null ? x(r.ic_sup) : 0, x(0)) + 6;
       s += `<text class="val fade" x="${vx}" y="${y + 4}">${pct(e)}${sig ? '' : ' ·ns'}</text>`;
       const t = r.tip || `<b>${esc(r.label)}</b><br>${pct(e)}${r.ic_inf != null ? ` [${pct(r.ic_inf)}, ${pct(r.ic_sup)}]` : ''}${r.p != null ? '<br>' + pval(r.p) : ''}`;
@@ -111,8 +111,8 @@
   }
 
   /* Event study: puntos con intervalo */
-  function eventStudy(el, evento) {
-    const W = ancho(el), H = 210, L = 46, R = 14, T = 10, B = 30;
+  function eventStudy(el, evento, o = {}) {
+    const W = ancho(el), H = o.height || 210, L = 46, R = 14, T = 10, B = 30;
     const lo = Math.min(...evento.map((e) => e.ic_inf ?? e.efecto_pct), -2) - 1, hi = Math.max(...evento.map((e) => e.ic_sup ?? e.efecto_pct), 2) + 1;
     const x = (i) => L + (i + 0.5) / evento.length * (W - L - R), y = (v) => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
     let s = `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="Event study">`;
@@ -129,8 +129,8 @@
     animar(el);
   }
 
-  function histogram(el, valores, real) {
-    const W = ancho(el), H = 200, L = 36, R = 14, T = 10, B = 30, nb = 24;
+  function histogram(el, valores, real, o = {}) {
+    const W = ancho(el), H = o.height || 200, L = 36, R = 14, T = 10, B = 30, nb = 24;
     const lo = Math.min(...valores, real) - 0.5, hi = Math.max(...valores, real) + 0.5, bw = (hi - lo) / nb;
     const bins = Array(nb).fill(0); valores.forEach((v) => bins[Math.min(nb - 1, Math.floor((v - lo) / bw))]++);
     const mx = Math.max(...bins), x = (v) => L + (v - lo) / (hi - lo) * (W - L - R), y = (c) => T + (1 - c / mx) * (H - T - B);
@@ -158,7 +158,7 @@
   }
 
   /* Cifras grandes que «cuentan» hasta su valor al aparecer (conserva signo, decimales, miles y sufijo). */
-  const CIFRAS = '.big-stat strong,.doors strong,.pp-impact strong,.kpi strong,.ch-kpis strong,.rank strong,.htile strong,.sval,.pp-eff strong,.pp-kpis strong,.scen strong,.facts strong';
+  const CIFRAS = '.lsec-dato strong,.big-stat strong,.doors strong,.pp-impact strong,.kpi strong,.ch-kpis strong,.rank strong,.htile strong,.sval,.pp-eff strong,.pp-kpis strong,.scen strong,.facts strong';
   const NUM_RE = /([−+-]?)(\d{1,3}(?:\.\d{3})+|\d+)(,\d+)?/;
   function contar(el) {
     if (el.dataset.contado === el.textContent || el.childElementCount) return;
@@ -582,18 +582,22 @@
 
   /* Paradas de Rodalies: punto pequeño con el borde del color de la línea. El nombre no se escribe en el
    * mapa (lo cargaría demasiado): aparece al pasar el cursor, junto con las líneas que paran. */
-  function paradasRodalies(map) {
+  function paradasRodalies(map, desde) {
     if (!RAIL) return;
     map.createPane('paradas'); map.getPane('paradas').style.zIndex = 455;
+    const grupo = L.layerGroup();
     const R = 3.2, RH = 6;
     RAIL.features.filter((f) => f.geometry.type === 'Point').forEach((f) => {
       const [lon, lat] = f.geometry.coordinates, ls = (f.properties.lines || []).filter((l) => l !== 'R2');
       const p = L.circleMarker([lat, lon], { pane: 'paradas', radius: R, weight: 1.6, color: ls.length ? colorLinea(ls[0]) : css('--ink-2'), fillColor: css('--surface'), fillOpacity: 1, bubblingMouseEvents: false })
         .bindTooltip(`<b>${esc(f.properties.name)}</b><br>${ls.map(chipLinea).join(' ')}`, { className: 'story-tip parada-tip', direction: 'top', offset: [0, -6] })
-        .addTo(map);
+        .addTo(grupo);
       p.on('mouseover', () => { p.setRadius(RH); p.setStyle({ weight: 2.5 }); });
       p.on('mouseout', () => { p.setRadius(R); p.setStyle({ weight: 1.6 }); });
     });
+    if (desde == null) { grupo.addTo(map); return; }
+    const ver = () => { const on = map.getZoom() >= desde; if (on && !map.hasLayer(grupo)) grupo.addTo(map); if (!on && map.hasLayer(grupo)) map.removeLayer(grupo); };
+    map.on('zoomend', ver); map.whenReady(ver);
   }
 
   // ------------------------------------------------------------------ piezas comunes: mapa coroplético, iconos, buscador
@@ -623,8 +627,14 @@
     const base = await cargarBase();
     if (!window.L) { $('status').textContent = 'No se ha podido cargar Leaflet: el mapa necesita conexión a Internet.'; return null; }
     const fijo = o.fijo === true;
-    const map = L.map(id, { zoomControl: !fijo, scrollWheelZoom: !fijo, dragging: !fijo, doubleClickZoom: !fijo, touchZoom: !fijo, boxZoom: false, keyboard: !fijo, zoomSnap: 0.1, attributionControl: true });
-    if (!fijo) map.zoomControl.setPosition('bottomright');
+    const map = L.map(id, { zoomControl: !fijo, scrollWheelZoom: !fijo && !o.ruedaCtrl, dragging: !fijo, doubleClickZoom: !fijo, touchZoom: !fijo, boxZoom: false, keyboard: !fijo, zoomSnap: 0.1, ...(o.ruedaCtrl ? { zoomDelta: 0.5, maxZoom: 13 } : {}), attributionControl: true });
+    if (!fijo) map.zoomControl.setPosition(o.zoomPos || 'bottomright');
+    // En páginas que se leen con scroll, la rueda sola mueve la página; con Ctrl (o ⌘) acerca el mapa
+    if (o.ruedaCtrl) map.getContainer().addEventListener('wheel', (e) => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      e.preventDefault();
+      map.setZoomAround(map.mouseEventToContainerPoint(e), map.getZoom() + (e.deltaY < 0 ? 0.5 : -0.5));
+    }, { passive: false });
     map.attributionControl.setPrefix('').addAttribution('Límites: ICGC · Red: GTFS Renfe · Datos: Telefónica');
     map.createPane('rail'); map.getPane('rail').style.zIndex = 450; map.getPane('rail').style.pointerEvents = 'none';
     map.createPane('ruta'); map.getPane('ruta').style.zIndex = 460; map.getPane('ruta').style.pointerEvents = 'none';
@@ -647,7 +657,7 @@
       M.rail.set(f.properties.id, { casing, linea, color: f.properties.color });
     });
     contornoCatalunya(map);
-    paradasRodalies(map);
+    paradasRodalies(map, o.paradasDesde);
     M.annos = L.layerGroup().addTo(map);
     M.ruta = L.layerGroup().addTo(map);
     M.pintar = (fn) => M.capas.forEach((layer, cod) => {
@@ -1049,12 +1059,13 @@
         if (ver && x.hidden) { x.classList.remove('entra'); void x.offsetWidth; x.classList.toggle('atras', atras); x.classList.add('entra'); }
         x.hidden = !ver;
       });
-      if (b.dataset.lab === 'validacion') pintarValidacion();
-      if (b.dataset.lab === 'factores') pintarFactores();
+      if (b.dataset.lab === 'validacion') { pintarValidacion(); revelar($('lab-validacion')); }
+      if (b.dataset.lab === 'factores') { pintarFactores(); revelar($('lab-factores')); }
+      seguirLab();
     });
     // Casos: línea de tiempo
     $('lab-casos').innerHTML = `<div class="timeline">
-        <div class="tl-cards">${CASOS().map((i, k) => `<button class="tl-card ${k ? '' : 'active'}" data-i="${k}"><small>${fecha(i.fecha)} · ${esc(i.tipo)}</small><b>${esc(i.titulo)}</b><span class="${i.perdidos.efecto_pct < 0 ? 'down' : ''}">${pct(i.perdidos.efecto_pct)} en ${i.linea_nombre ? 'la ' + esc(i.linea_nombre) : 'dependientes'}</span></button>`).join('')}</div></div>
+        <div class="tl-cards" role="tablist" aria-label="Casos">${CASOS().map((i, k) => ({ i, k })).sort((a, b) => a.i.fecha.localeCompare(b.i.fecha)).map(({ i, k }) => `<button class="tl-card ${k ? '' : 'active'}" data-i="${k}" role="tab"><small>${fecha(i.fecha)} · ${esc(i.tipo)}</small><b>${esc(i.titulo)}</b><span class="${i.perdidos.efecto_pct < 0 ? 'down' : ''}">${pct(i.perdidos.efecto_pct)} en ${i.linea_nombre ? 'la ' + esc(i.linea_nombre) : 'dependientes'}</span></button>`).join('')}</div></div>
       <div id="lab-caso" class="lab"></div>`;
     $('lab-casos').querySelector('.timeline').addEventListener('click', (e) => {
       const b = e.target.closest('[data-i]'); if (!b) return;
@@ -1074,36 +1085,183 @@
   const OCULTOS_LAB = ['2025-03-26'];
   const CASOS = () => D.incidencias.concat(D.averias || []).filter((i) => !OCULTOS_LAB.includes(i.fecha));
 
+  /* Bloques del Laboratorio: cada análisis ocupa su propia franja, con el texto que lo explica a la izquierda
+   * (qué se mide, qué sale y cómo se lee) y el gráfico a la derecha. Sustituye a la antigua rejilla de 2×2. */
+  const dos = (n) => String(n).padStart(2, '0');
+  /* Tamaño de los gráficos del Laboratorio: ~60 % del alto de la pantalla, repartido entre las filas */
+  const altoLab = () => Math.round(Math.min(Math.max(innerHeight * 0.6, 340), 660));
+  const filasLab = (n, o = {}) => { const rowH = Math.round(Math.min(Math.max(altoLab() / n, 40), 88)); return { ...o, rowH, barH: Math.round(Math.min(Math.max(rowH * 0.36, 14), 28)) }; };
+  const bloque = ({ id, n, tema, titulo, dato, texto, lectura, cap, fig, pie = '' }) => `
+    <section class="lsec" id="${id}">
+      <div class="lsec-txt">
+        <p class="lsec-k"><span>${dos(n)}</span>${tema}</p>
+        <h2>${titulo}</h2>
+        ${dato ? `<p class="lsec-dato"><strong class="${dato.c || ''}">${dato.v}</strong><span>${dato.l}</span></p>` : ''}
+        ${texto ? `<p class="lsec-p">${texto}</p>` : ''}
+      </div>
+      <figure class="lsec-fig">${cap ? `<figcaption>${cap}</figcaption>` : ''}${fig}${lectura ? `<p class="lsec-read">${lectura}</p>` : ''}</figure>
+      ${pie}
+    </section>`;
+  /* Portada de cada pestaña: a todo el ancho, texto a la izquierda y, a la derecha, un mapa interactivo o una
+   * pieza visual propia (enjambre de placebos, fórmula del estimador). Abajo, la flecha que lleva al análisis. */
+  const portada = ({ k, titulo, lead, kpis, cue, cueTxt = 'Ver el análisis', mapa, visId = '', vis = '' }) => `
+    <section class="case-cover lab-cover${mapa ? '' : ' sin-mapa'}">
+      ${mapa ? `<div id="${mapa}" class="cover-map"></div><div class="cover-fade" aria-hidden="true"></div>` : `<div class="cover-vis" id="${visId}">${vis}</div>`}
+      <div class="cover-in"><div class="cover-txt">
+        <p class="cover-k">${k}</p>
+        <h2>${titulo}</h2>
+        <p class="cover-lead">${lead}</p>
+        ${kpis ? `<dl class="cover-kpis">${kpis.map(([dt, dd, c]) => `<div><dt>${dt}</dt><dd class="${c || ''}">${dd}</dd></div>`).join('')}</dl>` : ''}
+      </div></div>
+      ${mapa ? `<div class="story-legend mini cover-leg" id="${mapa}-leg"></div><p class="cover-hint">Arrastra para moverte · <kbd>Ctrl</kbd> + rueda o doble clic para acercar</p>` : ''}
+      <button type="button" class="cover-cue" data-ir="${cue}"><span>${cueTxt}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+    </section>`;
+  const navLab = (pasos) => `<nav class="lnav" aria-label="Pasos del análisis">${pasos.map(([id, t], k) => `<button type="button" data-ir="${id}"><span>${dos(k + 1)}</span>${t}</button>`).join('')}</nav>`;
+
+  /* Enjambre: cada punto es un placebo (un «efecto» calculado en días normales); la línea, el efecto real. */
+  function enjambre(el, valores, real) {
+    const W = ancho(el), H = Math.round(Math.min(Math.max(innerHeight * 0.5, 320), 460)), r = 5.2, L = 16, R = 16, B = 34;
+    const lo = Math.min(...valores, real) - 1, hi = Math.max(...valores, real) + 1, x = (v) => L + (v - lo) / (hi - lo) * (W - L - R);
+    const paso = r * 2 + 1.2, cols = new Map(), y0 = (H - B) / 2;
+    let s = `<svg class="viz enj" viewBox="0 0 ${W} ${H}" role="img" aria-label="Efecto en ${valores.length} simulaciones sin incidencia frente al efecto real">`;
+    niceTicks(lo, hi, 6).forEach((t) => { s += `<line class="${t === 0 ? 'zero' : 'grid'}" x1="${x(t)}" x2="${x(t)}" y1="8" y2="${H - B}"/><text x="${x(t)}" y="${H - 10}" text-anchor="middle">${nf(t)} %</text>`; });
+    valores.slice().sort((a, b) => a - b).forEach((v, i) => {
+      const c = Math.round(x(v) / paso), n = cols.get(c) || 0; cols.set(c, n + 1);
+      const dy = (n % 2 ? 1 : -1) * Math.ceil(n / 2) * paso;
+      s += `<circle class="pop" style="--k:${Math.round(i / 12)}" cx="${c * paso}" cy="${y0 + dy}" r="${r}" fill="${css('--neutral')}" opacity=".85"/>`;
+    });
+    s += `<g class="fade" style="--k:18"><line x1="${x(real)}" x2="${x(real)}" y1="8" y2="${H - B}" stroke="${css('--down')}" stroke-width="2.5"/><circle cx="${x(real)}" cy="${y0}" r="8" fill="${css('--down')}" stroke="${css('--bg')}" stroke-width="3"/>` +
+      `<text class="lbl" x="${x(real) + 14}" y="26">Días de caos reales</text><text class="val" x="${x(real) + 14}" y="44" style="fill:${css('--down')}">${pct(real)}</text></g>`;
+    s += `<text class="lbl" x="${x(0)}" y="26" text-anchor="middle">${valores.length} simulaciones sin incidencia</text>`;
+    el.innerHTML = s + '</svg>';
+    animar(el);
+  }
+
+  const introLab = (titulo, texto, pasos) => `
+    <header class="lintro">
+      <h2>${titulo}</h2>${texto ? `<p>${texto}</p>` : ''}
+    </header>
+    <nav class="lnav" aria-label="Pasos del análisis">${pasos.map(([id, t], k) => `<button type="button" data-ir="${id}"><span>${dos(k + 1)}</span>${t}</button>`).join('')}</nav>`;
+
+  /* Movimiento del Laboratorio (al estilo de las webs de producto):
+   *  · Zoom: cada pieza crece al acercarse y se aleja al irse (CSS ligado al scroll; aquí, respaldo por tiempo).
+   *  · Las líneas entre bloques se dibujan al entrar.
+   *  · Navegación de pasos fija con el paso activo y una línea de progreso.
+   * Con «reducir movimiento» no se añade nada y todo se ve directamente. */
+  const obsRv = 'IntersectionObserver' in window
+    ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); obsRv.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px', threshold: 0.12 })
+    : null;
+  function revelar(root) {
+    if (!root || !obsRv || sinMovimiento.matches) return;
+    // Con animaciones ligadas al scroll el zoom lo hace el CSS: aquí solo se dibujan las líneas entre bloques
+    if (window.CSS && CSS.supports('animation-timeline: view()')) { root.querySelectorAll('.lsec:not(.in)').forEach((sec) => obsRv.observe(sec)); return; }
+    const marcar = (els) => [...els].forEach((el, k) => { if (el.classList.contains('rv')) return; el.classList.add('rv'); el.style.setProperty('--d', k); obsRv.observe(el); });
+    marcar(root.querySelectorAll('.cover-txt > *'));
+    root.querySelectorAll('.lintro').forEach((h) => marcar(h.children));
+    root.querySelectorAll('.lsec').forEach((sec) => {
+      marcar(sec.querySelectorAll('.lsec-txt > *'));
+      marcar([...sec.querySelectorAll('.lsec-fig, .lsec-pie')].map((x) => (x.style.setProperty('--d0', 2), x)));
+      if (!sec.classList.contains('visto')) obsRv.observe(sec);
+    });
+  }
+  let seguirPend = false;
+  function seguirLab() {
+    seguirPend = false;
+    const nav = [...document.querySelectorAll('#mode-laboratorio .lnav')].find((n) => n.offsetParent);
+    if (!nav) return;
+    const bs = [...nav.querySelectorAll('[data-ir]')], secs = bs.map((b) => $(b.dataset.ir)).filter(Boolean);
+    if (!secs.length) return;
+    const y = innerHeight * 0.4, ini = secs[0].getBoundingClientRect().top, fin = secs[secs.length - 1].getBoundingClientRect().bottom;
+    let on = -1; secs.forEach((x, k) => { if (x.getBoundingClientRect().top < y) on = k; });
+    nav.style.setProperty('--p', Math.min(1, Math.max(0, (y - ini) / (fin - ini))).toFixed(4));
+    bs.forEach((b, k) => b.classList.toggle('on', k === on));
+  }
+  addEventListener('scroll', () => { if (!seguirPend) { seguirPend = true; requestAnimationFrame(seguirLab); } }, { passive: true });
+  // Saltar a un bloque desde el índice de la cabecera (sin tocar el hash, que usa el enrutador)
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest && e.target.closest('[data-ir]'); if (!b) return;
+    const s = $(b.dataset.ir);
+    if (s) s.scrollIntoView({ behavior: sinMovimiento.matches ? 'auto' : 'smooth', block: 'start' });
+  });
+
   async function caso(i) {
     const p = i.perdidos, lin = i.lineas_dependientes.slice().sort((a, b) => a.efecto_pct - b.efecto_pct), peor = lin[0];
     const esAveria = !!i.linea_clave, dep = i.grupos.find((g) => g.grupo === (esAveria ? 'linea_afectada' : 'dependientes'));
     const quien = esAveria ? `dependientes de la ${esc(i.linea_nombre)}` : 'dependientes';
+    const sig = (x) => x.p_valor < 0.05;
+    const NOMG = { dependientes: 'los dependientes', cercanos: 'los cercanos sin metro ni FGC', metro_fgc: 'los que tienen metro o FGC', resto: 'los dependientes de las demás líneas', linea_afectada: `los dependientes de la ${esc(i.linea_nombre || '')}` };
+    const nomG = (g) => NOMG[g.grupo] || esc(g.etiqueta || g.grupo);
+    const otros = i.grupos.filter((g) => g !== dep);
+    const linSig = lin.filter((l) => sig(l) && l.efecto_pct < 0);
+    const dia = i.serie.find((s) => s.caos), bn = i.banda_normal;
+    const fueraT = i.tramos.filter((t) => t.cambio_pct < t.normal_inf || t.cambio_pct > t.normal_sup);
+    const peorT = i.tramos.slice().sort((a, b) => a.cambio_pct - b.cambio_pct)[0];
+
+    const dentro = dia && dia.dependientes >= bn.inf && dia.dependientes <= bn.sup;
+    const orden = CASOS().slice().sort((a, b) => a.fecha.localeCompare(b.fecha)), nCaso = orden.indexOf(i) + 1;
+    const otrosTxt = otros.map((g) => `${nomG(g)} ${pct(g.efecto_pct)}${sig(g) ? '' : ' (ns)'}`).join(', ');
     $('lab-caso').innerHTML = `
-      <div class="case-hero card">
-        <div class="ch-text">
-          <p class="eyebrow">${fecha(i.fecha)} · ${esc(i.tipo)}</p><h2>${esc(i.titulo)}</h2>
-          <p>${esc(i.lectura)}</p>
-          <div class="ch-kpis"><div><strong class="down">${pct(p.efecto_pct)}</strong><span>viajes de los ${quien}</span></div><div><strong>${nf(p.viajes_perdidos)}</strong><span>viajes menos ese día</span></div><div><strong>${pval(p.p_valor).replace('p ', 'p ')}</strong><span>${p.p_valor < 0.05 ? 'efecto claro' : 'no concluyente'}</span></div></div>
-          <details class="small"><summary>Qué pasó exactamente</summary><p>${esc(i.descripcion)}</p><p><b>Servicio:</b> ${esc(i.tramo)}</p></details>
+      <section class="case-cover" aria-label="Caso: ${esc(i.titulo)}">
+        <div id="lab-map" class="cover-map"></div>
+        <div class="cover-fade" aria-hidden="true"></div>
+        <div class="cover-in">
+          <div class="cover-txt">
+            <p class="cover-k"><span>Caso ${dos(nCaso)} / ${dos(orden.length)}</span>${fecha(i.fecha)} · ${esc(i.tipo)}</p>
+            <h2>${esc(i.titulo)}</h2>
+            <p class="cover-lead">${esc(i.lectura)}</p>
+            <dl class="cover-kpis">
+              <div><dt>Viajes de los ${quien}</dt><dd class="down">${pct(p.efecto_pct)}</dd></div>
+              <div><dt>Viajes menos ese día</dt><dd>${nf(p.viajes_perdidos)}</dd></div>
+              <div><dt>${p.p_valor < 0.05 ? 'Efecto claro' : 'No concluyente'}</dt><dd>${pval(p.p_valor)}</dd></div>
+            </dl>
+            <details class="cover-det"><summary>Qué pasó exactamente</summary><p>${esc(i.descripcion)}</p><p><b>Servicio:</b> ${esc(i.tramo)}</p></details>
+          </div>
         </div>
-        <div class="ch-map"><div id="lab-map" class="fill-map"></div><div class="story-legend mini" id="legend-lab"></div></div>
-      </div>
-      <div class="lab-grid">
-        <div class="card"><div class="card-head"><h2>${dep && dep.p_valor < 0.05 ? (esAveria ? `Solo cae la ${esc(i.linea_nombre)}, no las demás líneas` : 'Solo caen los que dependen del tren') : 'Ningún grupo cae de forma clara'}</h2><small>Efecto por grupo de municipios e intervalo del 95 %</small></div><div class="pad" id="c-grupos"></div></div>
-        <div class="card"><div class="card-head"><h2>${peor.p_valor < 0.05 ? `La ${esc(peor.linea)} es la que más cae` : 'Ninguna línea destaca con claridad'}</h2><small>Municipios dependientes, por línea</small></div><div class="pad" id="c-lineas"></div></div>
-        <div class="card"><div class="card-head"><h2>El día del caos se sale del rango normal</h2><small>Índice de viajes (día normal = 100). Banda gris: lo habitual.</small></div><div class="pad" id="c-serie"></div></div>
-        <div class="card"><div class="card-head"><h2>Por tramos de la red</h2><small>Punto: cambio ese día. Barra gris: lo que varía un día normal. Fuera de la barra = anómalo.</small></div><div class="pad" id="c-tramos"></div></div>
+        <div class="story-legend mini cover-leg" id="legend-lab"></div>
+        <p class="cover-hint">Arrastra para moverte · <kbd>Ctrl</kbd> + rueda o doble clic para acercar</p>
+        <button type="button" class="cover-cue" data-ir="cs-grupos"><span>Ver el análisis</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+      </section>
+      ${introLab('El caso, paso a paso', '', [['cs-grupos', 'Quién cae'], ['cs-lineas', 'Qué línea'], ['cs-serie', '¿Es anómalo?'], ['cs-tramos', 'Dónde']])}
+      <div class="lsecs">
+        ${bloque({ id: 'cs-grupos', n: 1, tema: 'Quién cae',
+          titulo: dep && sig(dep) ? (esAveria ? `Solo cae la ${esc(i.linea_nombre)}` : 'Solo caen los que dependen del tren') : 'Ningún grupo cae de forma clara',
+          dato: dep && { v: pct(dep.efecto_pct), l: `${nomG(dep)} (${dep.municipios} municipios)`, c: sig(dep) && dep.efecto_pct < 0 ? 'down' : '' },
+          texto: `Frente a ${otrosTxt}. Si fuera un día flojo, caerían todos a la vez.`,
+          cap: 'Cambio de viajes a Barcelona por grupo, frente a un día normal',
+          lectura: 'Línea negra: intervalo del 95 %. Tono claro y «ns»: no concluyente.',
+          fig: '<div id="c-grupos"></div>' })}
+        ${bloque({ id: 'cs-lineas', n: 2, tema: 'Qué línea',
+          titulo: sig(peor) ? `La ${esc(peor.linea)} es la que más cae` : 'Ninguna línea destaca con claridad',
+          dato: { v: pct(peor.efecto_pct), l: `${esc(peor.linea)}, ${peor.municipios} municipios dependientes`, c: sig(peor) ? 'down' : '' },
+          texto: linSig.length > 1 ? `También cae de forma clara ${linSig.filter((l) => l !== peor).map((l) => `la ${esc(l.linea)} (${pct(l.efecto_pct)})`).join(', ')}.` : 'Con pocos municipios por línea, los intervalos son anchos.',
+          cap: 'Municipios dependientes por línea (entre paréntesis, cuántos)',
+          fig: '<div id="c-lineas"></div>' })}
+        ${bloque({ id: 'cs-serie', n: 3, tema: '¿Es anómalo?',
+          titulo: dia && !dentro ? 'Ese día se sale del rango normal' : 'Ese día, frente a las semanas de alrededor',
+          dato: dia && { v: nf(dia.dependientes, 1), l: `índice de los ${quien} (normal: ${nf(bn.inf, 0)}–${nf(bn.sup, 0)})`, c: dentro ? '' : 'down' },
+          texto: dia ? `El control sin Rodalies marca ${nf(dia.control, 1)}: no es un día flojo para todos.` : '',
+          cap: 'Índice de viajes a Barcelona (día normal = 100)',
+          lectura: 'Banda gris: rango habitual. Discontinua: municipios sin Rodalies.',
+          fig: '<div id="c-serie"></div>' })}
+        ${bloque({ id: 'cs-tramos', n: 4, tema: 'Dónde',
+          titulo: fueraT.length ? `${fueraT.length === 1 ? 'Un tramo se sale' : `${fueraT.length} tramos se salen`} de lo normal` : 'Ningún tramo se sale de lo normal',
+          dato: fueraT.length ? { v: pct(peorT.cambio_pct), l: esc(peorT.tramo), c: 'down' } : null,
+          texto: fueraT.length ? `Un día normal, este tramo varía entre ${pct(peorT.normal_inf)} y ${pct(peorT.normal_sup)}.` : 'Cada tramo queda dentro de lo que varía un día cualquiera.',
+          cap: 'Cambio de viajes por tramo de la red',
+          lectura: 'Barra gris: variación normal. Punto de color fuera de la barra: anómalo.',
+          fig: '<div id="c-tramos"></div>' })}
       </div>`;
-    forest($('c-grupos'), i.grupos.map((g) => ({ label: (g.etiqueta || GRUPO[g.grupo]) + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: esAveria ? 250 : 190 });
-    forest($('c-lineas'), i.lineas_dependientes.map((l) => ({ label: `${l.linea} (${l.municipios})`, efecto: l.efecto_pct, ic_inf: l.ic_inf, ic_sup: l.ic_sup, p: l.p_valor })), { labelW: 110 });
+    forest($('c-grupos'), i.grupos.map((g) => ({ label: (g.etiqueta || GRUPO[g.grupo]) + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), filasLab(i.grupos.length, { labelW: esAveria ? 250 : 190 }));
+    forest($('c-lineas'), i.lineas_dependientes.map((l) => ({ label: `${l.linea} (${l.municipios})`, efecto: l.efecto_pct, ic_inf: l.ic_inf, ic_sup: l.ic_sup, p: l.p_valor })), filasLab(i.lineas_dependientes.length, { labelW: 110 }));
     const xs = i.serie.map((s) => fecha(s.fecha).slice(0, 5));
     lines($('c-serie'), xs, [
       { name: esAveria ? `Dependientes ${i.linea_nombre}` : 'Dependientes', color: css('--down'), values: i.serie.map((s) => s.dependientes) },
       { name: 'Control (sin Rodalies)', color: css('--ink-2'), dash: true, values: i.serie.map((s) => s.control) },
-    ], { band: { lo: i.serie.map(() => i.banda_normal.inf), hi: i.serie.map(() => i.banda_normal.sup) }, marks: i.serie.map((s, k) => (s.caos ? k : -1)).filter((k) => k >= 0), maxLabels: 7 });
-    rangos($('c-tramos'), i.tramos);
+    ], { band: { lo: i.serie.map(() => i.banda_normal.inf), hi: i.serie.map(() => i.banda_normal.sup) }, marks: i.serie.map((s, k) => (s.caos ? k : -1)).filter((k) => k >= 0), maxLabels: 7, height: altoLab() });
+    rangos($('c-tramos'), i.tramos, filasLab(i.tramos.length));
+    revelar($('lab-caso')); seguirLab();
     if (labMap) labMap.map.remove();
-    labMap = await mapaCoropletico('lab-map', { fijo: true, tip: (pp, x) => x && x.efectos[i.fecha] ? `<b>${esc(x.nombre)}</b><br><span class="v ${x.efectos[i.fecha].efecto < 0 ? 'down' : ''}">${pct(x.efectos[i.fecha].efecto)}</span><span class="muted">${pval(x.efectos[i.fecha].p)}</span>` : `<b>${esc(pp.nombre)}</b>` });
+    labMap = await mapaCoropletico('lab-map', { ruedaCtrl: true, zoomPos: 'topright', paradasDesde: 10.4, pad: padPortada(), tip: (pp, x) => x && x.efectos[i.fecha] ? `<b>${esc(x.nombre)}</b><br><span class="v ${x.efectos[i.fecha].efecto < 0 ? 'down' : ''}">${pct(x.efectos[i.fecha].efecto)}</span><span class="muted">${pval(x.efectos[i.fecha].p)}</span>` : `<b>${esc(pp.nombre)}</b>` });
     if (labMap) {
       labMap.pintar((x) => { const e = x.efectos[i.fecha]; return e ? colorEf(e.efecto, e.p) : css('--other'); });
       labMap.vias((lid) => (i.lineas.some((l) => l.replace(' ', '') === lid || l.replace(' Nord', 'N').replace(' Sud', 'S') === lid) ? 'cut' : 'on'));
@@ -1111,9 +1269,16 @@
     }
   }
 
+  /* Encuadre de la portada: deja libre la columna del texto, que va encima del mapa */
+  function padPortada(c = $('lab-caso').querySelector('.case-cover')) {
+    const t = c && c.querySelector('.cover-txt');
+    if (!c || !t || innerWidth < 900) return { padding: [24, 24] };
+    return { paddingTopLeft: [Math.round(t.getBoundingClientRect().right - c.getBoundingClientRect().left + 24), 40], paddingBottomRight: [24, 40] };
+  }
+
   /* Tramos: rango normal (barra) y valor del día (punto). */
-  function rangos(el, tramos) {
-    const W = ancho(el), L0 = Math.min(250, W * 0.45), R = 56, rowH = 30, H = tramos.length * rowH + 26;
+  function rangos(el, tramos, o = {}) {
+    const W = ancho(el), L0 = Math.min(250, W * 0.45), R = 56, rowH = o.rowH ?? 30, bh = o.barH ?? 12, H = tramos.length * rowH + 26;
     const vals = tramos.flatMap((t) => [t.cambio_pct, t.normal_inf, t.normal_sup]);
     const lo = Math.min(...vals, -10) - 2, hi = Math.max(...vals, 10) + 2, x = (v) => L0 + (v - lo) / (hi - lo) * (W - L0 - R);
     let s = `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="Tramos">`;
@@ -1122,7 +1287,7 @@
       const y = 6 + k * rowH + rowH / 2, fuera = t.cambio_pct < t.normal_inf || t.cambio_pct > t.normal_sup;
       const lab = t.tramo.length > 38 ? t.tramo.slice(0, 37) + '…' : t.tramo;
       s += `<text class="lbl" x="${L0 - 10}" y="${y + 4}" text-anchor="end">${esc(lab)}</text>`;
-      s += `<rect x="${x(t.normal_inf)}" y="${y - 6}" width="${x(t.normal_sup) - x(t.normal_inf)}" height="12" rx="6" fill="${css('--neutral')}" opacity=".5"/>`;
+      s += `<rect x="${x(t.normal_inf)}" y="${y - bh / 2}" width="${x(t.normal_sup) - x(t.normal_inf)}" height="${bh}" rx="${bh / 2}" fill="${css('--neutral')}" opacity=".5"/>`;
       s += `<circle cx="${x(t.cambio_pct)}" cy="${y}" r="${fuera ? 7 : 5}" fill="${fuera ? colClase(claseDe(t.cambio_pct)) : css('--surface')}" stroke="${fuera ? css('--surface') : css('--ink-2')}" stroke-width="2"/>`;
       s += `<text class="val" x="${W - R + 8}" y="${y + 4}">${pct(t.cambio_pct)}</text>`;
       s += `<rect class="hit" x="0" y="${y - rowH / 2}" width="${W}" height="${rowH}" data-tip="${esc(`<b>${esc(t.tramo)}</b><br>${pct(t.cambio_pct)} (normal: ${nf(t.normal_inf, 1)} a ${nf(t.normal_sup, 1)} %)<br>${t.municipios} municipios: ${esc(t.lista)}`)}"/>`;
@@ -1134,58 +1299,146 @@
   function pintarValidacion() {
     if (valListo) return; valListo = true;
     const v = D.placebo.valores_pct, real = D.placebo.real_pct, menos = v.filter((x) => x <= real).length;
-    $('lab-validacion').innerHTML = `<div class="lab-grid">
-      <div class="card"><div class="card-head"><h2>${menos === 0 ? `Ninguno de los ${v.length} grupos de días al azar da` : `Solo ${menos} de ${v.length} grupos de días al azar dan`} una caída tan grande</h2><small>Prueba placebo: grupos de días normales tratados como si fueran días de caos. Si el efecto fuera casualidad, la línea azul caería dentro de la nube gris.</small></div><div class="pad" id="lab-placebo"></div></div>
-      <div class="card"><div class="card-head"><h2>Antes, nada. El día 0, la caída. Después, normalidad.</h2><small>Event study: efecto en los dependientes cada día alrededor del caos. Los días previos ≈ 0 validan la comparación.</small></div><div class="pad" id="lab-evento"></div></div></div>`;
-    histogram($('lab-placebo'), v, real);
-    eventStudy($('lab-evento'), D.evento);
+    const ord = v.slice().sort((a, b) => a - b), q = (f) => ord[Math.round(f * (ord.length - 1))];
+    const ev = D.evento, pre = ev.filter((e) => e.dia < 0), post = ev.filter((e) => e.dia > 0), d0 = ev.find((e) => e.dia === 0);
+    const preSig = pre.filter((e) => e.ic_inf > 0 || e.ic_sup < 0).length;
+    const postArriba = post.some((e) => e.ic_inf > 0), postAbajo = post.some((e) => e.ic_sup < 0);
+    const nDias = D.incidencias.length;
+    $('lab-validacion').innerHTML = `
+      ${portada({ k: '<span>Validaciones</span>Tres pruebas', titulo: '¿Es real la caída?',
+        lead: `Antes de dar por bueno el ${pct(real)} hay que descartar que sea casualidad, que la comparación esté sesgada o que dependa del método.`,
+        kpis: [['Efecto real en los dependientes', pct(real), 'down'], [`Simulaciones con una caída así`, `${menos} / ${v.length}`], ['Probabilidad por azar', pval(D.placebo.p_valor)]],
+        cue: 'vl-placebo', visId: 'vl-enjambre' })}
+      ${navLab([['vl-placebo', 'No es casualidad'], ['vl-evento', 'La comparación es justa'], ['vl-regresion', 'No depende del método']])}
+      <div class="lsecs">
+        ${bloque({ id: 'vl-placebo', n: 1, tema: 'Prueba placebo',
+          titulo: `${menos === 0 ? 'Ningún grupo' : `Solo ${menos} de ${v.length} grupos`} de días normales da una caída así`,
+          dato: { v: `${pct(q(0.025))} a ${pct(q(0.975))}`, l: `rango del 95 % en ${v.length} simulaciones sin incidencia` },
+          texto: `Se aplica el mismo cálculo a grupos de ${nDias} días normales. El efecto real, ${pct(real)}, queda fuera de toda la nube (${pval(D.placebo.p_valor)}).`,
+          cap: `Efecto en ${v.length} grupos de ${nDias} días normales al azar`,
+          lectura: 'Gris: efectos falsos. Naranja: el resultado real.',
+          fig: '<div id="lab-placebo"></div>' })}
+        ${bloque({ id: 'vl-evento', n: 2, tema: 'Antes y después',
+          titulo: 'Antes, nada. El día 0, la caída. Después, normalidad.',
+          dato: { v: pct(d0.efecto_pct), l: 'el día de la incidencia', c: 'down' },
+          texto: `Los ${pre.length} días previos quedan entre ${pct(Math.min(...pre.map((e) => e.efecto_pct)))} y ${pct(Math.max(...pre.map((e) => e.efecto_pct)))}${preSig ? '' : ', ninguno significativo'}: los grupos se movían a la par${postArriba && !postAbajo ? '. Después, ligero rebote' : ''}.`,
+          cap: 'Efecto en los dependientes cada día alrededor de la incidencia',
+          lectura: 'Punto: efecto del día. Línea vertical: intervalo del 95 %.',
+          fig: '<div id="lab-evento"></div>' })}
+        ${bloque({ id: 'vl-regresion', n: 3, tema: 'Otro método',
+          titulo: 'Con una regresión, el mismo resultado',
+          texto: 'Diferencias en diferencias con efectos fijos de municipio y fecha. Misma dirección y significación en todos los casos; detalle en Método y límites.',
+          cap: 'Efecto estimado con cada método',
+          fig: `<table class="tbl compact lsec-tab"><thead><tr><th>Caso</th><th class="num">Principal</th><th class="num">Regresión</th></tr></thead><tbody>
+            <tr><td>Media de los días de caos · dependientes</td><td class="num">−6,2 %</td><td class="num">−6,8 %</td></tr>
+            <tr><td>Huelga 17/03/2025 · dependientes</td><td class="num">−8,9 %</td><td class="num">−10,7 %</td></tr>
+            <tr><td>Avería 13/05/2024 · dependientes</td><td class="num">−10,3 %</td><td class="num">−8,5 %</td></tr>
+            <tr><td>Avería 13/05/2024 · dependientes R1</td><td class="num">−13,5 %</td><td class="num">−17,2 %</td></tr></tbody></table>` })}
+      </div>`;
+    enjambre($('vl-enjambre'), v, real);
+    histogram($('lab-placebo'), v, real, { height: altoLab() });
+    eventStudy($('lab-evento'), D.evento, { height: altoLab() });
   }
 
   let facListo = false;
   function pintarFactores() {
     if (facListo) return; facListo = true;
     const alt = D.alternativa, dias = [...new Set(alt.map((a) => a.dia))].filter((d) => !OCULTOS_LAB.map(fecha).includes(d)), grupos = ['Sin alternativa directa', 'Alternativa débil', 'Alternativa fuerte'];
-    const lejos = D.distancia[D.distancia.length - 1];
-    $('lab-factores').innerHTML = `<div class="lab-grid">
-      <div class="card"><div class="card-head"><h2>Cuanto más lejos, más cae: ${pct(lejos.efecto_pct)} a ${esc(lejos.banda)}</h2><small>Municipios con Rodalies, todos los días de caos</small></div><div class="pad" id="lab-dist"></div></div>
-      <div class="card"><div class="card-head"><h2>Donde hay metro o FGC, no pasa nada</h2><small>Efecto por grupo, todos los días de caos</small></div><div class="pad" id="lab-grupos"></div></div>
-      <div class="card wide2"><div class="card-head"><h2>Sin alternativa al tren, la caída se repite en cada incidencia</h2><small>Efecto según la alternativa en transporte público (GTFS), municipios con Rodalies. Color intenso: efecto claro (p &lt; 0,05). Pasa el cursor para ver el intervalo.</small></div>
-        <div class="pad"><table class="heat"><thead><tr><th></th>${grupos.map((g) => `<th>${g}</th>`).join('')}</tr></thead><tbody>${dias.map((d) => `<tr><th>${esc(d)}</th>${grupos.map((g) => { const x = alt.find((a) => a.dia === d && a.grupo === g); if (!x) return '<td></td>'; const k = claseDe(x.efecto), cl = x.p < 0.05; return `<td style="--bg:${cl ? colClase(k) : 'var(--surface-2)'};--fg:${cl ? tintaSobre(k) : 'var(--muted)'}" data-tip="${esc(`<b>${g}</b>, ${d}<br>${pct(x.efecto)} [${pct(x.ic_inf)}, ${pct(x.ic_sup)}]<br>${pval(x.p)} · ${x.municipios} municipios`)}">${pct(x.efecto)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></div>
-      ${factoresSociales()}
-</div>`;
-    forest($('lab-dist'), D.distancia.map((g) => ({ label: g.banda + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 120 });
-    forest($('lab-grupos'), D.grupos.map((g) => ({ label: g.etiqueta.replace(/ \(.*\)/, ''), efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), { labelW: 170 });
+    const cerca = D.distancia[0], lejos = D.distancia[D.distancia.length - 1];
+    const G = (id) => D.grupos.find((g) => g.grupo === id);
+    const gd = G('dependientes'), gc = G('cercanos'), gm = G('metro_fgc');
+    const altTodos = (g) => alt.find((a) => a.grupo === g && /todos/i.test(a.dia));
+    const aSin = altTodos(grupos[0]), aFue = altTodos(grupos[2]);
     const VR = D.vulnerabilidad_resumen;
+    const pasos = [['fx-distancia', 'Distancia'], ['fx-metro', 'Metro o FGC'], ['fx-alternativa', 'Bus'], ...(VR ? [['fx-motor', 'Coche'], ['fx-renta', 'Renta'], ['fx-modelo', 'Todo junto']] : [['fx-social', 'Coche y renta']])];
+    $('lab-factores').innerHTML = `
+      ${portada({ k: '<span>Qué lo explica</span>Factores', titulo: '¿Por qué unos caen más que otros?',
+        lead: 'La caída no es igual en todas partes. Cada factor por separado y, al final, todos juntos en un mismo modelo.',
+        kpis: [[`A ${esc(lejos.banda)}`, pct(lejos.efecto_pct), 'down'], ['Con metro o FGC', pct(gm.efecto_pct)], ...(VR ? [['Pocos coches', pct(VR.terciles_motorizacion.find((t) => t.nivel === 'baja').efecto), 'down']] : [])],
+        cue: 'fx-distancia', mapa: 'fx-map' })}
+      ${navLab(pasos)}
+      <div class="lsecs">
+        ${bloque({ id: 'fx-distancia', n: 1, tema: 'Distancia',
+          titulo: 'Cuanto más lejos de Barcelona, más cae',
+          dato: { v: pct(lejos.efecto_pct), l: `a ${esc(lejos.banda)}, frente a ${pct(cerca.efecto_pct)} a ${esc(cerca.banda)}`, c: 'down' },
+          texto: 'En viajes largos es más difícil sustituir el tren.',
+          cap: 'Municipios con Rodalies por distancia a Barcelona',
+          fig: '<div id="lab-dist"></div>' })}
+        ${bloque({ id: 'fx-metro', n: 2, tema: 'Metro o FGC',
+          titulo: 'Donde hay metro o FGC, apenas se nota',
+          dato: { v: pct(gd.efecto_pct), l: `dependientes, frente a ${pct(gm.efecto_pct)} con metro o FGC`, c: 'down' },
+          texto: 'Otra red ferroviaria permite hacer el viaje igualmente.',
+          cap: 'Efecto por grupo de municipios',
+          fig: '<div id="lab-grupos"></div>' })}
+        ${bloque({ id: 'fx-alternativa', n: 3, tema: 'Bus y otras alternativas',
+          titulo: 'Sin alternativa, la caída se repite en cada incidencia',
+          dato: aSin && aFue ? { v: pct(aSin.efecto), l: `sin alternativa directa, frente a ${pct(aFue.efecto)} con una fuerte`, c: 'down' } : null,
+          texto: 'Alternativa medida con los horarios de bus y FGC (GTFS).',
+          cap: 'Efecto según la alternativa en transporte público, por día',
+          lectura: 'Color: efecto claro (p &lt; 0,05). Gris: no concluyente.',
+          fig: `<table class="heat"><thead><tr><th></th>${grupos.map((g) => `<th>${g}</th>`).join('')}</tr></thead><tbody>${dias.map((d) => `<tr><th>${esc(d)}</th>${grupos.map((g) => { const x = alt.find((a) => a.dia === d && a.grupo === g); if (!x) return '<td></td>'; const k = claseDe(x.efecto), cl = x.p < 0.05; return `<td style="--bg:${cl ? colClase(k) : 'var(--surface-2)'};--fg:${cl ? tintaSobre(k) : 'var(--muted)'}" data-tip="${esc(`<b>${g}</b>, ${d}<br>${pct(x.efecto)} [${pct(x.ic_inf)}, ${pct(x.ic_sup)}]<br>${pval(x.p)} · ${x.municipios} municipios`)}">${pct(x.efecto)}</td>`; }).join('')}</tr>`).join('')}</tbody></table>` })}
+        ${factoresSociales(4)}
+      </div>`;
+    forest($('lab-dist'), D.distancia.map((g) => ({ label: g.banda + ` (${g.municipios})`, efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), filasLab(D.distancia.length, { labelW: 120 }));
+    forest($('lab-grupos'), D.grupos.map((g) => ({ label: g.etiqueta.replace(/ \(.*\)/, ''), efecto: g.efecto_pct, ic_inf: g.ic_inf, ic_sup: g.ic_sup, p: g.p_valor })), filasLab(D.grupos.length, { labelW: 170 }));
+    mapaFactores();
     if (VR) {
       const NOM = { baja: 'Baja', media: 'Media', alta: 'Alta' };
       const filasT = (ts, u) => ts.map((t) => ({ label: `${NOM[t.nivel]} (${nf(t.min)}–${nf(t.max)}${u})`, efecto: t.efecto, ic_inf: t.ic_inf, ic_sup: t.ic_sup, p: t.ic_inf < 0 && t.ic_sup > 0 ? 1 : 0 }));
-      forest($('lab-motor'), filasT(VR.terciles_motorizacion, ''), { labelW: 150, aria: 'Efecto por terciles de motorización' });
-      forest($('lab-renta'), filasT(VR.terciles_renta, ' €'), { labelW: 170, aria: 'Efecto por terciles de renta' });
+      forest($('lab-motor'), filasT(VR.terciles_motorizacion, ''), filasLab(VR.terciles_motorizacion.length, { labelW: 150, aria: 'Efecto por terciles de motorización' }));
+      forest($('lab-renta'), filasT(VR.terciles_renta, ' €'), filasLab(VR.terciles_renta.length, { labelW: 170, aria: 'Efecto por terciles de renta' }));
     }
   }
 
+  /* Mapa de la portada de «Qué lo explica»: efecto medio de cada municipio en los días de caos */
+  async function mapaFactores() {
+    const cover = $('lab-factores').querySelector('.case-cover');
+    const M = await mapaCoropletico('fx-map', { ruedaCtrl: true, zoomPos: 'topright', paradasDesde: 10.4, pad: padPortada(cover),
+      tip: (pp, x) => x && x.efecto_medio != null ? `<b>${esc(x.nombre)}</b><br><span class="v ${x.efecto_medio < 0 ? 'down' : ''}">${pct(x.efecto_medio)}</span><span class="muted">${x.dist_km != null ? nf(x.dist_km) + ' km' : ''}</span>` : `<b>${esc(pp.nombre)}</b>` });
+    if (!M) return;
+    M.pintar((x) => colorEf(x.efecto_medio, null));
+    $('fx-map-leg').innerHTML = leyendaClasesHTML('Efecto medio en los días de caos');
+  }
+
   /* Tarjetas de motorización y renta (notebook 05). Vacío si aún no hay datos. */
-  function factoresSociales() {
+  function factoresSociales(n0) {
     const VR = D.vulnerabilidad_resumen;
-    if (!VR) return '<div class="card wide2"><div class="card-head"><h2>Motorización y renta</h2></div><p class="pending small" style="margin:0 16px 16px">Pendiente: se añaden con el notebook 05.</p></div>';
-    const tb = VR.terciles_motorizacion.find((t) => t.nivel === 'baja'), ta = VR.terciles_motorizacion.find((t) => t.nivel === 'alta');
+    if (!VR) return `<section class="lsec" id="fx-social"><div class="lsec-txt"><p class="lsec-k"><span>${dos(n0)}</span>Coche y renta</p><h2>Motorización y renta</h2><p class="pending small">Pendiente: se añaden con el notebook 05.</p></div></section>`;
+    const tb = VR.terciles_motorizacion.find((t) => t.nivel === 'baja'), tm = VR.terciles_motorizacion.find((t) => t.nivel === 'media'), ta = VR.terciles_motorizacion.find((t) => t.nivel === 'alta');
+    const rs = VR.terciles_renta.map((t) => t.efecto), rMin = Math.min(...rs), rMax = Math.max(...rs);
     const mot = VR.modelo.find((x) => x.variable === 'tur100'), R = VR.robustez;
     const ren13 = VR.por_dia.find((d) => d.fecha === FECHAS.averia);
     const pp = (x) => (x > 0 ? '+' : '') + nf(x, 2).replace('-', '−');
     return `
-      <div class="card"><div class="card-head"><h2>Con menos coches, más caída: ${pct(tb.efecto)} frente a ${pct(ta.efecto)}</h2><small>Municipios dependientes por terciles de motorización (turismos por 1.000 hab.). Efecto medio en los 4 días de caos, ponderado por la fiabilidad de cada municipio.</small></div><div class="pad" id="lab-motor"></div></div>
-      <div class="card"><div class="card-head"><h2>La renta no marca diferencias</h2><small>Municipios dependientes por terciles de renta neta por persona (ADRH).</small></div><div class="pad" id="lab-renta"></div></div>
-      <div class="card wide2"><div class="card-head"><h2>A igual distancia y alternativa, +100 turismos por 1.000 hab. son ${nf(mot.coef_pp, 1)} puntos menos de caída</h2><small>Regresión ponderada entre los ${VR.muestra} municipios con Rodalies. Variable explicada: efecto medio de cada municipio en los días de caos. Positivo = menos caída. Es una asociación entre municipios, no una causa.</small></div>
-        <div class="pad"><table class="tbl compact"><thead><tr><th>Factor</th><th class="num">Puntos de caída</th><th class="num">IC 95 %</th><th class="num">p</th></tr></thead><tbody>${VR.modelo.map((x) => `<tr class="${x.p >= 0.05 ? 'ns' : ''}"><td>${esc(x.etiqueta)}</td><td class="num">${pp(x.coef_pp)}</td><td class="num">[${pp(x.ic_inf)}, ${pp(x.ic_sup)}]</td><td class="num">${pval(x.p).replace('p = ', '').replace('p < ', '< ')}</td></tr>`).join('')}</tbody></table>
-          <p class="muted small">R² = ${nf(VR.r2, 2)}. En gris: sin efecto claro (p ≥ 0,05).</p></div>
-        <ul class="checks">
-          <li>Quitando cualquier municipio, el efecto de la motorización queda entre ${pp(R.quitar_un_municipio[0])} y ${pp(R.quitar_un_municipio[1])} puntos.</li>
-          <li>Test de permutación (motorización asignada al azar): ${pval(R.p_permutacion)}.</li>
-          <li>Controlando también por la alternativa en transporte público (GTFS): ${pp(R.control_transporte_alternativo.coef_pp)} puntos (${pval(R.control_transporte_alternativo.p)}).</li>
-          <li>En los municipios sin Rodalies no aparece ninguna relación (${pval(R.placebo_sin_rodalies.p_motorizacion)}): el método no la inventa.</li></ul>
-        <ul class="checks warn">
-          <li>Evidencia moderada: sin ponderar por el ruido de cada municipio, ${pp(R.sin_pesos.coef_pp)} puntos (${pval(R.sin_pesos.p)}). Mismo signo los 4 días, pero ningún día por separado es significativo.</li>
-          ${ren13 ? `<li>Renta: solo en la avería sin aviso (${fecha(ren13.fecha)}) los municipios con más renta caen más (${pp(ren13.coef_renta)} puntos por +1.000 €, ${pval(ren13.p_renta)}). ¿Teletrabajo ante un imprevisto? Es una hipótesis, no una conclusión.</li>` : ''}</ul></div>`;
+      ${bloque({ id: 'fx-motor', n: n0, tema: 'Coche',
+        titulo: 'Con menos coches, más caída',
+        dato: { v: pct(tb.efecto), l: `con pocos coches, frente a ${pct(ta.efecto)} con muchos`, c: 'down' },
+        texto: 'Quien tiene coche llega igualmente cuando falla el tren.',
+        cap: 'Dependientes por terciles de turismos por 1.000 hab.',
+        fig: '<div id="lab-motor"></div>' })}
+      ${bloque({ id: 'fx-renta', n: n0 + 1, tema: 'Renta',
+        titulo: 'La renta no marca diferencias',
+        dato: { v: `${pct(rMax)} a ${pct(rMin)}`, l: 'las tres franjas, con intervalos que se solapan' },
+        texto: ren13 ? `Solo en la avería del ${fecha(ren13.fecha)} caen más los de más renta: es una hipótesis, no una conclusión.` : '',
+        cap: 'Dependientes por terciles de renta neta por persona',
+        fig: '<div id="lab-renta"></div>' })}
+      ${bloque({ id: 'fx-modelo', n: n0 + 2, tema: 'Todo junto',
+        titulo: 'A igualdad de lo demás, el coche sigue pesando',
+        dato: { v: `${mot.coef_pp > 0 ? '+' : ''}${nf(mot.coef_pp, 1)} pp`, l: 'menos de caída por cada +100 coches por 1.000 hab.' },
+        texto: `Regresión entre ${VR.muestra} municipios. Es una asociación, no una causa.`,
+        cap: `Regresión ponderada · R² = ${nf(VR.r2, 2)}`,
+        lectura: 'Positivo = menos caída. En gris, sin efecto claro.',
+        fig: `<table class="tbl compact lsec-tab"><thead><tr><th>Factor</th><th class="num">Puntos</th><th class="num">IC 95 %</th><th class="num">p</th></tr></thead><tbody>${VR.modelo.map((x) => `<tr class="${x.p >= 0.05 ? 'ns' : ''}"><td>${esc(x.etiqueta)}</td><td class="num">${pp(x.coef_pp)}</td><td class="num">[${pp(x.ic_inf)}, ${pp(x.ic_sup)}]</td><td class="num">${pval(x.p).replace('p = ', '').replace('p < ', '< ')}</td></tr>`).join('')}</tbody></table>`,
+        pie: `<div class="lsec-pie">
+          <div><h3>Lo respalda</h3><ul class="checks">
+            <li>Quitando cualquier municipio: entre ${pp(R.quitar_un_municipio[0])} y ${pp(R.quitar_un_municipio[1])} puntos.</li>
+            <li>Permutación al azar: ${pval(R.p_permutacion)}.</li>
+            <li>Con la alternativa GTFS: ${pp(R.control_transporte_alternativo.coef_pp)} puntos (${pval(R.control_transporte_alternativo.p)}).</li>
+            <li>Sin Rodalies no hay relación (${pval(R.placebo_sin_rodalies.p_motorizacion)}).</li></ul></div>
+          <div><h3>Con cautela</h3><ul class="checks warn">
+            <li>Sin ponderar: ${pp(R.sin_pesos.coef_pp)} puntos (${pval(R.sin_pesos.p)}).</li>
+            <li>Mismo signo los ${D.incidencias.length} días, ninguno significativo por separado.</li></ul></div>
+        </div>` })}`;
   }
 
   function pintarMetodo() {
@@ -1199,12 +1452,21 @@
     const T = Object.fromEntries(D.tipos.map((t) => [t.id, t.coeficientes]));
     const VR = D.vulnerabilidad_resumen, R = VR && VR.robustez, mot = VR && VR.modelo.find((x) => x.variable === 'tur100');
     const pp = (x) => `${x > 0 ? '+' : ''}${nf(x, 1)}`;
-    const sec = (id, n, titulo, cuerpo) => `<section class="card msec" id="m-${id}"><h2><span class="mn">${n}</span>${titulo}</h2>${cuerpo}</section>`;
+    const sec = (id, n, titulo, cuerpo) => `<section class="msec" id="m-${id}"><h2><span class="mn">${n}</span>${titulo}</h2>${cuerpo}</section>`;
     const porque = (html) => `<div class="mwhy"><b>Por qué es válido.</b> ${html}</div>`;
     const indice = [['pregunta', 'La pregunta'], ['datos', 'Datos y muestra'], ['referencia', 'Qué es un día normal'], ['estimador', 'El estimador'], ['inferencia', 'Incertidumbre: placebos'],
       ['regresion', 'Comprobación: regresión'], ['viajes', 'De % a viajes y simulador'], ...(VR ? [['vulnerabilidad', 'Motorización y renta']] : []), ['significacion', 'Cómo leer la p'], ['limites', 'Limitaciones']];
 
-    $('lab-metodo').innerHTML = `<div class="metodo">
+    const formula = `<div class="cover-eq" aria-label="Estimador del efecto">
+        <p class="cover-eq-k">El estimador</p>
+        <div class="eq big">${v('ê')}<sub>${v('G')}</sub>(${v('t')}) = ln ${fr(`${v('V')}<sub>${v('G')},${v('t')}</sub>`, med(`${v('V')}<sub>${v('G')},${v('s')}</sub>`))} − ln ${fr(`${v('V')}<sub>${v('C')},${v('t')}</sub>`, med(`${v('V')}<sub>${v('C')},${v('s')}</sub>`))}</div>
+        <ul class="cover-eq-l"><li><b>Grupo</b> frente a su día normal</li><li><b>menos</b> el control sin Rodalies frente al suyo</li><li>= el efecto de la incidencia</li></ul></div>`;
+    $('lab-metodo').innerHTML = `
+      ${portada({ k: '<span>Método y límites</span>Cómo se ha medido', titulo: 'Una diferencia en diferencias, con placebos',
+        lead: 'Cada día de caos se compara con días normales parecidos y con municipios sin Rodalies, y el ruido se mide con días normales tratados como falsos días de caos.',
+        kpis: [['Dependientes, media de los días de caos', pct(G.efecto_pct), 'down'], ['Intervalo del 95 %', `${nf(G.ic_inf, 1)} a ${nf(G.ic_sup, 1)} %`], ['Frente a días normales', pval(P.p_valor)]],
+        cue: 'm-pregunta', cueTxt: 'Leer el método', vis: formula })}
+      <div class="metodo">
       <nav class="mtoc" aria-label="Secciones del método">${indice.map(([id, t], i) => `<a href="#" data-m="${id}"><span>${i}</span>${t}</a>`).join('')}</nav>
       <div class="mbody">
 
